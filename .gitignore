@@ -1,0 +1,112 @@
+# ============================================================
+# CHB Corporate Site — .gitignore
+# Conservative open-source posture: protect IP, secrets,
+# runtime artifacts, and any patent-pending logic.
+# ============================================================
+
+# ----------------------------------------------------------
+# ENVIRONMENT & SECRETS — never commit credentials
+# ----------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+private/
+
+# ----------------------------------------------------------
+# PROPRIETARY IP / PATENT-PENDING LOGIC
+# Pipes context-injection engine internals.
+# The public repo exposes the UI surface; engine stays private.
+# ----------------------------------------------------------
+server/pipes/
+server/context-engine/
+server/pipe-definitions/
+docs/pipes-internals/
+pipes-engine/
+**/pipes-logic/**
+**/context-injection/**
+**/manifests/private/**
+PIPES_INTERNALS.md
+PIPES_ENGINE*.md
+
+# ----------------------------------------------------------
+# OAUTH CLIENT SECRETS & AUTH INTERNALS
+# Schemas are public; live credentials are not.
+# ----------------------------------------------------------
+server/oauth-secrets/
+oauth-config.json
+client-secrets.json
+.admin-sessions.json
+
+# ----------------------------------------------------------
+# NODE / BUILD ARTIFACTS
+# ----------------------------------------------------------
+node_modules/
+dist/
+build/
+.vite/
+.turbo/
+
+# ----------------------------------------------------------
+# REPLIT RUNTIME & CACHE
+# ----------------------------------------------------------
+.replit
+replit.nix
+.upm/
+.cache/
+.config/
+.local/
+
+# ----------------------------------------------------------
+# AI-GENERATED IMAGES (large binary assets; use external store)
+# public/ includes only committed brand images.
+# ----------------------------------------------------------
+public/generated/
+attached_assets/generated_images/
+
+# ----------------------------------------------------------
+# ATTACHED WORKING ASSETS (internal brand docs, drafts)
+# ----------------------------------------------------------
+attached_assets/
+
+# ----------------------------------------------------------
+# PLAYWRIGHT / TEST ARTIFACTS
+# ----------------------------------------------------------
+playwright-report/
+test-results/
+*.spec.ts.snap
+
+# ----------------------------------------------------------
+# SCREENSHOT CAPTURES (testing artifacts, not source)
+# ----------------------------------------------------------
+*.png
+!client/public/**/*.png
+!client/src/**/*.png
+
+# ----------------------------------------------------------
+# LOGS, DIAGNOSTICS & WORKING NOTES
+# ----------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+admin-sync-issue-report.md
+image-design-audit.md
+design_guidelines.md
+replit.md.backup
+production-image-manifest.json
+
+# ----------------------------------------------------------
+# OS & EDITOR NOISE
+# ----------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

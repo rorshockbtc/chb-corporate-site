@@ -1,0 +1,779 @@
+@import '@fontsource/playfair-display';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 99%);
+  --foreground: hsl(215, 25%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(215, 25%, 15%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(215, 25%, 15%);
+  --primary: #FE299E;
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: #FFCF00;
+  --secondary-foreground: hsl(215, 25%, 15%);
+  --muted: hsl(210, 20%, 96%);
+  --muted-foreground: hsl(215, 15%, 55%);
+  --accent: #B8E986;
+  --accent-foreground: hsl(215, 25%, 15%);
+  --destructive: hsl(0, 70%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(210, 20%, 88%);
+  --input: hsl(210, 20%, 94%);
+  --ring: hsl(330, 65%, 55%);
+  --quaternary: #01A9F4;
+  --surface-dark: #111111;
+  --text-on-surface: #EEEEEE;
+  --brand-surface: #111111;
+  --brand-pink: #FE299E;
+  --brand-yellow: #FFCF00;
+  --brand-green: #B8E986;
+  --brand-blue: #01A9F4;
+  --radius: 16px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  
+  /* Material Design Variable Typography with VW/VH Scaling */
+  /* Fluid typography that elegantly scales across all devices */
+  --fluid-hero: clamp(2.5rem, 5vw + 1rem, 5rem);           /* Hero headlines: 40px → 80px */
+  --fluid-display: clamp(2rem, 4vw + 0.75rem, 3.5rem);      /* Section headers: 32px → 56px */
+  --fluid-heading: clamp(1.5rem, 3vw + 0.5rem, 2.25rem);    /* Subheadings: 24px → 36px */
+  --fluid-body-xl: clamp(1.125rem, 2vw + 0.5rem, 1.5rem);   /* Large body: 18px → 24px */
+  --fluid-body: clamp(1rem, 1.5vw + 0.25rem, 1.25rem);      /* Body text: 16px → 20px */
+  --fluid-caption: clamp(0.875rem, 1vw + 0.25rem, 1rem);    /* Captions: 14px → 16px */
+  
+  /* Advanced viewport scaling with balanced dimensions */
+  --fluid-hero-vmin: clamp(2.5rem, 6vmin, 5rem);            /* Balanced hero scaling */
+  --fluid-display-vmax: clamp(2rem, 3vmax, 3.5rem);         /* Large screen optimized */
+  
+  /* Line height scaling for optimal readability */
+  --fluid-line-hero: clamp(1.1, 2vw + 1, 1.3);             /* Hero line height */
+  --fluid-line-display: clamp(1.2, 1.5vw + 1, 1.4);        /* Display line height */
+  --fluid-line-body: clamp(1.5, 1vw + 1.4, 1.8);           /* Body line height */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer components {
+  /* Material Design Fluid Typography Utilities */
+  .text-fluid-hero {
+    font-size: var(--fluid-hero);
+    line-height: var(--fluid-line-hero);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+  
+  .text-fluid-display {
+    font-size: var(--fluid-display);
+    line-height: var(--fluid-line-display);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+  }
+  
+  .text-fluid-heading {
+    font-size: var(--fluid-heading);
+    line-height: var(--fluid-line-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  
+  .text-fluid-body-xl {
+    font-size: var(--fluid-body-xl);
+    line-height: var(--fluid-line-body);
+    font-weight: 400;
+  }
+  
+  .text-fluid-body {
+    font-size: var(--fluid-body);
+    line-height: var(--fluid-line-body);
+    font-weight: 400;
+  }
+  
+  .text-fluid-caption {
+    font-size: var(--fluid-caption);
+    line-height: var(--fluid-line-body);
+    font-weight: 500;
+  }
+  
+  /* Advanced viewport-aware typography */
+  .text-fluid-hero-vmin {
+    font-size: var(--fluid-hero-vmin);
+    line-height: var(--fluid-line-hero);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+  
+  .text-fluid-display-vmax {
+    font-size: var(--fluid-display-vmax);
+    line-height: var(--fluid-line-display);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+  }
+
+  .perspective-content {
+    @apply transition-all duration-200 ease-in-out opacity-100 transform-none;
+  }
+  
+  /* ROOT PERSPECTIVE VARIABLES - DRIVES ALL NON-CTA COLORS */
+  :root[data-perspective="startup_founders"] {
+    --perspective-primary: #01A9F4; /* BRAND BLUE - correct brand quaternary */
+    --perspective-accent: hsl(142, 76%, 36%); /* Success green */
+    --perspective-secondary: #33B3F6; /* Lighter brand blue */
+    --perspective-light: #CCE9FD; /* Light brand blue for backgrounds */
+  }
+  
+  :root[data-perspective="content_creators"] {
+    --perspective-primary: hsl(328, 85%, 70%); /* Creative magenta */
+    --perspective-accent: hsl(45, 93%, 47%); /* Creative yellow */
+    --perspective-secondary: hsl(328, 85%, 80%); /* Lighter magenta */
+    --perspective-light: hsl(328, 70%, 90%); /* Light magenta for backgrounds */
+  }
+  
+  :root[data-perspective="memory_capturers"] {
+    --perspective-primary: hsl(142, 76%, 36%); /* Nurturing green */
+    --perspective-accent: hsl(25, 95%, 53%); /* Warm orange */
+    --perspective-secondary: hsl(142, 76%, 46%); /* Lighter green */
+    --perspective-light: hsl(142, 60%, 85%); /* Light green for backgrounds */
+  }
+  
+  /* UNIVERSAL CLASSES USING PERSPECTIVE VARIABLES */
+  .section-title-perspective {
+    color: var(--perspective-primary) !important;
+  }
+  
+  .accent-perspective {
+    color: var(--perspective-primary) !important;
+  }
+  
+  .border-perspective {
+    border-color: var(--perspective-primary) !important;
+  }
+  
+  .bg-perspective {
+    background-color: var(--perspective-primary) !important;
+  }
+  
+  .bg-perspective-light {
+    background-color: var(--perspective-light) !important;
+  }
+  
+  /* Specific background classes for optional includes sections */
+  .optional-includes-bg {
+    background-color: rgba(var(--perspective-light-rgb, 221, 221, 255), 0.15) !important;
+    border-color: rgba(var(--perspective-light-rgb, 221, 221, 255), 0.3) !important;
+  }
+  
+  /* Convert CSS variables to RGB format for opacity support */
+  :root[data-perspective="startup_founders"] {
+    --perspective-light-rgb: 188, 202, 235; /* Light blue RGB */
+  }
+  
+  :root[data-perspective="content_creators"] {
+    --perspective-light-rgb: 245, 214, 235; /* Light magenta RGB */
+  }
+  
+  :root[data-perspective="memory_capturers"] {
+    --perspective-light-rgb: 204, 233, 204; /* Light green RGB */
+  }
+
+  .nav-backdrop {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  /* SOUTHERN FARMHOUSE AESTHETIC - Cracker Barrel meets Shabby Chic */
+  .farmhouse-card {
+    background: linear-gradient(145deg, #faf6f0 0%, #f2ede3 40%, #ede4d3 100%);
+    border: 2px solid #c8b99c;
+    box-shadow: 
+      0 12px 40px rgba(139, 117, 84, 0.25),
+      inset 0 2px 0 rgba(255, 248, 240, 0.9),
+      inset 0 -1px 0 rgba(200, 185, 156, 0.3);
+    border-radius: 18px;
+    position: relative;
+    backdrop-filter: blur(8px);
+  }
+  
+  .farmhouse-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(210, 180, 140, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 75% 20%, rgba(205, 175, 149, 0.12) 0%, transparent 55%),
+      radial-gradient(circle at 50% 85%, rgba(218, 165, 132, 0.1) 0%, transparent 50%),
+      repeating-linear-gradient(
+        12deg,
+        transparent 0px,
+        transparent 4px,
+        rgba(200, 185, 156, 0.04) 4px,
+        rgba(200, 185, 156, 0.04) 8px
+      );
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  .farmhouse-text-warm {
+    color: #2d1810;
+    text-shadow: 0 1px 3px rgba(255, 248, 240, 0.5);
+    font-weight: 500;
+  }
+  
+  .farmhouse-text-muted {
+    color: #5a4d42;
+    opacity: 0.9;
+  }
+  
+  /* MEMORY CAPTURERS TYPOGRAPHY SYSTEM */
+  
+  /* Titles: Sans-serif (Inter) */
+  .farmhouse-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #2d1810;
+    text-shadow: 0 1px 3px rgba(255, 248, 240, 0.4);
+  }
+  
+  /* Display: Playfair with high visibility */
+  .farmhouse-display {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1a0e08;
+    text-shadow: 0 2px 6px rgba(255, 248, 240, 0.8);
+    line-height: 1.1;
+  }
+  
+  /* Body/Subheader: Georgia serif */
+  .farmhouse-body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.7;
+    color: #4a3e35;
+  }
+  
+  .farmhouse-subheader {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.5;
+    color: #3c2f26;
+  }
+  
+  /* Farmhouse Card White Variant - Better contrast on farmhouse sections */
+  .farmhouse-card-white {
+    background: linear-gradient(145deg, #ffffff 0%, #fefbf8 50%, #fdf9f4 100%);
+    border: 1px solid #d4c4a8;
+    box-shadow: 
+      0 8px 32px rgba(139, 117, 84, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    position: relative;
+    backdrop-filter: blur(4px);
+  }
+  
+  .farmhouse-card-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(210, 180, 140, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(205, 175, 149, 0.03) 0%, transparent 50%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  /* CONTENT CREATORS TYPOGRAPHY SYSTEM */
+  .creators-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    color: #7c3aed;
+  }
+  
+  .creators-body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #6b21a8;
+  }
+  
+  .creators-display {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #581c87;
+  }
+  
+  /* STARTUP FOUNDERS TYPOGRAPHY SYSTEM */
+  .founders-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #1e40af;
+  }
+  
+  .founders-body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #1e3a8a;
+  }
+  
+  .founders-display {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #1e3a8a;
+  }
+  
+  /* PERSPECTIVE-DRIVEN BUTTON STYLING */
+  .pipes-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: var(--perspective-primary);
+    color: white;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+  }
+  
+  .pipes-link:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* CONTENT CREATORS SECTION STYLING */
+  .creators-section {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);
+    position: relative;
+    border-top: 1px solid rgba(147, 51, 234, 0.1);
+    border-bottom: 1px solid rgba(147, 51, 234, 0.05);
+  }
+  
+  .creators-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* STARTUP FOUNDERS SECTION STYLING */
+  .founders-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(30, 64, 175, 0.03) 100%);
+    position: relative;
+    border-top: 1px solid rgba(59, 130, 246, 0.1);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.05);
+  }
+  
+  .founders-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .farmhouse-section {
+    background: linear-gradient(135deg, #f8f4ee 0%, #f3efE5 30%, #eee8dc 70%, #e9e2d4 100%);
+    position: relative;
+    overflow: hidden;
+    border-top: 2px solid rgba(196, 175, 145, 0.2);
+    border-bottom: 1px solid rgba(196, 175, 145, 0.15);
+  }
+  
+  .farmhouse-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        15deg,
+        transparent 0px,
+        transparent 6px,
+        rgba(210, 180, 140, 0.04) 6px,
+        rgba(210, 180, 140, 0.04) 12px
+      ),
+      radial-gradient(circle at 20% 20%, rgba(205, 175, 149, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(218, 165, 132, 0.06) 0%, transparent 35%);
+    pointer-events: none;
+  }
+  
+  .perspective-content.transitioning {
+    @apply opacity-0 translate-y-1 pointer-events-none;
+  }
+  
+  .perspective-content.hidden {
+    @apply opacity-0 translate-y-2 pointer-events-none;
+  }
+  
+  .premium-border {
+    border: 1px solid var(--border);
+    @apply rounded-lg;
+  }
+  
+  .premium-border-inner {
+    background: var(--background);
+    @apply rounded-md h-full w-full;
+  }
+  
+  .floating-perspective {
+    backdrop-filter: blur(20px);
+    background: hsla(0, 0%, 100%, 0.95);
+  }
+  
+  /* Theme transition system for smooth perspective switching */
+  .theme-transition {
+    transition: 
+      --theme-primary 300ms ease,
+      --theme-secondary 300ms ease,
+      --theme-accent 300ms ease,
+      --theme-background 300ms ease,
+      --theme-foreground 300ms ease,
+      --theme-muted 300ms ease,
+      --theme-hero-overlay 300ms ease;
+  }
+  
+  .theme-transition * {
+    transition: 
+      color 300ms ease,
+      background-color 300ms ease,
+      border-color 300ms ease,
+      opacity 300ms ease,
+      filter 300ms ease;
+  }
+  
+  /* Hero image theme-aware styling */
+  .hero-image-overlay {
+    background: var(--theme-hero-gradient, linear-gradient(135deg, #01A9F4 0%, #0088CC 100%));
+    opacity: var(--theme-hero-overlay, 0.5);
+    filter: brightness(var(--theme-brightness, 1.1)) contrast(var(--theme-contrast, 1.2));
+  }
+  
+  /* Perspective-aware content containers */
+  .theme-container {
+    max-width: var(--theme-container-width, 1200px);
+  }
+  
+  .floating-card {
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-card {
+    border: 1px solid var(--border);
+    @apply transition-all duration-200;
+  }
+  
+  .product-card:hover {
+    border-color: var(--primary);
+    @apply translate-y-[-1px];
+  }
+  
+  .punctuation-highlight {
+    color: var(--primary);
+    @apply font-semibold;
+  }
+  
+  .quaternary-color {
+    color: var(--quaternary);
+  }
+  
+  .secondary-color {
+    color: var(--secondary);
+  }
+  
+  .accent-color {
+    color: var(--accent);
+  }
+}
+
+@layer utilities {
+  /* === CONTRAST-SAFE SURFACE/TEXT PAIRINGS === */
+  /* Use these instead of bg-muted/text-muted-foreground to guarantee readability */
+  
+  /* Light callout surface - cream/warm white with dark text */
+  .surface-callout-light {
+    background-color: #f8f6f3;
+    border: 1px solid #e5e0d8;
+  }
+  .surface-callout-light .text-callout-heading {
+    color: #1a1a1a;
+  }
+  .surface-callout-light .text-callout-body {
+    color: #3d3d3d;
+  }
+  
+  /* Neutral callout surface - soft gray with dark text */
+  .surface-callout-neutral {
+    background-color: #f4f5f7;
+    border: 1px solid #e2e4e8;
+  }
+  .surface-callout-neutral .text-callout-heading {
+    color: #1a1a1a;
+  }
+  .surface-callout-neutral .text-callout-body {
+    color: #4a4a4a;
+  }
+  
+  /* Dark callout surface - slate with light text */
+  .surface-callout-dark {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+  }
+  .surface-callout-dark .text-callout-heading {
+    color: #f7fafc;
+  }
+  .surface-callout-dark .text-callout-body {
+    color: #e2e8f0;
+  }
+  
+  /* === GUARANTEED HIGH-CONTRAST TEXT COLORS === */
+  /* Use these for maximum readability on any background */
+  
+  /* For light backgrounds (white, cream, light gray) */
+  .text-high-contrast-dark {
+    color: #1a1a1a !important;
+  }
+  .text-secondary-dark {
+    color: #4a4a4a !important;
+  }
+  
+  /* For dark backgrounds (gray-900, slate, black) */
+  .text-high-contrast-light {
+    color: #f7fafc !important;
+  }
+  .text-secondary-light {
+    color: #cbd5e0 !important;
+  }
+  
+  /* === EXPLICIT CALLOUT BOX STYLES === */
+  /* Pre-defined box styles that guarantee contrast */
+  
+  .callout-box-light {
+    background-color: #f8f6f3;
+    border: 1px solid #e5e0d8;
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+  .callout-box-light h3,
+  .callout-box-light h4,
+  .callout-box-light strong {
+    color: #1a1a1a;
+  }
+  .callout-box-light p,
+  .callout-box-light li,
+  .callout-box-light span {
+    color: #3d3d3d;
+  }
+  
+  .callout-box-neutral {
+    background-color: #f4f5f7;
+    border: 1px solid #e2e4e8;
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+  .callout-box-neutral h3,
+  .callout-box-neutral h4,
+  .callout-box-neutral strong {
+    color: #1a1a1a;
+  }
+  .callout-box-neutral p,
+  .callout-box-neutral li,
+  .callout-box-neutral span {
+    color: #4a4a4a;
+  }
+  
+  .subtle-hover {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .subtle-hover:hover {
+    @apply translate-y-[-1px];
+  }
+  
+  .text-brand-primary {
+    color: var(--primary);
+  }
+  
+  .text-brand-blue {
+    color: var(--quaternary);
+  }
+  
+  .border-brand-surface {
+    border-color: var(--brand-surface);
+  }
+  
+  /* Fixed brand colors for products - never change with perspectives */
+  .bg-brand-pink {
+    background-color: #FE299E;
+  }
+  
+  .bg-brand-yellow {
+    background-color: #FFCF00;
+  }
+  
+  .bg-brand-green {
+    background-color: #B8E986;
+  }
+  
+  .bg-brand-blue {
+    background-color: #01A9F4;
+  }
+  
+  .text-brand-pink {
+    color: #FE299E;
+  }
+  
+  .text-brand-yellow-dark {
+    color: #CC9A00; /* Darker yellow for readability */
+  }
+  
+  .text-brand-green-dark {
+    color: #7BAE4F; /* Darker green for readability */
+  }
+  
+  .text-brand-blue {
+    color: #01A9F4;
+  }
+  
+  /* Mobile Touch Target Improvements - Ultra High Specificity */
+  @media (max-width: 768px) {
+    /* Logo link - ensure 44px minimum touch target */
+    header [data-testid="logo-link"] {
+      min-height: 44px !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 10px 0 !important;
+    }
+    
+    /* Footer links - ensure 44px minimum touch target - ALL BREAKPOINTS */
+    footer [data-testid="footer-hash-link"],
+    footer [data-testid="footer-semi-link"],
+    footer [data-testid="footer-personal-twitter"],
+    footer [data-testid="footer-business-twitter"],
+    footer [data-testid="footer-email"] {
+      min-height: 44px !important;
+      min-width: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      padding: 12px 4px !important;
+      line-height: 20px !important;
+    }
+    
+    /* Try Hash buttons and CTAs - high specificity */
+    header a[href="https://hash.pink"],
+    section a[href="https://hash.pink"],
+    div a[href="https://hash.pink"],
+    a[href="https://semi.pink"] {
+      min-height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      padding: 12px 16px !important;
+    }
+    
+    /* All buttons minimum touch target */
+    button, 
+    .btn,
+    a.btn,
+    [role="button"] {
+      min-height: 44px !important;
+      min-width: 44px !important;
+    }
+    
+    /* Specific navigation elements */
+    nav a,
+    header a {
+      min-height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+  }
+  
+  /* Extra small mobile breakpoint fixes */
+  @media (max-width: 320px) {
+    footer [data-testid="footer-hash-link"],
+    footer [data-testid="footer-semi-link"],
+    footer [data-testid="footer-personal-twitter"],
+    footer [data-testid="footer-business-twitter"],
+    footer [data-testid="footer-email"] {
+      min-height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      padding: 14px 0 !important;
+      line-height: 16px !important;
+    }
+  }
+  
+  /* Touch device specific improvements */
+  @media (hover: none) and (pointer: coarse) {
+    a, button, [role="button"] {
+      min-height: 44px !important;
+      min-width: 44px !important;
+    }
+  }
+}
+
+
+/* Fix for Radix UI Select dropdown z-index and pointer events */
+[data-radix-select-content] {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+[data-radix-select-viewport] {
+  pointer-events: auto !important;
+}
+
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+}
+
+/* Ensure select items are clickable */
+[data-radix-select-item] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
