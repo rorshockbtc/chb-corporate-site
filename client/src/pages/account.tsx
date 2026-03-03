@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNostrAuth } from "@/hooks/use-nostr-auth";
 import { usePerspective } from "@/hooks/use-perspective";
 import { usePerspectiveTheme } from "@/hooks/use-perspective-theme";
+import { BRAND_COLORS } from "@/lib/brand-colors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -279,7 +280,7 @@ function OverviewTab({
       <Card className="border-primary/20 bg-gradient-to-br from-background to-primary/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Heart className="h-5 w-5 text-[#FE299E]" />
+            <Heart className="h-5 w-5 text-primary" />
             The CHB Promise
           </CardTitle>
         </CardHeader>
@@ -316,21 +317,21 @@ function OverviewTab({
           description="Your private memory journal"
           icon={<Database className="h-6 w-6" />}
           href="https://hash.pink"
-          color="#4CAF50"
+          color={BRAND_COLORS.hash}
         />
         <QuickLinkCard
           title="Semi"
           description="Your intelligent AI assistant"
           icon={<Brain className="h-6 w-6" />}
           href="https://semi.pink"
-          color="#9C27B0"
+          color={BRAND_COLORS.semi}
         />
         <QuickLinkCard
           title="Pipes"
           description="Curator marketplace"
           icon={<Sparkles className="h-6 w-6" />}
           href="https://pipes.pink"
-          color="#FE299E"
+          color={BRAND_COLORS.pipes}
         />
       </div>
     </>
@@ -622,7 +623,7 @@ function ConnectedAppsTab({ currentPerspective }: { currentPerspective: string }
       description: "Hash captures your thoughts, learnings, and evolution. It's the private foundation that powers personalization across the ecosystem. What you write here travels with you—Semi knows you because Hash tells her.",
       synergy: "Your Hash journals reveal your expertise and inform how Semi responds to you.",
       icon: <Database className="h-8 w-8" />,
-      color: "#4CAF50",
+      color: BRAND_COLORS.hash,
       url: "https://hash.pink",
       connected: true
     },
@@ -633,7 +634,7 @@ function ConnectedAppsTab({ currentPerspective }: { currentPerspective: string }
       description: "Semi is the AI layer for everything. She routes intelligently—simple queries stay local (efficient), complex ones go external (when needed). She learns your preferences and gets smarter about YOU every day.",
       synergy: "Semi uses your Hash for context and can query Pipes for domain expertise.",
       icon: <Brain className="h-8 w-8" />,
-      color: "#9C27B0",
+      color: BRAND_COLORS.semi,
       url: "https://semi.pink",
       connected: true
     },
@@ -644,7 +645,7 @@ function ConnectedAppsTab({ currentPerspective }: { currentPerspective: string }
       description: "Package your expertise into reusable, monetizable AI infrastructure. Like domain names for knowledge—claim your namespace, curate your perspective, earn equity from your wisdom.",
       synergy: "Your Hash reveals what you know deeply. Create Pipes from your strongest themes.",
       icon: <Sparkles className="h-8 w-8" />,
-      color: "#FE299E",
+      color: BRAND_COLORS.pipes,
       url: "https://pipes.pink",
       connected: false
     }

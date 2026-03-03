@@ -320,24 +320,24 @@ export default function CreativeProcess() {
           {/* Primary Navigation */}
           <div className="mt-8">
             <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as ViewMode)} className="w-full">
-              <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-[#FE299E] to-[#FE299E]/80 p-1.5 h-14 rounded-xl shadow-lg" data-testid="view-mode-tabs">
+              <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-[var(--brand-pink)] to-[var(--brand-pink)]/80 p-1.5 h-14 rounded-xl shadow-lg" data-testid="view-mode-tabs">
                 <TabsTrigger 
                   value="story" 
-                  className="gap-3 !text-white data-[state=active]:!bg-white data-[state=active]:!text-[#FE299E] data-[state=active]:shadow-lg hover:!text-white/90 font-semibold transition-all duration-200"
+                  className="gap-3 !text-white data-[state=active]:!bg-white data-[state=active]:!text-primary data-[state=active]:shadow-lg hover:!text-white/90 font-semibold transition-all duration-200"
                 >
                   <BookOpen className="h-5 w-5" />
                   Story
                 </TabsTrigger>
                 <TabsTrigger 
                   value="gallery" 
-                  className="gap-3 !text-white data-[state=active]:!bg-white data-[state=active]:!text-[#FE299E] data-[state=active]:shadow-lg hover:!text-white/90 font-semibold transition-all duration-200"
+                  className="gap-3 !text-white data-[state=active]:!bg-white data-[state=active]:!text-primary data-[state=active]:shadow-lg hover:!text-white/90 font-semibold transition-all duration-200"
                 >
                   <Grid className="h-5 w-5" />
                   Gallery
                 </TabsTrigger>
                 <TabsTrigger 
                   value="comparison" 
-                  className="gap-3 !text-white data-[state=active]:!bg-white data-[state=active]:!text-[#FE299E] data-[state=active]:shadow-lg hover:!text-white/90 font-semibold transition-all duration-200"
+                  className="gap-3 !text-white data-[state=active]:!bg-white data-[state=active]:!text-primary data-[state=active]:shadow-lg hover:!text-white/90 font-semibold transition-all duration-200"
                 >
                   <Filter className="h-5 w-5" />
                   Filter

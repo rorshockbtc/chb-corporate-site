@@ -32,7 +32,7 @@ export function SemiChat({ className = '' }: SemiChatProps) {
   const { getThemeColor } = usePerspectiveTheme();
   
   // Semi should be pink by default, but can adapt to perspective
-  const chatColor = getThemeColor('primary') || '#FE299E'; // Default to CHB pink
+  const chatColor = getThemeColor('primary') || 'var(--brand-pink)';
 
   // Auto-scroll to bottom when new messages are added
   useEffect(() => {

@@ -1,6 +1,7 @@
 import { Eye } from "lucide-react";
 import { usePerspective } from "@/hooks/use-perspective";
 import { usePerspectiveTheme } from "@/hooks/use-perspective-theme";
+import { BRAND_COLORS } from "@/lib/brand-colors";
 import type { Perspective } from "@/types/content";
 
 export function PerspectiveSelector() {
@@ -8,7 +9,7 @@ export function PerspectiveSelector() {
   const { theme } = usePerspectiveTheme();
 
   const perspectives: { key: Perspective; label: string; color: string }[] = [
-    { key: "startup_founders", label: "Startup Founders", color: "#01A9F4" },
+    { key: "startup_founders", label: "Startup Founders", color: BRAND_COLORS.blue },
     { key: "content_creators", label: "Content Creators", color: "hsl(328, 85%, 70%)" },
     { key: "memory_capturers", label: "Memory Capturers", color: "hsl(142, 76%, 36%)" },
   ];

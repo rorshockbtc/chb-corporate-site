@@ -1,272 +1,337 @@
 # UI_MANIFEST.md
-## CHB Corporate Site — Design System Reference
-
-> This document catalogs the complete color palette, typography system, and component 
-> patterns in use. It is the authoritative source for Figma migration and design token 
-> synchronization.
+## CHB Corporate Site — Full UI Audit
+### v2 — Post GitHub Provisioning
 
 ---
 
-## Brand Sheet vs. Implementation
+## 1. The Pipes Injection Mechanism
 
-The fast brand sheet defines six foundational colors:
+"Pipes" in this codebase means the **Perspectives Engine**: a runtime CSS variable injection system that re-skins the entire UI per audience segment. Here is the exact mechanism, layer by layer.
 
-| Token Name | Hex | Usage Role |
-|-----------|-----|------------|
-| **Surface** | `#111111` | Dark page backgrounds, nav on scroll |
-| **Text on Surface** | `#EEEEEE` | Body text on dark backgrounds |
-| **Brand Primary** | `#FE299E` | All CTAs, never overridden by perspective |
-| **Brand Secondary** | `#FFCF00` | Highlights, badges, tier accents |
-| **Brand Tertiary** | `#B8E986` | Memory Capturers accent (light green) |
-| **Brand Quaternary** | `#01A9F4` | Startup Founders perspective color |
+### Runtime Flow
 
-### Why the Implementation Extends the Brand Sheet
+```
+User Action / Page Load
+       │
+       ▼
+localStorage.getItem("chb-perspective")
+       │  (default: "startup_founders")
+       ▼
+PerspectiveContext (React Context)
+  client/src/hooks/use-perspective.tsx
+       │
+       ▼
+usePerspectiveTheme() effect fires on perspective change
+  client/src/hooks/use-perspective-theme.tsx
+       │
+       ├─► document.documentElement.setAttribute("data-perspective", key)
+       │         triggers CSS selector cascade in index.css
+       │
+       └─► Object.entries(cssVariables).forEach(([prop, val]) =>
+               root.style.setProperty(prop, val)
+           )
+               writes ~15 --theme-* and --perspective-* variables
+               directly onto :root inline style
+```
 
-The corporate site serves **three simultaneous audience perspectives**. The brand sheet 
-covers the *universal* brand layer. The implementation adds perspective-specific colors 
-on top:
+### Layer A — CSS Attribute Selectors (index.css)
 
-| Addition | Value | Reason |
-|---------|-------|--------|
-| Content Creators magenta | `hsl(328, 85%, 70%)` | Distinct from brand pink; creative/editorial energy |
-| Memory Capturers green | `hsl(142, 76%, 36%)` | Deeper, warmer than `#B8E986`; better legibility |
-| Farmhouse warm cream | `#faf6f0 → #e9e2d4` | Vintage postcard aesthetic for older demographic |
-| Founders steel blue | `#1e40af` | Authority/trust signal for B2B audience |
-
-All additions are perspective-scoped and do not affect the universal brand layer.
-
----
-
-## CSS Custom Properties (Full Reference)
-
-### Universal Brand Tokens
+Triggered by `data-perspective` attribute on `<html>`. These set the four perspective palette variables:
 
 ```css
-/* --- Core Brand Colors --- */
---brand-pink:    #FE299E;   /* Primary CTA — NEVER change, NEVER override */
---brand-yellow:  #FFCF00;   /* Secondary highlight */
---brand-green:   #B8E986;   /* Tertiary / Memory Capturers light */
---brand-blue:    #01A9F4;   /* Quaternary / Startup Founders */
-
-/* --- Surface System --- */
---brand-surface:     #111111;  /* Dark surface base */
---surface-dark:      #111111;  /* Alias for dark backgrounds */
---text-on-surface:   #EEEEEE;  /* Light text on dark surfaces */
-
-/* --- Shadcn/Radix Base Tokens --- */
---background:           hsl(0, 0%, 99%);
---foreground:           hsl(215, 25%, 15%);
---card:                 hsl(0, 0%, 100%);
---card-foreground:      hsl(215, 25%, 15%);
---primary:              #FE299E;
---primary-foreground:   hsl(0, 0%, 100%);
---secondary:            #FFCF00;
---secondary-foreground: hsl(215, 25%, 15%);
---muted:                hsl(210, 20%, 96%);
---muted-foreground:     hsl(215, 15%, 55%);
---accent:               #B8E986;
---accent-foreground:    hsl(215, 25%, 15%);
---destructive:          hsl(0, 70%, 50%);
---destructive-foreground: hsl(0, 0%, 98%);
---border:               hsl(210, 20%, 88%);
---input:                hsl(210, 20%, 94%);
---ring:                 hsl(330, 65%, 55%);
---quaternary:           #01A9F4;
-
-/* --- Border Radius --- */
---radius: 16px;
-```
-
-### Perspective-Driven Tokens (Runtime)
-
-These are set dynamically on `:root[data-perspective="..."]` and consumed by utility classes.
-
-```css
---perspective-primary:    /* Active perspective signature color */
---perspective-accent:     /* Supporting accent for active perspective */
---perspective-secondary:  /* Lighter variant of perspective primary */
---perspective-light:      /* Very light tint for section backgrounds */
---perspective-light-rgb:  /* RGB triplet for opacity-based usage */
-```
-
-### Hero Theme Tokens (Runtime, per perspective)
-
-```css
---theme-hero-overlay:    /* Opacity value 0–1 for hero image dimming */
---theme-hero-gradient:   /* CSS gradient string for hero color wash */
---theme-brightness:      /* CSS filter brightness multiplier */
---theme-contrast:        /* CSS filter contrast multiplier */
---theme-container-width: /* Max-width: 1000px | 1100px | 1200px */
---theme-spacing:         /* Section padding: 2rem | 3rem | 4rem */
---theme-headline-weight: /* Font weight: 300 | 600 | 700 | 800 */
---theme-body-size:       /* Body font size: 0.875rem | 1rem | 1.125rem */
-```
-
----
-
-## Typography System
-
-### Font Families
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--font-sans` | `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` | Default body, headings, UI |
-| `--font-serif` | Same as sans (currently aliased) | H1–H6 by Tailwind default |
-| `--font-mono` | `'JetBrains Mono', 'SF Mono', Consolas, monospace` | Code, credentials, tokens |
-| `Playfair Display` | Loaded via @fontsource | Content Creators & Memory Capturers decorative headings |
-| `Georgia` | System serif | Fallback for farmhouse/editorial body text |
-
-### Fluid Type Scale
-
-All type sizes use CSS `clamp()` for device-responsive scaling without breakpoints.
-
-| Token | Clamp Range | Role |
-|-------|-------------|------|
-| `--fluid-hero` | `clamp(2.5rem, 5vw + 1rem, 5rem)` | 40px → 80px, page heroes |
-| `--fluid-display` | `clamp(2rem, 4vw + 0.75rem, 3.5rem)` | 32px → 56px, section headers |
-| `--fluid-heading` | `clamp(1.5rem, 3vw + 0.5rem, 2.25rem)` | 24px → 36px, subheadings |
-| `--fluid-body-xl` | `clamp(1.125rem, 2vw + 0.5rem, 1.5rem)` | 18px → 24px, lead copy |
-| `--fluid-body` | `clamp(1rem, 1.5vw + 0.25rem, 1.25rem)` | 16px → 20px, body text |
-| `--fluid-caption` | `clamp(0.875rem, 1vw + 0.25rem, 1rem)` | 14px → 16px, captions |
-
-### Line Heights
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--fluid-line-hero` | `clamp(1.1, 2vw + 1, 1.3)` | Hero headlines |
-| `--fluid-line-display` | `clamp(1.2, 1.5vw + 1, 1.4)` | Display headers |
-| `--fluid-line-body` | `clamp(1.5, 1vw + 1.4, 1.8)` | Body copy |
-
-### Tailwind Utility Classes
-
-```
-.text-fluid-hero        font-weight: 900, letter-spacing: -0.02em
-.text-fluid-display     font-weight: 800, letter-spacing: -0.015em
-.text-fluid-heading     font-weight: 700, letter-spacing: -0.01em
-.text-fluid-body-xl     font-weight: 400
-.text-fluid-body        font-weight: 400
-.text-fluid-caption     font-weight: 500
-```
-
----
-
-## Component Patterns
-
-### Buttons
-
-**Primary CTA** (universal, perspective-immune)
-```jsx
-<Button className="bg-brand-pink text-white hover:opacity-90">
-  Get Started
-</Button>
-```
-Hex: `#FE299E` | Text: `#FFFFFF` | Radius: `var(--radius)` = 16px
-
-**Outline on colored backgrounds** (accessibility-critical pattern)
-```jsx
-<Button variant="outline" className="border-white text-white bg-transparent hover:bg-white/10">
-  Learn More
-</Button>
-```
-Always add `bg-transparent` to prevent white-on-white rendering.
-
-**Perspective-aware secondary button**
-```jsx
-<a className="pipes-link">Explore | | |</a>
-```
-Background: `var(--perspective-primary)` | Text: white | Radius: 0.75rem | 
-Hover: `brightness(0.9)` + `translateY(-2px)`
-
-### Cards
-
-**Standard Card**
-```css
-/* Shadcn default with 16px radius */
-bg-card text-card-foreground rounded-lg border shadow-sm
-```
-
-**Farmhouse Card** (Memory Capturers only)
-```css
-.farmhouse-card {
-  background: linear-gradient(145deg, #faf6f0, #f2ede3, #ede4d3);
-  border: 2px solid #c8b99c;
-  border-radius: 18px;
-  /* Layered shadows + subtle grain texture via ::before pseudo-element */
+:root[data-perspective="startup_founders"] {
+  --perspective-primary:   #01A9F4;
+  --perspective-accent:    hsl(142, 76%, 36%);
+  --perspective-secondary: #33B3F6;
+  --perspective-light:     #CCE9FD;
+  --perspective-light-rgb: 188, 202, 235;
+}
+:root[data-perspective="content_creators"] {
+  --perspective-primary:   hsl(328, 85%, 70%);
+  --perspective-accent:    hsl(45, 93%, 47%);
+  --perspective-secondary: hsl(328, 85%, 80%);
+  --perspective-light:     hsl(328, 70%, 90%);
+  --perspective-light-rgb: 245, 214, 235;
+}
+:root[data-perspective="memory_capturers"] {
+  --perspective-primary:   hsl(142, 76%, 36%);
+  --perspective-accent:    hsl(25, 95%, 53%);
+  --perspective-secondary: hsl(142, 76%, 46%);
+  --perspective-light:     hsl(142, 60%, 85%);
+  --perspective-light-rgb: 204, 233, 204;
 }
 ```
 
-**Farmhouse Card White** (lighter variant for nested content)
-```css
-.farmhouse-card-white {
-  background: linear-gradient(145deg, #ffffff, #fefbf8, #fdf9f4);
-  border: 1px solid #d4c4a8;
+### Layer B — Inline CSS Variables (set via JS)
+
+`generateThemeCSS()` in `perspective-themes.ts` outputs these, applied via `root.style.setProperty()`:
+
+| Variable | Controls |
+|----------|---------|
+| `--primary` | Shadcn primary token (overrides base) |
+| `--secondary` | Shadcn secondary token |
+| `--accent` | Shadcn accent token |
+| `--background` | Page background |
+| `--foreground` | Default text color |
+| `--muted` / `--muted-foreground` | Subdued text |
+| `--theme-hero-overlay` | Hero image opacity (0.4–0.5) |
+| `--theme-hero-gradient` | Hero color wash gradient string |
+| `--theme-brightness` | CSS filter brightness |
+| `--theme-contrast` | CSS filter contrast |
+| `--theme-container-width` | Max-width: 1000–1200px |
+| `--theme-spacing` | Section padding: 2–4rem |
+| `--theme-headline-weight` | Font weight: 300–800 |
+| `--theme-body-size` | Body font size: 0.875–1.125rem |
+| `--perspective-primary` | Perspective signature color (alias of secondary) |
+| `--perspective-accent` | Perspective accent |
+| `--perspective-text` | Perspective foreground |
+| `--perspective-muted` | Perspective muted text |
+
+### Layer C — Content Switching (React)
+
+`usePerspectiveContent()` accepts a keyed object and returns the value for the active perspective:
+
+```tsx
+const headline = usePerspectiveContent({
+  startup_founders: "Scale your AI infrastructure",
+  content_creators: "Build an audience that compounds",
+  memory_capturers: "Never lose another memory",
+});
+```
+
+Called in: `hero-section.tsx`, `product-card.tsx`, `home.tsx`, `products.tsx`,
+`chb-case-study.tsx`, `roadmap.tsx`, `scout.tsx`, `contact.tsx`, and all three product pages.
+
+---
+
+## 2. CSS Classes Injected by the Perspectives Engine
+
+### Universal Utility Classes (consume `--perspective-*` variables)
+
+These classes work on ANY element and automatically respond to the active perspective:
+
+| Class | CSS Effect | Used In |
+|-------|-----------|---------|
+| `.section-title-perspective` | `color: var(--perspective-primary)` | `hero-section.tsx`, `home.tsx` |
+| `.accent-perspective` | `color: var(--perspective-primary)` | `home.tsx` |
+| `.border-perspective` | `border-color: var(--perspective-primary)` | — |
+| `.bg-perspective` | `background: var(--perspective-primary)` | `home.tsx` |
+| `.bg-perspective-light` | `background: var(--perspective-light)` | — |
+| `.pipes-link` | `bg: var(--perspective-primary)` + hover lift | `home.tsx` |
+| `.optional-includes-bg` | rgba opacity from `--perspective-light-rgb` | — |
+| `.perspective-content` | Transition base class | — |
+
+### Perspective-Specific Named Classes
+
+These are **hard-coded to a single perspective**. They are applied via conditional logic in JSX:
+
+```tsx
+// home.tsx pattern
+className={
+  currentPerspective === 'memory_capturers' ? 'farmhouse-section' :
+  currentPerspective === 'startup_founders' ? 'founders-section' :
+  'creators-section'
 }
 ```
 
-### Section Backgrounds
+**Startup Founders** (`founders-*`):
+- `.founders-section` — subtle blue radial gradient background
+- `.founders-title` — Inter 700, `#1e40af`, tight tracking ⚠️ *hardcoded*
+- `.founders-body` — Inter 500, `#1e3a8a` ⚠️ *hardcoded*
+- `.founders-display` — Inter 800, `#1e3a8a` ⚠️ *hardcoded*
+- `.founders-heading` — *referenced in TSX but not defined in CSS* 🐛
 
-| Class | Perspective | Background |
-|-------|-------------|------------|
-| `.founders-section` | Startup Founders | `rgba(59,130,246,0.03)` gradient + radial highlights |
-| `.creators-section` | Content Creators | `rgba(147,51,234,0.03)` gradient + radial highlights |
-| `.farmhouse-section` | Memory Capturers | Warm cream `#f8f4ee → #e9e2d4` with diagonal grain |
+**Content Creators** (`creators-*`):
+- `.creators-section` — subtle purple/magenta radial gradient
+- `.creators-title` — Playfair Display italic, `#7c3aed` ⚠️ *hardcoded*
+- `.creators-body` — Georgia 400, `#6b21a8` ⚠️ *hardcoded*
+- `.creators-display` — Playfair Display 600, `#581c87` ⚠️ *hardcoded*
+- `.creators-heading` — *referenced in TSX but not defined in CSS* 🐛
+- `.creators-border` — *referenced in TSX but not defined in CSS* 🐛
 
-### Navigation
+**Memory Capturers** (`farmhouse-*`):
+- `.farmhouse-section` — warm cream gradient with diagonal grain texture
+- `.farmhouse-card` — layered shadow, tan border, cream gradient
+- `.farmhouse-card-white` — lighter card variant
+- `.farmhouse-title` — Inter 700, `#2d1810` ⚠️ *hardcoded*
+- `.farmhouse-body` — Georgia, `#4a3e35` ⚠️ *hardcoded*
+- `.farmhouse-display` — Playfair Display 600, `#1a0e08` ⚠️ *hardcoded*
+- `.farmhouse-subheader` — Georgia, `#3c2f26` ⚠️ *hardcoded*
+- `.farmhouse-text-warm` — `#2d1810` ⚠️ *hardcoded*
+- `.farmhouse-text-muted` — `#5a4d42` ⚠️ *hardcoded*
+- `.farmhouse-heading` — *referenced in TSX but not defined in CSS* 🐛
+- `.farmhouse-border` — *referenced in TSX but not defined in CSS* 🐛
 
-```css
-.nav-backdrop {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-}
+### Tailwind Arbitrary CSS Variable Classes (from `usePerspectiveStyles()`)
+
+Generated dynamically by the hook and applied inline:
+
+```
+bg-[var(--theme-primary)]
+bg-[var(--theme-secondary)]
+border-[var(--theme-accent)]
+bg-[var(--theme-background)]
+text-[var(--theme-foreground)]
+text-[var(--theme-muted)]
+border-[var(--theme-muted)]
+hover:border-[var(--theme-primary)]
 ```
 
-### Callout Boxes (Accessible)
+---
 
-Use these utility classes instead of `bg-muted` (which has contrast issues):
+## 3. Default (Incidental) Baseline State
 
-```css
-.callout-box-neutral  /* Safe neutral callout */
-.callout-box-light    /* Lighter variant */
+The **Default UI** — before any explicit user selection — is `startup_founders`.
+
+Persistence: `localStorage.getItem("chb-perspective")` → falls back to `"startup_founders"` if missing.
+
+### Default Active Values
+
+| Property | Default Value |
+|----------|--------------|
+| `--perspective-primary` | `#01A9F4` (brand blue) |
+| `--perspective-light` | `#CCE9FD` |
+| Hero overlay | `linear-gradient(135deg, #01A9F4 0%, #0088CC 100%)`, opacity 0.5 |
+| Hero brightness | 1.1 |
+| Section class | `.founders-section` |
+| Typography class | `.founders-title`, `.founders-body` |
+| Container max-width | 1200px |
+| Section padding | 2rem (compact) |
+| Font weight | 800 (extra-bold) |
+| Body font size | 0.875rem |
+| Content voice | Authoritative, features-focused |
+| `--primary` (Shadcn) | `#FE299E` (unchanged — pink is always primary) |
+| `--secondary` (Shadcn) | `#01A9F4` (brand blue for this perspective) |
+
+### Default Page → Component Visual Mapping
+
+```
+Navigation
+  bg-white/95 + backdrop-blur-[12px]   nav-backdrop class
+  Logo: CHB :-]                         text-foreground (dark on light)
+  Perspective Selector: visible         color #01A9F4 active indicator
+
+Hero Section
+  Background: perspective image         brightness(1.1) contrast(1.2)
+  Overlay: blue gradient                #01A9F4 → #0088CC, opacity 0.5
+  H1: .text-fluid-hero                  .section-title-perspective → #01A9F4
+  Subtext: text-white/90                on the hero overlay
+
+Product Cards
+  bg-card (white)
+  Title: text-foreground
+  Badge: bg-primary (#FE299E)
+
+CTA Buttons
+  bg: var(--brand-pink) = #FE299E      NEVER changes with perspective
+  text: white
 ```
 
 ---
 
-## Accessibility Rules
+## 4. Shadcn Component Inventory
 
-These rules are constitutional — violations are bugs, not design choices.
+| Component | Import Count | Primary Usage |
+|-----------|-------------|---------------|
+| `button` | 22 | CTAs, form submits, nav actions |
+| `card` / `card-header` / `card-content` | 12 | Product cards, account panels |
+| `badge` | 9 | Tier labels, status indicators |
+| `input` | 8 | Auth forms, admin fields |
+| `label` | 7 | Form field labels |
+| `tabs` / `tabs-list` / `tabs-trigger` / `tabs-content` | 5 | Creative process, product toggles |
+| `select` / `select-item` | 4 | Admin filters |
+| `tooltip` | 3 | Nav icons, info overlays |
+| `textarea` | 3 | Contact form, admin notes |
+| `dialog` | 3 | Auth modals, image editor |
+| `separator` | 2 | Nav dividers, section breaks |
+| `dropdown-menu` | 2 | Nav user menu |
+| `toggle` | 1 | View mode switch |
+| `toaster` / `toast` | 1 | Global notifications |
+| `slider` | 1 | Admin image controls |
+| `skeleton` | 1 | Loading states |
+| `sheet` | 1 | Mobile nav drawer |
+| `progress` | 1 | Account credit bar |
+| `form` | 1 | React Hook Form wrapper |
+| `collapsible` | 1 | Expandable FAQ |
+| `checkbox` | 1 | Admin bulk select |
+| `accordion` | 1 | Product FAQ sections |
 
-1. **Light surfaces** (`white`, `bg-gray-50`): `text-gray-900` headings, `text-gray-700` body
-2. **Dark surfaces** (`bg-gray-900`, `#111111`): `text-white` headings, `text-gray-300` body  
-3. **Colored surfaces** (`bg-green-600`, `bg-purple-600`, `#FE299E`): `text-white` all text
-4. **Outline buttons on color**: Always add `bg-transparent`
-5. **Never use** `bg-muted` / `text-muted-foreground` without explicit contrast verification
-
----
-
-## Border Radius Scale
-
-| Tailwind Class | Value | Usage |
-|---------------|-------|-------|
-| `rounded-sm` | `calc(16px - 4px)` = 12px | Small elements |
-| `rounded-md` | `calc(16px - 2px)` = 14px | Medium elements |
-| `rounded-lg` | `16px` | Cards, buttons (default) |
-| `rounded-xl` | 20px (Tailwind default) | Hero sections |
-| Custom | 18px | Farmhouse cards |
-
----
-
-## Subscription Tier Badges
-
-Visual identifiers for CHB's three subscription tiers:
-
-| Tier | Symbol | Price | Credits |
-|------|--------|-------|---------|
-| Comma | `,` | $7/mo | 50k |
-| Period | `.` | $21/mo | 200k |
-| Ellipsis | `...` | $210/mo | 1M |
-
-Rendered as monospace badge characters, styled with `font-mono`.
+All components are sourced from `@/components/ui/*` (Radix UI + shadcn defaults). No third-party UI components beyond shadcn.
 
 ---
 
-*Last updated: March 2026 | Maintainer: CHB Design System*
+## 5. Tailwind v4 Readiness Audit
+
+### Breaking Changes to Prepare For
+
+| Issue | v3 Pattern | v4 Pattern | Status |
+|-------|-----------|-----------|--------|
+| Config file | `tailwind.config.ts` with `theme.extend` | `@theme` block in CSS | Not migrated — plan required |
+| `!important` prefix | `!text-white` | `text-white!` (suffix) | 4 instances flagged in creative-process.tsx |
+| Plugin imports | `require("tailwindcss-animate")` | ESM `import` or `@plugin` | Will break with v4 |
+| `darkMode: ["class"]` | `tailwind.config.ts` option | `@custom-variant dark (...)` in CSS | Not migrated |
+| Arbitrary value opacity | `bg-[#FE299E]/80` | Works same + `bg-[var(...)]/80` also works | OK |
+
+### Hardcoded Hex Values — Remediated
+
+All hardcoded hex values in `.tsx`/`.ts` files have been moved to `client/src/lib/brand-colors.ts`:
+
+| File | Was | Now |
+|------|-----|-----|
+| `creative-process.tsx` | `from-[#FE299E]`, `text-[#FE299E]` | `from-[var(--brand-pink)]`, `text-primary` |
+| `account.tsx` | `text-[#FE299E]`, `color="#4CAF50"`, etc. | `text-primary`, `BRAND_COLORS.hash`, etc. |
+| `semi-chat.tsx` | `\|\| '#FE299E'` | `\|\| 'var(--brand-pink)'` |
+| `perspective-selector.tsx` | `color: "#01A9F4"` | `BRAND_COLORS.blue` |
+
+### Hardcoded Values Still in CSS — Flagged for v4 Migration
+
+These live in `index.css` inside named component classes. They work fine in v3 but should become CSS custom properties before a v4 migration:
+
+```css
+/* FLAGGED: founders-* classes */
+.founders-title  { color: #1e40af; }  /* → var(--founders-text-primary) */
+.founders-body   { color: #1e3a8a; }  /* → var(--founders-text-body) */
+
+/* FLAGGED: creators-* classes */
+.creators-title  { color: #7c3aed; }  /* → var(--creators-text-primary) */
+.creators-body   { color: #6b21a8; }  /* → var(--creators-text-body) */
+.creators-display{ color: #581c87; }  /* → var(--creators-text-display) */
+
+/* FLAGGED: farmhouse-* classes */
+.farmhouse-card  { background: #faf6f0 → #ede4d3; border: #c8b99c; }
+.farmhouse-title { color: #2d1810; }  /* → var(--farmhouse-text-primary) */
+.farmhouse-body  { color: #4a3e35; }  /* → var(--farmhouse-text-body) */
+```
+
+### Undefined CSS Classes — Bugs
+
+These are referenced in TSX but have no corresponding CSS definition:
+
+- `.founders-heading` — used in `startup-founders-deep-dive.tsx`
+- `.creators-heading` — used in `content-creators-deep-dive.tsx`
+- `.creators-border` — used in `content-creators-deep-dive.tsx`
+- `.farmhouse-heading` — used in `memory-capturers-deep-dive.tsx`
+- `.farmhouse-border` — used in `memory-capturers-deep-dive.tsx`
+
+These fall through silently (no visual error) because they inherit from parent classes. They should either be defined or replaced with existing classes.
+
+---
+
+## 6. Brand Token Quick Reference
+
+Defined in `client/src/lib/brand-colors.ts` (JS) and `client/src/index.css` (CSS):
+
+| Token | JS Key | CSS Variable | Hex |
+|-------|--------|-------------|-----|
+| Brand Pink (CTA) | `BRAND_COLORS.pink` | `var(--brand-pink)` | `#FE299E` |
+| Brand Yellow | `BRAND_COLORS.yellow` | `var(--brand-yellow)` | `#FFCF00` |
+| Brand Green | `BRAND_COLORS.green` | `var(--brand-green)` | `#B8E986` |
+| Brand Blue | `BRAND_COLORS.blue` | `var(--brand-blue)` | `#01A9F4` |
+| Surface Dark | `BRAND_COLORS.surface` | `var(--brand-surface)` | `#111111` |
+| Hash Product | `BRAND_COLORS.hash` | — | `#4CAF50` |
+| Semi Product | `BRAND_COLORS.semi` | — | `#9C27B0` |
+| Pipes Product | `BRAND_COLORS.pipes` | = `--brand-pink` | `#FE299E` |
+
+---
+
+*Last updated: March 2026 | Generated from: `index.css`, `perspective-themes.ts`, `use-perspective-theme.tsx`*
