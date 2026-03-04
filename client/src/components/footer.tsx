@@ -64,6 +64,7 @@ export function Footer() {
             <div className="space-y-2 text-muted-foreground">
               <div><a href="/#ecosystem" className="hover:text-primary transition-colors">Philosophy</a></div>
               <div><a href="/roadmap" className="hover:text-primary transition-colors">Roadmap</a></div>
+              <div><a href="/design" className="hover:text-primary transition-colors">Design</a></div>
               <div><a href="/contact" className="hover:text-primary transition-colors">Contact</a></div>
             </div>
           </div>
