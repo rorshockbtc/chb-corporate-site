@@ -49,6 +49,10 @@
   --fluid-hero-vmin: clamp(2.5rem, 6vmin, 5rem);            /* Balanced hero scaling */
   --fluid-display-vmax: clamp(2rem, 3vmax, 3.5rem);         /* Large screen optimized */
   
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
+
   /* Line height scaling for optimal readability */
   --fluid-line-hero: clamp(1.1, 2vw + 1, 1.3);             /* Hero line height */
   --fluid-line-display: clamp(1.2, 1.5vw + 1, 1.4);        /* Display line height */
