@@ -32,6 +32,7 @@ pipes-engine/
 **/manifests/private/**
 PIPES_INTERNALS.md
 PIPES_ENGINE*.md
+chb_public_content.md
 
 # ----------------------------------------------------------
 # OAUTH CLIENT SECRETS & AUTH INTERNALS
