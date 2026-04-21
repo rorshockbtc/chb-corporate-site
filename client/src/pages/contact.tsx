@@ -1,5 +1,6 @@
 import { Mail, ExternalLink, Users, Building } from "lucide-react";
 import { usePerspectiveContent } from "@/hooks/use-perspective";
+import { ContactForm } from "@/components/contact-form";
 
 export default function Contact() {
   const contactContent = usePerspectiveContent({
@@ -116,25 +117,26 @@ export default function Contact() {
             ))}
           </div>
           
-          <div className="text-center space-y-8">
-            <h3 className="text-3xl font-bold font-serif">Ready to Start?</h3>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">
-              <a
-                href="mailto:cubby@colonhyphenbracket.pink"
-                className="px-10 py-4 bg-primary text-white rounded-xl hover:bg-primary/90 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                data-testid="primary-contact-button"
-              >
-                {contactContent.ctaText}
-              </a>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10 space-y-3">
+              <h3 className="text-3xl lg:text-4xl font-bold font-serif">{contactContent.ctaText}</h3>
+              <p className="text-muted-foreground text-lg">
+                Send us a note. We read every message and reply personally.
+              </p>
+            </div>
+            <div className="bg-card border border-border rounded-3xl p-8 lg:p-10 shadow-lg">
+              <ContactForm subjectPrefix="CHB Contact Page" testIdPrefix="contact-page" />
+            </div>
+            <div className="text-center mt-8">
               <a
                 href="https://hash.pink"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-10 py-4 border-2 border-primary text-primary rounded-xl hover:bg-primary hover:text-white transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
                 data-testid="try-hash-free-button"
               >
-                <span>Try Hash Free</span>
-                <ExternalLink size={18} />
+                <span>Or try Hash for free</span>
+                <ExternalLink size={16} />
               </a>
             </div>
           </div>

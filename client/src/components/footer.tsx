@@ -1,9 +1,29 @@
 import { ExternalLink } from "lucide-react";
+import { ContactForm } from "@/components/contact-form";
 
 export function Footer() {
   return (
     <footer className="border-t border-border py-12">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Contact CTA strip */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 pb-12 mb-12 border-b border-border">
+          <div className="space-y-4">
+            <h3 className="text-3xl lg:text-4xl font-bold font-serif leading-tight">
+              Drop us a line :-]
+            </h3>
+            <p className="text-muted-foreground text-lg">
+              Questions, ideas, partnerships, or just want to say hi? We read every message
+              and reply personally — usually within a day.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Prefer email? <a href="mailto:cubby@colonhyphenbracket.pink" className="text-primary hover:underline">cubby@colonhyphenbracket.pink</a>
+            </p>
+          </div>
+          <div>
+            <ContactForm variant="compact" subjectPrefix="CHB Footer" testIdPrefix="footer-contact" />
+          </div>
+        </div>
+
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="text-xl tracking-wide">
