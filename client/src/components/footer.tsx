@@ -53,6 +53,18 @@ export function Footer() {
                 </a>
               </div>
               <div>
+                <a
+                  href="https://greater.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors inline-flex items-center space-x-1"
+                  data-testid="footer-greater-link"
+                >
+                  <span>Greater</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+              <div>
                 <span className="text-muted-foreground/60">Pipes</span>
                 <span className="text-xs ml-1 text-muted-foreground/40">(coming soon)</span>
               </div>

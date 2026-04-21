@@ -110,7 +110,15 @@ export function Navigation() {
                   {label}
                 </Link>
               ))}
-              
+
+              <a
+                href="https://hire.colonhyphenbracket.pink/studio"
+                className="text-base font-light text-muted-foreground hover:text-primary transition-colors"
+                data-testid="nav-work-with-us"
+              >
+                Work With Us
+              </a>
+
               {isAuthenticated ? (
                 <Link
                   href="/account"
@@ -168,6 +176,14 @@ export function Navigation() {
                     {label}
                   </Link>
                 ))}
+                <a
+                  href="https://hire.colonhyphenbracket.pink/studio"
+                  className="block w-full py-2 text-base font-light text-muted-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid="mobile-nav-work-with-us"
+                >
+                  Work With Us
+                </a>
               </div>
               
               {/* Perspective selector for mobile */}
