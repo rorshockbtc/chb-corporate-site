@@ -6,8 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
 
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined;
-
 type Variant = "full" | "compact";
 
 interface ContactFormProps {
@@ -29,37 +27,34 @@ export function ContactForm({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!ACCESS_KEY) {
-      toast({
-        title: "Form not configured",
-        description: "The contact form is missing its access key.",
-        variant: "destructive",
-      });
-      return;
-    }
+    const form = e.currentTarget;
+    const data = new FormData(form);
 
-    const formData = new FormData(e.currentTarget);
-    formData.append("access_key", ACCESS_KEY);
-    formData.append("subject", `${subjectPrefix} — ${formData.get("name") || "New message"}`);
-    formData.append("from_name", "colonhyphenbracket.pink");
-    formData.append("botcheck", ""); // honeypot
+    const payload = {
+      name: (data.get("name") as string)?.trim(),
+      email: (data.get("email") as string)?.trim(),
+      company: (data.get("company") as string)?.trim() || "",
+      message: (data.get("message") as string)?.trim(),
+      subject: `${subjectPrefix} — ${(data.get("name") as string)?.trim() || "New message"}`,
+    };
+
+    if (!payload.name || !payload.email || !payload.message) return;
 
     setSubmitting(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      const data = await res.json();
-      if (data.success) {
+      const result = await res.json() as { success: boolean; message?: string };
+
+      if (result.success) {
         setSubmitted(true);
-        (e.target as HTMLFormElement).reset();
-        toast({
-          title: "Message sent :-]",
-          description: "We'll get back to you soon.",
-        });
+        form.reset();
+        toast({ title: "Message sent :-]", description: "We'll get back to you soon." });
       } else {
-        throw new Error(data.message || "Submission failed");
+        throw new Error(result.message || "Submission failed");
       }
     } catch (err: any) {
       toast({
@@ -87,7 +82,6 @@ export function ContactForm({
   if (variant === "compact") {
     return (
       <form onSubmit={handleSubmit} className={`space-y-3 ${className}`} data-testid={`${testIdPrefix}-form-compact`}>
-        <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
         <div className="grid sm:grid-cols-2 gap-3">
           <Input
             name="name"
@@ -131,8 +125,6 @@ export function ContactForm({
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-5 ${className}`} data-testid={`${testIdPrefix}-form`}>
-      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
-
       <div className="grid sm:grid-cols-2 gap-5">
         <div className="space-y-2">
           <Label htmlFor={`${testIdPrefix}-name`}>Name</Label>

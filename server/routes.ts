@@ -1143,7 +1143,52 @@ We focus on perspective-aware technology that adapts content for different audie
     }
   });
 
-  // Health check endpoint  
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, company, message, subject } = req.body as Record<string, string>;
+
+      if (!name?.trim() || !email?.trim() || !message?.trim()) {
+        return res.status(400).json({ success: false, message: "Name, email, and message are required." });
+      }
+
+      const accessKey = process.env.VITE_WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_ACCESS_KEY;
+      if (!accessKey) {
+        console.error("[contact] WEB3FORMS_ACCESS_KEY not set");
+        return res.status(500).json({ success: false, message: "Contact form is not configured." });
+      }
+
+      const payload = {
+        access_key: accessKey,
+        name: name.trim(),
+        email: email.trim(),
+        company: company?.trim() || "",
+        message: message.trim(),
+        subject: subject || `CHB Site — ${name.trim()}`,
+        from_name: "colonhyphenbracket.pink",
+        botcheck: "",
+      };
+
+      const w3Res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await w3Res.json() as { success: boolean; message?: string };
+
+      if (data.success) {
+        console.log(`[contact] Message submitted from ${email}`);
+        return res.json({ success: true });
+      } else {
+        console.error("[contact] Web3Forms error:", data.message);
+        return res.status(502).json({ success: false, message: data.message || "Delivery failed." });
+      }
+    } catch (error: any) {
+      console.error("[contact] Unexpected error:", error?.message);
+      return res.status(500).json({ success: false, message: "Server error. Please try again." });
+    }
+  });
+
   app.get("/api/health", async (req, res) => {
     try {
       const semiStatus = await semiApi.validateConnection();
