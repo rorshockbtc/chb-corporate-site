@@ -402,7 +402,7 @@ export default function HashDeepDive() {
                   <h3 className="text-2xl font-bold text-gray-900 mt-6">Step 1: Capture</h3>
                   <p className="text-lg text-gray-700 leading-relaxed">
                     Hash is your private AI journal. You write to it naturally—thoughts, ideas, decisions, learnings. 
-                    Unlike traditional journaling, Hash is designed for AI consumption: it structures and tags your entries 
+                    Unlike a paper notebook, Hash is designed for AI consumption: it structures and tags your entries 
                     automatically, making them retrievable and synthesizable.
                   </p>
 

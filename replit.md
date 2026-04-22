@@ -2,7 +2,9 @@
 
 ## Overview
 
-CHB (Colon Hyphen Bracket = :-]) is an AI innovation company developing tools for underserved users, particularly older and traditional demographics. The corporate website provides a professional business presence, supports developer account verification, and showcases the company's "perspective-switching" technology.
+CHB (Colon Hyphen Bracket = :-]) is an AI innovation company developing tools for the underserved—individuals who feel left behind by Big Tech and want real personalization, control over their data, and AI that respects their values instead of flattening them. The corporate website provides a professional business presence, supports developer account verification, and showcases the company's "perspective-switching" technology.
+
+**Brand Voice (CRITICAL)**: Public-facing copy uses **"AI for the underserved"** as the primary positioning. Avoid politically-loaded language like "traditionalists," "dissidents," "conservative AI," "progressive ideologies," "Valley groupthink," "family values" (as a proper noun), or anything that signals a partisan stance. Reframe as: personalization, control, transparency, "people Big Tech overlooks," "what matters to you/your family," "personal values."
 
 **Mission Stakes**:
 - **AI Memory Persistence**: Ensure AI retains user context and memory, preventing users from repeating themselves.

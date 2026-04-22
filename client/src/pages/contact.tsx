@@ -1,4 +1,4 @@
-import { Mail, ExternalLink, Users, Building } from "lucide-react";
+import { Mail, ExternalLink, Building } from "lucide-react";
 import { usePerspectiveContent } from "@/hooks/use-perspective";
 import { ContactForm } from "@/components/contact-form";
 
@@ -32,17 +32,8 @@ export default function Contact() {
       testId: "contact-email"
     },
     {
-      icon: Users,
-      title: "Personal",
-      subtitle: "Individual updates",
-      contact: "@RoRshockBTC",
-      href: "https://twitter.com/RoRshockBTC",
-      color: "bg-brand-yellow",
-      testId: "contact-personal"
-    },
-    {
       icon: Building,
-      title: "Business",
+      title: "Follow CHB",
       subtitle: "Company updates",
       contact: "@chb_coop",
       href: "https://twitter.com/chb_coop", 
@@ -90,7 +81,7 @@ export default function Contact() {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Whether you prefer email, personal updates, or business discussions, we're here to connect in the way that works best for you.</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12 mb-20">
+          <div className="grid sm:grid-cols-2 gap-8 lg:gap-12 mb-20 max-w-3xl mx-auto">
             {contactMethods.map((method, index) => (
               <div key={method.title} className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
@@ -148,16 +139,16 @@ export default function Contact() {
         <div className="max-w-6xl mx-auto px-8">
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold font-serif mb-6">Common Questions</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Everything you need to know about CHB and our AI innovation for traditionalists & dissidents</p>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Everything you need to know about CHB and our AI for the underserved</p>
           </div>
           
           <div className="grid lg:grid-cols-2 gap-8">
             <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <h3 className="text-2xl font-bold mb-6 text-primary">What makes CHB different from other AI companies?</h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                We're building AI innovation for traditionalists & dissidents with constitutional governance. Our tools prioritize human agency, 
-                privacy, and traditional values while delivering cutting-edge capabilities. We believe AI should 
-                enhance human creativity, not replace it.
+                We build AI for people Big Tech overlooks—individuals who want real personalization, 
+                control over their data, and tools that respect their values instead of flattening them. 
+                Constitutional governance means transparency and human agency are baked in, not bolted on.
               </p>
             </div>
             
@@ -171,11 +162,11 @@ export default function Contact() {
             </div>
             
             <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-6 text-primary">What does "AI for traditionalists & dissidents" mean?</h3>
+              <h3 className="text-2xl font-bold mb-6 text-primary">What does "AI for the underserved" mean?</h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                AI for traditionalists & dissidents means technology that respects human agency, protects privacy, 
-                maintains transparency, and aligns with traditional values. It's AI that serves people rather than 
-                replacing them, with clear governance and constitutional safeguards.
+                It means building for the people mainstream AI ignores: individuals who want personalization 
+                tied to their actual values, control over what's shared, and transparency about how their AI 
+                makes decisions. Less one-size-fits-all, more your-size-fits-you.
               </p>
             </div>
             

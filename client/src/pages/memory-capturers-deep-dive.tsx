@@ -13,8 +13,8 @@ export default function MemoryCapturersDeepDive() {
               </h1>
               
               <p className="text-2xl farmhouse-body leading-relaxed">
-                In a world where big tech treats your memories as data to be mined, :-] builds AI that 
-                preserves what truly matters with the respect and dignity your family deserves.
+                In a world where Big Tech treats your memories as data to be mined, :-] builds AI that 
+                preserves what truly matters—on your terms, with the privacy your family deserves.
               </p>
             </div>
             
@@ -48,17 +48,17 @@ export default function MemoryCapturersDeepDive() {
               <Shield className="w-16 h-16 text-red-500 mx-auto mb-6" />
               <h3 className="text-2xl font-bold mb-4 text-red-700">Your Privacy is Their Product</h3>
               <p className="text-muted-foreground">
-                Big tech AI reads your conversations, analyzes your photos, and sells insights about your 
+                Big Tech AI reads your conversations, analyzes your photos, and sells insights about your 
                 family to advertisers. Your intimate moments become corporate profit.
               </p>
             </div>
 
             <div className="bg-card border-2 border-red-200/60 rounded-2xl p-8 text-center">
               <Users className="w-16 h-16 text-red-500 mx-auto mb-6" />
-              <h3 className="text-2xl font-bold mb-4 text-red-700">Values Don't Matter</h3>
+              <h3 className="text-2xl font-bold mb-4 text-red-700">One-Size-Fits-All Values</h3>
               <p className="text-muted-foreground">
-                Modern AI pushes progressive ideologies and dismisses traditional values. It's designed 
-                by people who don't understand or respect your way of life.
+                Mainstream AI is tuned for the median user and flattens what makes your family unique. 
+                It's designed by people who don't know your story and don't ask.
               </p>
             </div>
 
@@ -80,8 +80,8 @@ export default function MemoryCapturersDeepDive() {
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold font-serif mb-6 farmhouse-heading">The :-] Difference</h2>
             <p className="text-xl farmhouse-body max-w-4xl mx-auto">
-              :-] isn't just another tech company. We're traditionalists building AI that serves families, 
-              not shareholders. Here's what makes us fundamentally different:
+              :-] isn't just another tech company. We build AI that serves families—not shareholders—and 
+              respects the values you actually hold instead of the ones an algorithm assumes you do.
             </p>
           </div>
 
@@ -146,13 +146,12 @@ export default function MemoryCapturersDeepDive() {
               <h4 className="text-3xl font-bold mb-6 farmhouse-heading">Semi: AI That Respects Your Values</h4>
               <div className="space-y-4 farmhouse-body">
                 <p>
-                  Semi is an AI writing partner that understands and respects traditional values. 
-                  Whether you're homeschooling your children or planning family devotions, Semi helps 
-                  without pushing harmful ideologies.
+                  Semi is an AI writing partner that learns who you are and what matters to you—rather 
+                  than nudging you toward someone else's defaults. You set the tone; she follows your lead.
                 </p>
                 <p>
-                  Need help with a family newsletter? Planning a church event? Semi provides thoughtful, 
-                  value-aligned assistance that honors your beliefs.
+                  Need help with a family newsletter? Planning an event? Drafting a tribute? Semi gives 
+                  you thoughtful assistance that sounds like you—not like everyone else.
                 </p>
               </div>
             </div>
@@ -174,21 +173,21 @@ export default function MemoryCapturersDeepDive() {
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="bg-card border border-border rounded-2xl p-8">
               <Camera className="w-12 h-12 text-primary mb-6" />
-              <h3 className="text-2xl font-bold mb-4">Family Devotions & Bible Study</h3>
+              <h3 className="text-2xl font-bold mb-4">Family Rituals & Celebrations</h3>
               <p className="text-muted-foreground mb-4">
-                Use Semi to help organize family devotions, create discussion questions for Bible study, 
-                and develop teaching materials that align with your theological beliefs. Perfect for 
-                families who want to take spiritual education into their own hands.
+                Use Semi to organize the conversations and traditions that bring your family together—from 
+                weekly check-ins to holiday gatherings—with discussion prompts and planning help that 
+                reflect what your family actually cares about.
               </p>
             </div>
 
             <div className="bg-card border border-border rounded-2xl p-8">
               <Users className="w-12 h-12 text-primary mb-6" />
-              <h3 className="text-2xl font-bold mb-4">Homeschool Curriculum Support</h3>
+              <h3 className="text-2xl font-bold mb-4">Personalized Learning Support</h3>
               <p className="text-muted-foreground mb-4">
-                Semi helps create lesson plans that reflect your values and worldview. From American history 
-                to science education, get assistance developing curriculum that teaches facts without 
-                progressive bias or ideological manipulation.
+                Semi helps you build learning materials that reflect your perspective and your child's 
+                pace. You decide what to emphasize and how to teach it; Semi supports the work without 
+                imposing a hidden agenda.
               </p>
             </div>
 
@@ -197,8 +196,8 @@ export default function MemoryCapturersDeepDive() {
               <h3 className="text-2xl font-bold mb-4">Legacy & Memory Preservation</h3>
               <p className="text-muted-foreground mb-4">
                 Hash helps you document family stories, preserve elder wisdom, and create digital archives 
-                of your family's journey. Capture oral histories, organize family photos, and ensure 
-                your values and memories pass to the next generation.
+                of your family's journey. Capture oral histories, organize family photos, and pass what 
+                matters most to the next generation.
               </p>
             </div>
           </div>
@@ -209,12 +208,12 @@ export default function MemoryCapturersDeepDive() {
       <section className="py-32 farmhouse-section">
         <div className="max-w-4xl mx-auto px-8 text-center">
           <h2 className="text-5xl font-bold font-serif mb-8 farmhouse-heading">
-            Join Families Who Put Values First
+            Join Families Who Put Their Story First
           </h2>
           
           <p className="text-2xl farmhouse-body mb-12 leading-relaxed">
-            You don't have to accept technology that undermines your values. :-] is building AI that 
-            honors your family, respects your beliefs, and preserves what truly matters.
+            You don't have to settle for technology that flattens what makes your family yours. :-] is 
+            building AI that honors your story, respects your privacy, and preserves what truly matters.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-md mx-auto">

@@ -55,8 +55,8 @@ export function HomePage() {
 
   const missionContent = usePerspectiveContent({
     startup_founders: {
-      title: "Scale beyond Silicon Valley's limits",
-      description: "Traditional entrepreneurs deserve AI that respects your market positioning and competitive advantages. We're building technology that amplifies your business vision rather than conforming to Valley groupthink."
+      title: "Scale beyond Silicon Valley's defaults",
+      description: "Founders Big Tech overlooks deserve AI that respects your market positioning and competitive advantages. We build technology that amplifies your business vision rather than flattening it into the same template every other startup uses."
     },
     content_creators: {
       title: "Create without creative conformity",
@@ -106,8 +106,8 @@ export function HomePage() {
 
   const principlesContent = usePerspectiveContent({
     startup_founders: {
-      title: "Preventing digital tyranny,<br />one entrepreneur at a time",
-      description: "Unless traditional entrepreneurs get involved with technology development, business innovation will be controlled by algorithms designed to extract value rather than create it. This threatens free market competition and entrepreneurial independence."
+      title: "Independent entrepreneurs,<br />independent infrastructure",
+      description: "Unless founders outside the Big Tech orbit shape AI development, business innovation will be controlled by algorithms designed to extract value rather than create it. That threatens competition and entrepreneurial independence."
     },
     content_creators: {
       title: "Preventing digital censorship,<br />one creator at a time", 
@@ -688,7 +688,7 @@ export function HomePage() {
                   {ctaContent.primaryCTA}
                 </a>
                 <a 
-                  href="https://twitter.com/RorshockBTC" 
+                  href="https://twitter.com/chb_coop" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="border border-primary text-primary px-8 py-4 rounded-xl font-medium text-lg hover:bg-primary/10 transition-colors"

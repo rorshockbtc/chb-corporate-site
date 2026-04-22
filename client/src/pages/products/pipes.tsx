@@ -112,7 +112,7 @@ export default function PipesDeepDive() {
 
   const biasExamples = [
     {
-      perspective: "Traditionalist",
+      perspective: "Heritage",
       description: "Values time-tested methods and classical techniques"
     },
     {
@@ -367,9 +367,9 @@ export default function PipesDeepDive() {
                         </div>
                         <p className="text-gray-700">
                           Instead of undifferentiated internet data scraped without consent, AI gets vetted, attributed expertise from known 
-                          sources. Users can choose exactly which perspectives and values they want their AI to reflect. Want conservative 
-                          financial advice? Install a Pipe from a curator who embodies that approach. Want progressive analysis? Install 
-                          a different Pipe. Transparency replaces corporate opacity.
+                          sources. Users can choose exactly which perspectives and values they want their AI to reflect. Want value-investing 
+                          advice from a Buffett-style curator? Install that Pipe. Want a growth-investing lens instead? Install a different one. 
+                          Transparency replaces corporate opacity.
                         </p>
                       </CardContent>
                     </Card>
@@ -550,7 +550,7 @@ export default function PipesDeepDive() {
 
                 <div className="prose prose-lg max-w-none space-y-6">
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    Traditional content monetization is linear: you create, you get paid once (or per-view), you must create again. 
+                    Conventional content monetization is linear: you create, you get paid once (or per-view), you must create again. 
                     The Curator Economy is different. It's designed to be <strong className="text-gray-900">compounding</strong>.
                   </p>
 

@@ -15,7 +15,7 @@ export function HeroSection() {
   const heroContent = usePerspectiveContent({
     startup_founders: {
       title: "Scale your vision",
-      description: ":-] helps entrepreneurs build products for market segments overlooked by Silicon Valley. Traditional values, growth-focused solutions, and AI that respects your product's positioning and competitive advantages.",
+      description: ":-] helps entrepreneurs build products for market segments overlooked by Silicon Valley. Personal values, growth-focused solutions, and AI that respects your product's positioning and competitive advantages.",
     },
     content_creators: {
       title: "Create authentically",

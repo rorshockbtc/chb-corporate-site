@@ -113,9 +113,9 @@ export default function Roadmap() {
     },
     memory_capturers: {
       title: "Our Family Vision", 
-      description: "AI that honors relationships, not algorithms. Technology that respects family values, protects personal privacy, and amplifies meaningful connections without overwhelming complexity.",
+      description: "AI that honors relationships, not algorithms. Technology that respects what your family values, protects personal privacy, and amplifies meaningful connections without overwhelming complexity.",
       principles: [
-        "Family values come first",
+        "Your family's priorities come first",
         "Privacy is non-negotiable", 
         "Technology should preserve what matters",
         "AI should enhance, not replace, human connection"

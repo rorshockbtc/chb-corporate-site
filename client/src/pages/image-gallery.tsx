@@ -37,7 +37,7 @@ const generatedImages = [
     filename: "generated_1758657725220.png",
     url: "/generated/images/generated_1758657725220.png", 
     timestamp: "2025-09-23T20:02:09.450Z",
-    prompt: "CHB corporate website development showing perspective-switching technology in action, family-centered technology environment with warm, traditional values",
+    prompt: "CHB corporate website development showing perspective-switching technology in action, family-centered technology environment with warm, personal touches",
     perspective: "memory_capturers",
     parameters: {
       minimalism: 50,

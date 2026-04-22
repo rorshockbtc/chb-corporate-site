@@ -32,7 +32,7 @@ export function Footer() {
               <span className="font-medium">bracket</span>
             </div>
             <p className="text-muted-foreground">
-              AI innovation for traditionalists & dissidents
+              AI for the underserved
             </p>
           </div>
           
@@ -106,17 +106,6 @@ export function Footer() {
             <div className="space-y-2 text-muted-foreground">
               <div>
                 <a 
-                  href="https://twitter.com/RorshockBTC" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
-                  data-testid="footer-personal-twitter"
-                >
-                  @RorshockBTC
-                </a>
-              </div>
-              <div>
-                <a 
                   href="https://twitter.com/chb_coop" 
                   target="_blank" 
                   rel="noopener noreferrer"
@@ -140,7 +129,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-          <p>&copy; 2025 CHB (Colon Hyphen Bracket, LLC). AI innovation for traditionalists & dissidents.</p>
+          <p>&copy; 2025 CHB (Colon Hyphen Bracket, LLC). AI for the underserved.</p>
         </div>
       </div>
     </footer>

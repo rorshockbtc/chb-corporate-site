@@ -41,7 +41,7 @@ export default function Scout() {
           icon: "speed",
           title: "Speed That Respects Your Time",
           description: "Under 200 milliseconds. That's faster than you can finish your thought. Scout's intelligent indexing means answers arrive before your coffee cools—not after your meeting ends.",
-          detail: "Traditional search makes you wait. Scout anticipates. The difference between 'I'll look that up later' and 'Here it is.'"
+          detail: "Conventional search makes you wait. Scout anticipates. The difference between 'I'll look that up later' and 'Here it is.'"
         },
         {
           icon: "patterns",
