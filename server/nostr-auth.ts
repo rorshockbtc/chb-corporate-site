@@ -135,6 +135,7 @@ export async function verifyNostrLogin(
       sessionId,
       pubkey,
       createdAt: now,
+      lastValidated: now,
       expiresAt: now + SESSION_TTL_MS,
     });
     

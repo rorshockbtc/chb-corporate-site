@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <rect width="1200" height="750" fill="#F2EAE0" />
+  <rect x="60" y="55" width="1080" height="640" fill="none" stroke="#281B16" stroke-width="2" />
+  <!-- Main Street Storefront Elevations -->
+  <g transform="translate(150, 140)" stroke="#281B16" stroke-width="2" fill="#EAE0D0">
+    <rect x="0" y="0" width="225" height="310" />
+    <rect x="225" y="18" width="225" height="292" />
+    <rect x="450" y="28" width="225" height="282" />
+    <rect x="675" y="8" width="225" height="302" />
+    <!-- Windows & Awnings -->
+    <rect x="30" y="55" width="65" height="90" fill="#F2EAE0" />
+    <rect x="130" y="55" width="65" height="90" fill="#F2EAE0" />
+    <rect x="255" y="65" width="65" height="80" fill="#F2EAE0" />
+    <rect x="355" y="65" width="65" height="80" fill="#F2EAE0" />
+    <rect x="480" y="70" width="65" height="75" fill="#F2EAE0" />
+    <rect x="580" y="70" width="65" height="75" fill="#F2EAE0" />
+    <rect x="705" y="55" width="65" height="90" fill="#F2EAE0" />
+    <rect x="805" y="55" width="65" height="90" fill="#F2EAE0" />
+    <polygon points="225,180 450,180 465,225 210,225" fill="#D3C7B5" />
+    <polygon points="450,180 675,180 690,225 435,225" fill="#D3C7B5" />
+  </g>
+  <line x1="110" y1="450" x2="1090" y2="450" stroke="#281B16" stroke-width="3" />
+  <!-- Subterranean Fiber Optic Conduits in CHB Hot Pink -->
+  <g stroke="#FE299E" stroke-width="3" fill="none">
+    <path d="M260,450 L260,545 L910,545 L910,450" />
+    <path d="M485,450 L485,580 L710,580 L710,450" />
+    <path d="M180,615 L710,615 L710,450" />
+  </g>
+  <g fill="#FE299E">
+    <circle cx="260" cy="450" r="9" />
+    <circle cx="485" cy="450" r="9" />
+    <circle cx="710" cy="450" r="9" />
+    <circle cx="910" cy="450" r="9" />
+  </g>
+</svg>

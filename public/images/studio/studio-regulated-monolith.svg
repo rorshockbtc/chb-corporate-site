@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <rect width="1200" height="750" fill="#F2EAE0" />
+  <rect x="75" y="55" width="1050" height="640" fill="#EAE0D0" stroke="#281B16" stroke-width="2.5" />
+  <!-- 3 Horizontal Regulated Tiers -->
+  <line x1="75" y1="265" x2="1125" y2="265" stroke="#281B16" stroke-width="3" />
+  <line x1="75" y1="480" x2="1125" y2="480" stroke="#281B16" stroke-width="3" />
+  <!-- Tier 1 (Top): Institutional Swiss-Grid Command Ledger -->
+  <g transform="translate(115, 90)" stroke="#281B16" stroke-width="1.5" fill="#F2EAE0">
+    <rect x="0" y="0" width="440" height="145" />
+    <rect x="470" y="0" width="490" height="145" />
+    <line x1="0" y1="32" x2="440" y2="32" stroke-width="2" />
+    <line x1="470" y1="32" x2="960" y2="32" stroke-width="2" />
+    <line x1="0" y1="68" x2="440" y2="68" />
+    <line x1="0" y1="104" x2="440" y2="104" />
+    <line x1="470" y1="68" x2="960" y2="68" />
+    <line x1="470" y1="104" x2="960" y2="104" />
+  </g>
+  <!-- Tier 2 (Middle): Clinical ECG & Telemetry Waveforms -->
+  <path d="M120,375 L220,375 L235,315 L250,430 L265,355 L285,375 L410,375 L425,310 L440,435 L455,355 L475,375 L610,375 L630,305 L650,440 L670,340 L690,375 L1080,375" fill="none" stroke="#2A7B5C" stroke-width="3" />
+  <g fill="#FE299E">
+    <circle cx="235" cy="315" r="6" />
+    <circle cx="425" cy="310" r="6" />
+    <circle cx="630" cy="305" r="6" />
+  </g>
+  <!-- Tier 3 (Bottom): Cryptographic Vault & Merkle Block Cipher -->
+  <g transform="translate(360, 588)">
+    <circle cx="0" cy="0" r="88" fill="#F2EAE0" stroke="#281B16" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="62" fill="none" stroke="#281B16" stroke-width="2" stroke-dasharray="8 6" />
+    <circle cx="0" cy="0" r="24" fill="#FE299E" />
+  </g>
+  <g transform="translate(650, 515)" stroke="#281B16" stroke-width="2" fill="#F2EAE0">
+    <rect x="0" y="0" width="120" height="65" />
+    <rect x="160" y="0" width="120" height="65" />
+    <rect x="80" y="85" width="120" height="65" />
+    <line x1="120" y1="32" x2="160" y2="32" stroke="#FE299E" stroke-width="2.5" />
+    <line x1="60" y1="65" x2="140" y2="85" stroke="#FE299E" stroke-width="2.5" />
+    <line x1="220" y1="65" x2="140" y2="85" stroke="#FE299E" stroke-width="2.5" />
+  </g>
+</svg>

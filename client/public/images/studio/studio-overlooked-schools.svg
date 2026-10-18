@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <rect width="1200" height="750" fill="#F2EAE0" />
+  <rect x="60" y="55" width="1080" height="640" fill="none" stroke="#281B16" stroke-width="2" />
+  <!-- Left: Classical Astrolabe -->
+  <g transform="translate(310, 430)">
+    <circle cx="0" cy="0" r="195" fill="#EAE0D0" stroke="#281B16" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="165" fill="none" stroke="#281B16" stroke-width="1.5" />
+    <circle cx="0" cy="-30" r="115" fill="none" stroke="#281B16" stroke-width="1.5" />
+    <circle cx="0" cy="20" r="85" fill="none" stroke="#6B554D" stroke-width="1.2" stroke-dasharray="4 4" />
+    <line x1="-195" y1="0" x2="195" y2="0" stroke="#281B16" stroke-width="1.5" />
+    <line x1="0" y1="-235" x2="0" y2="195" stroke="#281B16" stroke-width="1.5" />
+    <circle cx="0" cy="-220" r="24" fill="none" stroke="#281B16" stroke-width="2.5" />
+    <line x1="-145" y1="80" x2="145" y2="-80" stroke="#FE299E" stroke-width="3" />
+    <circle cx="0" cy="0" r="10" fill="#FE299E" />
+  </g>
+  <!-- Top Center: Classical Monograph Spread -->
+  <g transform="translate(430, 95)">
+    <rect x="0" y="0" width="340" height="210" fill="#EAE0D0" stroke="#281B16" stroke-width="2" />
+    <line x1="170" y1="0" x2="170" y2="210" stroke="#281B16" stroke-width="2" />
+    <rect x="25" y="25" width="120" height="160" fill="none" stroke="#6B554D" stroke-width="1" />
+    <rect x="195" y="25" width="120" height="160" fill="none" stroke="#6B554D" stroke-width="1" />
+  </g>
+  <!-- Right: Sovereign Knowledge Tree -->
+  <g stroke="#281B16" stroke-width="3" fill="none">
+    <path d="M890,630 L890,220" />
+    <path d="M890,490 L770,380" />
+    <path d="M890,440 L1020,330" />
+    <path d="M890,340 L790,240" />
+    <path d="M890,300 L1010,200" />
+  </g>
+  <g fill="#2A7B5C">
+    <circle cx="770" cy="380" r="9" />
+    <circle cx="1020" cy="330" r="9" />
+    <circle cx="790" cy="240" r="9" />
+    <circle cx="1010" cy="200" r="9" />
+  </g>
+  <g fill="#FE299E">
+    <circle cx="890" cy="490" r="8" />
+    <circle cx="890" cy="440" r="8" />
+    <circle cx="890" cy="340" r="8" />
+    <circle cx="890" cy="220" r="10" />
+  </g>
+</svg>

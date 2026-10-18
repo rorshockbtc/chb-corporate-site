@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <rect width="1200" height="675" fill="#F2EAE0" />
+  <!-- 4-Stage Operating Loom Schematic -->
+  <!-- Stage 1: Raw Signal Aperture -->
+  <path d="M55,337 Q95,230 135,337 T215,337" fill="none" stroke="#281B16" stroke-width="2.5" />
+  <rect x="235" y="242" width="160" height="190" fill="#EAE0D0" stroke="#281B16" stroke-width="2.2" />
+  <circle cx="315" cy="337" r="62" fill="#D3C7B5" stroke="#281B16" stroke-width="2" />
+  <circle cx="315" cy="337" r="24" fill="#F2EAE0" stroke="#281B16" stroke-width="2" />
+  <!-- Stage 2: Swiss Modular Grid -->
+  <rect x="445" y="242" width="160" height="190" fill="#EAE0D0" stroke="#281B16" stroke-width="2.2" />
+  <line x1="445" y1="305" x2="605" y2="305" stroke="#281B16" stroke-width="1.5" />
+  <line x1="445" y1="370" x2="605" y2="370" stroke="#281B16" stroke-width="1.5" />
+  <line x1="500" y1="242" x2="500" y2="432" stroke="#281B16" stroke-width="1.5" />
+  <line x1="550" y1="242" x2="550" y2="432" stroke="#281B16" stroke-width="1.5" />
+  <!-- Stage 3: Algorithmic Loom -->
+  <rect x="655" y="242" width="160" height="190" fill="#EAE0D0" stroke="#281B16" stroke-width="2.2" />
+  <g stroke="#6B554D" stroke-width="2">
+    <line x1="685" y1="220" x2="685" y2="455" />
+    <line x1="718" y1="220" x2="718" y2="455" />
+    <line x1="752" y1="220" x2="752" y2="455" />
+    <line x1="785" y1="220" x2="785" y2="455" />
+  </g>
+  <!-- Stage 4: Verification Shield & Sealed Monograph -->
+  <rect x="865" y="242" width="140" height="190" fill="#EAE0D0" stroke="#281B16" stroke-width="2.2" />
+  <path d="M935,275 L980,295 L980,345 Q980,390 935,408 Q890,390 890,345 L890,295 Z" fill="#F2EAE0" stroke="#281B16" stroke-width="2.2" />
+  <rect x="1050" y="242" width="95" height="190" rx="6" fill="#EAE0D0" stroke="#281B16" stroke-width="2.5" />
+  <circle cx="1097" cy="320" r="20" fill="none" stroke="#FE299E" stroke-width="2.5" />
+  <!-- Continuous Hot Pink Signal Thread -->
+  <line x1="215" y1="337" x2="1050" y2="337" stroke="#FE299E" stroke-width="3.5" />
+  <g fill="#FE299E">
+    <circle cx="315" cy="337" r="7" />
+    <circle cx="525" cy="337" r="7" />
+    <circle cx="735" cy="337" r="7" />
+    <circle cx="935" cy="337" r="7" />
+  </g>
+</svg>

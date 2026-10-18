@@ -775,7 +775,7 @@ export default function CreativeProcess() {
                         <p className="text-sm text-muted-foreground line-clamp-2">{image.description}</p>
                         
                         {/* Visual Identity Indicators */}
-                        {image.generationParams && (
+                        {Boolean(image.generationParams) && (
                           <div className="flex flex-wrap gap-1">
                             {(image.generationParams as any).colorPalette && (
                               <Badge variant="outline" className="text-xs capitalize">
@@ -996,7 +996,7 @@ export default function CreativeProcess() {
                         <p className="text-sm text-muted-foreground line-clamp-2">{image.description}</p>
                         
                         {/* Visual Identity Indicators */}
-                        {image.generationParams && (
+                        {Boolean(image.generationParams) && (
                           <div className="flex flex-wrap gap-1">
                             {(image.generationParams as any).colorPalette && (
                               <Badge variant="outline" className="text-xs capitalize">
@@ -1493,7 +1493,7 @@ export default function CreativeProcess() {
                   </div>
                   
                   {/* Visual Generation Parameters */}
-                  {selectedImage.generationParams && (
+                  {Boolean(selectedImage.generationParams) && (
                     <div>
                       <h4 className="font-semibold mb-2">Visual Identity Parameters</h4>
                       <div className="bg-muted p-4 rounded-lg space-y-2">

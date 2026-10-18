@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <rect width="1200" height="750" fill="#F2EAE0" />
+  <rect x="60" y="55" width="1080" height="640" fill="none" stroke="#281B16" stroke-width="2" />
+  <!-- Left: Exploration Chaos Vectors -->
+  <g stroke="#281B16" stroke-width="1.8" fill="none">
+    <path d="M130,220 L290,150 L240,360 L140,310 Z" />
+    <path d="M160,420 L330,280 L370,490 L210,560 Z" />
+    <path d="M110,360 C190,180 350,240 390,375" />
+    <path d="M150,510 C250,460 310,330 430,375" />
+    <line x1="120" y1="180" x2="430" y2="365" stroke="#FE299E" stroke-width="2" />
+    <line x1="140" y1="570" x2="430" y2="385" stroke="#FE299E" stroke-width="2" />
+  </g>
+  <!-- Center: Precision Optical Prism -->
+  <polygon points="560,195 420,485 700,485" fill="#EAE0D0" stroke="#281B16" stroke-width="2.5" />
+  <line x1="560" y1="195" x2="560" y2="485" stroke="#6B554D" stroke-width="1.5" stroke-dasharray="5 5" />
+  <!-- Refracted Signal Lines to Structured Swiss Grid -->
+  <g stroke="#FE299E" stroke-width="2.2" fill="none">
+    <path d="M635,345 L770,220" />
+    <path d="M650,375 L770,375" />
+    <path d="M665,405 L770,530" />
+  </g>
+  <!-- Right: Structured Swiss UI & Schema Grid -->
+  <g transform="translate(770, 135)">
+    <rect x="0" y="0" width="300" height="140" fill="#EAE0D0" stroke="#281B16" stroke-width="2" />
+    <rect x="0" y="0" width="300" height="28" fill="#281B16" />
+    <rect x="18" y="45" width="75" height="75" fill="#F2EAE0" stroke="#281B16" stroke-width="1.5" />
+    <line x1="115" y1="58" x2="275" y2="58" stroke="#281B16" stroke-width="2" />
+    <line x1="115" y1="82" x2="255" y2="82" stroke="#6B554D" stroke-width="1.5" />
+    <line x1="115" y1="106" x2="235" y2="106" stroke="#6B554D" stroke-width="1.5" />
+
+    <rect x="0" y="170" width="140" height="140" fill="#EAE0D0" stroke="#281B16" stroke-width="2" />
+    <rect x="160" y="170" width="140" height="140" fill="#EAE0D0" stroke="#281B16" stroke-width="2" />
+    <circle cx="70" cy="240" r="35" fill="none" stroke="#FE299E" stroke-width="2.5" />
+    <rect x="185" y="195" width="90" height="90" fill="none" stroke="#281B16" stroke-width="1.5" />
+
+    <rect x="0" y="340" width="300" height="135" fill="#EAE0D0" stroke="#281B16" stroke-width="2" />
+    <line x1="20" y1="375" x2="280" y2="375" stroke="#281B16" stroke-width="2" />
+    <line x1="20" y1="408" x2="280" y2="408" stroke="#281B16" stroke-width="1.5" />
+    <line x1="20" y1="440" x2="240" y2="440" stroke="#281B16" stroke-width="1.5" />
+  </g>
+  <circle cx="560" cy="375" r="8" fill="#FE299E" />
+  <circle cx="770" cy="220" r="6" fill="#FE299E" />
+  <circle cx="770" cy="375" r="6" fill="#FE299E" />
+  <circle cx="770" cy="530" r="6" fill="#FE299E" />
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750">
+  <rect width="1200" height="750" fill="#EAE0D0" />
+  <g stroke="#D3C7B5" stroke-width="1">
+    <line x1="80" y1="60" x2="1120" y2="60" />
+    <line x1="80" y1="150" x2="1120" y2="150" />
+    <line x1="80" y1="240" x2="1120" y2="240" />
+    <line x1="80" y1="330" x2="1120" y2="330" />
+    <line x1="80" y1="420" x2="1120" y2="420" />
+    <line x1="80" y1="510" x2="1120" y2="510" />
+    <line x1="80" y1="600" x2="1120" y2="600" />
+    <line x1="80" y1="690" x2="1120" y2="690" />
+    <line x1="80" y1="60" x2="80" y2="690" />
+    <line x1="210" y1="60" x2="210" y2="690" />
+    <line x1="340" y1="60" x2="340" y2="690" />
+    <line x1="470" y1="60" x2="470" y2="690" />
+    <line x1="600" y1="60" x2="600" y2="690" />
+    <line x1="730" y1="60" x2="730" y2="690" />
+    <line x1="860" y1="60" x2="860" y2="690" />
+    <line x1="990" y1="60" x2="990" y2="690" />
+    <line x1="1120" y1="60" x2="1120" y2="690" />
+  </g>
+  <rect x="80" y="60" width="1040" height="630" fill="none" stroke="#281B16" stroke-width="2" />
+  <circle cx="340" cy="375" r="250" fill="none" stroke="#6B554D" stroke-width="1.5" stroke-dasharray="6 4" />
+  <circle cx="340" cy="375" r="90" fill="none" stroke="#281B16" stroke-width="1.5" />
+  <!-- Architectural Elevation Top Left -->
+  <rect x="145" y="135" width="390" height="150" fill="#F2EAE0" stroke="#281B16" stroke-width="2" />
+  <g stroke="#281B16" stroke-width="1.2">
+    <line x1="210" y1="135" x2="210" y2="285" />
+    <line x1="275" y1="135" x2="275" y2="285" />
+    <line x1="340" y1="135" x2="340" y2="285" />
+    <line x1="405" y1="135" x2="405" y2="285" />
+    <line x1="470" y1="135" x2="470" y2="285" />
+    <line x1="145" y1="240" x2="535" y2="240" />
+  </g>
+  <!-- Merkle-DAG Hierarchy Bottom Left -->
+  <rect x="290" y="345" width="100" height="50" fill="#F2EAE0" stroke="#281B16" stroke-width="2" />
+  <rect x="195" y="455" width="75" height="45" fill="#F2EAE0" stroke="#281B16" stroke-width="2" />
+  <rect x="410" y="455" width="75" height="45" fill="#F2EAE0" stroke="#281B16" stroke-width="2" />
+  <rect x="130" y="565" width="60" height="40" fill="#F2EAE0" stroke="#281B16" stroke-width="1.8" />
+  <rect x="220" y="565" width="60" height="40" fill="#F2EAE0" stroke="#281B16" stroke-width="1.8" />
+  <rect x="360" y="565" width="60" height="40" fill="#F2EAE0" stroke="#281B16" stroke-width="1.8" />
+  <rect x="455" y="565" width="60" height="40" fill="#F2EAE0" stroke="#281B16" stroke-width="1.8" />
+  <g stroke="#281B16" stroke-width="1.8" fill="none">
+    <path d="M340 395 L340 425 L232 425 L232 455" />
+    <path d="M340 425 L447 425 L447 455" />
+    <path d="M232 500 L232 532 L160 532 L160 565" />
+    <path d="M232 532 L250 532 L250 565" />
+    <path d="M447 500 L447 532 L390 532 L390 565" />
+    <path d="M447 532 L485 532 L485 565" />
+  </g>
+  <!-- Isometric Structural Modules Right -->
+  <g transform="translate(650, 140)" stroke="#281B16" stroke-width="2" fill="#F2EAE0">
+    <polygon points="180,20 340,95 340,245 180,170" />
+    <polygon points="340,95 430,45 430,195 340,245" fill="#E3D7C4" />
+    <polygon points="180,20 270,-30 430,45 340,95" fill="#F7F1E8" />
+    <polygon points="30,90 160,155 160,295 30,230" />
+    <polygon points="160,155 240,110 240,250 160,295" fill="#E3D7C4" />
+    <polygon points="30,90 110,45 240,110 160,155" fill="#F7F1E8" />
+  </g>
+  <g transform="translate(660, 410)" stroke="#281B16" stroke-width="2" fill="none">
+    <rect x="40" y="20" width="340" height="190" fill="#F2EAE0" />
+    <line x1="40" y1="75" x2="380" y2="75" />
+    <line x1="150" y1="20" x2="150" y2="210" />
+    <line x1="265" y1="20" x2="265" y2="210" />
+    <rect x="65" y="100" width="60" height="85" stroke="#FE299E" stroke-width="2" />
+    <rect x="175" y="100" width="65" height="85" />
+    <rect x="290" y="100" width="65" height="85" />
+  </g>
+  <!-- CHB Hot Pink Registration Marks -->
+  <g stroke="#FE299E" stroke-width="2" fill="none">
+    <circle cx="340" cy="345" r="10" fill="#FE299E" />
+    <circle cx="600" cy="60" r="11" />
+    <line x1="582" y1="60" x2="618" y2="60" />
+    <line x1="600" y1="42" x2="600" y2="78" />
+    <circle cx="600" cy="690" r="11" />
+    <line x1="582" y1="690" x2="618" y2="690" />
+    <line x1="600" y1="672" x2="600" y2="708" />
+    <circle cx="1090" cy="100" r="9" fill="#FE299E" />
+    <circle cx="1090" cy="650" r="9" fill="#FE299E" />
+  </g>
+</svg>

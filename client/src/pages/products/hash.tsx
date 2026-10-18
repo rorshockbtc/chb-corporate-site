@@ -125,52 +125,86 @@ export default function HashDeepDive() {
   };
 
   return (
-    <main className="pt-20">
+    <main className="pt-20 bg-[#EAE0D0] text-[#281B16]">
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-green-500/10 via-background to-background">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-8">
+      <section className="py-16 lg:py-24 bg-[#EAE0D0] border-b border-[#D3C7B5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-3">
-                <div className="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center shadow-lg">
-                  <span className="text-2xl font-bold text-white">#</span>
+                <div className="px-3.5 py-2 bg-[#1B6346] rounded-xl flex items-center justify-center">
+                  <span className="text-lg font-mono font-bold text-white">#</span>
                 </div>
-                <span className="text-green-600 font-semibold tracking-wide uppercase">{heroContent.subtitle}</span>
+                <span className="px-3 py-1 rounded bg-[#E4DACB] border border-[#D3C7B5] font-mono text-xs font-bold text-[#281B16] uppercase tracking-wider">
+                  UNIFIED IN PIPES · PIPES.PINK/WRITE · {heroContent.subtitle}
+                </span>
               </div>
-              
-              <h1 className="text-4xl lg:text-6xl font-black tracking-tight text-gray-900" data-testid="hash-title">
+
+              <h1
+                className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#281B16] leading-[1.08]"
+                data-testid="hash-title"
+              >
                 {heroContent.title}
               </h1>
-              
-              <p className="text-lg lg:text-xl text-gray-700 leading-relaxed">
-                {heroContent.description}
+
+              <p className="text-base sm:text-lg lg:text-xl text-[#4A3A32] leading-relaxed">
+                {heroContent.description} Now unified directly inside <strong>Pipes (pipes.pink/write)</strong> alongside <code className="font-mono font-bold text-[#281B16]">;-]</code> Semi—so your private journal can stay 100% private or compile into a Sovereign Pipe with one click.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="https://hash.pink" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="group bg-green-600 hover:bg-green-700" data-testid="cta-try-hash">
-                    Try Hash
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </Button>
+              <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-xl p-5">
+                <div className="flex items-start gap-3">
+                  <Heart className="h-5 w-5 text-[#1B6346] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-mono text-xs font-bold text-[#1B6346] uppercase tracking-wider mb-1">
+                      SANCTUARY PROOF POINT
+                    </p>
+                    <p className="text-sm sm:text-base text-[#281B16] italic leading-relaxed">
+                      "{heroContent.biggestWin}"
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-3.5 pt-2">
+                <a
+                  href="https://pipes.pink/write"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-xl bg-[#1B6346] hover:bg-[#144E37] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors"
+                  data-testid="cta-try-hash"
+                >
+                  <span>Open # Hash Sanctuary (pipes.pink/write)</span>
+                  <ExternalLink className="h-4 w-4" />
                 </a>
-                <Link href="/products">
-                  <Button size="lg" variant="outline" data-testid="link-back-products">
-                    Back to Products
-                  </Button>
+                <Link
+                  href="/products"
+                  className="px-5 py-3.5 rounded-xl bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] text-[#281B16] font-mono text-xs font-bold uppercase tracking-wider inline-flex items-center"
+                  data-testid="link-back-products"
+                >
+                  Back to Ecosystem
                 </Link>
               </div>
             </div>
 
-            {/* Biggest Win Quote */}
-            <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-8 lg:p-10">
-              <div className="flex items-start gap-4 mb-6">
-                <Heart className="h-8 w-8 text-green-600 flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">Biggest Win</p>
-                  <p className="text-lg lg:text-xl text-gray-900 italic leading-relaxed">
-                    "{heroContent.biggestWin}"
-                  </p>
+            {/* Dark Espresso Product Showcase */}
+            <div className="lg:col-span-5">
+              <div className="bg-[#231814] border border-[#3D2B24] rounded-2xl p-4 sm:p-5 text-[#F2EAE0] shadow-xl space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#D3C7B5]">
+                    PIPES.PINK/WRITE // # HASH SANCTUARY
+                  </span>
+                  <span className="font-mono text-xs font-bold text-[#4ADE80]">ZERO TRAINING</span>
                 </div>
+                <div className="rounded-xl overflow-hidden border border-[#3D2B24] bg-[#160F0C]">
+                  <img
+                    src="/images/pipes/pipes-hash-sanctuary.png"
+                    alt="# Hash Epistemic Sanctuary inside Pipes.Pink"
+                    className="w-full h-56 sm:h-64 object-cover object-top"
+                  />
+                </div>
+                <p className="font-mono text-[11px] text-[#D3C7B5] leading-relaxed">
+                  Four writing modes (All / Notes / Journal / Mono), 1-click Substack ingestion, 3D Knowledge Galaxy, and 1-click "Seal to Pipe."
+                </p>
               </div>
             </div>
           </div>
@@ -178,19 +212,29 @@ export default function HashDeepDive() {
       </section>
 
       {/* View Mode Toggle */}
-      <section className="py-8 border-b">
+      <section className="py-6 bg-[#E4DACB] border-b border-[#D3C7B5]">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-4">
-            <span className="text-sm text-gray-700">How deep do you want to go?</span>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#281B16]">
+              Select Reading Depth:
+            </span>
             <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "highlights" | "deep-dive")} className="w-auto">
-              <TabsList className="bg-gray-200 dark:bg-gray-800">
-                <TabsTrigger value="highlights" data-testid="tab-highlights" className="text-gray-700 dark:text-gray-300 data-[state=active]:bg-green-600 data-[state=active]:text-white">
-                  <Zap className="h-4 w-4 mr-2" />
+              <TabsList className="bg-[#F2EAE0] border border-[#D3C7B5] p-1">
+                <TabsTrigger
+                  value="highlights"
+                  data-testid="tab-highlights"
+                  className="text-[#281B16] font-semibold data-[state=active]:bg-[#231814] data-[state=active]:text-[#F2EAE0]"
+                >
+                  <Zap className="h-4 w-4 mr-2 text-[#1B6346]" />
                   Quick Highlights
                 </TabsTrigger>
-                <TabsTrigger value="deep-dive" data-testid="tab-deep-dive" className="text-gray-700 dark:text-gray-300 data-[state=active]:bg-green-600 data-[state=active]:text-white">
-                  <FileText className="h-4 w-4 mr-2" />
-                  Deep Dive
+                <TabsTrigger
+                  value="deep-dive"
+                  data-testid="tab-deep-dive"
+                  className="text-[#281B16] font-semibold data-[state=active]:bg-[#231814] data-[state=active]:text-[#F2EAE0]"
+                >
+                  <FileText className="h-4 w-4 mr-2 text-[#1B6346]" />
+                  The Memory Revolution (10 min)
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -726,25 +770,34 @@ export default function HashDeepDive() {
       )}
 
       {/* CTA */}
-      <section className="py-16 lg:py-24 bg-green-600">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center space-y-8">
-          <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-white">
-            Start building your memory
+      <section className="py-16 lg:py-24 bg-[#231814] text-[#F2EAE0]">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center space-y-6">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#1B6346]/40 text-[#4ADE80] font-mono text-xs font-bold uppercase tracking-[0.15em]">
+            UNIFIED IN PIPES // PIPES.PINK/WRITE
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F2EAE0]">
+            Start building your sovereign memory vault
           </h2>
-          <p className="text-lg text-green-100 max-w-2xl mx-auto">
-            Every entry makes Semi smarter. Every thought preserved is a thought you'll never lose again.
+          <p className="text-base sm:text-lg text-[#D3C7B5] max-w-2xl mx-auto leading-relaxed">
+            Every entry in <code className="font-mono text-[#4ADE80]">#</code> Hash makes <code className="font-mono text-[#FE299E]">;-]</code> Semi smarter—and can compile into a Sovereign Pipe whenever you're ready.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://hash.pink" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="secondary" className="group" data-testid="cta-final-hash">
-                Try Hash Free
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+            <a
+              href="https://pipes.pink/write"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-4 rounded-xl bg-[#1B6346] hover:bg-[#144E37] text-white font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors"
+              data-testid="cta-final-hash"
+            >
+              <span>Open # Hash Sanctuary Free</span>
+              <ExternalLink className="h-4 w-4" />
             </a>
-            <Link href="/products/semi">
-              <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white/10">
-                Learn About Semi
-              </Button>
+            <Link
+              href="/products/semi"
+              className="px-7 py-4 rounded-xl bg-[#F2EAE0] hover:bg-white text-[#231814] font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors"
+            >
+              <span>Explore ;-] Semi Socratic Editor</span>
+              <ArrowRight className="h-4 w-4 text-[#FE299E]" />
             </Link>
           </div>
         </div>

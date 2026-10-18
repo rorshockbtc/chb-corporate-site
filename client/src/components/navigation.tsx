@@ -1,231 +1,307 @@
 import { useState } from 'react';
 import { Link, useLocation } from "wouter";
 import { usePerspective } from "@/hooks/use-perspective";
-import { usePerspectiveTheme } from "@/hooks/use-perspective-theme";
 import { useAuth } from "@/hooks/useAuth";
 import { useNostrAuth } from "@/hooks/use-nostr-auth";
 import { Button } from "@/components/ui/button";
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Eye, Menu, X, User } from "lucide-react";
+import { Menu, X, User, ExternalLink } from "lucide-react";
+import type { Perspective } from "@/types/content";
 
 export function Navigation() {
   const [location] = useLocation();
   const { currentPerspective, setPerspective } = usePerspective();
-  const { getThemeColor } = usePerspectiveTheme();
   const { isAuthenticated: isEmailAuth } = useAuth();
   const { isAuthenticated: isNostrAuth } = useNostrAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+
   const isAuthenticated = isEmailAuth || isNostrAuth;
-  
-  // Get current perspective colors for eye icon container
-  const containerColor = getThemeColor('secondary');
 
   const navItems = [
-    { href: "/products", label: "Products" },
+    { href: "/products", label: "Ecosystem" },
+    { href: "/products/pipes", label: "Pipes" },
     { href: "/roadmap", label: "Roadmap" },
     { href: "/contact", label: "Contact" },
   ];
 
-  const perspectives = [
-    { id: "startup_founders" as const, label: "Startup Founders" },
-    { id: "content_creators" as const, label: "Content Creators" },
-    { id: "memory_capturers" as const, label: "Memory Capturers" },
+  const perspectives: {
+    id: Perspective;
+    pipeHandle: string;
+    label: string;
+    accentColor: string;
+  }[] = [
+    {
+      id: "startup_founders",
+      pipeHandle: "pipe\\founders",
+      label: "Builders",
+      accentColor: "#0B5CAB",
+    },
+    {
+      id: "content_creators",
+      pipeHandle: "pipe\\creators",
+      label: "Authors",
+      accentColor: "#B81468",
+    },
+    {
+      id: "memory_capturers",
+      pipeHandle: "pipe\\legacy",
+      label: "Families",
+      accentColor: "#1B6346",
+    },
   ];
 
   return (
     <header className="fixed top-0 left-0 w-full z-50">
-      {/* Single unified masthead - premium and functional */}
-      <div className="bg-background/95 backdrop-blur-md border-b border-border/30 nav-backdrop">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex items-center justify-between py-4">
-            {/* Logo with integrated perspective switcher */}
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="text-xl tracking-wide" data-testid="logo-link">
-                <span className="font-medium">colon</span>
-                <span className="font-extralight">hyphen</span>
-                <span className="font-medium">bracket</span>
-              </Link>
-              
-              {/* Enhanced perspective switcher - colored container shows it drives functionality */}
-              {/* Hidden on mobile to avoid redundancy with hamburger menu */}
-              <div className="hidden md:block">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="p-0 hover:bg-transparent" 
-                      aria-label="Change perspective"
-                      data-testid="perspective-switcher"
-                    >
-                      {/* Perspective-colored container with white icon for visibility */}
-                      <div 
-                        className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-md" 
-                        style={{
-                          backgroundColor: containerColor,
-                          border: `1px solid ${containerColor}`,
-                        }}
-                      >
-                        <Eye className="h-4 w-4 text-white drop-shadow-sm" />
-                      </div>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48">
-                  <div className="p-1">
-                    {perspectives.map((p) => (
-                      <DropdownMenuItem
-                        key={p.id}
-                        onClick={() => setPerspective(p.id)}
-                        className={`cursor-pointer ${
-                          currentPerspective === p.id ? "bg-secondary text-secondary-foreground" : ""
-                        }`}
-                        data-testid={`perspective-option-${p.id}`}
-                      >
-                        {p.label}
-                      </DropdownMenuItem>
-                    ))}
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-            </div>
-            
-            {/* Main navigation - spacious and clean */}
-            <div className="hidden md:flex items-center space-x-8">
-              {navItems.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`text-base font-light hover:text-primary transition-colors ${
-                    location === href ? "text-primary font-medium" : "text-muted-foreground"
-                  }`}
-                  data-testid={`nav-${label.toLowerCase()}`}
-                >
-                  {label}
-                </Link>
-              ))}
-
-              <a
-                href="https://hire.colonhyphenbracket.pink/studio"
-                className="text-base font-light text-muted-foreground hover:text-primary transition-colors"
-                data-testid="nav-work-with-us"
+      <div className="bg-[#EAE0D0]/95 backdrop-blur-md border-b border-[#D3C7B5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 gap-4">
+            {/* Left: Brandmark + Mounted Perspective Pipe Switcher */}
+            <div className="flex items-center gap-4 lg:gap-6">
+              <Link
+                href="/"
+                className="flex items-center gap-2.5 text-[#281B16] hover:opacity-90 transition-opacity"
+                data-testid="logo-link"
               >
-                Work With Us
-              </a>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-[#231814] text-[#FE299E] font-mono text-sm font-bold tracking-tight">
+                  :-]
+                </span>
+                <span className="text-lg tracking-tight text-[#281B16]">
+                  <span className="font-bold">colon</span>
+                  <span className="font-normal text-[#4A3A32]">hyphen</span>
+                  <span className="font-bold">bracket</span>
+                </span>
+              </Link>
 
-              {isAuthenticated ? (
-                <Link
-                  href="/account"
-                  className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all font-medium text-sm flex items-center gap-2"
-                  data-testid="account-button"
-                >
-                  <User className="h-4 w-4" />
-                  Account
-                </Link>
-              ) : (
-                <Link
-                  href="/signup"
-                  className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all font-medium text-sm"
-                  data-testid="signup-button"
-                >
-                  Sign Up
-                </Link>
-              )}
+              {/* Desktop Tactile Perspective Pipe Bar */}
+              <div
+                className="hidden xl:flex items-center bg-[#E4DACB] border border-[#D3C7B5] rounded-lg p-1 gap-1"
+                role="group"
+                aria-label="Mounted Perspective Pipe"
+                data-testid="perspective-switcher"
+              >
+                <span className="px-2 font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#4A3A32] select-none">
+                  Lens:
+                </span>
+                {perspectives.map((p) => {
+                  const isActive = currentPerspective === p.id;
+                  return (
+                    <button
+                      key={p.id}
+                      onClick={() => setPerspective(p.id)}
+                      className={`px-2.5 py-1 rounded-md text-xs font-mono transition-all flex items-center gap-1.5 ${
+                        isActive
+                          ? "bg-[#231814] text-[#F2EAE0] font-bold shadow-sm"
+                          : "text-[#281B16] hover:bg-[#F2EAE0]/80 font-medium"
+                      }`}
+                      data-testid={`perspective-option-${p.id}`}
+                      aria-pressed={isActive}
+                      title={`Mount ${p.pipeHandle} (${p.label} Perspective)`}
+                    >
+                      <span
+                        className="w-2 h-2 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: isActive ? "#FE299E" : p.accentColor }}
+                      />
+                      <span>{p.pipeHandle}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Right: Navigation Links + Direct Product & Account CTAs */}
+            <div className="hidden md:flex items-center gap-5 lg:gap-6">
+              <nav className="flex items-center gap-5">
+                {navItems.map(({ href, label }) => {
+                  const isActive = location === href;
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      className={`text-sm transition-colors ${
+                        isActive
+                          ? "text-[#281B16] font-bold underline decoration-[#FE299E] decoration-2 underline-offset-8"
+                          : "text-[#281B16] font-medium hover:text-[#FE299E]"
+                      }`}
+                      data-testid={`nav-${label.toLowerCase()}`}
+                    >
+                      {label}
+                    </Link>
+                  );
+                })}
+
+                <a
+                  href="https://hire.colonhyphenbracket.pink/studio"
+                  className="text-sm font-medium text-[#281B16] hover:text-[#FE299E] transition-colors"
+                  data-testid="nav-work-with-us"
+                >
+                  R&amp;D Studio
+                </a>
+              </nav>
+
+              <div className="flex items-center gap-2.5 pl-2 border-l border-[#D3C7B5]">
+                <a
+                  href="https://pipes.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-lg bg-[#231814] text-[#F2EAE0] hover:bg-[#3A2821] transition-colors font-mono text-xs font-bold tracking-wide inline-flex items-center gap-1.5"
+                  data-testid="nav-launch-pipes"
+                >
+                  <span className="text-[#FE299E]">| | |</span>
+                  <span>Open Pipes.Pink</span>
+                  <ExternalLink className="h-3 w-3 text-[#D3C7B5]" />
+                </a>
+
+                {isAuthenticated ? (
+                  <Link
+                    href="/account"
+                    className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1.5"
+                    data-testid="account-button"
+                  >
+                    <User className="h-3.5 w-3.5" />
+                    <span>Account</span>
+                  </Link>
+                ) : (
+                  <Link
+                    href="/signup"
+                    className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1"
+                    data-testid="signup-button"
+                  >
+                    <span>Sign Up</span>
+                    <span className="font-mono text-[11px] opacity-90">:-]</span>
+                  </Link>
+                )}
+              </div>
+            </div>
+
+            {/* Mobile Menu Toggle */}
             <div className="md:hidden">
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="sm"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
+                className="text-[#281B16] hover:bg-[#E4DACB]"
                 data-testid="mobile-menu-toggle"
               >
-                {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Mobile menu dropdown - full navigation and perspective access */}
+
+      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border/30" id="mobile-menu">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
-            <div className="flex flex-col space-y-4">
-              {/* Navigation links */}
-              <div className="flex flex-col space-y-3">
-                {navItems.map(({ href, label }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={`block w-full py-2 text-base font-light hover:text-primary transition-colors ${
-                      location === href ? "text-primary font-medium" : "text-muted-foreground"
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-testid={`mobile-nav-${label.toLowerCase()}`}
-                  >
-                    {label}
-                  </Link>
-                ))}
-                <a
-                  href="https://hire.colonhyphenbracket.pink/studio"
-                  className="block w-full py-2 text-base font-light text-muted-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid="mobile-nav-work-with-us"
-                >
-                  Work With Us
-                </a>
-              </div>
-              
-              {/* Perspective selector for mobile */}
-              <div className="border-t border-border/30 pt-4">
-                <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">Perspective</p>
-                <div className="space-y-2">
-                  {perspectives.map((p) => (
-                    <Button
+        <div
+          className="md:hidden bg-[#F2EAE0] border-b border-[#D3C7B5] shadow-xl"
+          id="mobile-menu"
+        >
+          <div className="max-w-7xl mx-auto px-6 py-5 space-y-5">
+            {/* Mounted Perspective Pipe Selector on Mobile */}
+            <div className="bg-[#E4DACB] border border-[#D3C7B5] rounded-xl p-3">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-[#281B16] mb-2">
+                Mounted Perspective Pipe
+              </p>
+              <div className="grid grid-cols-3 gap-1.5">
+                {perspectives.map((p) => {
+                  const isActive = currentPerspective === p.id;
+                  return (
+                    <button
                       key={p.id}
                       onClick={() => {
                         setPerspective(p.id);
                         setIsMobileMenuOpen(false);
                       }}
-                      variant={currentPerspective === p.id ? "default" : "ghost"}
-                      className="w-full justify-start text-left"
+                      className={`px-2 py-2 rounded-lg text-center transition-all ${
+                        isActive
+                          ? "bg-[#231814] text-[#F2EAE0] font-bold"
+                          : "bg-[#F2EAE0] text-[#281B16] font-medium border border-[#D3C7B5]"
+                      }`}
                       data-testid={`mobile-perspective-${p.id}`}
                     >
-                      <Eye className="h-4 w-4 mr-2" />
-                      {p.label}
-                    </Button>
-                  ))}
-                </div>
+                      <div className="font-mono text-[11px]">{p.pipeHandle}</div>
+                      <div
+                        className={`text-[10px] mt-0.5 ${
+                          isActive ? "text-[#FE299E]" : "text-[#4A3A32]"
+                        }`}
+                      >
+                        {p.label}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
-              
+            </div>
+
+            {/* Navigation Links */}
+            <div className="flex flex-col space-y-2">
+              {navItems.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`block w-full py-2.5 px-3 rounded-lg text-base font-semibold transition-colors ${
+                    location === href
+                      ? "bg-[#231814] text-[#F2EAE0]"
+                      : "text-[#281B16] hover:bg-[#E4DACB]"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid={`mobile-nav-${label.toLowerCase()}`}
+                >
+                  {label}
+                </Link>
+              ))}
+              <a
+                href="https://hire.colonhyphenbracket.pink/studio"
+                className="block w-full py-2.5 px-3 rounded-lg text-base font-semibold text-[#281B16] hover:bg-[#E4DACB] transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="mobile-nav-work-with-us"
+              >
+                R&amp;D Studio (Work With Us)
+              </a>
+            </div>
+
+            {/* Direct Conversion CTAs */}
+            <div className="grid grid-cols-1 gap-2.5 pt-3 border-t border-[#D3C7B5]">
+              <a
+                href="https://pipes.pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#231814] text-[#F2EAE0] font-mono text-sm font-bold"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="text-[#FE299E]">| | |</span>
+                <span>Claim Your Pipe on Pipes.Pink</span>
+                <ExternalLink className="h-4 w-4 text-[#FE299E]" />
+              </a>
+              <a
+                href="https://pipes.pink/write"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#E4DACB] border border-[#D3C7B5] text-[#281B16] font-mono text-sm font-bold"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="text-[#1B6346]">#</span>
+                <span>Open Hash Sanctuary &amp; Semi</span>
+                <ExternalLink className="h-4 w-4 text-[#281B16]" />
+              </a>
               {isAuthenticated ? (
                 <Link
                   href="/account"
-                  className="flex items-center justify-center gap-2 px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all font-medium text-sm"
+                  className="flex items-center justify-center gap-2 px-5 py-3 bg-[#FE299E] text-white rounded-lg font-bold text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid="mobile-account-button"
                 >
                   <User className="h-4 w-4" />
-                  Account
+                  <span>Manage :-] Account</span>
                 </Link>
               ) : (
                 <Link
                   href="/signup"
-                  className="block px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all font-medium text-sm text-center"
+                  className="block px-5 py-3 bg-[#FE299E] text-white rounded-lg font-bold text-sm text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid="mobile-signup-button"
                 >
-                  Sign Up
+                  Create Universal :-] Account
                 </Link>
               )}
             </div>

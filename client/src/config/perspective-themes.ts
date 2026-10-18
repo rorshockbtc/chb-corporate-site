@@ -1,23 +1,24 @@
 import type { Perspective, PerspectiveTheme } from "@/types/content";
 
-// Comprehensive perspective-driven theme system
-// Each theme drives content, visuals, colors, and layout for total immersion
+// Canonical Warm Albers Sandstone + Massimo Vignelli Swiss Grid Theme System
+// Fixes contrast bugs (--muted vs --muted-foreground) and uses high-contrast
+// editorial registration accents per Perspective Pipe.
 
 export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
   startup_founders: {
     colors: {
-      primary: "#FE299E", // BRAND PINK - never changes across perspectives
-      secondary: "#01A9F4", // BRAND BLUE - correct brand quaternary
-      accent: "hsl(142, 76%, 36%)", // Success green
-      background: "hsl(0, 0%, 100%)",
-      foreground: "hsl(222, 84%, 5%)",
-      muted: "hsl(215, 14%, 34%)",
+      primary: "#FE299E",      // Canonical CHB Hot Pink
+      secondary: "#0B5CAB",    // High-contrast Blueprint Cobalt (WCAG AA+ on #EAE0D0)
+      accent: "#1B6346",       // Archival Forest Green
+      background: "#EAE0D0",   // Warm Albers Sandstone
+      foreground: "#281B16",   // Deep Espresso Ink (12.8:1 contrast)
+      muted: "#4A3A32",        // Deep Warm Umber secondary text (8.1:1 contrast)
     },
     heroSettings: {
-      overlayOpacity: 0.5, // Balanced for professional look
-      overlayGradient: "linear-gradient(135deg, #01A9F4 0%, #0088CC 100%)",
-      brightness: 1.1,
-      contrast: 1.2,
+      overlayOpacity: 0.12,
+      overlayGradient: "linear-gradient(135deg, #281B16 0%, #0B5CAB 100%)",
+      brightness: 1.0,
+      contrast: 1.05,
       imageStyle: 'cool',
     },
     typography: {
@@ -28,7 +29,7 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
     layout: {
       spacing: 'compact',
       gridStyle: 'structured',
-      containerMaxWidth: '1200px',
+      containerMaxWidth: '1280px',
     },
     contentTone: {
       voice: 'authoritative',
@@ -39,18 +40,18 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
 
   content_creators: {
     colors: {
-      primary: "#FE299E", // BRAND PINK - never changes across perspectives
-      secondary: "hsl(328, 85%, 70%)", // Creative magenta  
-      accent: "hsl(45, 93%, 47%)", // Creative yellow
-      background: "hsl(0, 0%, 100%)",
-      foreground: "hsl(328, 25%, 15%)",
-      muted: "hsl(320, 15%, 45%)",
+      primary: "#FE299E",      // Canonical CHB Hot Pink
+      secondary: "#B81468",    // High-contrast Atelier Magenta (WCAG AA+ on #EAE0D0)
+      accent: "#B85D19",       // Warm Ochre / Terracotta
+      background: "#EAE0D0",   // Warm Albers Sandstone
+      foreground: "#281B16",   // Deep Espresso Ink
+      muted: "#4A3A32",        // Deep Warm Umber secondary text
     },
     heroSettings: {
-      overlayOpacity: 0.45, // Slightly more vibrant
-      overlayGradient: "linear-gradient(135deg, hsl(328, 85%, 70%) 0%, hsl(288, 85%, 50%) 100%)",
-      brightness: 1.15,
-      contrast: 1.1,
+      overlayOpacity: 0.12,
+      overlayGradient: "linear-gradient(135deg, #281B16 0%, #B81468 100%)",
+      brightness: 1.0,
+      contrast: 1.05,
       imageStyle: 'warm',
     },
     typography: {
@@ -61,7 +62,7 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
     layout: {
       spacing: 'comfortable',
       gridStyle: 'asymmetric',
-      containerMaxWidth: '1100px',
+      containerMaxWidth: '1280px',
     },
     contentTone: {
       voice: 'conversational',
@@ -72,18 +73,18 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
 
   memory_capturers: {
     colors: {
-      primary: "#FE299E", // BRAND PINK - never changes across perspectives
-      secondary: "hsl(142, 76%, 36%)", // Nurturing green
-      accent: "hsl(25, 95%, 53%)", // Warm orange
-      background: "hsl(45, 25%, 98%)", // Warm off-white
-      foreground: "hsl(142, 35%, 15%)",
-      muted: "hsl(142, 15%, 40%)",
+      primary: "#FE299E",      // Canonical CHB Hot Pink
+      secondary: "#1B6346",    // High-contrast Archival Emerald (WCAG AA+ on #EAE0D0)
+      accent: "#B85D19",       // Warm Terracotta
+      background: "#EAE0D0",   // Warm Albers Sandstone
+      foreground: "#281B16",   // Deep Espresso Ink
+      muted: "#4A3A32",        // Deep Warm Umber secondary text
     },
     heroSettings: {
-      overlayOpacity: 0.4, // Softer, more inviting
-      overlayGradient: "linear-gradient(135deg, hsl(142, 76%, 36%) 0%, hsl(172, 76%, 26%) 100%)",
-      brightness: 1.2,
-      contrast: 1.0,
+      overlayOpacity: 0.12,
+      overlayGradient: "linear-gradient(135deg, #281B16 0%, #1B6346 100%)",
+      brightness: 1.0,
+      contrast: 1.05,
       imageStyle: 'warm',
     },
     typography: {
@@ -94,7 +95,7 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
     layout: {
       spacing: 'spacious',
       gridStyle: 'minimal',
-      containerMaxWidth: '1000px',
+      containerMaxWidth: '1280px',
     },
     contentTone: {
       voice: 'empathetic',
@@ -104,48 +105,46 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
   },
 };
 
-// Helper function to get current theme
 export function getThemeForPerspective(perspective: Perspective): PerspectiveTheme {
   return perspectiveThemes[perspective];
 }
 
-// Comprehensive CSS variable mapping that overrides Tailwind tokens for actual theming
+// Guarantees distinct surface (--muted) vs text (--muted-foreground) tokens for high contrast
 export function generateThemeCSS(theme: PerspectiveTheme): Record<string, string> {
   return {
-    // Override existing Tailwind color variables to make perspectives actually change the UI
     '--primary': theme.colors.primary,
-    '--primary-foreground': 'hsl(0, 0%, 100%)',
-    '--secondary': theme.colors.secondary, 
+    '--primary-foreground': '#FFFFFF',
+    '--secondary': theme.colors.secondary,
+    '--secondary-foreground': '#FFFFFF',
     '--accent': theme.colors.accent,
+    '--accent-foreground': '#FFFFFF',
     '--background': theme.colors.background,
     '--foreground': theme.colors.foreground,
-    '--muted': theme.colors.muted,
+    '--card': '#F2EAE0',
+    '--card-foreground': '#281B16',
+    '--popover': '#F2EAE0',
+    '--popover-foreground': '#281B16',
+    '--muted': '#E4DACB',
     '--muted-foreground': theme.colors.muted,
-    
-    // Additional theme-specific variables for advanced styling
+    '--border': '#D3C7B5',
+    '--input': '#E4DACB',
+    '--ring': '#FE299E',
     '--theme-hero-overlay': `${theme.heroSettings.overlayOpacity}`,
     '--theme-hero-gradient': theme.heroSettings.overlayGradient,
     '--theme-brightness': `${theme.heroSettings.brightness}`,
     '--theme-contrast': `${theme.heroSettings.contrast}`,
     '--theme-container-width': theme.layout.containerMaxWidth,
-    '--theme-spacing': theme.layout.spacing === 'compact' ? '2rem' : 
-                      theme.layout.spacing === 'comfortable' ? '3rem' : '4rem',
-    '--theme-headline-weight': theme.typography.headlineStyle === 'bold' ? '700' :
-                              theme.typography.headlineStyle === 'elegant' ? '300' :
-                              theme.typography.headlineStyle === 'playful' ? '600' : '800',
-    '--theme-body-size': theme.contentTone.complexity === 'simple' ? '1.125rem' :
-                        theme.contentTone.complexity === 'moderate' ? '1rem' : '0.875rem',
+    '--theme-spacing': '3rem',
+    '--theme-headline-weight': '700',
+    '--theme-body-size': '1.0625rem',
   };
 }
 
-// Complete image generation context for all perspectives
 export function getImageContextForPerspective(
-  perspective: Perspective, 
+  perspective: Perspective,
   placement: 'hero' | 'product-card' | 'narrative-inset' | 'ambient-divider' | 'case-study-banner'
 ) {
   const theme = perspectiveThemes[perspective];
-  
-  // Complete tone mapping for all perspectives - enables multi-perspective content generation
   const allPerspectiveTones = {
     startup_founders: 'professional' as const,
     content_creators: 'creative' as const,
@@ -154,15 +153,15 @@ export function getImageContextForPerspective(
 
   return {
     placement,
-    tone: allPerspectiveTones, // Full perspective coverage for comprehensive content generation
+    tone: allPerspectiveTones,
     currentPerspective: perspective,
     imageStyle: theme.heroSettings.imageStyle,
     overlaySettings: {
       opacity: theme.heroSettings.overlayOpacity,
       gradient: theme.heroSettings.overlayGradient,
     },
-    aspectRatio: placement === 'hero' ? '16:9' : 
-                placement === 'product-card' ? '4:3' :
-                placement === 'case-study-banner' ? '21:9' : '3:2',
+    aspectRatio: placement === 'hero' ? '16:9' :
+                 placement === 'product-card' ? '4:3' :
+                 placement === 'case-study-banner' ? '21:9' : '3:2',
   };
 }

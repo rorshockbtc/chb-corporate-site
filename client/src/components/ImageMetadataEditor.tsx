@@ -67,7 +67,7 @@ export function ImageMetadataEditor({
       tags: Array.isArray(image.tags) ? image.tags : [],
       searchKeywords: image.searchKeywords || "",
       licensing: image.licensing || "Creative Commons CC0",
-    });
+    } as any);
   }, [image]);
 
   const updateField = (field: keyof CreativeImage, value: any) => {
