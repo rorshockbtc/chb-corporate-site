@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePerspectiveContent, usePerspective } from "@/hooks/use-perspective";
 import { ArrowRight, ExternalLink, Shield, Sparkles, Terminal, Layers } from "lucide-react";
+import {
+  SPRING_LAYOUT,
+  TAP,
+  CARD_HOVER,
+  CARD_TAP,
+  AccentRevealText,
+  AccentRevealImage,
+} from "@/components/motion/primitives";
 import type { Perspective } from "@/types/content";
 
 export function HeroSection() {
@@ -149,10 +158,12 @@ export function HeroSection() {
               {perspectives.map((p) => {
                 const isActive = currentPerspective === p.id;
                 return (
-                  <button
+                  <motion.button
+                    whileHover={{ y: -1 }}
+                    whileTap={TAP}
                     key={p.id}
                     onClick={() => setPerspective(p.id)}
-                    className={`px-3.5 py-2 rounded-lg text-left transition-all border ${
+                    className={`px-3.5 py-2 rounded-lg text-left transition-all border cursor-pointer ${
                       isActive
                         ? "bg-[#231814] text-[#F2EAE0] border-[#231814] shadow-sm"
                         : "bg-[#EAE0D0]/70 text-[#281B16] border-[#D3C7B5] hover:bg-[#E4DACB]"
@@ -176,7 +187,7 @@ export function HeroSection() {
                     >
                       {p.shortTitle}
                     </div>
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
@@ -202,7 +213,12 @@ export function HeroSection() {
               className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#281B16] leading-[1.08] tracking-tight"
               data-testid="hero-title"
             >
-              {heroContent.title}
+              <AccentRevealText
+                key={currentPerspective}
+                text={heroContent.title}
+                as="span"
+                immediate
+              />
             </h1>
 
             <p
@@ -214,7 +230,9 @@ export function HeroSection() {
 
             {/* Primary & Secondary Conversion CTAs */}
             <div className="pt-2 flex flex-col sm:flex-row gap-3.5 items-stretch sm:items-center">
-              <a
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={TAP}
                 href={
                   currentPerspective === "memory_capturers"
                     ? "https://pipes.pink/write"
@@ -222,14 +240,16 @@ export function HeroSection() {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-4 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-base shadow-sm transition-all flex items-center justify-center gap-2.5 group"
+                className="px-6 py-4 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-base shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2.5 group"
                 data-testid="button-primary-pipes-cta"
               >
                 <span>{heroContent.primaryCtaText}</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={TAP}
                 href={
                   currentPerspective === "memory_capturers"
                     ? "https://pipes.pink"
@@ -242,7 +262,7 @@ export function HeroSection() {
               >
                 <span>{heroContent.secondaryCtaText}</span>
                 <ExternalLink className="h-4 w-4 text-[#FE299E]" />
-              </a>
+              </motion.a>
             </div>
 
             {/* Direct Account & Ecosystem Quick-Links */}
@@ -276,8 +296,10 @@ export function HeroSection() {
             {/* 3-Column Architectural Proof Strip */}
             <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-[#D3C7B5]">
               {heroContent.metricStrip.map((metric, idx) => (
-                <div
+                <motion.div
                   key={idx}
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.15 }}
                   className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-lg px-4 py-3"
                 >
                   <div className="font-mono text-[11px] uppercase tracking-wider text-[#4A3A32] font-semibold">
@@ -286,7 +308,7 @@ export function HeroSection() {
                   <div className="font-serif text-base sm:text-lg font-bold text-[#281B16] mt-0.5">
                     {metric.value}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -307,7 +329,7 @@ export function HeroSection() {
                 </span>
               </div>
 
-              {/* 4 Operator Switcher Buttons */}
+              {/* 4 Operator Switcher Buttons with Shared Spring Pill */}
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-1.5 mb-4">
                 {[
                   { id: "pipes" as const, symbol: "| | |", label: "Pipes.Pink" },
@@ -320,26 +342,36 @@ export function HeroSection() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveProductTab(tab.id)}
-                      className={`px-2.5 py-2 rounded-lg font-mono text-xs transition-all flex items-center justify-center gap-1.5 border ${
+                      className={`relative px-2.5 py-2 rounded-lg font-mono text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                         isSelected
-                          ? "bg-[#FE299E] text-white border-[#FE299E] font-bold"
-                          : "bg-[#2E201B] text-[#D3C7B5] border-[#3D2B24] hover:text-white hover:border-[#FE299E]/50"
+                          ? "text-white font-bold"
+                          : "text-[#D3C7B5] hover:text-white bg-[#2E201B] border border-[#3D2B24]"
                       }`}
                       data-testid={`hero-showcase-tab-${tab.id}`}
                     >
-                      <span>{tab.symbol}</span>
-                      <span>{tab.label}</span>
+                      {isSelected && (
+                        <motion.div
+                          layoutId="hero-operator-pill"
+                          transition={SPRING_LAYOUT}
+                          className="absolute inset-0 bg-[#FE299E] rounded-lg -z-0"
+                        />
+                      )}
+                      <span className="relative z-10">{tab.symbol}</span>
+                      <span className="relative z-10">{tab.label}</span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* High-Contrast Screenshot Frame */}
+              {/* High-Contrast Screenshot Frame with Curtain Reveal */}
               <div className="rounded-xl overflow-hidden border border-[#3D2B24] bg-[#160F0C] mb-4">
-                <img
+                <AccentRevealImage
+                  key={activeProductTab}
                   src={activeShowcase.image}
                   alt={activeShowcase.title}
-                  className="w-full h-56 sm:h-64 object-cover object-top"
+                  className="w-full h-56 sm:h-64"
+                  imgClassName="object-top"
+                  delay={0.05}
                 />
               </div>
 
@@ -357,7 +389,9 @@ export function HeroSection() {
                   {activeShowcase.caption}
                 </p>
                 <div className="pt-1 flex items-center justify-between gap-3">
-                  <a
+                  <motion.a
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={TAP}
                     href={activeShowcase.ctaHref}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -366,7 +400,7 @@ export function HeroSection() {
                   >
                     <span>{activeShowcase.ctaLabel}</span>
                     <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </div>

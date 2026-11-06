@@ -1,6 +1,18 @@
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { HeroSection } from "@/components/hero-section";
 import { usePerspectiveContent, usePerspective } from "@/hooks/use-perspective";
+import {
+  TAP,
+  CARD_HOVER,
+  CARD_TAP,
+  AccentRevealText,
+  AccentRevealImage,
+  AccentKineticBadge,
+  AccentEditorialReveal,
+  Stagger,
+  StaggerItem,
+} from "@/components/motion/primitives";
 import {
   ArrowRight,
   ExternalLink,
@@ -356,68 +368,73 @@ export function HomePage() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-14 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
-                {curatorEconomyContent.eyebrow}
-              </div>
+              <AccentKineticBadge label={curatorEconomyContent.eyebrow} />
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#281B16] leading-[1.12] tracking-tight">
-                {curatorEconomyContent.title}
+                <AccentRevealText
+                  key={currentPerspective}
+                  text={curatorEconomyContent.title}
+                  as="span"
+                />
               </h2>
               <p className="text-base sm:text-lg text-[#4A3A32] leading-relaxed">
                 {curatorEconomyContent.subtitle}
               </p>
             </div>
 
-            {/* 3-Step Workflow Grid */}
-            <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+            {/* 3-Step Workflow Grid with Stagger & Tactile Lift */}
+            <Stagger className="grid lg:grid-cols-3 gap-6 lg:gap-8">
               {curatorEconomyContent.steps.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all"
-                  data-testid={`curator-step-${idx}`}
-                >
-                  <div className="space-y-5">
-                    <div className="flex items-center justify-between gap-3 pb-4 border-b border-[#D3C7B5]">
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A3A32]">
-                        {item.step}
-                      </span>
-                      <span className="px-2.5 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold">
-                        {item.symbol}
-                      </span>
+                <StaggerItem key={idx}>
+                  <motion.div
+                    whileHover={CARD_HOVER}
+                    whileTap={CARD_TAP}
+                    className="h-full bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-colors shadow-sm"
+                    data-testid={`curator-step-${idx}`}
+                  >
+                    <div className="space-y-5">
+                      <div className="flex items-center justify-between gap-3 pb-4 border-b border-[#D3C7B5]">
+                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A3A32]">
+                          {item.step}
+                        </span>
+                        <span className="px-2.5 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold">
+                          {item.symbol}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif text-2xl font-bold text-[#281B16] leading-snug">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-sm sm:text-base text-[#4A3A32] leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
 
-                    <h3 className="font-serif text-2xl font-bold text-[#281B16] leading-snug">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-sm sm:text-base text-[#4A3A32] leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-6 mt-6 border-t border-[#D3C7B5]">
-                    {item.ctaHref.startsWith("http") ? (
-                      <a
-                        href={item.ctaHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E] transition-colors"
-                      >
-                        <span>{item.ctaText}</span>
-                        <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
-                      </a>
-                    ) : (
-                      <Link
-                        href={item.ctaHref}
-                        className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E] transition-colors"
-                      >
-                        <span>{item.ctaText}</span>
-                        <ArrowRight className="h-3.5 w-3.5 text-[#FE299E]" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
+                    <div className="pt-6 mt-6 border-t border-[#D3C7B5]">
+                      {item.ctaHref.startsWith("http") ? (
+                        <a
+                          href={item.ctaHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E] transition-colors"
+                        >
+                          <span>{item.ctaText}</span>
+                          <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.ctaHref}
+                          className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E] transition-colors"
+                        >
+                          <span>{item.ctaText}</span>
+                          <ArrowRight className="h-3.5 w-3.5 text-[#FE299E]" />
+                        </Link>
+                      )}
+                    </div>
+                  </motion.div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
 
             {/* High-Contrast Conversion Banner Underneath Section 01 */}
             <div className="mt-10 bg-[#231814] border border-[#3D2B24] rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -466,9 +483,7 @@ export function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
               <div className="max-w-3xl space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
-                  02 // WHY PUNCTUATION MATTERS
-                </div>
+                <AccentKineticBadge label="02 // WHY PUNCTUATION MATTERS" />
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#281B16] leading-[1.12] tracking-tight">
                   Five punctuation operators. One unified sovereign ecosystem.
                 </h2>
@@ -478,23 +493,27 @@ export function HomePage() {
               </div>
 
               <div className="flex-shrink-0">
-                <Link
-                  href="/products"
-                  className="px-5 py-3 rounded-xl bg-[#231814] text-[#F2EAE0] hover:bg-[#3A2821] font-mono text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 transition-colors"
-                  data-testid="view-all-products-button"
-                >
-                  <span>Compare All Operators</span>
-                  <ArrowRight className="h-4 w-4 text-[#FE299E]" />
-                </Link>
+                <motion.div whileHover={{ y: -2 }} whileTap={TAP}>
+                  <Link
+                    href="/products"
+                    className="px-5 py-3 rounded-xl bg-[#231814] text-[#F2EAE0] hover:bg-[#3A2821] font-mono text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 transition-colors shadow-sm"
+                    data-testid="view-all-products-button"
+                  >
+                    <span>Compare All Operators</span>
+                    <ArrowRight className="h-4 w-4 text-[#FE299E]" />
+                  </Link>
+                </motion.div>
               </div>
             </div>
 
             {/* 5 Operator Architectural Rows */}
             <div className="space-y-8">
               {punctuationOperators.map((op, index) => (
-                <div
+                <motion.div
                   key={op.name}
-                  className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-2xl overflow-hidden shadow-sm"
+                  whileHover={CARD_HOVER}
+                  transition={{ duration: 0.18 }}
+                  className="bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] rounded-2xl overflow-hidden shadow-sm transition-colors"
                   data-testid={`operator-card-${op.name.toLowerCase().replace(/\s+/g, "-")}`}
                 >
                   <div className="grid lg:grid-cols-12 items-stretch">
@@ -541,7 +560,8 @@ export function HomePage() {
                       </div>
 
                       <div className="pt-4 border-t border-[#D3C7B5] flex flex-wrap items-center gap-3">
-                        <a
+                        <motion.a
+                          whileTap={TAP}
                           href={op.primaryCta.href}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -550,15 +570,17 @@ export function HomePage() {
                         >
                           <span>{op.primaryCta.label}</span>
                           <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
+                        </motion.a>
 
-                        <Link
-                          href={op.secondaryCta.href}
-                          className="px-4 py-2.5 rounded-lg bg-[#E4DACB] hover:bg-[#D3C7B5] text-[#281B16] font-mono text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors"
-                        >
-                          <span>{op.secondaryCta.label}</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
+                        <motion.div whileTap={TAP}>
+                          <Link
+                            href={op.secondaryCta.href}
+                            className="px-4 py-2.5 rounded-lg bg-[#E4DACB] hover:bg-[#D3C7B5] text-[#281B16] font-mono text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors"
+                          >
+                            <span>{op.secondaryCta.label}</span>
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </Link>
+                        </motion.div>
                       </div>
                     </div>
 
@@ -573,15 +595,17 @@ export function HomePage() {
                         </span>
                       </div>
                       <div className="rounded-xl overflow-hidden border border-[#3D2B24] bg-[#160F0C]">
-                        <img
+                        <AccentRevealImage
                           src={op.image}
                           alt={`${op.name} production interface`}
-                          className="w-full h-52 sm:h-60 object-cover object-top"
+                          className="w-full h-52 sm:h-60"
+                          imgClassName="object-top"
+                          delay={0.08}
                         />
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -594,9 +618,7 @@ export function HomePage() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-16 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
-                03 // CONSTITUTIONAL PRINCIPLES
-              </div>
+              <AccentKineticBadge label="03 // CONSTITUTIONAL PRINCIPLES" />
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#281B16] leading-[1.12] tracking-tight">
                 Three principles we refuse to compromise.
               </h2>
@@ -607,12 +629,12 @@ export function HomePage() {
 
             <div className="space-y-12">
               {principlesContent.map((principle, idx) => (
-                <div
+                <AccentEditorialReveal
                   key={idx}
+                  delay={idx * 0.08}
                   className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-2xl overflow-hidden"
-                  data-testid={`principle-card-${idx}`}
                 >
-                  <div className="grid lg:grid-cols-12 items-stretch">
+                  <div className="grid lg:grid-cols-12 items-stretch" data-testid={`principle-card-${idx}`}>
                     <div
                       className={`lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-6 ${
                         idx % 2 === 1 ? "lg:order-2" : ""
@@ -644,7 +666,8 @@ export function HomePage() {
 
                       <div className="pt-4 border-t border-[#D3C7B5]">
                         {principle.external ? (
-                          <a
+                          <motion.a
+                            whileTap={TAP}
                             href={principle.ctaHref}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -652,15 +675,17 @@ export function HomePage() {
                           >
                             <span>{principle.ctaLabel}</span>
                             <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
-                          </a>
+                          </motion.a>
                         ) : (
-                          <Link
-                            href={principle.ctaHref}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-mono text-xs font-bold uppercase tracking-wider transition-colors"
-                          >
-                            <span>{principle.ctaLabel}</span>
-                            <ArrowRight className="h-3.5 w-3.5 text-[#FE299E]" />
-                          </Link>
+                          <motion.div whileTap={TAP}>
+                            <Link
+                              href={principle.ctaHref}
+                              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-mono text-xs font-bold uppercase tracking-wider transition-colors"
+                            >
+                              <span>{principle.ctaLabel}</span>
+                              <ArrowRight className="h-3.5 w-3.5 text-[#FE299E]" />
+                            </Link>
+                          </motion.div>
                         )}
                       </div>
                     </div>
@@ -673,10 +698,12 @@ export function HomePage() {
                       }`}
                     >
                       <div className="rounded-xl overflow-hidden border border-[#3D2B24] bg-[#160F0C]">
-                        <img
+                        <AccentRevealImage
                           src={principle.image}
                           alt={principle.title}
-                          className="w-full h-56 sm:h-64 object-cover object-top"
+                          className="w-full h-56 sm:h-64"
+                          imgClassName="object-top"
+                          delay={0.1}
                         />
                       </div>
                       <p className="font-mono text-[11px] text-[#D3C7B5] mt-3 leading-relaxed">
@@ -684,7 +711,7 @@ export function HomePage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </AccentEditorialReveal>
               ))}
             </div>
           </div>

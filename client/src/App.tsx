@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { MotionConfig } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PerspectiveProvider } from "@/hooks/use-perspective";
@@ -203,14 +204,16 @@ function App() {
           <NostrAuthProvider>
             <ThemeManager />
             <AnalyticsTracker />
-            <div className="min-h-screen bg-background text-foreground">
-              <Navigation />
-              <Router />
-              <Footer />
-              <Toaster />
-              {/* Semi Chat - positioned for both desktop and mobile */}
-              <SemiChat className="bottom-4 right-4 sm:bottom-6 sm:right-6" />
-            </div>
+            <MotionConfig reducedMotion="user">
+              <div className="min-h-screen bg-background text-foreground">
+                <Navigation />
+                <Router />
+                <Footer />
+                <Toaster />
+                {/* Semi Chat - positioned for both desktop and mobile */}
+                <SemiChat className="bottom-4 right-4 sm:bottom-6 sm:right-6" />
+              </div>
+            </MotionConfig>
           </NostrAuthProvider>
         </PerspectiveProvider>
       </TooltipProvider>

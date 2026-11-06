@@ -1,7 +1,9 @@
 import { ExternalLink, BookOpen } from "lucide-react";
+import { motion } from "framer-motion";
 import { usePerspectiveContent, usePerspective } from "@/hooks/use-perspective";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { CARD_HOVER, CARD_TAP } from "@/lib/motion/tokens";
 import type { Product } from "@/types/content";
 
 interface ProductCardProps {
@@ -91,7 +93,11 @@ export function ProductCard({ product }: ProductCardProps) {
   const textColorClass = textColorClassMap[product.color as keyof typeof textColorClassMap] || textColorClassMap.primary;
 
   return (
-    <div className="product-card bg-card rounded-xl p-6">
+    <motion.div
+      whileHover={CARD_HOVER}
+      whileTap={CARD_TAP}
+      className="product-card bg-card rounded-xl p-6 shadow-sm border border-border/40 hover:border-border transition-colors"
+    >
       <div className="mb-4">
         <div className={`w-12 h-12 ${colorClass} rounded-lg flex items-center justify-center mb-4`}>
           <span className="text-2xl font-bold">{product.symbol}</span>
@@ -152,6 +158,6 @@ export function ProductCard({ product }: ProductCardProps) {
           {getDeepDiveButton(product.id, textColorClass)}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

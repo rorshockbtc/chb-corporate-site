@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePerspective } from "@/hooks/use-perspective";
 import { useAuth } from "@/hooks/useAuth";
 import { useNostrAuth } from "@/hooks/use-nostr-auth";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, ExternalLink } from "lucide-react";
+import { SPRING_LAYOUT, TAP } from "@/lib/motion/tokens";
 import type { Perspective } from "@/types/content";
 
 export function Navigation() {
@@ -87,20 +89,27 @@ export function Navigation() {
                     <button
                       key={p.id}
                       onClick={() => setPerspective(p.id)}
-                      className={`px-2.5 py-1 rounded-md text-xs font-mono transition-all flex items-center gap-1.5 ${
+                      className={`relative px-2.5 py-1 rounded-md text-xs font-mono transition-colors flex items-center gap-1.5 cursor-pointer ${
                         isActive
-                          ? "bg-[#231814] text-[#F2EAE0] font-bold shadow-sm"
-                          : "text-[#281B16] hover:bg-[#F2EAE0]/80 font-medium"
+                          ? "text-[#F2EAE0] font-bold"
+                          : "text-[#281B16] hover:text-[#FE299E] font-medium"
                       }`}
                       data-testid={`perspective-option-${p.id}`}
                       aria-pressed={isActive}
                       title={`Mount ${p.pipeHandle} (${p.label} Perspective)`}
                     >
+                      {isActive && (
+                        <motion.div
+                          layoutId="nav-lens-pill"
+                          transition={SPRING_LAYOUT}
+                          className="absolute inset-0 bg-[#281B16] rounded-md -z-10 shadow-sm"
+                        />
+                      )}
                       <span
-                        className="w-2 h-2 rounded-full flex-shrink-0"
+                        className="w-2 h-2 rounded-full flex-shrink-0 relative z-10"
                         style={{ backgroundColor: isActive ? "#FE299E" : p.accentColor }}
                       />
-                      <span>{p.pipeHandle}</span>
+                      <span className="relative z-10">{p.pipeHandle}</span>
                     </button>
                   );
                 })}
@@ -138,7 +147,9 @@ export function Navigation() {
               </nav>
 
               <div className="flex items-center gap-2.5 pl-2 border-l border-[#D3C7B5]">
-                <a
+                <motion.a
+                  whileHover={{ y: -1 }}
+                  whileTap={TAP}
                   href="https://pipes.pink"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -148,26 +159,30 @@ export function Navigation() {
                   <span className="text-[#FE299E]">| | |</span>
                   <span>Open Pipes.Pink</span>
                   <ExternalLink className="h-3 w-3 text-[#D3C7B5]" />
-                </a>
+                </motion.a>
 
                 {isAuthenticated ? (
-                  <Link
-                    href="/account"
-                    className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1.5"
-                    data-testid="account-button"
-                  >
-                    <User className="h-3.5 w-3.5" />
-                    <span>Account</span>
-                  </Link>
+                  <motion.div whileHover={{ y: -1 }} whileTap={TAP}>
+                    <Link
+                      href="/account"
+                      className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1.5"
+                      data-testid="account-button"
+                    >
+                      <User className="h-3.5 w-3.5" />
+                      <span>Account</span>
+                    </Link>
+                  </motion.div>
                 ) : (
-                  <Link
-                    href="/signup"
-                    className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1"
-                    data-testid="signup-button"
-                  >
-                    <span>Sign Up</span>
-                    <span className="font-mono text-[11px] opacity-90">:-]</span>
-                  </Link>
+                  <motion.div whileHover={{ y: -1 }} whileTap={TAP}>
+                    <Link
+                      href="/signup"
+                      className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1"
+                      data-testid="signup-button"
+                    >
+                      <span>Sign Up</span>
+                      <span className="font-mono text-[11px] opacity-90">:-]</span>
+                    </Link>
+                  </motion.div>
                 )}
               </div>
             </div>
