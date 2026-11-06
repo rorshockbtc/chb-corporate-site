@@ -1,6 +1,18 @@
 import { BookOpen, ArrowRight, Lightbulb, Download, Brain, Shield, Zap, Users, Database, Sparkles, ExternalLink, CheckCircle2 } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { usePerspectiveContent } from "@/hooks/use-perspective";
+import {
+  TAP,
+  CARD_HOVER,
+  CARD_TAP,
+  AccentRevealText,
+  AccentRevealImage,
+  AccentKineticBadge,
+  AccentEditorialReveal,
+  Stagger,
+  StaggerItem,
+} from "@/components/motion/primitives";
 
 export default function Products() {
   const heroContent = usePerspectiveContent({
@@ -347,47 +359,46 @@ export default function Products() {
       <section className="py-16 lg:py-24 bg-[#EAE0D0] border-b border-[#D3C7B5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-5 max-w-4xl mx-auto mb-16">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]"
-              data-testid="products-subtitle"
-            >
-              {heroContent.eyebrow}
-            </div>
+            <AccentKineticBadge label={heroContent.eyebrow} className="justify-center" />
             <h1
               className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#281B16]"
               data-testid="products-page-title"
             >
-              {heroContent.title}
+              <AccentRevealText text={heroContent.title} as="span" immediate />
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-[#4A3A32] leading-relaxed">
               {heroContent.description}
             </p>
             <div className="pt-2 flex flex-wrap justify-center gap-3">
-              <a
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={TAP}
                 href="https://pipes.pink"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors"
+                className="px-6 py-3.5 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-sm inline-flex items-center gap-2 transition-all shadow-sm"
                 data-testid="hero-claim-pipe"
               >
                 <span>Claim Your Pipe on Pipes.Pink ($9/yr)</span>
                 <ExternalLink className="h-4 w-4" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={TAP}
                 href="https://pipes.pink/write"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-bold text-sm inline-flex items-center gap-2 transition-colors"
+                className="px-6 py-3.5 rounded-xl bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-bold text-sm inline-flex items-center gap-2 transition-all"
                 data-testid="hero-open-hash"
               >
                 <span>Open # Hash &amp; ;-] Semi Free</span>
                 <ExternalLink className="h-4 w-4 text-[#FE299E]" />
-              </a>
+              </motion.a>
             </div>
           </div>
 
           {/* 3-Step Workflow Card */}
-          <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-2xl p-6 sm:p-8 lg:p-12">
+          <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-2xl p-6 sm:p-8 lg:p-12 shadow-sm">
             <div className="text-center mb-10">
               <h2
                 className="font-serif text-2xl sm:text-3xl font-bold text-[#281B16] mb-2"
@@ -400,60 +411,63 @@ export default function Products() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            <Stagger className="grid md:grid-cols-3 gap-6 lg:gap-8">
               {workflowSteps.map((step) => (
-                <div
-                  key={step.step}
-                  className="bg-[#EAE0D0] border border-[#D3C7B5] rounded-xl p-6 flex flex-col justify-between space-y-5"
-                  data-testid={`workflow-step-${step.step}`}
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A3A32]">
-                        STEP {step.step} · {step.product}
-                      </span>
-                      <span
-                        className="px-2.5 py-1 rounded text-white font-mono text-xs font-bold"
-                        style={{ backgroundColor: step.accent }}
-                      >
-                        {step.symbol}
-                      </span>
+                <StaggerItem key={step.step}>
+                  <motion.div
+                    whileHover={CARD_HOVER}
+                    whileTap={CARD_TAP}
+                    className="h-full bg-[#EAE0D0] border border-[#D3C7B5] hover:border-[#281B16] rounded-xl p-6 flex flex-col justify-between space-y-5 transition-colors shadow-sm"
+                    data-testid={`workflow-step-${step.step}`}
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A3A32]">
+                          STEP {step.step} · {step.product}
+                        </span>
+                        <span
+                          className="px-2.5 py-1 rounded text-white font-mono text-xs font-bold"
+                          style={{ backgroundColor: step.accent }}
+                        >
+                          {step.symbol}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#281B16]">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-[#4A3A32] leading-relaxed">
+                        {step.description}
+                      </p>
+                      <p className="text-xs font-mono font-bold text-[#281B16] bg-[#F2EAE0] border border-[#D3C7B5] rounded-lg px-3 py-2">
+                        "{step.detail}"
+                      </p>
                     </div>
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#281B16]">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm text-[#4A3A32] leading-relaxed">
-                      {step.description}
-                    </p>
-                    <p className="text-xs font-mono font-bold text-[#281B16] bg-[#F2EAE0] border border-[#D3C7B5] rounded-lg px-3 py-2">
-                      "{step.detail}"
-                    </p>
-                  </div>
 
-                  <div className="pt-3 border-t border-[#D3C7B5]">
-                    {step.ctaHref.startsWith("http") ? (
-                      <a
-                        href={step.ctaHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E]"
-                      >
-                        <span>{step.ctaLabel}</span>
-                        <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
-                      </a>
-                    ) : (
-                      <Link
-                        href={step.ctaHref}
-                        className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E]"
-                      >
-                        <span>{step.ctaLabel}</span>
-                        <ArrowRight className="h-3.5 w-3.5 text-[#FE299E]" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
+                    <div className="pt-3 border-t border-[#D3C7B5]">
+                      {step.ctaHref.startsWith("http") ? (
+                        <a
+                          href={step.ctaHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E]"
+                        >
+                          <span>{step.ctaLabel}</span>
+                          <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={step.ctaHref}
+                          className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#281B16] hover:text-[#FE299E]"
+                        >
+                          <span>{step.ctaLabel}</span>
+                          <ArrowRight className="h-3.5 w-3.5 text-[#FE299E]" />
+                        </Link>
+                      )}
+                    </div>
+                  </motion.div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
 
             <div className="mt-10 text-center">
               <Link

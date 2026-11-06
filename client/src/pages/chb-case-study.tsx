@@ -2,6 +2,8 @@ import { usePerspectiveContent } from "@/hooks/use-perspective";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
+import { AccentRevealText, AccentRevealImage, TAP } from "@/components/motion/primitives";
 
 export default function CHBCaseStudy() {
   const heroImage = usePerspectiveContent({
@@ -152,17 +154,18 @@ export default function CHBCaseStudy() {
           <div className="text-center space-y-8">
             {/* Hero Image - Changes based on perspective */}
             <div className="relative mx-auto max-w-3xl">
-              <img 
+              <AccentRevealImage 
+                key={heroImage}
                 src={heroImage}
                 alt="CHB Corporate Website Development - Perspective-Aware Technology"
-                className="w-full h-auto rounded-xl shadow-2xl"
-                data-testid="hero-image"
+                className="w-full h-auto rounded-xl shadow-2xl overflow-hidden"
+                delay={0.1}
               />
             </div>
 
             <div className="space-y-6">
               <h1 className="text-fluid-hero font-serif" data-testid="case-study-title">
-                {heroContent.title}
+                <AccentRevealText key={heroContent.title} text={heroContent.title} as="span" immediate />
               </h1>
               <p className="text-fluid-heading text-muted-foreground" data-testid="case-study-subtitle">
                 {heroContent.subtitle}

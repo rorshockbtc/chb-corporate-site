@@ -1,6 +1,18 @@
 import { Check, ArrowRight, ExternalLink, Sparkles, Shield, Cpu } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { usePerspectiveContent } from "@/hooks/use-perspective";
+import {
+  TAP,
+  CARD_HOVER,
+  CARD_TAP,
+  AccentRevealText,
+  AccentRevealImage,
+  AccentKineticBadge,
+  AccentEditorialReveal,
+  Stagger,
+  StaggerItem,
+} from "@/components/motion/primitives";
 
 export default function Roadmap() {
   const heroContent = usePerspectiveContent({
@@ -157,50 +169,53 @@ export default function Roadmap() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
-                {heroContent.eyebrow}
-              </div>
+              <AccentKineticBadge label={heroContent.eyebrow} />
               <h1
                 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#281B16] leading-[1.08] tracking-tight"
                 data-testid="roadmap-title"
               >
-                {heroContent.title}
+                <AccentRevealText text={heroContent.title} as="span" immediate />
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-[#4A3A32] leading-relaxed max-w-2xl">
                 {heroContent.subtitle}
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
-                <a
+                <motion.a
+                  whileHover={{ y: -2 }}
+                  whileTap={TAP}
                   href="https://pipes.pink"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors"
+                  className="px-6 py-3.5 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-sm inline-flex items-center gap-2 transition-all shadow-sm"
                   data-testid="roadmap-cta-pipes"
                 >
                   <span>Explore Live on Pipes.Pink</span>
                   <ExternalLink className="h-4 w-4" />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
+                  whileHover={{ y: -2 }}
+                  whileTap={TAP}
                   href="https://pipes.pink/write"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-xl bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-bold text-sm inline-flex items-center gap-2 transition-colors"
+                  className="px-6 py-3.5 rounded-xl bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-bold text-sm inline-flex items-center gap-2 transition-all"
                   data-testid="roadmap-cta-hash"
                 >
                   <span>Open # Hash &amp; ;-] Semi</span>
                   <ExternalLink className="h-4 w-4 text-[#FE299E]" />
-                </a>
+                </motion.a>
               </div>
             </div>
 
             <div className="lg:col-span-5">
               <div className="bg-[#231814] border border-[#3D2B24] rounded-2xl p-4 sm:p-5 shadow-lg">
                 <div className="rounded-xl overflow-hidden border border-[#3D2B24] bg-[#160F0C]">
-                  <img
+                  <AccentRevealImage
                     src={heroContent.image}
                     alt="CHB Shipped Architecture"
-                    className="w-full h-56 sm:h-64 object-cover object-top"
-                    data-testid="roadmap-header-image"
+                    className="w-full h-56 sm:h-64"
+                    imgClassName="object-top"
+                    delay={0.1}
                   />
                 </div>
                 <p className="font-mono text-[11px] text-[#D3C7B5] mt-3 leading-relaxed">
@@ -215,54 +230,40 @@ export default function Roadmap() {
       {/* 3-Phase Roadmap Grid */}
       <section className="py-16 lg:py-24 bg-[#E4DACB] border-b border-[#D3C7B5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+          <Stagger className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {phases.map((phase) => {
               const phaseContent = usePerspectiveContent(phase.content);
-
               return (
-                <div
-                  key={phase.id}
-                  className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-2xl p-7 sm:p-8 flex flex-col justify-between space-y-6"
-                >
-                  <div className="space-y-5">
-                    <div className="flex items-center justify-between gap-2 pb-4 border-b border-[#D3C7B5]">
+                <StaggerItem key={phase.id}>
+                  <motion.div
+                    whileHover={CARD_HOVER}
+                    whileTap={CARD_TAP}
+                    className="h-full bg-[#F2EAE0] border border-[#D3C7B5] hover:border-[#281B16] rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 transition-colors shadow-sm"
+                    data-testid={`roadmap-phase-${phase.id}`}
+                  >
+                    <div className="space-y-4">
                       <span
-                        className="px-2.5 py-1 rounded text-white font-mono text-[11px] font-bold uppercase tracking-wider"
+                        className="inline-block px-3 py-1 rounded font-mono text-xs font-bold text-white uppercase tracking-wider"
                         style={{ backgroundColor: phase.accentColor }}
                       >
                         {phase.badge}
                       </span>
-                      <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-mono text-xs font-bold"
-                        style={{ backgroundColor: phase.accentColor }}
-                      >
-                        {phase.status === "complete" ? <Check size={16} /> : "03"}
-                      </div>
+                      <h3 className="font-serif text-2xl font-bold text-[#281B16]">
+                        {phase.title}
+                      </h3>
+                      <ul className="space-y-2.5 pt-2 text-sm text-[#4A3A32]">
+                        {phaseContent.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-
-                    <h3
-                      className="font-serif text-2xl sm:text-3xl font-bold text-[#281B16]"
-                      data-testid={`phase-${phase.id}-title`}
-                    >
-                      {phase.title}
-                    </h3>
-
-                    <div className="space-y-3">
-                      {phaseContent.map((item, index) => (
-                        <p
-                          key={index}
-                          className="text-sm sm:text-base text-[#281B16] leading-relaxed font-medium"
-                          data-testid={`phase-${phase.id}-item-${index}`}
-                        >
-                          {item}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
         </div>
       </section>
 
