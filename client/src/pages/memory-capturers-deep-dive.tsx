@@ -22,9 +22,9 @@ export default function MemoryCapturersDeepDive() {
               <div className="relative">
                 <div className="absolute -inset-6 bg-gradient-to-r from-amber-200/30 to-orange-200/30 rounded-3xl blur-xl"></div>
                 <img 
-                  src="/generated/images/Family_sharing_memories_on_porch_e4f89057.png" 
-                  alt="Multi-generational family actively sharing memories and stories on farmhouse porch"
-                  className="relative w-96 h-auto rounded-2xl shadow-2xl border-2 border-amber-200/60"
+                  src="/images/pipes/pipes-hash-sanctuary.png" 
+                  alt="# Hash Sanctuary: calm archival epistemic workspace"
+                  className="relative w-full max-w-lg h-auto rounded-2xl shadow-2xl border border-border"
                 />
               </div>
             </div>

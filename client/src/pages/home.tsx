@@ -369,7 +369,7 @@ export function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-14 space-y-4">
               <AccentKineticBadge label={curatorEconomyContent.eyebrow} />
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#281B16] leading-[1.12] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#281B16] leading-[1.08] tracking-tight">
                 <AccentRevealText
                   key={currentPerspective}
                   text={curatorEconomyContent.title}
@@ -484,7 +484,7 @@ export function HomePage() {
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
               <div className="max-w-3xl space-y-4">
                 <AccentKineticBadge label="02 // WHY PUNCTUATION MATTERS" />
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#281B16] leading-[1.12] tracking-tight">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#281B16] leading-[1.08] tracking-tight">
                   Five punctuation operators. One unified sovereign ecosystem.
                 </h2>
                 <p className="text-base sm:text-lg text-[#4A3A32] leading-relaxed">
@@ -619,7 +619,7 @@ export function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mb-16 space-y-4">
               <AccentKineticBadge label="03 // CONSTITUTIONAL PRINCIPLES" />
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#281B16] leading-[1.12] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#281B16] leading-[1.08] tracking-tight">
                 Three principles we refuse to compromise.
               </h2>
               <p className="text-base sm:text-lg text-[#4A3A32] leading-relaxed">
@@ -727,7 +727,7 @@ export function HomePage() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#FE299E]/20 text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
                 04 // GET STARTED WITH :-] &amp; PIPES
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F2EAE0] leading-[1.12] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#F2EAE0] leading-[1.08] tracking-tight">
                 Three ways to step inside the Sovereign Knowledge Ecosystem.
               </h2>
               <p className="text-base sm:text-lg text-[#D3C7B5] leading-relaxed">

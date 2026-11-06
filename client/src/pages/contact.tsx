@@ -59,14 +59,20 @@ export default function Contact() {
             </div>
             
             <div className="flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl opacity-60"></div>
-                <img 
-                  src="/generated/images/contact_hero_universal.png" 
-                  alt="Professional connection illustration"
-                  className="relative w-80 h-80 object-contain drop-shadow-2xl"
-                  data-testid="contact-hero-image"
-                />
+              <div className="relative group">
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500"></div>
+                <div className="relative overflow-hidden rounded-2xl border border-border bg-[#F2EAE0] p-2 shadow-xl">
+                  <img 
+                    src="/images/studio/kyle-portrait.jpg" 
+                    alt="Kyle Cyree — Founder & Principal Systems Architect"
+                    className="w-72 h-80 object-cover rounded-xl grayscale hover:grayscale-0 transition duration-500"
+                    data-testid="contact-hero-image"
+                  />
+                  <div className="pt-3 pb-1 px-2 text-left">
+                    <p className="font-mono text-xs uppercase tracking-wider text-[#4A3A32]">Principal Architect</p>
+                    <p className="font-serif text-sm font-semibold text-[#281B16]">Kyle Cyree · Colon Hyphen Bracket</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

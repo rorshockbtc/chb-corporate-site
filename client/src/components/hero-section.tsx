@@ -140,8 +140,18 @@ export function HeroSection() {
   const activeShowcase = productShowcases[activeProductTab];
 
   return (
-    <section className="relative pt-24 pb-16 lg:pt-28 lg:pb-24 bg-[#EAE0D0] border-b border-[#D3C7B5]">
+    <section className="relative pt-20 pb-16 lg:pt-24 lg:pb-24 bg-[#EAE0D0] border-b border-[#D3C7B5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Issue / Volume Masthead — Swiss Architectural Ledger */}
+        <div className="flex flex-wrap items-center justify-between border-b border-[#D3C7B5] pb-3 mb-6 text-[11px] font-mono uppercase tracking-[0.2em] text-[#4A3A32]">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FE299E] animate-pulse" />
+            <span className="font-bold text-[#281B16]">COLON HYPHEN BRACKET · VOL. 04</span>
+          </div>
+          <span className="hidden sm:inline">SOVEREIGN KNOWLEDGE R&amp;D LAB &amp; ARCHITECTURAL STUDIO</span>
+          <span>EST. 2024 · ALL SYSTEMS SHIP LIVE</span>
+        </div>
+
         {/* Top Interactive Perspective Pipe Bar — Explains the 3 Perspectives as Live Pipes */}
         <div className="mb-10 bg-[#F2EAE0] border border-[#D3C7B5] rounded-xl p-3 sm:p-4 shadow-sm">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
@@ -210,7 +220,7 @@ export function HeroSection() {
             </div>
 
             <h1
-              className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#281B16] leading-[1.08] tracking-tight"
+              className="font-serif text-4xl sm:text-5xl lg:text-[3.65rem] font-light text-[#281B16] leading-[1.05] tracking-tight"
               data-testid="hero-title"
             >
               <AccentRevealText

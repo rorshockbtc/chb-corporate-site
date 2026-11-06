@@ -7,9 +7,9 @@ import { AccentRevealText, AccentRevealImage, TAP } from "@/components/motion/pr
 
 export default function CHBCaseStudy() {
   const heroImage = usePerspectiveContent({
-    startup_founders: "/generated/images/startup_founders_case_study_hero.png",
-    content_creators: "/generated/images/content_creators_case_study_hero.png", 
-    memory_capturers: "/generated/images/memory_capturers_case_study_hero.png"
+    startup_founders: "/images/studio/studio-hero-architecture.png",
+    content_creators: "/images/pipes/pipes-curator-dashboard.png", 
+    memory_capturers: "/images/pipes/pipes-hash-sanctuary.png"
   });
 
   const heroContent = usePerspectiveContent({

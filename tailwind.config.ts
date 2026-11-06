@@ -66,6 +66,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+        editorial: ["var(--font-editorial)"],
         mono: ["var(--font-mono)"],
       },
       keyframes: {
