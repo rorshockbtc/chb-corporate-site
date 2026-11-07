@@ -7,10 +7,14 @@ import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
 
-const BLUE = "#0A9BE0";
-const GREEN = "#3FA535";
-const PINK = "#FE299E";
-const GOLD = "#D97706";
+// 7 Distinct Product Signature Colors
+const COLOR_PIPES = "#EAB308"; // Solar Yellow
+const COLOR_BANG = "#16A34A"; // Emerald Green
+const COLOR_HASH = "#C2410C"; // Burnt Terracotta / Rust
+const COLOR_SEMI = "#FE299E"; // Sovereign Pink
+const COLOR_GREATER = "#0284C7"; // Sky Blue
+const COLOR_ACCENT = "#E11D48"; // Crimson / Ruby
+const COLOR_MARIGOLD = "#D97706"; // Amber Gold
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface ProductItem {
@@ -33,7 +37,7 @@ const PRODUCTS: ProductItem[] = [
     id: "pipes",
     mark: "|||",
     name: "Pipes",
-    color: BLUE,
+    color: COLOR_PIPES,
     status: "Live · Cross-Platform",
     href: "https://pipes.pink",
     cta: "Claim your pipe at pipes.pink",
@@ -54,7 +58,7 @@ const PRODUCTS: ProductItem[] = [
     id: "bang",
     mark: "!",
     name: "BANG!",
-    color: PINK,
+    color: COLOR_BANG,
     status: "Live in Pipes Desktop",
     href: "https://pipes.pink/desktop/bang",
     cta: "Open BANG! IDE",
@@ -74,7 +78,7 @@ const PRODUCTS: ProductItem[] = [
     id: "hash",
     mark: "#",
     name: "Hash",
-    color: GREEN,
+    color: COLOR_HASH,
     status: "Live in Pipes",
     href: "https://pipes.pink/write",
     cta: "Start writing in Hash",
@@ -91,7 +95,7 @@ const PRODUCTS: ProductItem[] = [
     id: "semi",
     mark: "; - ]",
     name: "Semi",
-    color: PINK,
+    color: COLOR_SEMI,
     status: "Live in Pipes",
     href: "https://pipes.pink/write",
     cta: "Meet Semi",
@@ -108,7 +112,7 @@ const PRODUCTS: ProductItem[] = [
     id: "greater",
     mark: ">",
     name: "Greater",
-    color: BLUE,
+    color: COLOR_GREATER,
     status: "Live",
     href: "https://greater.pink",
     cta: "Open greater.pink",
@@ -125,7 +129,7 @@ const PRODUCTS: ProductItem[] = [
     id: "accent",
     mark: "é",
     name: "Accént",
-    color: PINK,
+    color: COLOR_ACCENT,
     status: "Open Source · MIT",
     href: "https://design.pipes.pink",
     cta: "Explore Accént design system",
@@ -146,27 +150,27 @@ const PRODUCTS: ProductItem[] = [
 const ECOSYSTEM_STEPS = [
   {
     title: "# Think",
-    color: GREEN,
+    color: COLOR_HASH,
     body: "Quiet notes and early drafting in Hash, safe from external scraping.",
   },
   {
     title: "; - ] Refine",
-    color: PINK,
+    color: COLOR_SEMI,
     body: "Semi asks Socratic questions and helps you clarify your thoughts without ghostwriting.",
   },
   {
     title: "||| Publish",
-    color: BLUE,
+    color: COLOR_PIPES,
     body: "Claim your sovereign pipe across web, desktop, and mobile, and earn 70% royalties.",
   },
   {
     title: "! Build",
-    color: PINK,
+    color: COLOR_BANG,
     body: "Open BANG! inside Pipes Desktop to update your own site locally for $0—no code needed.",
   },
   {
     title: "❀ Analyze",
-    color: GOLD,
+    color: COLOR_MARIGOLD,
     body: "Analyze and query hundreds of thousands of records locally in Marigold.",
   },
 ];
@@ -325,7 +329,7 @@ export default function Products() {
                 onClick={() => scrollToSection("marigold")}
                 className="relative bg-transparent cursor-pointer font-display text-[14px] sm:text-xl lg:text-2xl font-bold transition-all duration-300 py-0.5 sm:py-1 text-left sm:text-center shrink-0"
                 style={{
-                  color: activeId === "marigold" ? GOLD : isDark ? "rgba(250,248,245,0.45)" : "rgba(17,24,39,0.3)",
+                  color: activeId === "marigold" ? COLOR_MARIGOLD : isDark ? "rgba(250,248,245,0.45)" : "rgba(17,24,39,0.3)",
                 }}
               >
                 <span className="mr-1 sm:mr-1.5 text-xs sm:text-lg">❀</span>
@@ -334,7 +338,7 @@ export default function Products() {
                   <motion.span
                     layoutId="active-indicator"
                     className="absolute left-0 right-0 -bottom-1 sm:-bottom-2 h-[2.5px] sm:h-[4px] rounded-full"
-                    style={{ backgroundColor: GOLD }}
+                    style={{ backgroundColor: COLOR_MARIGOLD }}
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
                   />
                 )}

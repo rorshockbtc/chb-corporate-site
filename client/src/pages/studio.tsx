@@ -58,25 +58,25 @@ const ECOSYSTEM_PLATFORMS = [
   {
     mark: "|||",
     title: "Native Desktop (Mac & Windows)",
-    color: "#0A9BE0",
+    color: "#EAB308",
     body: "Lightweight, local-first desktop apps built with Rust and native OS capabilities—not bloated 8GB wrappers.",
   },
   {
     mark: "; - ]",
     title: "iOS, Android & Web",
-    color: "#3FA535",
+    color: "#FE299E",
     body: "Fast, accessible mobile and web applications sharing one disciplined design system and data architecture.",
   },
   {
     mark: "#",
     title: "Chromium Extensions",
-    color: "#0A9BE0",
+    color: "#C2410C",
     body: "Browser companions and live diagnostic plugins that work on any website without surveillance.",
   },
   {
     mark: "!",
     title: "BANG! Local IDE ($0 Edits)",
-    color: "#FE299E",
+    color: "#16A34A",
     body: "We hand you BANG! inside Pipes for Desktop so non-technical teams can invoke our Pipes to update text, images, and pages locally for $0—without calling us.",
   },
 ];
@@ -254,7 +254,7 @@ export default function StudioPage() {
               <FadeUp
                 key={plat.title}
                 delay={i * 0.08}
-                className="p-6 sm:p-7 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10 flex flex-col"
+                className="pt-6 border-t border-[#111827]/15 sm:pr-4 flex flex-col"
               >
                 <div className="font-display text-3xl sm:text-4xl font-black" style={{ color: plat.color }}>
                   {plat.mark}

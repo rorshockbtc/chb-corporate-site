@@ -302,7 +302,7 @@ function Manifesto() {
           </ol>
 
           <div className="hidden lg:block lg:col-span-4 lg:pt-6">
-            <div className="sticky top-40 p-8 rounded-3xl bg-[#F3EEE6] border border-[#111827]/10 shadow-sm">
+            <div className="sticky top-40 pl-8 lg:pl-10 border-l border-[#111827]/15">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -539,12 +539,12 @@ function HowItWorks() {
 
 /* ─────────────────────────── THINGS WE MAKE ─────────────────────────── */
 const MAKES = [
-  { color: "#0A9BE0", mark: "|||", name: "Pipes", line: "Curated human knowledge across web, desktop, mobile & browser.", href: "https://pipes.pink" },
-  { color: "#FE299E", mark: "!", name: "BANG!", line: "A local IDE inside Pipes Desktop to edit your own website for $0.", href: "https://pipes.pink/desktop/bang" },
-  { color: "#3FA535", mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
+  { color: "#EAB308", mark: "|||", name: "Pipes", line: "Curated human knowledge across web, desktop, mobile & browser.", href: "https://pipes.pink" },
+  { color: "#16A34A", mark: "!", name: "BANG!", line: "A local IDE inside Pipes Desktop to edit your own website for $0.", href: "https://pipes.pink/desktop/bang" },
+  { color: "#C2410C", mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
   { color: "#FE299E", mark: "; - ]", name: "Semi", line: "A Socratic editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
-  { color: "#0A9BE0", mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
-  { color: "#FE299E", mark: "é", name: "Accént", line: "Our free, open-source design system (MIT).", href: "https://design.pipes.pink" },
+  { color: "#0284C7", mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
+  { color: "#E11D48", mark: "é", name: "Accént", line: "Our free, open-source design system (MIT).", href: "https://design.pipes.pink" },
   { color: "#D97706", mark: "❀", name: "Marigold", line: "Zero-knowledge local civic analytics.", href: "https://marigoldinsights.org" },
 ];
 
