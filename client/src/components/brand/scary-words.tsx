@@ -7,11 +7,11 @@ export type ScaryPair = { scary: string; friendly: string };
 export const HOME_SCARY_PAIRS: ScaryPair[] = [
   { scary: "SOC 2 audits", friendly: "a checklist" },
   { scary: "HIPAA", friendly: "trust" },
-  { scary: "Kubernetes", friendly: "uptime" },
+  { scary: "vendor lock-in", friendly: "software you own" },
   { scary: "legacy code", friendly: "calm" },
   { scary: "regulators", friendly: "easy audits" },
   { scary: "cryptography", friendly: "privacy" },
-  { scary: "black-box software", friendly: "a helper" },
+  { scary: "dark patterns", friendly: "honest UX" },
 ];
 
 export const STUDIO_SCARY_PAIRS: ScaryPair[] = [
