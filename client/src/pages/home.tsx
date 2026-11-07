@@ -92,7 +92,8 @@ function Manifesto() {
       for (let i = 0; i < OPINIONS.length; i++) {
         const el = document.getElementById(OPINIONS[i].id);
         if (el) {
-          const top = el.offsetTop;
+          const rect = el.getBoundingClientRect();
+          const top = rect.top + window.pageYOffset;
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
             setActive(i);
@@ -115,33 +116,31 @@ function Manifesto() {
         <div className="mt-14 grid lg:grid-cols-12 gap-10">
           <ol className="lg:col-span-8">
             {OPINIONS.map((o, i) => (
-              <li key={o.id} id={o.id} className="scroll-mt-48">
-                <button
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  className="group w-full text-left py-7 sm:py-8 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 bg-transparent cursor-pointer"
+              <li
+                key={o.id}
+                id={o.id}
+                className="scroll-mt-48 py-7 sm:py-8 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 cursor-default"
+                onClick={() => setActive(i)}
+              >
+                <span
+                  className={`font-display font-bold text-2xl sm:text-3xl w-14 shrink-0 transition-colors duration-300 ${active === i ? "" : "text-[#111827]/25"}`}
+                  style={active === i ? { color: MCOL[i % 3] } : undefined}
                 >
+                  {o.mark}
+                </span>
+                <div className="flex-1">
                   <span
-                    className={`font-display font-bold text-2xl sm:text-3xl w-14 shrink-0 transition-colors duration-300 ${active === i ? "" : "text-[#111827]/25"}`}
-                    style={active === i ? { color: MCOL[i % 3] } : undefined}
+                    className={`block font-display font-bold text-big transition-all duration-300 ${
+                      active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"
+                    }`}
                   >
-                    {o.mark}
+                    {o.line}
                   </span>
-                  <div className="flex-1">
-                    <span
-                      className={`block font-display font-bold text-big transition-all duration-300 ${
-                        active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"
-                      }`}
-                    >
-                      {o.line}
-                    </span>
-                    {/* Inline on mobile, sticky side on desktop */}
-                    <div className="block lg:hidden mt-3 text-lg text-[#111827]/75">
-                      {o.note}
-                    </div>
+                  {/* Inline text note on mobile, card on desktop */}
+                  <div className="block lg:hidden mt-3 text-lg text-[#111827]/75">
+                    {o.note}
                   </div>
-                </button>
+                </div>
               </li>
             ))}
           </ol>
