@@ -55,14 +55,14 @@ function Hero() {
 
 /* ───────────────────────────── MARQUEE ───────────────────────────── */
 function Marquee() {
-  const words = ["Scary", "→", "Clear", "→", "Shipped", ":-]", "Honest", "#", "Independent", ";-]", "Kind", "|", "Opinionated", "&", "Crafted", "/"];
+  const words = ["Scary", "→", "Clear", "→", "Shipped", ": - ]", "Honest", "#", "Independent", "; - ]", "Kind", "|||", "Opinionated", "é", "Crafted", "&"];
   const row = [...words, ...words];
   return (
     <div className="border-y border-[#111827]/10 py-6 overflow-hidden bg-[#FAF8F5]" aria-hidden>
       <motion.div className="flex gap-10 whitespace-nowrap font-display text-4xl sm:text-5xl font-bold"
         animate={{ x: ["0%", "-50%"] }} transition={{ duration: 38, ease: "linear", repeat: Infinity }}>
         {row.map((w, i) => (
-          <span key={i} className={/[:;#|&/→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>{w}</span>
+          <span key={i} className={/[:;é#|&→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>{w}</span>
         ))}
       </motion.div>
     </div>
@@ -72,12 +72,12 @@ function Marquee() {
 /* ──────────────────────────── MANIFESTO ──────────────────────────── */
 const MCOL = ["#FE299E", "#0A9BE0", "#3FA535"];
 const OPINIONS = [
-  { mark: ":-]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
+  { mark: ": - ]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
   { mark: "#", line: "Explicit bias beats fake neutrality.", note: "We have opinions. We tell you what they are. You're smart enough to disagree." },
-  { mark: ";-]", line: "One senior human beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
-  { mark: "&", line: "Your data is yours. Full stop.", note: "Local-first, private by default. We never sell, mine, or train on what you make." },
-  { mark: "|", line: "Independent means uncompromised.", note: "No VC to please. We answer to the people who use the software." },
-  { mark: "/", line: "Craft is how you scale.", note: "Clean architecture and a real design system are what let small teams act big." },
+  { mark: "; - ]", line: "One senior human beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
+  { mark: "|||", line: "Independent means uncompromised.", note: "No VC to please. Curators keep 70% of what they create. We answer to the people who use the software." },
+  { mark: "é", line: "Craft is how you scale.", note: "Clean architecture and a real design system are what let small teams act big." },
+  { mark: "&", line: "Your data is yours. Full stop.", note: "Local-first, private by default. Marigold analyzes data in your browser; we never sell, mine, or train on what you make." },
 ];
 
 function Manifesto() {
@@ -225,11 +225,12 @@ function HowItWorks() {
 
 /* ─────────────────────────── THINGS WE MAKE ─────────────────────────── */
 const MAKES = [
-  { color: "#0A9BE0", mark: "|", name: "Pipes", line: "Curated human knowledge. Creators keep 70%.", href: "https://pipes.pink" },
+  { color: "#0A9BE0", mark: "|||", name: "Pipes", line: "Curated human knowledge. Creators keep 70%.", href: "https://pipes.pink" },
   { color: "#3FA535", mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
-  { color: "#FE299E", mark: ";-]", name: "Semi", line: "An AI editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
+  { color: "#FE299E", mark: "; - ]", name: "Semi", line: "An AI editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
   { color: "#0A9BE0", mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
-  { color: "#3FA535", mark: "/", name: "Accént", line: "Our design system, out in the open.", href: "https://design.pipes.pink" },
+  { color: "#FE299E", mark: "é", name: "Accént", line: "Our design system, out in the open.", href: "https://design.pipes.pink" },
+  { color: "#3FA535", mark: "&", name: "Marigold", line: "Zero-knowledge local analytics that never leave your laptop.", href: "https://bolt.pipes.pink" },
 ];
 
 function ThingsWeMake() {

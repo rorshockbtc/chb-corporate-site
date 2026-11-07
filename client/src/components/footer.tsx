@@ -28,16 +28,16 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="font-display text-lg font-bold text-white mb-4">Products</div>
             <ul className="space-y-2.5 text-[15px]">
-              <li><a href="https://pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Pipes |</a></li>
-              <li><a href="https://pipes.pink/write" className="link-swipe no-underline text-white/80 hover:text-white">Hash # &amp; Semi ;-]</a></li>
+              <li><a href="https://pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Pipes |||</a></li>
+              <li><a href="https://pipes.pink/write" className="link-swipe no-underline text-white/80 hover:text-white">Hash # &amp; Semi ; - ]</a></li>
               <li><a href="https://greater.pink" className="link-swipe no-underline text-white/80 hover:text-white">Greater &gt;</a></li>
-              <li><Link href="/roadmap" className="link-swipe no-underline text-white/80 hover:text-white">Roadmap</Link></li>
+              <li><a href="https://bolt.pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Marigold &amp;</a></li>
             </ul>
           </div>
           <div className="lg:col-span-2">
             <div className="font-display text-lg font-bold text-white mb-4">Open</div>
             <ul className="space-y-2.5 text-[15px]">
-              <li><a href="https://design.pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Accént design system /</a></li>
+              <li><a href="https://design.pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Accént design system é</a></li>
               <li><a href="https://github.com/rorshockbtc" className="link-swipe no-underline text-white/80 hover:text-white">GitHub</a></li>
               <li><Link href="/account" className="link-swipe no-underline text-white/80 hover:text-white">Sign in</Link></li>
             </ul>

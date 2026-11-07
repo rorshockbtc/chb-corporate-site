@@ -17,17 +17,36 @@ const WEEK = [
   { d: "Tue", t: "Map", b: "Domain, data, and constraints drawn on one page." },
   { d: "Wed", t: "Design", b: "Real screens on a real design system, not sticky notes." },
   { d: "Thu", t: "Build", b: "Working code wired to real data, deployed." },
-  { d: "Fri", t: "Smile", b: "Walkthrough, decision memo, repo handed over. :-]" },
+  { d: "Fri", t: "Smile", b: "Walkthrough, decision memo, repo handed over. : - ]" },
 ];
 
 const TIERS = [
-  { name: "The Sprint", price: "$7,500", per: "one week, fixed", body: "Go from a scary thesis to a working, deployed prototype and an architecture you can build on. You own every line.", cta: "Book a sprint" },
-  { name: "The Partner", price: "$15,000", per: "per month", body: "A principal designer-architect embedded in your team: product direction, design system, and production code. Pause anytime.", cta: "Start a conversation" },
-  { name: "The Build", price: "Custom", per: "by milestone", body: "Turnkey products: classrooms, data rooms, client platforms. Scoped honestly and shipped calmly.", cta: "Scope a build" },
+  {
+    name: "The Sprint",
+    price: "$7,500",
+    per: "one week, fixed scope",
+    body: "Go from a scary thesis to a working, deployed prototype and an architecture you can build on. You own every line.",
+    cta: "Book a sprint",
+  },
+  {
+    name: "The Partner",
+    price: "Starts at $15k",
+    per: "per month (fractional, ~10–20 hrs/wk)",
+    body: "A principal designer-architect embedded in your team: product direction, design system, and production code. Target full engagement is $21k/month. Pause anytime.",
+    cta: "Start a conversation",
+  },
+  {
+    name: "The Build",
+    price: "Custom",
+    per: "by milestone or day rate",
+    body: "Turnkey products, data rooms, and custom platforms scoped honestly. We also do single-day build sprints and focused interventions for smaller teams.",
+    cta: "Scope a build",
+  },
 ];
 
 const FAQ = [
   { q: "Is it really just one person?", a: "One principal (Kyle Cyree, 15+ years across Custodia Bank, UnitedHealth Group, and Walmart) with a disciplined AI-assisted workflow. When a project needs more hands, we bring trusted specialists, but you always talk to the person doing the work." },
+  { q: "Do you do smaller or single-day builds?", a: "Yes. $7,500 for a full week isn't a rigid floor. We regularly do single-day build sprints and focused interventions for early teams. Contact us for current day rates." },
   { q: "Do you do design or engineering?", a: "Yes. That's the point. The handoff between them is where most products lose months." },
   { q: "What if my problem isn't scary?", a: "Then it's probably fun, and we like fun too." },
   { q: "Do you use AI?", a: "Carefully and openly. Never on your private data without permission, and never as a substitute for judgment." },

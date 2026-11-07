@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
- * The CHB mark — ":-]" — that occasionally winks into ";-]".
- * Pure typography; no image assets.
+ * The CHB mark — ": - ]" — that occasionally winks into "; - ]".
+ * Pure typography; no image assets. Spaced explicitly per brand standard.
  */
 export function Smile({
   className = "",
@@ -30,14 +30,14 @@ export function Smile({
 
   return (
     <span
-      className={`inline-flex items-baseline font-display font-bold leading-none select-none ${className}`}
+      className={`inline-flex items-baseline font-display font-bold leading-none select-none tracking-normal ${className}`}
       style={{ color }}
       onMouseEnter={() => hoverWink && setWink(true)}
       onMouseLeave={() => hoverWink && setWink(false)}
       aria-label="colon hyphen bracket smile"
       role="img"
     >
-      <span className="relative inline-block w-[0.5em] text-center">
+      <span className="relative inline-block w-[0.62em] text-center">
         <motion.span
           className="absolute inset-0"
           animate={{ opacity: wink ? 0 : 1, scaleY: wink ? 0.2 : 1 }}
@@ -54,9 +54,9 @@ export function Smile({
         </motion.span>
         <span className="invisible">:</span>
       </span>
-      <span className="inline-block w-[0.5em] text-center">-</span>
+      <span className="inline-block mx-[0.12em] text-center">-</span>
       <motion.span
-        className="inline-block w-[0.5em] text-center origin-left"
+        className="inline-block w-[0.62em] text-center origin-left"
         animate={{ rotate: wink ? 8 : 0 }}
         transition={{ type: "spring", stiffness: 500, damping: 18 }}
       >
