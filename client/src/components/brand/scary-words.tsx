@@ -15,7 +15,7 @@ export const HOME_SCARY_PAIRS: ScaryPair[] = [
 ];
 
 export const STUDIO_SCARY_PAIRS: ScaryPair[] = [
-  { scary: "four-person handoffs", friendly: "one senior human" },
+  { scary: "four-person handoffs", friendly: "one principal" },
   { scary: "six-month discovery", friendly: "a five-day sprint" },
   { scary: "bloated agency retainers", friendly: "shipped code" },
   { scary: "Figma-to-nowhere", friendly: "working software" },

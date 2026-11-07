@@ -12,7 +12,7 @@ const template = fs.readFileSync(distHtmlPath, 'utf8');
 const pages = [
   {
     path: 'studio',
-    title: 'Studio | Colon Hyphen Bracket : - ] — One Senior Human. No Handoffs.',
+    title: 'Studio | Colon Hyphen Bracket : - ] — One Principal Architect. No Handoffs.',
     desc: 'From scary thesis to shipped production code in five days. Fixed one-week sprints ($7.5k), embedded partnerships, and custom builds by principal designer-architect Kyle Cyree.',
     image: 'https://colonhyphenbracket.pink/images/og/og-studio.jpg'
   },

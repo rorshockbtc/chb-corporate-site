@@ -74,7 +74,7 @@ export default function StudioPage() {
   return (
     <div className="brand-canvas min-h-screen">
       <Seo
-        title="Studio | Colon Hyphen Bracket : - ] — One Senior Human. No Handoffs."
+        title="Studio | Colon Hyphen Bracket : - ] — One Principal Architect. No Handoffs."
         description="From scary thesis to shipped production code in five days. Fixed one-week sprints ($7,500), embedded partnerships, and custom builds by principal designer-architect Kyle Cyree."
         path="/studio"
         image="/images/og/og-studio.jpg"
@@ -84,7 +84,7 @@ export default function StudioPage() {
       <section className="pt-28 sm:pt-40 pb-16 sm:pb-24">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <h1 className="font-display font-bold text-mega">
-            <RiseLines immediate lines={["One senior human.", <span key="n" className="text-[#FE299E]">No handoffs.</span>]} />
+            <RiseLines immediate lines={["One principal architect.", <span key="n" className="text-[#FE299E]">No handoffs.</span>]} />
           </h1>
           <FadeUp delay={0.3} className="mt-8 sm:mt-12 grid lg:grid-cols-12 gap-8 sm:gap-10">
             <p className="lg:col-span-7 text-lg sm:text-2xl leading-[1.45] text-[#111827]/80">

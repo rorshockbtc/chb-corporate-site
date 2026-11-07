@@ -11,7 +11,7 @@ const pages = [
     slug: 'home',
     eyebrow: 'COLON HYPHEN BRACKET : - ]',
     title: 'We turn the scary parts of software into a smile.',
-    subtitle: 'Principal design, software architecture, and sovereign tools. One senior human, zero handoffs.',
+    subtitle: 'Principal design, software architecture, and sovereign tools. One principal architect, zero handoffs.',
     badge: 'STUDIO &amp; LAB',
     accent: '#FE299E',
     artFile: '/Users/kendallkylecyree/Developer/chb-corporate-site/client/public/images/brand/scary-staircase.jpg'
@@ -19,7 +19,7 @@ const pages = [
   {
     slug: 'studio',
     eyebrow: 'COLON HYPHEN BRACKET STUDIO',
-    title: 'One senior human. No handoffs.',
+    title: 'One principal architect. No handoffs.',
     subtitle: 'From scary thesis to shipped production code in five days. Fixed sprints ($7.5k), embedded partnerships, custom builds.',
     badge: 'FIVE-DAY SPRINTS',
     accent: '#0A9BE0',
@@ -204,7 +204,7 @@ const pages = [
 
     await page.setContent(html, { waitUntil: 'networkidle' });
     await page.screenshot({ path: path.join(outDir, `og-${p.slug}.jpg`), type: 'jpeg', quality: 90 });
-    console.log('Successfully generated og-' + p.slug + '.jpg');
+    console.log('Successfully regenerated og-' + p.slug + '.jpg');
   }
 
   // Copy home as default og-image.jpg
