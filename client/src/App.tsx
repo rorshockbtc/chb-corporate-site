@@ -214,8 +214,6 @@ function App() {
                 <Router />
                 <Footer />
                 <Toaster />
-                {/* Semi Chat - positioned for both desktop and mobile */}
-                <SemiChat className="bottom-4 right-4 sm:bottom-6 sm:right-6" />
               </div>
             </MotionConfig>
           </NostrAuthProvider>

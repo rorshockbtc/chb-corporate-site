@@ -178,48 +178,62 @@ export default function Products() {
       </section>
 
       {/* Full-Width Sticky Punctuation Index Bar */}
-      <div className="sticky top-16 sm:top-20 z-20 w-full bg-[#FAF8F5]/92 backdrop-blur-md border-y border-[#111827]/10 py-4">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
-          {PRODUCTS.map((x) => {
-            const isActive = activeId === x.id;
-            return (
+      {(() => {
+        const isDark = activeId === "marigold";
+        return (
+          <div
+            className={`sticky top-16 sm:top-20 z-30 w-full border-y transition-colors duration-300 py-4 ${
+              isDark
+                ? "bg-[#1a140d]/95 backdrop-blur-md border-amber-900/40 shadow-md"
+                : "bg-[#FAF8F5]/95 backdrop-blur-md border-[#111827]/10"
+            }`}
+          >
+            <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+              {PRODUCTS.map((x) => {
+                const isActive = activeId === x.id;
+                const inactiveColor = isDark ? "rgba(250,248,245,0.45)" : "rgba(17,24,39,0.3)";
+                return (
+                  <button
+                    key={x.id}
+                    onClick={() => scrollToSection(x.id)}
+                    className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
+                    style={{ color: isActive ? x.color : inactiveColor }}
+                  >
+                    <span className="mr-2 font-black">{x.mark}</span>
+                    <span>{x.name}</span>
+                    {isActive && (
+                      <motion.span
+                        layoutId="active-indicator"
+                        className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
+                        style={{ backgroundColor: x.color }}
+                        transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
               <button
-                key={x.id}
-                onClick={() => scrollToSection(x.id)}
+                onClick={() => scrollToSection("marigold")}
                 className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
-                style={{ color: isActive ? x.color : "rgba(17,24,39,0.3)" }}
+                style={{
+                  color: activeId === "marigold" ? GOLD : isDark ? "rgba(250,248,245,0.45)" : "rgba(17,24,39,0.3)",
+                }}
               >
-                <span className="mr-2 font-black">{x.mark}</span>
-                <span>{x.name}</span>
-                {isActive && (
+                <span className="mr-2 text-xl">❀</span>
+                <span>Marigold</span>
+                {activeId === "marigold" && (
                   <motion.span
                     layoutId="active-indicator"
                     className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
-                    style={{ backgroundColor: x.color }}
+                    style={{ backgroundColor: GOLD }}
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
                   />
                 )}
               </button>
-            );
-          })}
-          <button
-            onClick={() => scrollToSection("marigold")}
-            className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
-            style={{ color: activeId === "marigold" ? GOLD : "rgba(17,24,39,0.3)" }}
-          >
-            <span className="mr-2 text-xl">❀</span>
-            <span>Marigold</span>
-            {activeId === "marigold" && (
-              <motion.span
-                layoutId="active-indicator"
-                className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
-                style={{ backgroundColor: GOLD }}
-                transition={{ type: "spring", stiffness: 450, damping: 35 }}
-              />
-            )}
-          </button>
-        </div>
-      </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Sequential Product Chapters */}
       <section className="pt-16 pb-28 sm:pb-36">
@@ -352,45 +366,45 @@ export default function Products() {
       </section>
 
       {/* How They Work Together Band */}
-      <section className="py-28 sm:py-36 bg-[#111827] text-[#FAF8F5]">
+      <section className="py-28 sm:py-36 bg-[#F2EAE0] text-[#111827] border-t border-[#111827]/10">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-10 items-end pb-16 border-b border-white/10">
-            <h2 className="lg:col-span-7 font-display font-bold text-huge">
+          <div className="grid lg:grid-cols-12 gap-10 items-end pb-16 border-b border-[#111827]/15">
+            <h2 className="lg:col-span-7 font-display font-bold text-huge text-[#111827]">
               Better together, <span className="text-[#0A9BE0]">fine</span> <span className="text-[#3FA535]">alone</span><span className="text-[#FE299E]">.</span>
             </h2>
-            <p className="lg:col-span-5 text-xl leading-relaxed text-white/70">
+            <p className="lg:col-span-5 text-xl leading-relaxed text-[#111827]/75">
               Think in Hash, refine with Semi, publish to your pipe, teach with Greater, and analyze with Marigold. Or just use the one you need. One : - ] account works across all of them.
             </p>
           </div>
 
           <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
               <div className="font-display text-4xl font-bold text-[#3FA535]"># Think</div>
-              <p className="mt-3 text-base text-white/70 leading-relaxed">
+              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
                 Quiet notes and epistemic drafting in Hash, safe from external model scraping.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
               <div className="font-display text-4xl font-bold text-[#FE299E]">; - ] Refine</div>
-              <p className="mt-3 text-base text-white/70 leading-relaxed">
+              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
                 Semi asks Socratic questions and helps you clarify your thoughts without ghostwriting.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
               <div className="font-display text-4xl font-bold text-[#0A9BE0]">||| Publish</div>
-              <p className="mt-3 text-base text-white/70 leading-relaxed">
+              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
                 Claim your sovereign pipe, sign your provenance, and earn 70% royalties.
               </p>
             </div>
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="font-display text-4xl font-bold text-[#F59E0B]">❀ Analyze</div>
-              <p className="mt-3 text-base text-white/70 leading-relaxed">
+            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
+              <div className="font-display text-4xl font-bold text-[#D97706]">❀ Analyze</div>
+              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
                 Analyze and query hundreds of thousands of records locally in Marigold.
               </p>
             </div>
           </div>
 
-          <div className="mt-14 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-6 text-sm text-white/50">
+          <div className="mt-14 pt-8 border-t border-[#111827]/15 flex flex-wrap items-center justify-between gap-6 text-sm text-[#111827]/60">
             <span>Free to start · $9/yr to claim a sovereign Pipe · 70% creator royalties</span>
             <span>Single unified cryptographic login across the entire ecosystem</span>
           </div>
@@ -398,9 +412,9 @@ export default function Products() {
       </section>
 
       {/* Close Section */}
-      <section className="py-32 sm:py-40 text-center">
+      <section className="py-32 sm:py-40 text-center bg-[#FAF8F5] border-t border-[#111827]/10">
         <Smile className="text-[120px] sm:text-[160px]" color={PINK} winkEvery={3000} />
-        <h2 className="font-display font-bold text-huge mt-8 px-5">Need something we haven't made yet?</h2>
+        <h2 className="font-display font-bold text-huge mt-8 px-5 text-[#111827]">Need something we haven't made yet?</h2>
         <Link
           href="/contact"
           className="mt-10 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-lg font-semibold no-underline"

@@ -37,9 +37,9 @@ function Hero() {
         />
 
         <div className="relative z-10 max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-[50rem]">
+          <div className="max-w-[58rem] lg:max-w-[64rem]">
             <h1
-              className="font-display font-bold text-[#111827] text-[clamp(2.6rem,6.8vw,7rem)] leading-[0.95]"
+              className="font-display font-bold text-[#111827] text-[clamp(2.4rem,5.6vw,6.2rem)] leading-[0.96]"
               data-testid="hero-title"
             >
               <ScaryHeadline accent="#FE299E" />

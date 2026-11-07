@@ -96,7 +96,7 @@ export function ScaryHeadline({
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
             key={pair.scary}
-            className="relative inline-block"
+            className="relative inline-block whitespace-nowrap"
             initial={{ y: "100%" }}
             animate={{ y: "0%", color: struck ? struckColor : inkColor }}
             exit={{ y: "-100%" }}
@@ -116,7 +116,7 @@ export function ScaryHeadline({
       </span>
 
       {/* Line 3: into [friendly] : - ] */}
-      <span className="block overflow-hidden pb-[0.08em] min-h-[1.06em]">
+      <span className="block overflow-hidden pb-[0.08em] min-h-[1.06em] whitespace-nowrap">
         <motion.span
           className="inline-block mr-[0.24em]"
           style={{ color: inkColor }}
