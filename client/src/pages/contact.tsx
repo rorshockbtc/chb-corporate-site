@@ -17,6 +17,10 @@ const KINDS = [
 const field =
   "w-full bg-transparent border-0 border-b-2 border-[#111827]/15 focus:border-[#FE299E] focus:outline-none focus:ring-0 py-3.5 sm:py-4 font-display text-xl sm:text-3xl font-semibold text-[#111827] placeholder:text-[#111827]/25 transition-colors";
 
+const ACCESS_KEY =
+  (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined) ||
+  "0a997a5d-fccb-46f4-bc7b-7df7ec33d90d";
+
 export default function Contact() {
   const [kind, setKind] = useState("sprint");
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -27,21 +31,46 @@ export default function Contact() {
     const d = new FormData(e.currentTarget);
     const name = String(d.get("name") || "").trim();
     const email = String(d.get("email") || "").trim();
+    const company = String(d.get("company") || "").trim();
     const message = String(d.get("message") || "").trim();
     if (!name || !email || !message) return;
+
     setState("sending");
+    setError("");
+
     try {
-      const res = await fetch("/api/contact", {
+      const selectedKind = KINDS.find((k) => k.id === kind)?.label || kind;
+      const formattedMessage = [
+        `Looking for: ${selectedKind}`,
+        company ? `Company / Project: ${company}` : null,
+        "",
+        "Message:",
+        message,
+      ]
+        .filter((line) => line !== null)
+        .join("\n");
+
+      const payload = {
+        access_key: ACCESS_KEY,
+        name,
+        email,
+        subject: `CHB Start a project (${selectedKind}) — ${name}`,
+        from_name: "colonhyphenbracket.pink",
+        message: formattedMessage,
+        // Standard fields Web3Forms parses automatically
+        "Project Type": selectedKind,
+        ...(company ? { Company: company } : {}),
+      };
+
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          company: String(d.get("company") || "").trim(),
-          subject: `CHB Start a project (${KINDS.find((k) => k.id === kind)?.label}) — ${name}`,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
+
       const r = (await res.json()) as { success: boolean; message?: string };
       if (!r.success) throw new Error(r.message || "Something went wrong");
       setState("sent");
