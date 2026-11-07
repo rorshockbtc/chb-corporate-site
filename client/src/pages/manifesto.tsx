@@ -38,7 +38,7 @@ const PILLARS = [
 const CONTRASTS = [
   {
     them: "Four-person agency pods playing telephone between strategy decks, Figma files, and junior contractors.",
-    us: "One principal designer-architect who listens on Monday, designs on Wednesday, and ships production code on Friday.",
+    us: "One principal designer-architect who listens on Monday, builds working software by Wednesday, and ships refined code on Friday.",
     color: "#FE299E",
   },
   {

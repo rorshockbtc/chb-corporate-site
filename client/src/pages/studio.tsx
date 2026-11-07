@@ -16,11 +16,11 @@ const WHO = [
 ];
 
 const WEEK = [
-  { d: "Mon", t: "Listen", color: "#0A9BE0", b: "You explain the scary thing. We ask annoying questions." },
-  { d: "Tue", t: "Map", color: "#3FA535", b: "Domain, data, and constraints drawn on one page." },
-  { d: "Wed", t: "Design", color: "#0A9BE0", b: "Real screens on a real design system, not sticky notes." },
-  { d: "Thu", t: "Build", color: "#3FA535", b: "Working code wired to real data, deployed." },
-  { d: "Fri", t: "Smile", color: "#FE299E", b: "Walkthrough, decision memo, repo handed over. : - ]" },
+  { d: "Mon", t: "Listen", color: "#0A9BE0", b: "You explain the challenge. We define the problem and ask the hard questions." },
+  { d: "Tue", t: "Map", color: "#3FA535", b: "Architecture, data models, and constraints pinned down. Building begins." },
+  { d: "Wed", t: "Build", color: "#0A9BE0", b: "Working code and live data. A reviewable milestone so you know we're on the right track." },
+  { d: "Thu", t: "Refine", color: "#3FA535", b: "Design and craft applied to working software: ergonomics, UI polish, and edge cases." },
+  { d: "Fri", t: "Smile", color: "#FE299E", b: "Live walkthrough, decision memo, and the repository handed over outright. : - ]" },
 ];
 
 const TIERS = [
@@ -120,8 +120,8 @@ export default function StudioPage() {
             </div>
             <div className="font-display text-2xl sm:text-5xl font-bold text-white leading-tight pt-2">
               <span className="text-[#0A9BE0]">Problem</span> →{" "}
-              <span className="text-[#3FA535]">Design</span> →{" "}
-              <span className="text-[#FE299E]">Production Code</span>{" "}
+              <span className="text-[#3FA535]">Working Build</span> →{" "}
+              <span className="text-[#FE299E]">Refined Code</span>{" "}
               <span className="text-white/60">in one head.</span>
             </div>
           </FadeUp>
