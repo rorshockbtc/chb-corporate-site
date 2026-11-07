@@ -6,6 +6,8 @@ import { ScaryHeadline, MANIFESTO_SCARY_PAIRS } from "@/components/brand/scary-w
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { Seo } from "@/components/brand/seo";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const PILLARS = [
   {
     mark: ": - ]",
@@ -84,12 +86,14 @@ export default function ManifestoPage() {
               Why a principal designer-architect from Southern Appalachia built a studio for the founders, creators, families, and Main Street businesses Big Tech overlooked.
             </p>
             <div className="lg:col-span-4 lg:justify-self-end">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-base sm:text-lg font-semibold no-underline"
-              >
-                Work with us <ArrowRight className="w-5 h-5" />
-              </Link>
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-base sm:text-lg font-semibold no-underline"
+                >
+                  Work with us <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
             </div>
           </FadeUp>
         </div>
@@ -99,28 +103,33 @@ export default function ManifestoPage() {
       <section className="py-20 sm:py-36" data-testid="manifesto-pillars">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 space-y-16 sm:space-y-32">
           {PILLARS.map((p, idx) => (
-            <FadeUp
+            <div
               key={p.title}
-              delay={idx * 0.05}
               className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-start pt-10 border-t border-[#111827]/10 first:border-t-0 first:pt-0"
             >
-              <div className="lg:col-span-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.65, rotate: -10 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true, margin: "-8% 0px" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20, delay: idx * 0.04 }}
+                className="lg:col-span-4"
+              >
                 <div
-                  className="font-display font-black leading-none text-5xl sm:text-7xl whitespace-nowrap"
+                  className="font-display font-black leading-none text-5xl sm:text-7xl whitespace-nowrap origin-left"
                   style={{ color: p.color }}
                 >
                   {p.mark}
                 </div>
-              </div>
-              <div className="lg:col-span-8">
+              </motion.div>
+              <FadeUp delay={0.08} className="lg:col-span-8">
                 <h2 className="font-display text-2xl sm:text-5xl font-bold text-[#111827] leading-[1.1]">
                   {p.title}
                 </h2>
                 <p className="mt-4 sm:mt-6 text-lg sm:text-2xl leading-relaxed text-[#111827]/75 max-w-[58ch]">
                   {p.body}
                 </p>
-              </div>
-            </FadeUp>
+              </FadeUp>
+            </div>
           ))}
         </div>
       </section>
@@ -128,29 +137,47 @@ export default function ManifestoPage() {
       {/* Dark Navy Band: How Default Agencies Work vs. How CHB Works */}
       <section className="py-20 sm:py-36 bg-[#111827] text-[#FAF8F5]" data-testid="manifesto-contrast">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <h2 className="font-display font-bold text-huge max-w-4xl">
-            What we refuse to do—and what we do instead.
-          </h2>
+          <FadeUp>
+            <h2 className="font-display font-bold text-huge max-w-4xl">
+              What we refuse to do—and what we do instead.
+            </h2>
+          </FadeUp>
 
           <div className="mt-12 sm:mt-16 space-y-0">
             {CONTRASTS.map((c, i) => (
-              <FadeUp
+              <div
                 key={i}
-                delay={i * 0.06}
                 className="grid md:grid-cols-12 gap-4 sm:gap-6 md:gap-12 py-8 sm:py-10 border-t border-white/15 items-baseline"
               >
-                <div className="md:col-span-5">
-                  <p className="font-display text-lg sm:text-2xl font-medium text-white/40 line-through decoration-2" style={{ textDecorationColor: c.color }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-8% 0px" }}
+                  transition={{ duration: 0.55, ease: EASE }}
+                  className="md:col-span-5"
+                >
+                  <p
+                    className="font-display text-lg sm:text-2xl font-medium text-white/40 line-through decoration-2"
+                    style={{ textDecorationColor: c.color }}
+                  >
                     {c.them}
                   </p>
-                </div>
-                <div className="md:col-span-7">
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-8% 0px" }}
+                  transition={{ duration: 0.65, delay: 0.12, ease: EASE }}
+                  className="md:col-span-7"
+                >
                   <p className="font-display text-xl sm:text-3xl font-bold text-white leading-snug">
-                    <span className="mr-3" style={{ color: c.color }}>→</span>
+                    <span className="mr-3" style={{ color: c.color }}>
+                      →
+                    </span>
                     {c.us}
                   </p>
-                </div>
-              </FadeUp>
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -163,12 +190,14 @@ export default function ManifestoPage() {
             <Smile className="text-[96px] sm:text-[150px]" color="#FE299E" winkEvery={3000} />
           </FadeUp>
           <h2 className="font-display font-bold text-huge mt-6">
-            <RiseLines immediate lines={["Coastal rigor.", "Appalachian honesty."]} />
+            <RiseLines lines={["Coastal rigor.", "Appalachian honesty."]} />
           </h2>
-          <p className="mt-6 text-lg sm:text-2xl text-[#111827]/75 max-w-2xl mx-auto leading-relaxed">
-            Whether you're on Main Street or Sand Hill Road, if you're building something that matters, we'd love to help you ship it.
-          </p>
-          <FadeUp delay={0.2} className="mt-10 flex flex-wrap justify-center gap-4">
+          <FadeUp delay={0.15}>
+            <p className="mt-6 text-lg sm:text-2xl text-[#111827]/75 max-w-2xl mx-auto leading-relaxed">
+              Whether you're on Main Street or Sand Hill Road, if you're building something that matters, we'd love to help you ship it.
+            </p>
+          </FadeUp>
+          <FadeUp delay={0.25} className="mt-10 flex flex-wrap justify-center gap-4">
             <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/contact"

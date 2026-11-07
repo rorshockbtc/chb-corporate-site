@@ -6,19 +6,21 @@ import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { Seo } from "@/components/brand/seo";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const WHO = [
-  { who: "Startups", line: "Zero to one to Series B, without a four-person pod playing telephone." },
-  { who: "Regulated teams", line: "Banking, healthcare, and anything with an auditor. We've shipped in all of them." },
-  { who: "Schools & families", line: "Private classrooms and memory tools that never treat kids as data." },
-  { who: "Main Street", line: "Field teams, venues, and independent shops that run the country." },
+  { who: "Startups", color: "#0A9BE0", line: "Zero to one to Series B, without a four-person pod playing telephone." },
+  { who: "Regulated teams", color: "#3FA535", line: "Banking, healthcare, and anything with an auditor. We've shipped in all of them." },
+  { who: "Schools & families", color: "#FE299E", line: "Private classrooms and memory tools that never treat kids as data." },
+  { who: "Main Street", color: "#0A9BE0", line: "Field teams, venues, and independent shops that run the country." },
 ];
 
 const WEEK = [
-  { d: "Mon", t: "Listen", b: "You explain the scary thing. We ask annoying questions." },
-  { d: "Tue", t: "Map", b: "Domain, data, and constraints drawn on one page." },
-  { d: "Wed", t: "Design", b: "Real screens on a real design system, not sticky notes." },
-  { d: "Thu", t: "Build", b: "Working code wired to real data, deployed." },
-  { d: "Fri", t: "Smile", b: "Walkthrough, decision memo, repo handed over. : - ]" },
+  { d: "Mon", t: "Listen", color: "#0A9BE0", b: "You explain the scary thing. We ask annoying questions." },
+  { d: "Tue", t: "Map", color: "#3FA535", b: "Domain, data, and constraints drawn on one page." },
+  { d: "Wed", t: "Design", color: "#0A9BE0", b: "Real screens on a real design system, not sticky notes." },
+  { d: "Thu", t: "Build", color: "#3FA535", b: "Working code wired to real data, deployed." },
+  { d: "Fri", t: "Smile", color: "#FE299E", b: "Walkthrough, decision memo, repo handed over. : - ]" },
 ];
 
 const TIERS = [
@@ -43,6 +45,12 @@ const TIERS = [
     body: "Turnkey products, data rooms, and custom platforms scoped honestly. We also do single-day build sprints and focused interventions for smaller teams.",
     cta: "Scope a build",
   },
+];
+
+const STATS = [
+  { val: "1", color: "#0A9BE0", desc: "Principal architect from first call to final pull request." },
+  { val: "5 days", color: "#3FA535", desc: "To go from a gnarly thesis to deployed, working software." },
+  { val: "100%", color: "#FE299E", desc: "Your repository, your design tokens, your IP on day one." },
 ];
 
 const FAQ = [
@@ -104,9 +112,9 @@ export default function StudioPage() {
       </section>
 
       {/* Bold Typographic Handoff-Elimination Band */}
-      <FadeUp className="bg-[#111827] text-[#FAF8F5] py-16 sm:py-28">
+      <section className="bg-[#111827] text-[#FAF8F5] py-16 sm:py-28">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-6 space-y-4">
+          <FadeUp className="lg:col-span-6 space-y-4">
             <div className="font-display text-xl sm:text-3xl font-bold text-white/35 line-through decoration-[#FE299E] decoration-4">
               Strategy deck → Figma handoff → Jira backlog → 4 months lost
             </div>
@@ -116,29 +124,25 @@ export default function StudioPage() {
               <span className="text-[#FE299E]">Production Code</span>{" "}
               <span className="text-white/60">in one head.</span>
             </div>
-          </div>
+          </FadeUp>
           <div className="lg:col-span-6 grid sm:grid-cols-3 gap-6 border-t lg:border-t-0 lg:border-l border-white/15 pt-8 lg:pt-0 lg:pl-12">
-            <div>
-              <div className="font-display text-4xl sm:text-5xl font-bold text-[#0A9BE0]">1</div>
-              <p className="mt-2 text-base text-white/75 leading-relaxed">
-                Principal architect from first call to final pull request.
-              </p>
-            </div>
-            <div>
-              <div className="font-display text-4xl sm:text-5xl font-bold text-[#3FA535]">5 days</div>
-              <p className="mt-2 text-base text-white/75 leading-relaxed">
-                To go from a gnarly thesis to deployed, working software.
-              </p>
-            </div>
-            <div>
-              <div className="font-display text-4xl sm:text-5xl font-bold text-[#FE299E]">100%</div>
-              <p className="mt-2 text-base text-white/75 leading-relaxed">
-                Your repository, your design tokens, your IP on day one.
-              </p>
-            </div>
+            {STATS.map((st, idx) => (
+              <motion.div
+                key={st.val}
+                initial={{ opacity: 0, y: 20, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-8% 0px" }}
+                transition={{ duration: 0.55, delay: idx * 0.1, ease: EASE }}
+              >
+                <div className="font-display text-4xl sm:text-5xl font-bold" style={{ color: st.color }}>
+                  {st.val}
+                </div>
+                <p className="mt-2 text-base text-white/75 leading-relaxed">{st.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </FadeUp>
+      </section>
 
       {/* Who */}
       <section className="py-20 sm:py-36">
@@ -147,7 +151,10 @@ export default function StudioPage() {
             {WHO.map((w, i) => (
               <FadeUp key={w.who} delay={i * 0.06}>
                 <li className="group grid md:grid-cols-12 gap-3 md:gap-8 items-baseline py-6 sm:py-7 border-t border-[#111827]/10">
-                  <span className="md:col-span-5 font-display font-bold text-big group-hover:text-[#FE299E] transition-colors">{w.who}</span>
+                  <span className="md:col-span-5 font-display font-bold text-big group-hover:text-[#FE299E] transition-colors flex items-baseline gap-3">
+                    <span className="inline-block w-2.5 h-2.5 rounded-full md:hidden shrink-0" style={{ backgroundColor: w.color }} />
+                    {w.who}
+                  </span>
                   <span className="md:col-span-7 text-lg sm:text-xl text-[#111827]/70">{w.line}</span>
                 </li>
               </FadeUp>
@@ -159,14 +166,24 @@ export default function StudioPage() {
       {/* A week */}
       <section className="py-20 sm:py-36 bg-[#F3EEE6]">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <h2 className="font-display font-bold text-huge max-w-4xl">Five days from scary to shipped.</h2>
-          <div className="mt-12 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
+          <FadeUp>
+            <h2 className="font-display font-bold text-huge max-w-4xl">Five days from scary to shipped.</h2>
+          </FadeUp>
+          <div className="mt-12 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
             {WEEK.map((w, i) => (
-              <FadeUp key={w.d} delay={i * 0.08}>
-                <div className="font-display text-xl font-bold text-[#111827]/30">{w.d}</div>
-                <div className={`font-display text-3xl sm:text-4xl font-bold mt-2 ${i === 4 ? "text-[#FE299E]" : ""}`}>{w.t}</div>
-                <p className="mt-3 text-[17px] leading-relaxed text-[#111827]/70">{w.b}</p>
-              </FadeUp>
+              <motion.div
+                key={w.d}
+                initial={{ opacity: 0, x: -16, y: 12 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, margin: "-8% 0px" }}
+                transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
+                className="pl-4 sm:pl-0 border-l-2 sm:border-l-0"
+                style={{ borderLeftColor: w.color }}
+              >
+                <div className="font-display text-xl font-bold text-[#111827]/35">{w.d}</div>
+                <div className={`font-display text-3xl sm:text-4xl font-bold mt-1.5 sm:mt-2 ${i === 4 ? "text-[#FE299E]" : ""}`}>{w.t}</div>
+                <p className="mt-2.5 sm:mt-3 text-[17px] leading-relaxed text-[#111827]/70">{w.b}</p>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -227,11 +244,17 @@ export default function StudioPage() {
 
       {/* Close */}
       <section className="pb-28 sm:pb-36 text-center">
-        <Smile className="text-[100px] sm:text-[160px]" color="#FE299E" winkEvery={3000} />
-        <h2 className="font-display font-bold text-huge mt-6 sm:mt-8 px-5">Let's make it smile.</h2>
-        <Link href="/contact" className="mt-8 sm:mt-10 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-lg font-semibold no-underline">
-          Start a project <ArrowRight className="w-5 h-5" />
-        </Link>
+        <FadeUp>
+          <Smile className="text-[100px] sm:text-[160px]" color="#FE299E" winkEvery={3000} />
+        </FadeUp>
+        <h2 className="font-display font-bold text-huge mt-6 sm:mt-8 px-5">
+          <RiseLines lines={["Let's make it smile."]} />
+        </h2>
+        <FadeUp delay={0.2}>
+          <Link href="/contact" className="mt-8 sm:mt-10 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-lg font-semibold no-underline">
+            Start a project <ArrowRight className="w-5 h-5" />
+          </Link>
+        </FadeUp>
       </section>
     </div>
   );

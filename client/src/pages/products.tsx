@@ -10,6 +10,7 @@ const BLUE = "#0A9BE0";
 const GREEN = "#3FA535";
 const PINK = "#FE299E";
 const GOLD = "#D97706";
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface ProductItem {
   id: string;
@@ -113,31 +114,56 @@ const PRODUCTS: ProductItem[] = [
   },
 ];
 
+const ECOSYSTEM_STEPS = [
+  {
+    title: "# Think",
+    color: GREEN,
+    body: "Quiet notes and epistemic drafting in Hash, safe from external scraping.",
+  },
+  {
+    title: "; - ] Refine",
+    color: PINK,
+    body: "Semi asks Socratic questions and helps you clarify your thoughts without ghostwriting.",
+  },
+  {
+    title: "||| Publish",
+    color: BLUE,
+    body: "Claim your sovereign pipe, sign your provenance, and earn 70% royalties.",
+  },
+  {
+    title: "❀ Analyze",
+    color: GOLD,
+    body: "Analyze and query hundreds of thousands of records locally in Marigold.",
+  },
+];
+
 export default function Products() {
   const [activeId, setActiveId] = useState("pipes");
 
   useEffect(() => {
+    const allIds = [...PRODUCTS.map((p) => p.id), "marigold"];
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 280;
-      for (const item of PRODUCTS) {
-        const el = document.getElementById(item.id);
+      const targetY = window.innerHeight * 0.4;
+      let bestId = allIds[0];
+      let bestDist = Infinity;
+
+      for (const id of allIds) {
+        const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveId(item.id);
-            return;
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= targetY && rect.bottom >= targetY) {
+            bestId = id;
+            break;
+          }
+          const center = rect.top + rect.height / 2;
+          const dist = Math.abs(center - targetY);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestId = id;
           }
         }
       }
-      const marigoldEl = document.getElementById("marigold");
-      if (marigoldEl) {
-        const top = marigoldEl.offsetTop;
-        const height = marigoldEl.offsetHeight;
-        if (scrollPos >= top && scrollPos < top + height) {
-          setActiveId("marigold");
-        }
-      }
+      setActiveId(bestId);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -184,7 +210,12 @@ export default function Products() {
               </p>
             </FadeUp>
           </div>
-          <FadeUp delay={0.4} className="lg:col-span-5">
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.85, delay: 0.35, ease: EASE }}
+            className="lg:col-span-5"
+          >
             <picture className="block w-full">
               <source media="(max-width: 639px)" srcSet="/images/brand/products-workbench-mobile.webp" type="image/webp" />
               <source media="(max-width: 639px)" srcSet="/images/brand/products-workbench-mobile.jpg" type="image/jpeg" />
@@ -195,11 +226,11 @@ export default function Products() {
                 className="w-full aspect-[4/3] sm:aspect-[16/10] object-cover rounded-[24px] sm:rounded-[28px] shadow-sm border border-[#111827]/5"
               />
             </picture>
-          </FadeUp>
+          </motion.div>
         </div>
       </section>
 
-      {/* Full-Width Sticky Punctuation Index Bar (Single compact scrollable row on mobile, full-width spread on desktop) */}
+      {/* Full-Width Sticky Punctuation Index Bar */}
       {(() => {
         const isDark = activeId === "marigold";
         return (
@@ -261,72 +292,94 @@ export default function Products() {
       <section className="pt-12 sm:pt-16 pb-20 sm:pb-36">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="space-y-20 sm:space-y-32">
-            {PRODUCTS.map((p) => (
-              <div
-                key={p.id}
-                id={p.id}
-                className="scroll-mt-32 pt-8 pb-8 sm:pb-12 border-t border-[#111827]/10 first:border-t-0 grid lg:grid-cols-12 gap-8 lg:gap-16 items-start"
-              >
-                <div className="lg:col-span-4 lg:sticky lg:top-36 flex sm:block items-baseline gap-4">
-                  <div
-                    className={`font-display font-black leading-none whitespace-nowrap ${
-                      p.mark === "|||"
-                        ? "text-[64px] sm:text-[100px] tracking-[0.08em]"
-                        : "text-[76px] sm:text-[130px]"
-                    }`}
-                    style={{ color: p.color }}
+            {PRODUCTS.map((p) => {
+              const isActive = activeId === p.id;
+              return (
+                <div
+                  key={p.id}
+                  id={p.id}
+                  className="scroll-mt-32 pt-8 pb-8 sm:pb-12 border-t border-[#111827]/10 first:border-t-0 grid lg:grid-cols-12 gap-8 lg:gap-16 items-start"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-8% 0px" }}
+                    transition={{ type: "spring", stiffness: 320, damping: 24 }}
+                    className="lg:col-span-4 lg:sticky lg:top-36 flex sm:block items-baseline gap-4"
                   >
-                    {p.mark}
-                  </div>
-                  <div>
-                    <div className="font-display text-3xl sm:text-4xl font-bold text-[#111827] sm:mt-3">
-                      {p.name}
-                    </div>
-                    <span className="inline-block mt-1.5 sm:mt-2 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-[#111827]/5 text-[#111827]/70">
-                      {p.status}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="lg:col-span-8">
-                  <h2 className="font-display text-2xl sm:text-5xl font-bold text-[#111827] leading-[1.08]">
-                    {p.tagline}
-                  </h2>
-                  <p className="mt-5 sm:mt-6 text-lg sm:text-2xl leading-relaxed text-[#111827]/75 max-w-[54ch]">
-                    {p.body}
-                  </p>
-
-                  <ul className="mt-8 sm:mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-2.5 sm:gap-y-3 border-t border-[#111827]/10 pt-6 sm:pt-8">
-                    {p.points.map((pt) => (
-                      <li
-                        key={pt}
-                        className="flex items-baseline gap-3 text-base sm:text-lg font-medium text-[#111827]"
-                      >
-                        <span
-                          className="font-display font-bold text-xl shrink-0"
-                          style={{ color: p.color }}
-                        >
-                          →
-                        </span>
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-8 sm:mt-10">
-                    <a
-                      href={p.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full text-white text-base sm:text-lg font-semibold no-underline transition-transform hover:-translate-y-0.5 shadow-sm"
-                      style={{ backgroundColor: p.color }}
+                    <motion.div
+                      animate={{
+                        scale: isActive ? 1.06 : 1,
+                        rotate: isActive ? -3 : 0,
+                      }}
+                      transition={{ type: "spring", stiffness: 320, damping: 22 }}
+                      className={`font-display font-black leading-none whitespace-nowrap origin-left ${
+                        p.mark === "|||"
+                          ? "text-[64px] sm:text-[100px] tracking-[0.08em]"
+                          : "text-[76px] sm:text-[130px]"
+                      }`}
+                      style={{ color: p.color }}
                     >
-                      {p.cta} <ArrowUpRight className="w-5 h-5" />
-                    </a>
+                      {p.mark}
+                    </motion.div>
+                    <div>
+                      <div className="font-display text-3xl sm:text-4xl font-bold text-[#111827] sm:mt-3">
+                        {p.name}
+                      </div>
+                      <span className="inline-block mt-1.5 sm:mt-2 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold bg-[#111827]/5 text-[#111827]/70">
+                        {p.status}
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  <div className="lg:col-span-8">
+                    <FadeUp>
+                      <h2 className="font-display text-2xl sm:text-5xl font-bold text-[#111827] leading-[1.08]">
+                        {p.tagline}
+                      </h2>
+                      <p className="mt-5 sm:mt-6 text-lg sm:text-2xl leading-relaxed text-[#111827]/75 max-w-[54ch]">
+                        {p.body}
+                      </p>
+                    </FadeUp>
+
+                    <ul className="mt-8 sm:mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-2.5 sm:gap-y-3 border-t border-[#111827]/10 pt-6 sm:pt-8">
+                      {p.points.map((pt, idx) => (
+                        <motion.li
+                          key={pt}
+                          initial={{ opacity: 0, x: -14 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, margin: "-5% 0px" }}
+                          transition={{ duration: 0.45, delay: idx * 0.06, ease: EASE }}
+                          className="flex items-baseline gap-3 text-base sm:text-lg font-medium text-[#111827]"
+                        >
+                          <span
+                            className="font-display font-bold text-xl shrink-0"
+                            style={{ color: p.color }}
+                          >
+                            →
+                          </span>
+                          <span>{pt}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+
+                    <FadeUp delay={0.15} className="mt-8 sm:mt-10">
+                      <motion.a
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.97 }}
+                        href={p.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full text-white text-base sm:text-lg font-semibold no-underline shadow-sm"
+                        style={{ backgroundColor: p.color }}
+                      >
+                        {p.cta} <ArrowUpRight className="w-5 h-5" />
+                      </motion.a>
+                    </FadeUp>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -350,7 +403,7 @@ export default function Products() {
         </div>
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-4xl">
+          <FadeUp className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30 mb-6 sm:mb-8">
               <span>❀</span> The Civic Data Exception · Named After the Flower
             </div>
@@ -368,78 +421,74 @@ export default function Products() {
             </p>
 
             <div className="mt-10 sm:mt-12 flex flex-wrap items-center gap-4">
-              <a
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
                 href="https://marigoldinsights.org"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] text-base sm:text-lg font-bold no-underline transition-colors shadow-lg"
               >
                 Open MarigoldInsights.org <ArrowUpRight className="w-5 h-5 text-[#111827]" />
-              </a>
+              </motion.a>
               <span className="text-sm font-medium text-white/60">
                 Live civic data research platform
               </span>
             </div>
-          </div>
+          </FadeUp>
         </div>
       </section>
 
       {/* How They Work Together Band */}
       <section className="py-24 sm:py-36 bg-[#F2EAE0] text-[#111827] border-t border-[#111827]/10">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 items-end pb-12 sm:pb-16 border-b border-[#111827]/15">
+          <FadeUp className="grid lg:grid-cols-12 gap-8 sm:gap-10 items-end pb-12 sm:pb-16 border-b border-[#111827]/15">
             <h2 className="lg:col-span-7 font-display font-bold text-huge text-[#111827]">
               Better together, <span className="text-[#0A9BE0]">fine</span> <span className="text-[#3FA535]">alone</span><span className="text-[#FE299E]">.</span>
             </h2>
             <p className="lg:col-span-5 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
               Think in Hash, refine with Semi, publish to your pipe, teach with Greater, and analyze with Marigold. Or just use the one you need. One : - ] account works across all of them.
             </p>
-          </div>
+          </FadeUp>
 
           <div className="mt-12 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-[#3FA535]"># Think</div>
-              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
-                Quiet notes and epistemic drafting in Hash, safe from external scraping.
-              </p>
-            </div>
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-[#FE299E]">; - ] Refine</div>
-              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
-                Semi asks Socratic questions and helps you clarify your thoughts without ghostwriting.
-              </p>
-            </div>
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-[#0A9BE0]">||| Publish</div>
-              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
-                Claim your sovereign pipe, sign your provenance, and earn 70% royalties.
-              </p>
-            </div>
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-[#D97706]">❀ Analyze</div>
-              <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">
-                Analyze and query hundreds of thousands of records locally in Marigold.
-              </p>
-            </div>
+            {ECOSYSTEM_STEPS.map((step, i) => (
+              <FadeUp
+                key={step.title}
+                delay={i * 0.08}
+                className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 shadow-sm"
+              >
+                <div className="font-display text-3xl sm:text-4xl font-bold" style={{ color: step.color }}>
+                  {step.title}
+                </div>
+                <p className="mt-3 text-base text-[#111827]/75 leading-relaxed">{step.body}</p>
+              </FadeUp>
+            ))}
           </div>
 
-          <div className="mt-12 sm:mt-14 pt-8 border-t border-[#111827]/15 flex flex-wrap items-center justify-between gap-4 sm:gap-6 text-sm text-[#111827]/60">
+          <FadeUp delay={0.25} className="mt-12 sm:mt-14 pt-8 border-t border-[#111827]/15 flex flex-wrap items-center justify-between gap-4 sm:gap-6 text-sm text-[#111827]/60">
             <span>Free to start · $9/yr to claim a sovereign Pipe · 70% creator royalties</span>
             <span>Single unified cryptographic login across the entire ecosystem</span>
-          </div>
+          </FadeUp>
         </div>
       </section>
 
       {/* Close Section */}
       <section className="py-24 sm:py-36 text-center bg-[#FAF8F5] border-t border-[#111827]/10">
-        <Smile className="text-[100px] sm:text-[160px]" color={PINK} winkEvery={3000} />
-        <h2 className="font-display font-bold text-huge mt-6 sm:mt-8 px-5 text-[#111827]">Need something we haven't made yet?</h2>
-        <Link
-          href="/contact"
-          className="mt-8 sm:mt-10 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-lg font-semibold no-underline"
-        >
-          Tell the studio <ArrowRight className="w-5 h-5" />
-        </Link>
+        <FadeUp>
+          <Smile className="text-[100px] sm:text-[160px]" color={PINK} winkEvery={3000} />
+        </FadeUp>
+        <h2 className="font-display font-bold text-huge mt-6 sm:mt-8 px-5 text-[#111827]">
+          <RiseLines lines={["Need something we", "haven't made yet?"]} />
+        </h2>
+        <FadeUp delay={0.2}>
+          <Link
+            href="/contact"
+            className="mt-8 sm:mt-10 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-lg font-semibold no-underline"
+          >
+            Tell the studio <ArrowRight className="w-5 h-5" />
+          </Link>
+        </FadeUp>
       </section>
     </div>
   );

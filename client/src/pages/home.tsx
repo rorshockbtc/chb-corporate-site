@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { ScaryHeadline } from "@/components/brand/scary-words";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { Seo } from "@/components/brand/seo";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 function ResponsiveArt({
   name,
@@ -39,12 +41,20 @@ function ResponsiveArt({
 
 /* ─────────────────────────────── HERO ─────────────────────────────── */
 function Hero() {
+  const mobileArtRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: mobileArtRef,
+    offset: ["start end", "end start"],
+  });
+  const mobileArtY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+  const mobileArtScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.06, 1.1, 1.06]);
+
   return (
     <section
       className="relative overflow-hidden bg-[#F7F6F1] border-b border-[#111827]/10"
       data-testid="hero-section"
     >
-      {/* Mobile & Tablet (< lg): Clean stacked layout so typography never collides with the dark staircase */}
+      {/* Mobile & Tablet (< lg): Clean stacked layout with scroll-parallax staircase art */}
       <div className="lg:hidden pt-24 sm:pt-32 pb-12">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
           <h1
@@ -59,12 +69,14 @@ function Hero() {
               Colon Hyphen Bracket takes the intimidating parts of software (compliance, infrastructure, cryptography) and makes them clear, honest, and kind to use. For founders, creators, and families Big Tech forgot.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#FE299E] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
-              >
-                Bring us something scary <ArrowRight className="w-5 h-5" />
-              </Link>
+              <motion.div whileTap={{ scale: 0.96 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#FE299E] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
+                >
+                  Bring us something scary <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
               <Link
                 href="/manifesto"
                 className="text-base sm:text-lg font-semibold text-[#111827] hover:text-[#FE299E] no-underline link-swipe py-2"
@@ -75,24 +87,37 @@ function Hero() {
           </FadeUp>
         </div>
 
-        {/* Dedicated mobile-cropped staircase + pink umbrella ramp artwork below the copy */}
-        <div className="mt-8 px-5 sm:px-8">
+        {/* Dedicated mobile-cropped staircase + pink umbrella ramp artwork with motion reveal & parallax */}
+        <motion.div
+          ref={mobileArtRef}
+          initial={{ opacity: 0, y: 28, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.85, delay: 0.3, ease: EASE }}
+          className="mt-8 px-5 sm:px-8"
+        >
           <div className="rounded-[24px] overflow-hidden border border-[#111827]/10 shadow-sm bg-[#F7F6F1]">
-            <picture>
-              <source srcSet="/images/brand/scary-staircase-mobile.webp" type="image/webp" />
-              <img
-                src="/images/brand/scary-staircase-mobile.jpg"
-                alt="A gentle ramp with a person holding a pink umbrella bypassing a tall jagged staircase"
-                className="w-full aspect-[4/3] object-cover block"
-                loading="eager"
-              />
-            </picture>
+            <motion.div style={{ y: mobileArtY, scale: mobileArtScale }}>
+              <picture>
+                <source srcSet="/images/brand/scary-staircase-mobile.webp" type="image/webp" />
+                <img
+                  src="/images/brand/scary-staircase-mobile.jpg"
+                  alt="A gentle ramp with a person holding a pink umbrella bypassing a tall jagged staircase"
+                  className="w-full aspect-[4/3] object-cover block"
+                  loading="eager"
+                />
+              </picture>
+            </motion.div>
           </div>
-          <div className="mt-4 inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 text-sm font-medium text-[#111827]/80">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: EASE }}
+            className="mt-4 inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 text-sm font-medium text-[#111827]/80 shadow-xs"
+          >
             <span className="font-display font-bold text-[#FE299E] shrink-0 whitespace-nowrap">: - ]</span>
             <span>Every steep staircase is just a ramp nobody bothered to design yet.</span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Desktop (lg+): Full-bleed taller-than-viewport staircase canvas */}
@@ -188,19 +213,23 @@ function Manifesto() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 320;
+      const targetY = window.innerHeight * 0.42;
+      let closestIdx = 0;
+      let closestDist = Infinity;
+
       for (let i = 0; i < OPINIONS.length; i++) {
         const el = document.getElementById(OPINIONS[i].id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          const top = rect.top + window.pageYOffset;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActive(i);
-            break;
+          const center = rect.top + rect.height / 2;
+          const dist = Math.abs(center - targetY);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIdx = i;
           }
         }
       }
+      setActive(closestIdx);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -209,42 +238,70 @@ function Manifesto() {
   return (
     <section id="manifesto" className="py-24 sm:py-40 scroll-mt-24" data-testid="section-manifesto">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <h2 className="font-display font-bold text-huge text-[#111827]">
-          What we believe.
-        </h2>
+        <FadeUp>
+          <h2 className="font-display font-bold text-huge text-[#111827]">
+            What we believe.
+          </h2>
+        </FadeUp>
 
         <div className="mt-12 sm:mt-16 grid lg:grid-cols-12 gap-12 lg:gap-16">
-          <ol className="lg:col-span-8">
-            {OPINIONS.map((o, i) => (
-              <li
-                key={o.id}
-                id={o.id}
-                className="scroll-mt-48 py-8 sm:py-14 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-10 cursor-default"
-                onClick={() => setActive(i)}
-              >
-                {/* On mobile all marks & titles are full color; on desktop lg+ they highlight as you scroll */}
-                <span
-                  className={`font-display font-bold text-2xl sm:text-4xl w-12 sm:w-14 shrink-0 whitespace-nowrap transition-colors duration-300 ${
-                    active === i ? "" : "lg:text-[#111827]/25"
-                  }`}
-                  style={{ color: MCOL[i % 3] }}
+          <ol className="lg:col-span-8 space-y-3 lg:space-y-0">
+            {OPINIONS.map((o, i) => {
+              const isActive = active === i;
+              const accentColor = MCOL[i % 3];
+              return (
+                <motion.li
+                  key={o.id}
+                  id={o.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-8% 0px" }}
+                  transition={{ duration: 0.65, delay: i * 0.05, ease: EASE }}
+                  className="relative scroll-mt-48 py-6 sm:py-14 px-4 sm:px-6 lg:px-0 rounded-2xl lg:rounded-none border-t border-[#111827]/10 flex items-baseline gap-4 sm:gap-10 cursor-pointer lg:cursor-default"
+                  onClick={() => setActive(i)}
                 >
-                  {o.mark}
-                </span>
-                <div className="flex-1">
-                  <span
-                    className={`block font-display font-bold text-big transition-all duration-300 text-[#111827] ${
-                      active === i ? "lg:translate-x-2" : "lg:text-[#111827]/30"
+                  {/* Animated active card highlight on mobile (< lg) */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="mobile-belief-highlight"
+                      className="lg:hidden absolute inset-0 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10 shadow-xs -z-10"
+                      style={{ borderLeftWidth: 4, borderLeftColor: accentColor }}
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+
+                  <motion.span
+                    animate={{
+                      scale: isActive ? 1.14 : 1,
+                      rotate: isActive ? -4 : 0,
+                    }}
+                    transition={{ type: "spring", stiffness: 360, damping: 22 }}
+                    className={`font-display font-bold text-2xl sm:text-4xl w-12 sm:w-14 shrink-0 whitespace-nowrap transition-colors duration-300 origin-left ${
+                      isActive ? "" : "lg:text-[#111827]/25"
                     }`}
+                    style={{ color: accentColor }}
                   >
-                    {o.line}
-                  </span>
-                  <div className="block lg:hidden mt-3 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
-                    {o.note}
+                    {o.mark}
+                  </motion.span>
+                  <div className="flex-1">
+                    <span
+                      className={`block font-display font-bold text-big transition-all duration-300 text-[#111827] ${
+                        isActive ? "translate-x-1 lg:translate-x-2" : "lg:text-[#111827]/30"
+                      }`}
+                    >
+                      {o.line}
+                    </span>
+                    <div
+                      className={`block lg:hidden mt-2.5 text-base sm:text-xl leading-relaxed transition-colors duration-300 ${
+                        isActive ? "text-[#111827]/90 font-medium" : "text-[#111827]/65"
+                      }`}
+                    >
+                      {o.note}
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </motion.li>
+              );
+            })}
           </ol>
 
           <div className="hidden lg:block lg:col-span-4 lg:pt-6">
@@ -255,7 +312,7 @@ function Manifesto() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.35, ease: EASE }}
                 >
                   <div
                     className="font-display text-[96px] font-bold leading-none"
@@ -318,18 +375,27 @@ function WhoWeHelp() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 280;
+      const targetY = window.innerHeight * 0.42;
+      let bestKey = AUDIENCES[0].key;
+      let bestDist = Infinity;
+
       for (const a of AUDIENCES) {
         const el = document.getElementById(`who-${a.key}`);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveKey(a.key);
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= targetY && rect.bottom >= targetY) {
+            bestKey = a.key;
             break;
+          }
+          const center = rect.top + rect.height / 2;
+          const dist = Math.abs(center - targetY);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestKey = a.key;
           }
         }
       }
+      setActiveKey(bestKey);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -377,7 +443,7 @@ function WhoWeHelp() {
           </div>
         </div>
 
-        {/* Sequential Chapters */}
+        {/* Sequential Chapters with tactile scroll-reveal animations */}
         <div className="space-y-20 sm:space-y-32">
           {AUDIENCES.map((a, idx) => (
             <div
@@ -387,7 +453,7 @@ function WhoWeHelp() {
                 idx === 0 ? "pt-2" : "pt-10 border-t border-[#111827]/10"
               }`}
             >
-              <div className="lg:col-span-5 order-2 lg:order-1">
+              <FadeUp delay={0.1} className="lg:col-span-5 order-2 lg:order-1">
                 <div className="font-display text-3xl sm:text-5xl font-bold" style={{ color: a.color }}>
                   {a.headline}
                 </div>
@@ -404,14 +470,20 @@ function WhoWeHelp() {
                 >
                   Tell us what's scary <ArrowRight className="w-5 h-5" />
                 </Link>
-              </div>
-              <div className="lg:col-span-7 order-1 lg:order-2">
+              </FadeUp>
+              <motion.div
+                initial={{ opacity: 0, y: 28, scale: 0.94 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+                transition={{ duration: 0.8, ease: EASE }}
+                className="lg:col-span-7 order-1 lg:order-2"
+              >
                 <ResponsiveArt
                   name={a.artName}
                   alt={a.alt}
                   className="w-full aspect-[5/4] sm:aspect-[4/3] rounded-[24px] sm:rounded-[28px] shadow-sm border border-[#111827]/5"
                 />
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
@@ -435,8 +507,21 @@ function HowItWorks() {
           {STEPS.map((s, i) => (
             <FadeUp key={s.n} delay={i * 0.12}>
               <div className="font-display text-2xl font-bold text-[#111827]/25">{s.n}</div>
-              <div className={`font-display font-bold text-huge mt-2 ${i === 2 ? "text-[#FE299E]" : i === 0 ? "text-[#111827]/30 line-through decoration-[#FE299E] decoration-4" : "text-[#0A9BE0]"}`}>
+              <div
+                className={`relative inline-block font-display font-bold text-huge mt-2 ${
+                  i === 2 ? "text-[#FE299E]" : i === 0 ? "text-[#111827]/35" : "text-[#0A9BE0]"
+                }`}
+              >
                 {s.word}
+                {i === 0 && (
+                  <motion.span
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, margin: "-15% 0px" }}
+                    transition={{ duration: 0.65, delay: 0.35, ease: EASE }}
+                    className="absolute left-0 right-0 top-1/2 h-[5px] sm:h-[6px] bg-[#FE299E] origin-left rounded-full"
+                  />
+                )}
               </div>
               <p className="mt-5 sm:mt-6 text-lg leading-relaxed text-[#111827]/75 max-w-[32ch]">{s.body}</p>
             </FadeUp>
@@ -469,33 +554,47 @@ function ThingsWeMake() {
   return (
     <section className="py-24 sm:py-36 bg-[#111827] text-[#FAF8F5]" data-testid="section-make">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <h2 className="font-display font-bold text-huge max-w-4xl">
-          We build our own tools, too. Every one is named after punctuation.
-        </h2>
+        <FadeUp>
+          <h2 className="font-display font-bold text-huge max-w-4xl">
+            We build our own tools, too. Every one is named after punctuation.
+          </h2>
+        </FadeUp>
         <ul className="mt-12 sm:mt-16">
-          {MAKES.map((m) => (
-            <li key={m.name}>
-              <a
+          {MAKES.map((m, i) => (
+            <motion.li
+              key={m.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-6% 0px" }}
+              transition={{ duration: 0.55, delay: i * 0.06, ease: EASE }}
+            >
+              <motion.a
                 href={m.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                whileTap={{ scale: 0.98, x: 4 }}
                 className="group grid grid-cols-12 items-baseline gap-3 sm:gap-4 py-6 sm:py-8 border-t border-white/10 no-underline text-[#FAF8F5]"
               >
-                <span
+                <motion.span
+                  initial={{ scale: 0.7, rotate: -10 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 320, damping: 20, delay: 0.1 + i * 0.06 }}
                   className="col-span-3 sm:col-span-2 lg:col-span-1 font-display text-3xl sm:text-5xl font-bold whitespace-nowrap transition-transform group-hover:-rotate-6"
                   style={{ color: m.color }}
                 >
                   {m.mark}
-                </span>
-                <span className="col-span-9 sm:col-span-4 font-display text-3xl sm:text-5xl font-bold transition-transform duration-500 group-hover:translate-x-3">
+                </motion.span>
+                <span className="col-span-8 sm:col-span-4 font-display text-3xl sm:text-5xl font-bold transition-transform duration-500 group-hover:translate-x-3">
                   {m.name}
                 </span>
+                <ArrowUpRight className="sm:hidden col-span-1 justify-self-end self-center w-5 h-5 text-white/40" />
                 <span className="col-span-9 col-start-4 sm:col-start-auto sm:col-span-5 lg:col-span-6 text-base sm:text-xl text-white/65 group-hover:text-white transition-colors">
                   {m.line}
                 </span>
                 <ArrowUpRight className="hidden sm:block col-span-1 justify-self-end w-7 h-7 text-white/30 group-hover:text-[#FE299E] transition-all group-hover:-translate-y-1 group-hover:translate-x-1" />
-              </a>
-            </li>
+              </motion.a>
+            </motion.li>
           ))}
         </ul>
       </div>
@@ -504,6 +603,21 @@ function ThingsWeMake() {
 }
 
 /* ─────────────────────────────── CLOSE ─────────────────────────────── */
+const SUMMARY_CARDS = [
+  {
+    title: "Fixed Sprints",
+    body: "$7,500 one-week sprint or single-day build. No scope creep, no runaway retainers.",
+  },
+  {
+    title: "Direct Kyle",
+    body: "No account managers or junior handoffs. You talk directly with the principal architect.",
+  },
+  {
+    title: "Code You Own",
+    body: "Clean architecture, tested repo, full design tokens. Deployed and handed over on Friday.",
+  },
+];
+
 function Close() {
   return (
     <section className="py-20 sm:py-28 text-center" data-testid="section-close">
@@ -512,29 +626,21 @@ function Close() {
           <Smile className="text-[88px] sm:text-[124px]" color="#FE299E" winkEvery={3000} />
         </FadeUp>
         <h2 className="font-display font-bold text-huge mt-4 sm:mt-5">
-          <RiseLines immediate lines={["Got something scary?", "Let's make it smile."]} />
+          <RiseLines lines={["Got something scary?", "Let's make it smile."]} />
         </h2>
 
-        <FadeUp delay={0.15} className="mt-7 sm:mt-9 grid sm:grid-cols-3 gap-5 text-left">
-          <div className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10">
-            <div className="font-display text-2xl font-bold text-[#111827]">Fixed Sprints</div>
-            <p className="mt-2 text-base text-[#111827]/70 leading-relaxed">
-              $7,500 one-week sprint or single-day build. No scope creep, no runaway retainers.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10">
-            <div className="font-display text-2xl font-bold text-[#111827]">Direct Kyle</div>
-            <p className="mt-2 text-base text-[#111827]/70 leading-relaxed">
-              No account managers or junior handoffs. You talk directly with the principal architect.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10">
-            <div className="font-display text-2xl font-bold text-[#111827]">Code You Own</div>
-            <p className="mt-2 text-base text-[#111827]/70 leading-relaxed">
-              Clean architecture, tested repo, full design tokens. Deployed and handed over on Friday.
-            </p>
-          </div>
-        </FadeUp>
+        <div className="mt-7 sm:mt-9 grid sm:grid-cols-3 gap-5 text-left">
+          {SUMMARY_CARDS.map((card, i) => (
+            <FadeUp
+              key={card.title}
+              delay={0.1 + i * 0.1}
+              className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10"
+            >
+              <div className="font-display text-2xl font-bold text-[#111827]">{card.title}</div>
+              <p className="mt-2 text-base text-[#111827]/70 leading-relaxed">{card.body}</p>
+            </FadeUp>
+          ))}
+        </div>
 
         <FadeUp delay={0.3} className="mt-10 flex flex-wrap justify-center items-center gap-4">
           <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
