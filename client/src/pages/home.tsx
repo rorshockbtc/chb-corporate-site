@@ -74,7 +74,7 @@ function Hero() {
                   href="/contact"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#FE299E] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
                 >
-                  Bring us something scary <ArrowRight className="w-5 h-5" />
+                  Bring us a challenge <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
               <Link
@@ -151,7 +151,7 @@ function Hero() {
                     href="/contact"
                     className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
                   >
-                    Bring us something scary <ArrowRight className="w-5 h-5" />
+                    Bring us a challenge <ArrowRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
                 <Link
@@ -196,7 +196,7 @@ function Marquee() {
 /* ──────────────────────────── MANIFESTO (CONTINUOUS SCROLL REVEAL) ──────────────────────────── */
 const MCOL = ["#FE299E", "#0A9BE0", "#3FA535"];
 const OPINIONS = [
-  { id: "op-0", mark: ": - ]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
+  { id: "op-0", mark: ": - ]", line: "You shouldn't have to speak tech.", note: "Technology should speak your language, not the other way around. If scary words are being used, it's a translation problem. We fix that." },
   { id: "op-1", mark: "#", line: "Explicit bias beats fake neutrality.", note: "We have opinions. We tell you what they are. You're smart enough to disagree." },
   { id: "op-2", mark: "; - ]", line: "One principal beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
   { id: "op-3", mark: "|||", line: "Independent means uncompromised.", note: "We value all businesses, especially the independent ones. We're independent too. No VC to please—we answer only to the people who use our software." },
