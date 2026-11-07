@@ -1,11 +1,15 @@
 {
   "framework": "vite",
   "outputDirectory": "dist/public",
-  "buildCommand": "vite build",
-  "rewrites": [
+  "buildCommand": "vite build && node prerender-social.cjs",
+  "cleanUrls": true,
+  "routes": [
     {
-      "source": "/((?!api/.*).*)",
-      "destination": "/index.html"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
