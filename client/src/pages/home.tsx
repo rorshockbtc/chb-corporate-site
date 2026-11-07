@@ -12,44 +12,43 @@ function Art({ src, alt, className = "" }: { src: string; alt: string; className
   return <img src={src} alt={alt} loading="lazy" onError={() => setOk(false)} className={`object-cover ${className}`} />;
 }
 
-/* ─────────────────────────────── HERO (MULE DESIGN INSPIRED) ─────────────────────────────── */
+/* ─────────────────────────────── HERO (FULL-WIDTH CRAFT & HIGH-CONTRAST TYPE) ─────────────────────────────── */
 function Hero() {
   return (
     <section className="relative pt-28 sm:pt-36 pb-20 sm:pb-28" data-testid="hero-section">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        {/* Full-bleed hero banner with text layered over warm architectural Guy Billout illustration */}
-        <div className="relative rounded-[36px] overflow-hidden bg-[#111827] text-[#FAF8F5] min-h-[560px] sm:min-h-[640px] flex flex-col justify-end p-8 sm:p-14 lg:p-18 shadow-xl">
-          {/* Background image with gentle tint so white headline is punchy & legible */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/images/brand/scary-staircase.jpg"
-              alt="A gentle ramp bypassing a jagged staircase with a pink umbrella"
-              className="w-full h-full object-cover opacity-35 filter blur-[0.5px] scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/85 to-transparent" />
-          </div>
-
-          <div className="relative z-10 max-w-4xl">
-            <h1 className="font-display font-bold text-[#FAF8F5] text-[clamp(2.6rem,7.4vw,7.75rem)] leading-[0.95]" data-testid="hero-title">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="lg:col-span-7">
+            <h1 className="font-display font-bold text-[#111827] text-[clamp(2.6rem,7.4vw,7.5rem)] leading-[0.95]" data-testid="hero-title">
               <ScaryHeadline accent="#FE299E" />
             </h1>
 
             <FadeUp delay={0.25} className="mt-8 sm:mt-10">
-              <p className="text-xl sm:text-2xl leading-[1.45] text-white/85 max-w-[36ch]">
+              <p className="text-xl sm:text-2xl leading-[1.45] text-[#111827]/80 max-w-[36ch]">
                 Colon Hyphen Bracket takes the intimidating parts of software (compliance, infrastructure, AI) and makes them clear, honest, and kind to use. For founders, creators, and families Big Tech forgot.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
+              <div className="mt-10 flex flex-wrap items-center gap-5">
                 <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
                   <Link href="/contact" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]">
                     Bring us something scary <ArrowRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
-                <a href="#manifesto" className="text-lg font-medium text-white/80 hover:text-white no-underline link-swipe">
+                <a href="#manifesto" className="text-lg font-medium text-[#111827]/80 hover:text-[#111827] no-underline link-swipe">
                   Explore our core opinions ↓
                 </a>
               </div>
             </FadeUp>
           </div>
+
+          <FadeUp delay={0.35} className="lg:col-span-5">
+            <div className="relative rounded-[32px] overflow-hidden shadow-lg border border-[#111827]/10 bg-[#F3EEE6]">
+              <img
+                src="/images/brand/scary-staircase.jpg"
+                alt="A gentle ramp bypassing a jagged staircase with a pink umbrella"
+                className="w-full aspect-[4/3] object-cover scale-x-[-1]"
+              />
+            </div>
+          </FadeUp>
         </div>
       </div>
     </section>
@@ -107,23 +106,23 @@ function Manifesto() {
   }, []);
 
   return (
-    <section id="manifesto" className="py-28 sm:py-36 scroll-mt-24" data-testid="section-manifesto">
+    <section id="manifesto" className="py-32 sm:py-44 scroll-mt-24" data-testid="section-manifesto">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <h2 className="font-display font-bold text-huge text-[#111827]">
           What we believe.
         </h2>
 
-        <div className="mt-14 grid lg:grid-cols-12 gap-10">
+        <div className="mt-16 grid lg:grid-cols-12 gap-12 lg:gap-16">
           <ol className="lg:col-span-8">
             {OPINIONS.map((o, i) => (
               <li
                 key={o.id}
                 id={o.id}
-                className="scroll-mt-48 py-7 sm:py-8 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 cursor-default"
+                className="scroll-mt-48 py-10 sm:py-14 border-t border-[#111827]/10 flex items-baseline gap-6 sm:gap-10 cursor-default"
                 onClick={() => setActive(i)}
               >
                 <span
-                  className={`font-display font-bold text-2xl sm:text-3xl w-14 shrink-0 transition-colors duration-300 ${active === i ? "" : "text-[#111827]/25"}`}
+                  className={`font-display font-bold text-3xl sm:text-4xl w-14 shrink-0 transition-colors duration-300 ${active === i ? "" : "text-[#111827]/25"}`}
                   style={active === i ? { color: MCOL[i % 3] } : undefined}
                 >
                   {o.mark}
@@ -137,7 +136,7 @@ function Manifesto() {
                     {o.line}
                   </span>
                   {/* Inline text note on mobile, card on desktop */}
-                  <div className="block lg:hidden mt-3 text-lg text-[#111827]/75">
+                  <div className="block lg:hidden mt-4 text-xl leading-relaxed text-[#111827]/75">
                     {o.note}
                   </div>
                 </div>
@@ -146,7 +145,7 @@ function Manifesto() {
           </ol>
 
           <div className="hidden lg:block lg:col-span-4 lg:pt-6">
-            <div className="sticky top-36 p-8 rounded-3xl bg-[#F3EEE6]/70 border border-[#111827]/10 shadow-sm">
+            <div className="sticky top-40 p-8 rounded-3xl bg-[#F3EEE6] border border-[#111827]/10 shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -189,7 +188,7 @@ const AUDIENCES = [
     key: "creators", who: "Creators", color: "#FE299E", headline: "Create authentically.",
     title: "Create without creative conformity",
     body: "Independent creators deserve tools that amplify their voice rather than homogenize it. Write privately, publish on your own terms, and get paid when people (or machines) learn from your work.",
-    art: "/images/brand/scary-staircase.jpg", alt: "A jagged staircase replaced by a gentle ramp, a figure with a pink umbrella",
+    art: "/images/brand/creators-terrace.jpg", alt: "An independent creator at a terrace worktable with giant translucent thought sheets rising into the sky",
   },
   {
     key: "families", who: "Families", color: "#3FA535", headline: "Preserve what matters.",

@@ -82,7 +82,11 @@ export default function StudioPage() {
 
       {/* Art band */}
       <FadeUp className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <img src="/images/brand/scary-staircase.jpg" alt="A jagged staircase bypassed by a gentle ramp" className="w-full aspect-[21/9] object-cover rounded-[28px]" />
+        <img
+          src="/images/brand/studio-bridge.jpg"
+          alt="A seamless stone bridge arch connecting strategy, design, and engineering"
+          className="w-full aspect-[21/9] object-cover rounded-[28px] shadow-sm"
+        />
       </FadeUp>
 
       {/* Who */}
