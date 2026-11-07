@@ -199,9 +199,9 @@ const OPINIONS = [
   { id: "op-0", mark: ": - ]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
   { id: "op-1", mark: "#", line: "Explicit bias beats fake neutrality.", note: "We have opinions. We tell you what they are. You're smart enough to disagree." },
   { id: "op-2", mark: "; - ]", line: "One principal beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
-  { id: "op-3", mark: "|||", line: "Independent means uncompromised.", note: "No VC to please. Curators keep 70% of what they create. We answer to the people who use the software." },
+  { id: "op-3", mark: "|||", line: "Independent means uncompromised.", note: "We value all businesses, especially the independent ones. We're independent too. No VC to please—we answer only to the people who use our software." },
   { id: "op-4", mark: "é", line: "Craft is how you scale.", note: "Clean architecture and a real design system are what let small teams act big." },
-  { id: "op-5", mark: "❀", line: "Your data is yours. Full stop.", note: "Local-first, private by default. Marigold analyzes data in your browser; we never sell, mine, or train on what you make." },
+  { id: "op-5", mark: "❀", line: "Your data is yours. Full stop.", note: "Local-first, private by default. You own your code, your content, and your data on day one—we never sell, mine, or train on what you make." },
 ];
 
 function Manifesto() {
