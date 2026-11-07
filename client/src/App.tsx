@@ -34,6 +34,7 @@ import ImageDetail from "@/pages/image-detail";
 import AnalyticsPage from "@/pages/analytics";
 import Account from "@/pages/account";
 import DesignSystemPage from "@/pages/design";
+import StudioPage from "@/pages/studio";
 import NotFound from "@/pages/not-found";
 
 // Simple admin protection wrapper
@@ -168,6 +169,7 @@ function Router() {
         <Route path="/signup" component={Signup} />
         <Route path="/account" component={Account} />
         <Route path="/design" component={DesignSystemPage} />
+        <Route path="/studio" component={StudioPage} />
         <Route path="/memory-capturers-deep-dive" component={MemoryCapturersDeepDive} />
         <Route path="/startup-founders-deep-dive" component={StartupFoundersDeepDive} />
         <Route path="/content-creators-deep-dive" component={ContentCreatorsDeepDive} />

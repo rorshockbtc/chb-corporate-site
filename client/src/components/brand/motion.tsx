@@ -1,0 +1,74 @@
+import { type ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Line-by-line masked rise for big display type. */
+export function RiseLines({
+  lines,
+  className = "",
+  delay = 0,
+  immediate = false,
+}: {
+  lines: ReactNode[];
+  className?: string;
+  delay?: number;
+  immediate?: boolean;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <span className={`block ${className}`}>
+      {lines.map((line, i) => (
+        <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+          <motion.span
+            className="block"
+            initial={reduce ? { opacity: 0 } : { y: "110%" }}
+            {...(immediate
+              ? { animate: reduce ? { opacity: 1 } : { y: "0%" } }
+              : {
+                  whileInView: reduce ? { opacity: 1 } : { y: "0%" },
+                  viewport: { once: true, margin: "-10% 0px" },
+                })}
+            transition={{ duration: reduce ? 0.2 : 0.9, ease: EASE, delay: delay + i * 0.08 }}
+          >
+            {line}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/** Soft fade-up on scroll. */
+export function FadeUp({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-8% 0px" }}
+      transition={{ duration: reduce ? 0.2 : 0.8, ease: EASE, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** Small mono eyebrow with a punctuation mark. */
+export function Eyebrow({ mark, children, color = "#FE299E" }: { mark: string; children: ReactNode; color?: string }) {
+  return (
+    <div className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-[#111827]/60">
+      <span className="font-bold text-[15px]" style={{ color }}>{mark}</span>
+      <span>{children}</span>
+    </div>
+  );
+}
