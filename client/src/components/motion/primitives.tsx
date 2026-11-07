@@ -218,6 +218,8 @@ export function AccentEditorialReveal({
   );
 }
 
+export { AccentEditorialReveal as Reveal };
+
 // --------------------------------------------------------------------------
 // Stagger Container & Items
 // --------------------------------------------------------------------------

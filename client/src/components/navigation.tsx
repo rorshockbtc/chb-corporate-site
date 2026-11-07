@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { usePerspective } from "@/hooks/use-perspective";
 import { useAuth } from "@/hooks/useAuth";
 import { useNostrAuth } from "@/hooks/use-nostr-auth";
@@ -19,116 +19,126 @@ export function Navigation() {
   const isAuthenticated = isEmailAuth || isNostrAuth;
 
   const navItems = [
-    { href: "/products", label: "Ecosystem" },
-    { href: "/products/pipes", label: "Pipes" },
+    { href: "/products", label: "Products" },
+    { href: "/studio", label: "Studio" },
     { href: "/roadmap", label: "Roadmap" },
     { href: "/contact", label: "Contact" },
   ];
 
   const perspectives: {
     id: Perspective;
-    pipeHandle: string;
     label: string;
-    accentColor: string;
+    shortLabel: string;
+    surfaceBg: string;
+    inkColor: string;
+    dotColor: string;
   }[] = [
     {
       id: "startup_founders",
-      pipeHandle: "pipe\\founders",
-      label: "Builders",
-      accentColor: "#0B5CAB",
+      label: "Startup Founders",
+      shortLabel: "Founders",
+      surfaceBg: "#D4EBF5",
+      inkColor: "#02212F",
+      dotColor: "#01A9F4",
     },
     {
       id: "content_creators",
-      pipeHandle: "pipe\\creators",
-      label: "Authors",
-      accentColor: "#B81468",
+      label: "Content Creators",
+      shortLabel: "Creators",
+      surfaceBg: "#F1DBDA",
+      inkColor: "#18002E",
+      dotColor: "#FE299E",
     },
     {
       id: "memory_capturers",
-      pipeHandle: "pipe\\legacy",
-      label: "Families",
-      accentColor: "#1B6346",
+      label: "Memory Capturers",
+      shortLabel: "Families",
+      surfaceBg: "#DBECC8",
+      inkColor: "#192E01",
+      dotColor: "#5C9F00",
     },
   ];
 
   return (
     <header className="fixed top-0 left-0 w-full z-50">
-      <div className="bg-[#EAE0D0]/95 backdrop-blur-md border-b border-[#D3C7B5]">
+      <div className="bg-[#FAF8F5]/95 backdrop-blur-md border-b-[1.5px] border-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 gap-4">
-            {/* Left: Brandmark + Mounted Perspective Pipe Switcher */}
-            <div className="flex items-center gap-4 lg:gap-6">
+          <div className="flex items-center justify-between h-16 gap-3">
+            {/* Left: Playful colonhyphenbracket :-] Brandmark + Perspective Selector */}
+            <div className="flex items-center gap-4 lg:gap-5">
               <Link
                 href="/"
-                className="flex items-center gap-2.5 text-[#281B16] hover:opacity-90 transition-opacity"
+                className="flex items-center gap-2 text-[#111827] hover:opacity-90 transition-opacity no-underline"
                 data-testid="logo-link"
               >
-                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded bg-[#231814] text-[#FE299E] font-mono text-sm font-bold tracking-tight">
-                  :-]
-                </span>
-                <span className="text-lg tracking-tight text-[#281B16]">
+                <span className="text-lg sm:text-xl tracking-tight text-[#111827]">
                   <span className="font-bold">colon</span>
-                  <span className="font-normal text-[#4A3A32]">hyphen</span>
+                  <span className="font-normal text-[#374151]">hyphen</span>
                   <span className="font-bold">bracket</span>
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-md bg-[#FE299E] text-white font-mono text-sm font-bold tracking-tight border border-[#111827] shadow-[0_2px_0_#111827]">
+                  :-]
                 </span>
               </Link>
 
-              {/* Desktop Tactile Perspective Pipe Bar */}
+              {/* Desktop Human Perspective Switcher (Accént 3.0 Albers Chromatic Pills) */}
               <div
-                className="hidden xl:flex items-center bg-[#E4DACB] border border-[#D3C7B5] rounded-lg p-1 gap-1"
+                className="hidden xl:flex items-center bg-[#E8E2D5] border-[1.5px] border-[#111827] rounded-full p-1 gap-1 shadow-[0_2px_0_#111827]"
                 role="group"
-                aria-label="Mounted Perspective Pipe"
+                aria-label="Perspective Switcher"
                 data-testid="perspective-switcher"
               >
-                <span className="px-2 font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#4A3A32] select-none">
-                  Lens:
+                <span className="px-2.5 font-mono text-[10px] uppercase tracking-[0.14em] font-bold text-[#111827] select-none">
+                  For:
                 </span>
                 {perspectives.map((p) => {
                   const isActive = currentPerspective === p.id;
                   return (
                     <button
                       key={p.id}
+                      type="button"
                       onClick={() => setPerspective(p.id)}
-                      className={`relative px-2.5 py-1 rounded-md text-xs font-mono transition-colors flex items-center gap-1.5 cursor-pointer ${
+                      className={`relative px-2.5 py-1 rounded-full text-xs font-medium transition-colors flex items-center gap-1.5 cursor-pointer border-none whitespace-nowrap ${
                         isActive
-                          ? "text-[#F2EAE0] font-bold"
-                          : "text-[#281B16] hover:text-[#FE299E] font-medium"
+                          ? "text-[#111827] font-bold"
+                          : "text-[#374151] hover:text-[#111827] bg-transparent"
                       }`}
                       data-testid={`perspective-option-${p.id}`}
                       aria-pressed={isActive}
-                      title={`Mount ${p.pipeHandle} (${p.label} Perspective)`}
+                      title={`View CHB for ${p.label}`}
                     >
                       {isActive && (
                         <motion.div
-                          layoutId="nav-lens-pill"
+                          layoutId="nav-perspective-pill"
                           transition={SPRING_LAYOUT}
-                          className="absolute inset-0 bg-[#281B16] rounded-md -z-10 shadow-sm"
+                          className="absolute inset-0 rounded-full -z-10 border border-[#111827]"
+                          style={{ backgroundColor: p.surfaceBg }}
                         />
                       )}
                       <span
-                        className="w-2 h-2 rounded-full flex-shrink-0 relative z-10"
-                        style={{ backgroundColor: isActive ? "#FE299E" : p.accentColor }}
+                        className="w-2 h-2 rounded-full flex-shrink-0 relative z-10 border border-[#111827]/40"
+                        style={{ backgroundColor: p.dotColor }}
                       />
-                      <span className="relative z-10">{p.pipeHandle}</span>
+                      <span className="relative z-10">{p.label}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Right: Navigation Links + Direct Product & Account CTAs */}
-            <div className="hidden md:flex items-center gap-5 lg:gap-6">
-              <nav className="flex items-center gap-5">
+            {/* Right: Navigation Links + Design System + Portfolio + Sign Up */}
+            <div className="hidden md:flex items-center gap-3.5 lg:gap-4 shrink-0">
+              <nav className="flex items-center gap-3.5 lg:gap-4">
                 {navItems.map(({ href, label }) => {
                   const isActive = location === href;
                   return (
                     <Link
                       key={href}
                       href={href}
-                      className={`text-sm transition-colors ${
+                      className={`text-sm transition-colors no-underline whitespace-nowrap ${
                         isActive
-                          ? "text-[#281B16] font-bold underline decoration-[#FE299E] decoration-2 underline-offset-8"
-                          : "text-[#281B16] font-medium hover:text-[#FE299E]"
+                          ? "text-[#111827] font-bold underline decoration-[#FE299E] decoration-2 underline-offset-8"
+                          : "text-[#111827] font-medium hover:text-[#FE299E]"
                       }`}
                       data-testid={`nav-${label.toLowerCase()}`}
                     >
@@ -138,37 +148,37 @@ export function Navigation() {
                 })}
 
                 <a
-                  href="https://hire.colonhyphenbracket.pink/studio"
-                  className="text-sm font-medium text-[#281B16] hover:text-[#FE299E] transition-colors"
-                  data-testid="nav-work-with-us"
+                  href="https://design.pipes.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#E8E2D5] hover:bg-[#FE299E] text-[#111827] hover:text-white border border-[#111827] font-mono text-[11px] font-bold tracking-tight transition-colors no-underline whitespace-nowrap shrink-0"
+                  data-testid="nav-design-system"
+                  title="Explore Accént 3.0 — The Pipes & CHB Design System"
                 >
-                  R&amp;D Studio
+                  <span>/ Accént 3.0</span>
+                  <ExternalLink className="h-2.5 w-2.5 shrink-0" />
+                </a>
+
+                <a
+                  href="https://hire.colonhyphenbracket.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-mono uppercase tracking-[0.1em] text-[#374151] hover:text-[#FE299E] transition-colors no-underline hidden 2xl:inline-flex items-center gap-1 whitespace-nowrap shrink-0"
+                  data-testid="nav-hire-kyle"
+                >
+                  <span>Portfolio ↗</span>
                 </a>
               </nav>
 
-              <div className="flex items-center gap-2.5 pl-2 border-l border-[#D3C7B5]">
-                <motion.a
-                  whileHover={{ y: -1 }}
-                  whileTap={TAP}
-                  href="https://pipes.pink"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3.5 py-2 rounded-lg bg-[#231814] text-[#F2EAE0] hover:bg-[#3A2821] transition-colors font-mono text-xs font-bold tracking-wide inline-flex items-center gap-1.5"
-                  data-testid="nav-launch-pipes"
-                >
-                  <span className="text-[#FE299E]">| | |</span>
-                  <span>Open Pipes.Pink</span>
-                  <ExternalLink className="h-3 w-3 text-[#D3C7B5]" />
-                </motion.a>
-
+              <div className="flex items-center gap-2 pl-2 border-l border-[#111827]/20 shrink-0">
                 {isAuthenticated ? (
                   <motion.div whileHover={{ y: -1 }} whileTap={TAP}>
                     <Link
                       href="/account"
-                      className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1.5"
+                      className="px-4 py-2 bg-[#FE299E] text-white rounded-full border-[1.5px] border-[#111827] shadow-[0_2px_0_#111827] hover:bg-[#E01E8B] transition-all font-bold text-xs inline-flex items-center gap-1.5 no-underline whitespace-nowrap"
                       data-testid="account-button"
                     >
-                      <User className="h-3.5 w-3.5" />
+                      <User className="h-3.5 w-3.5 shrink-0" />
                       <span>Account</span>
                     </Link>
                   </motion.div>
@@ -176,11 +186,11 @@ export function Navigation() {
                   <motion.div whileHover={{ y: -1 }} whileTap={TAP}>
                     <Link
                       href="/signup"
-                      className="px-4 py-2 bg-[#FE299E] text-white rounded-lg hover:bg-[#E01E8B] transition-all font-semibold text-xs inline-flex items-center gap-1"
+                      className="px-4 py-2 bg-[#FE299E] text-white rounded-full border-[1.5px] border-[#111827] shadow-[0_2px_0_#111827] hover:bg-[#E01E8B] transition-all font-bold text-xs inline-flex items-center gap-1.5 no-underline whitespace-nowrap"
                       data-testid="signup-button"
                     >
                       <span>Sign Up</span>
-                      <span className="font-mono text-[11px] opacity-90">:-]</span>
+                      <span className="font-mono text-[11px]">:-]</span>
                     </Link>
                   </motion.div>
                 )}
@@ -195,7 +205,7 @@ export function Navigation() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
-                className="text-[#281B16] hover:bg-[#E4DACB]"
+                className="text-[#111827] hover:bg-[#E8E2D5]"
                 data-testid="mobile-menu-toggle"
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -208,14 +218,14 @@ export function Navigation() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div
-          className="md:hidden bg-[#F2EAE0] border-b border-[#D3C7B5] shadow-xl"
+          className="md:hidden bg-[#FAF8F5] border-b-2 border-[#111827] shadow-xl"
           id="mobile-menu"
         >
           <div className="max-w-7xl mx-auto px-6 py-5 space-y-5">
-            {/* Mounted Perspective Pipe Selector on Mobile */}
-            <div className="bg-[#E4DACB] border border-[#D3C7B5] rounded-xl p-3">
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-[#281B16] mb-2">
-                Mounted Perspective Pipe
+            {/* Perspective Switcher on Mobile */}
+            <div className="bg-[#E8E2D5] border-[1.5px] border-[#111827] rounded-xl p-3 shadow-[0_2px_0_#111827]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-[#111827] mb-2">
+                Choose Your Perspective
               </p>
               <div className="grid grid-cols-3 gap-1.5">
                 {perspectives.map((p) => {
@@ -223,25 +233,18 @@ export function Navigation() {
                   return (
                     <button
                       key={p.id}
+                      type="button"
                       onClick={() => {
                         setPerspective(p.id);
                         setIsMobileMenuOpen(false);
                       }}
-                      className={`px-2 py-2 rounded-lg text-center transition-all ${
-                        isActive
-                          ? "bg-[#231814] text-[#F2EAE0] font-bold"
-                          : "bg-[#F2EAE0] text-[#281B16] font-medium border border-[#D3C7B5]"
+                      className={`px-2 py-2 rounded-lg text-center transition-all border border-[#111827] ${
+                        isActive ? "font-bold shadow-[0_2px_0_#111827]" : "bg-[#FAF8F5] font-medium"
                       }`}
+                      style={isActive ? { backgroundColor: p.surfaceBg, color: p.inkColor } : undefined}
                       data-testid={`mobile-perspective-${p.id}`}
                     >
-                      <div className="font-mono text-[11px]">{p.pipeHandle}</div>
-                      <div
-                        className={`text-[10px] mt-0.5 ${
-                          isActive ? "text-[#FE299E]" : "text-[#4A3A32]"
-                        }`}
-                      >
-                        {p.label}
-                      </div>
+                      <div className="text-xs">{p.shortLabel}</div>
                     </button>
                   );
                 })}
@@ -254,10 +257,10 @@ export function Navigation() {
                 <Link
                   key={href}
                   href={href}
-                  className={`block w-full py-2.5 px-3 rounded-lg text-base font-semibold transition-colors ${
+                  className={`block w-full py-2.5 px-3 rounded-lg text-base font-semibold transition-colors no-underline ${
                     location === href
-                      ? "bg-[#231814] text-[#F2EAE0]"
-                      : "text-[#281B16] hover:bg-[#E4DACB]"
+                      ? "bg-[#111827] text-[#FAF8F5]"
+                      : "text-[#111827] hover:bg-[#E8E2D5]"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid={`mobile-nav-${label.toLowerCase()}`}
@@ -266,43 +269,32 @@ export function Navigation() {
                 </Link>
               ))}
               <a
-                href="https://hire.colonhyphenbracket.pink/studio"
-                className="block w-full py-2.5 px-3 rounded-lg text-base font-semibold text-[#281B16] hover:bg-[#E4DACB] transition-colors"
+                href="https://design.pipes.pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full py-2.5 px-3 rounded-lg text-base font-semibold text-[#111827] hover:bg-[#E8E2D5] transition-colors no-underline"
                 onClick={() => setIsMobileMenuOpen(false)}
-                data-testid="mobile-nav-work-with-us"
+                data-testid="mobile-nav-design-system"
               >
-                R&amp;D Studio (Work With Us)
+                / Accént 3.0 Design System (design.pipes.pink) ↗
+              </a>
+              <a
+                href="https://hire.colonhyphenbracket.pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full py-2.5 px-3 rounded-lg text-base font-semibold text-[#111827] hover:bg-[#E8E2D5] transition-colors no-underline"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Kyle&apos;s Principal Portfolio ↗
               </a>
             </div>
 
             {/* Direct Conversion CTAs */}
-            <div className="grid grid-cols-1 gap-2.5 pt-3 border-t border-[#D3C7B5]">
-              <a
-                href="https://pipes.pink"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#231814] text-[#F2EAE0] font-mono text-sm font-bold"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span className="text-[#FE299E]">| | |</span>
-                <span>Claim Your Pipe on Pipes.Pink</span>
-                <ExternalLink className="h-4 w-4 text-[#FE299E]" />
-              </a>
-              <a
-                href="https://pipes.pink/write"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-[#E4DACB] border border-[#D3C7B5] text-[#281B16] font-mono text-sm font-bold"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span className="text-[#1B6346]">#</span>
-                <span>Open Hash Sanctuary &amp; Semi</span>
-                <ExternalLink className="h-4 w-4 text-[#281B16]" />
-              </a>
+            <div className="grid grid-cols-1 gap-2.5 pt-3 border-t border-[#111827]/20">
               {isAuthenticated ? (
                 <Link
                   href="/account"
-                  className="flex items-center justify-center gap-2 px-5 py-3 bg-[#FE299E] text-white rounded-lg font-bold text-sm"
+                  className="flex items-center justify-center gap-2 px-5 py-3 bg-[#FE299E] text-white rounded-full border-[1.5px] border-[#111827] shadow-[0_2px_0_#111827] font-bold text-sm no-underline"
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid="mobile-account-button"
                 >
@@ -312,11 +304,11 @@ export function Navigation() {
               ) : (
                 <Link
                   href="/signup"
-                  className="block px-5 py-3 bg-[#FE299E] text-white rounded-lg font-bold text-sm text-center"
+                  className="block px-5 py-3 bg-[#FE299E] text-white rounded-full border-[1.5px] border-[#111827] shadow-[0_2px_0_#111827] font-bold text-sm text-center no-underline"
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid="mobile-signup-button"
                 >
-                  Create Universal :-] Account
+                  Sign Up for Universal :-] Account
                 </Link>
               )}
             </div>

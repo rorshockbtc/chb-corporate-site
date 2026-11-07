@@ -138,29 +138,68 @@
     @apply transition-all duration-200 ease-in-out opacity-100 transform-none;
   }
 
-  /* HIGH-CONTRAST PERSPECTIVE REGISTRATION TOKENS (WCAG AA/AAA on #EAE0D0 & #F2EAE0) */
+  /* ACCÉNT 3.0 (design.pipes.pink) PERSPECTIVE CHROMATIC PAIRINGS */
   :root[data-perspective="startup_founders"] {
-    --perspective-primary: #0B5CAB;
-    --perspective-accent: #FE299E;
-    --perspective-secondary: #084482;
-    --perspective-light: #DFECEF;
-    --perspective-light-rgb: 11, 92, 171;
+    --perspective-primary: #02212F;
+    --perspective-accent: #01A9F4;
+    --perspective-secondary: #0177AE;
+    --perspective-light: #D4EBF5;
+    --perspective-light-rgb: 212, 235, 245;
+    --accent-surface: #D4EBF5;
+    --accent-ink: #02212F;
+    --accent-symbol: #01A9F4;
   }
 
   :root[data-perspective="content_creators"] {
-    --perspective-primary: #B81468;
+    --perspective-primary: #18002E;
     --perspective-accent: #FE299E;
-    --perspective-secondary: #8E0E4F;
-    --perspective-light: #F4E2EA;
-    --perspective-light-rgb: 184, 20, 104;
+    --perspective-secondary: #B8326D;
+    --perspective-light: #F1DBDA;
+    --perspective-light-rgb: 241, 219, 218;
+    --accent-surface: #F1DBDA;
+    --accent-ink: #18002E;
+    --accent-symbol: #FE299E;
   }
 
   :root[data-perspective="memory_capturers"] {
-    --perspective-primary: #1B6346;
-    --perspective-accent: #B85D19;
-    --perspective-secondary: #124731;
-    --perspective-light: #E0ECE5;
-    --perspective-light-rgb: 27, 99, 70;
+    --perspective-primary: #192E01;
+    --perspective-accent: #5C9F00;
+    --perspective-secondary: #192E01;
+    --perspective-light: #DBECC8;
+    --perspective-light-rgb: 219, 236, 200;
+    --accent-surface: #DBECC8;
+    --accent-ink: #192E01;
+    --accent-symbol: #5C9F00;
+  }
+
+  /* Accént 3.0 Commercial Tactile Card Mode */
+  .accent-card-tactile {
+    background-color: #FAF8F5;
+    border: 1.5px solid #111827;
+    box-shadow: 0 3px 0 #111827;
+    border-radius: 12px;
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .accent-card-tactile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #111827;
+  }
+
+  .accent-pill-tactile {
+    border: 1.5px solid #111827;
+    box-shadow: 0 2px 0 #111827;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .accent-pill-tactile:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #111827;
+  }
+
+  .accent-pill-tactile:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #111827;
   }
 
   .section-title-perspective {

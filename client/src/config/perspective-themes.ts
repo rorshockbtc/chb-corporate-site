@@ -1,22 +1,21 @@
 import type { Perspective, PerspectiveTheme } from "@/types/content";
 
-// Canonical Warm Albers Sandstone + Massimo Vignelli Swiss Grid Theme System
-// Fixes contrast bugs (--muted vs --muted-foreground) and uses high-contrast
-// editorial registration accents per Perspective Pipe.
+// Accént 3.0 (design.pipes.pink) Josef Albers Chromatic Pairings + Playful Tactile Commercial Mode
+// Restores distinct, warm, human perspective identities for Startup Founders, Content Creators, and Memory Capturers.
 
 export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
   startup_founders: {
     colors: {
       primary: "#FE299E",      // Canonical CHB Hot Pink
-      secondary: "#0B5CAB",    // High-contrast Blueprint Cobalt (WCAG AA+ on #EAE0D0)
-      accent: "#1B6346",       // Archival Forest Green
-      background: "#EAE0D0",   // Warm Albers Sandstone
-      foreground: "#281B16",   // Deep Espresso Ink (12.8:1 contrast)
-      muted: "#4A3A32",        // Deep Warm Umber secondary text (8.1:1 contrast)
+      secondary: "#01A9F4",    // Accént Crystalline Sky Symbol
+      accent: "#02212F",       // Accént Marine Abyss Ink
+      background: "#E8E2D5",   // Accént Warm Sandstone Canvas
+      foreground: "#111827",   // Accént Deep Slate Ink (16.4:1 AAA)
+      muted: "#374151",        // Slate Secondary Ink
     },
     heroSettings: {
-      overlayOpacity: 0.12,
-      overlayGradient: "linear-gradient(135deg, #281B16 0%, #0B5CAB 100%)",
+      overlayOpacity: 0.08,
+      overlayGradient: "linear-gradient(135deg, #D4EBF5 0%, #E8E2D5 100%)",
       brightness: 1.0,
       contrast: 1.05,
       imageStyle: 'cool',
@@ -41,15 +40,15 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
   content_creators: {
     colors: {
       primary: "#FE299E",      // Canonical CHB Hot Pink
-      secondary: "#B81468",    // High-contrast Atelier Magenta (WCAG AA+ on #EAE0D0)
-      accent: "#B85D19",       // Warm Ochre / Terracotta
-      background: "#EAE0D0",   // Warm Albers Sandstone
-      foreground: "#281B16",   // Deep Espresso Ink
-      muted: "#4A3A32",        // Deep Warm Umber secondary text
+      secondary: "#B8326D",    // Accént Sovereign Pink
+      accent: "#18002E",       // Accént Deep Plum Ink
+      background: "#E8E2D5",   // Accént Warm Sandstone Canvas
+      foreground: "#111827",   // Accént Deep Slate Ink
+      muted: "#374151",        // Slate Secondary Ink
     },
     heroSettings: {
-      overlayOpacity: 0.12,
-      overlayGradient: "linear-gradient(135deg, #281B16 0%, #B81468 100%)",
+      overlayOpacity: 0.08,
+      overlayGradient: "linear-gradient(135deg, #F1DBDA 0%, #E8E2D5 100%)",
       brightness: 1.0,
       contrast: 1.05,
       imageStyle: 'warm',
@@ -74,15 +73,15 @@ export const perspectiveThemes: Record<Perspective, PerspectiveTheme> = {
   memory_capturers: {
     colors: {
       primary: "#FE299E",      // Canonical CHB Hot Pink
-      secondary: "#1B6346",    // High-contrast Archival Emerald (WCAG AA+ on #EAE0D0)
-      accent: "#B85D19",       // Warm Terracotta
-      background: "#EAE0D0",   // Warm Albers Sandstone
-      foreground: "#281B16",   // Deep Espresso Ink
-      muted: "#4A3A32",        // Deep Warm Umber secondary text
+      secondary: "#192E01",    // Accént Deep Forest Ink
+      accent: "#5C9F00",       // Accént Herbal Sage Symbol
+      background: "#E8E2D5",   // Accént Warm Sandstone Canvas
+      foreground: "#111827",   // Accént Deep Slate Ink
+      muted: "#374151",        // Slate Secondary Ink
     },
     heroSettings: {
-      overlayOpacity: 0.12,
-      overlayGradient: "linear-gradient(135deg, #281B16 0%, #1B6346 100%)",
+      overlayOpacity: 0.08,
+      overlayGradient: "linear-gradient(135deg, #DBECC8 0%, #FFF5C9 100%)",
       brightness: 1.0,
       contrast: 1.05,
       imageStyle: 'warm',
@@ -118,16 +117,16 @@ export function generateThemeCSS(theme: PerspectiveTheme): Record<string, string
     '--secondary-foreground': '#FFFFFF',
     '--accent': theme.colors.accent,
     '--accent-foreground': '#FFFFFF',
-    '--background': theme.colors.background,
-    '--foreground': theme.colors.foreground,
-    '--card': '#F2EAE0',
-    '--card-foreground': '#281B16',
-    '--popover': '#F2EAE0',
-    '--popover-foreground': '#281B16',
-    '--muted': '#E4DACB',
-    '--muted-foreground': theme.colors.muted,
-    '--border': '#D3C7B5',
-    '--input': '#E4DACB',
+    '--background': '#E8E2D5',
+    '--foreground': '#111827',
+    '--card': '#FAF8F5',
+    '--card-foreground': '#111827',
+    '--popover': '#FAF8F5',
+    '--popover-foreground': '#111827',
+    '--muted': '#DFD8C8',
+    '--muted-foreground': '#374151',
+    '--border': '#111827',
+    '--input': '#FAF8F5',
     '--ring': '#FE299E',
     '--theme-hero-overlay': `${theme.heroSettings.overlayOpacity}`,
     '--theme-hero-gradient': theme.heroSettings.overlayGradient,

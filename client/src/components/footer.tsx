@@ -176,16 +176,30 @@ export function Footer() {
                 </Link>
               </div>
               <div>
-                <Link href="/design" className="hover:text-[#281B16] transition-colors">
-                  Vignelli / Albers Design System
+                <Link href="/studio" className="text-[#281B16] font-semibold hover:text-[#FE299E] transition-colors">
+                  CHB Studio &amp; R&amp;D Lab (/studio) →
                 </Link>
               </div>
               <div>
                 <a
-                  href="https://hire.colonhyphenbracket.pink/studio"
-                  className="text-[#281B16] font-semibold hover:text-[#FE299E] transition-colors"
+                  href="https://design.pipes.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#FE299E] transition-colors inline-flex items-center gap-1"
                 >
-                  R&amp;D Studio ($7.5k Sprints) →
+                  <span>/ Accént 3.0 (design.pipes.pink)</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://hire.colonhyphenbracket.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#FE299E] transition-colors inline-flex items-center gap-1"
+                >
+                  <span>Kyle&apos;s Principal Portfolio</span>
+                  <ExternalLink size={12} />
                 </a>
               </div>
             </div>

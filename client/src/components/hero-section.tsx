@@ -1,166 +1,203 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { usePerspectiveContent, usePerspective } from "@/hooks/use-perspective";
-import { ArrowRight, ExternalLink, Shield, Sparkles, Terminal, Layers } from "lucide-react";
+import { ArrowRight, ExternalLink, Sparkles } from "lucide-react";
 import {
   SPRING_LAYOUT,
   TAP,
-  CARD_HOVER,
-  CARD_TAP,
   AccentRevealText,
-  AccentRevealImage,
 } from "@/components/motion/primitives";
 import type { Perspective } from "@/types/content";
 
 export function HeroSection() {
   const { isTransitioning, currentPerspective, setPerspective } = usePerspective();
-  const [activeProductTab, setActiveProductTab] = useState<
-    "pipes" | "hash_semi" | "mcp_galaxy" | "greater_marigold"
-  >("pipes");
+  const [activePunctuation, setActivePunctuation] = useState<
+    "chb" | "hash" | "semi" | "scout" | "pipes" | "accent"
+  >("chb");
 
   const perspectives: {
     id: Perspective;
-    pipeHandle: string;
-    shortTitle: string;
-    description: string;
-    accentColor: string;
+    title: string;
+    subtitle: string;
+    albersBg: string;
+    albersInk: string;
+    albersSymbol: string;
+    mark: string;
   }[] = [
     {
       id: "startup_founders",
-      pipeHandle: "pipe\\founders",
-      shortTitle: "Builders & Founders",
-      description: "Sovereign AI, domain moats & R&D sprints",
-      accentColor: "#0B5CAB",
+      title: "Startup Founders",
+      subtitle: "Scale your vision without Big Tech lock-in",
+      albersBg: "#D4EBF5",
+      albersInk: "#02212F",
+      albersSymbol: "#01A9F4",
+      mark: ":-]",
     },
     {
       id: "content_creators",
-      pipeHandle: "pipe\\creators",
-      shortTitle: "Authors & Curators",
-      description: "Deeded namespaces & 70% AI royalties",
-      accentColor: "#B81468",
+      title: "Content Creators",
+      subtitle: "Create authentically & own your perspective",
+      albersBg: "#F1DBDA",
+      albersInk: "#18002E",
+      albersSymbol: "#FE299E",
+      mark: ";-]",
     },
     {
       id: "memory_capturers",
-      pipeHandle: "pipe\\legacy",
-      shortTitle: "Families & Historians",
-      description: "Private memory vaults & patient AI",
-      accentColor: "#1B6346",
+      title: "Memory Capturers",
+      subtitle: "Preserve what matters for generations",
+      albersBg: "#DBECC8",
+      albersInk: "#192E01",
+      albersSymbol: "#5C9F00",
+      mark: "&",
     },
   ];
 
+  const activeLens =
+    perspectives.find((p) => p.id === currentPerspective) || perspectives[0];
+
   const heroContent = usePerspectiveContent({
     startup_founders: {
-      eyebrow: "PIPE\\FOUNDERS // SOVEREIGN KNOWLEDGE & INFRASTRUCTURE",
-      title: "Own your domain's intelligence. Don't rent it from Big Tech.",
-      description:
-        "ColonHyphenBracket (:-]) builds sovereign knowledge infrastructure for founders and overlooked markets. Seal institutional expertise into cryptographic pipe\\ namespaces on Pipes.Pink, think privately in # Hash Sanctuary with ;-] Semi, and deploy local-first AI that never leaks your competitive moat.",
-      primaryCtaText: "Claim Your Pipe on Pipes.Pink",
-      primaryCtaSub: "Free reader · $9/yr deeded namespace",
-      secondaryCtaText: "Open # Hash + ;-] Semi Studio",
-      metricStrip: [
-        { label: "Creator & Domain Share", value: "70% via MCP & HTTP 402" },
-        { label: "Cryptographic Canon", value: "SHA-256 Merkle-DAG" },
-        { label: "Bespoke R&D Sprint", value: "$7,500 / 1-Week Shipped" },
+      eyebrow: "COLONHYPHENBRACKET :-] · FOR STARTUP FOUNDERS",
+      title: "Scale your vision.",
+      lead:
+        "Break free from generic AI templates that flatten your competitive edge. Build with biased-by-design tools that learn your startup's unique voice, protect your proprietary data, and ship faster than a four-person agency pod.",
+      primaryCtaText: "Explore Our Products",
+      primaryCtaHref: "/products",
+      secondaryCtaText: "Visit CHB Studio & R&D Lab",
+      secondaryCtaHref: "/studio",
+      humanPromise: [
+        { k: "Same Budget", v: "One ecosystem replaces 4 SaaS tools" },
+        { k: "Better Results", v: "AI that learns your business context" },
+        { k: "Privacy & Control", v: "Zero model training on your moat" },
       ],
     },
     content_creators: {
-      eyebrow: "PIPE\\CREATORS // THE CURATOR ECONOMY",
-      title: "Your voice is sovereign property. Make AI pay to cite it.",
-      description:
-        "AI giants scraped the open web without consent or compensation. Pipes.Pink restores the covenant: draft and refine inside your private # Hash Sanctuary with ;-] Semi, seal your canon into a deeded pipe\\ handle ($9/yr), and earn 70% royalties whenever AI agents or subscribers query your work.",
-      primaryCtaText: "Start Curating on Pipes.Pink",
-      primaryCtaSub: "Earn 70% royalties on AI & reader queries",
-      secondaryCtaText: "Write Free in # Hash Sanctuary",
-      metricStrip: [
-        { label: "Creator Royalty Split", value: "70% Direct to You" },
-        { label: "Deeded Namespace", value: "$9/yr Sovereign Handle" },
-        { label: "Substack & RSS Import", value: "1-Click Canon Ingestion" },
+      eyebrow: "COLONHYPHENBRACKET :-] · FOR CONTENT CREATORS",
+      title: "Create authentically.",
+      lead:
+        "Stop fighting algorithms and generic AI slop that sounds like everyone else. Capture raw ideas in # Hash, collaborate with ;-] Semi—the creative partner who never forgets your voice—and publish on Pipes.Pink with 70% creator royalties.",
+      primaryCtaText: "Explore Creator Tools",
+      primaryCtaHref: "/products",
+      secondaryCtaText: "Try # Hash & ;-] Semi Free",
+      secondaryCtaHref: "https://pipes.pink/write",
+      humanPromise: [
+        { k: "Explicitly Biased", v: "Amplifies your perspective, not averages" },
+        { k: "70% Royalties", v: "Earn when readers & AI agents cite you" },
+        { k: "Independent", v: "No ads, no feed manipulation, ever" },
       ],
     },
     memory_capturers: {
-      eyebrow: "PIPE\\LEGACY // CONSTITUTIONAL MEMORY",
-      title: "A private sanctuary for the stories your family can't afford to lose.",
-      description:
-        "Storage is cheap—there is no excuse for losing a single memory or repeating yourself to an amnesiac chatbot. Capture decades of family wisdom in # Hash Sanctuary, converse with ;-] Semi ('She Doesn't Forget'), and preserve an encrypted, living legacy Pipe for future generations.",
-      primaryCtaText: "Open Your Private # Hash Vault",
-      primaryCtaSub: "Zero training leakage · Encrypted memory",
-      secondaryCtaText: "Explore Family Pipes on Pipes.Pink",
-      metricStrip: [
-        { label: "Constitutional Rule", value: "She Doesn't Forget" },
-        { label: "Privacy Guarantee", value: "Zero Model Training" },
-        { label: "Legacy Sharing", value: "Selective Family Pipes" },
+      eyebrow: "COLONHYPHENBRACKET :-] · FOR FAMILIES & MEMORY CAPTURERS",
+      title: "Preserve what matters.",
+      lead:
+        "Storage is cheap—there is no excuse for losing a single family memory or repeating yourself to an amnesiac chatbot. Build a private, encrypted sanctuary where your family's stories, recipes, and wisdom live across generations.",
+      primaryCtaText: "Start Preserving Memories",
+      primaryCtaHref: "/signup",
+      secondaryCtaText: "How We Protect Families",
+      secondaryCtaHref: "/memory-capturers-deep-dive",
+      humanPromise: [
+        { k: "She Doesn't Forget", v: "Constitutional memory across decades" },
+        { k: "Family Sanctuary", v: "Encrypted & never sold to ad networks" },
+        { k: "Human-First", v: "Designed for grandparents & kids alike" },
       ],
     },
   });
 
-  const productShowcases = {
+  const punctuationPlayground = {
+    chb: {
+      symbol: ":-]",
+      name: "ColonHyphenBracket",
+      tagline: "Human-first software with a wink & a smile",
+      desc: "Before emojis were corporate cartoons, :-] was how humans signaled warmth across a terminal. Every tool we build is named after a punctuation mark because punctuation gives human thought structure, rhythm, and meaning.",
+      status: "Parent Studio & Ecosystem",
+      href: "/studio",
+      cta: "Meet the Studio →",
+      bg: "#FAF8F5",
+      ink: "#111827",
+      badgeBg: "#FE299E",
+    },
+    hash: {
+      symbol: "#",
+      name: "Hash Sanctuary",
+      tagline: "Your private memory & writing sanctuary",
+      desc: "Capture notes, journals, and business decisions effortlessly. Hash organizes your thoughts automatically without folders or rigid tagging—and never mines your private life for ad targeting.",
+      status: "Live at pipes.pink/write",
+      href: "/products/hash",
+      cta: "Explore # Hash →",
+      bg: "#DBECC8",
+      ink: "#192E01",
+      badgeBg: "#192E01",
+    },
+    semi: {
+      symbol: ";-]",
+      name: "Semi",
+      tagline: "The patient AI partner who never forgets",
+      desc: "A semicolon means a thought isn't finished yet. Semi remembers every project, preference, and family story you share—growing sharper and more helpful every week without you repeating yourself.",
+      status: "Live · Free to Chat",
+      href: "/products/semi",
+      cta: "Meet ;-] Semi →",
+      bg: "#F1DBDA",
+      ink: "#18002E",
+      badgeBg: "#FE299E",
+    },
+    scout: {
+      symbol: "&",
+      name: "Scout & Marigold",
+      tagline: "Connect the dots across your knowledge & data",
+      desc: "The ampersand (&) joins ideas together. Scout & Marigold link your notes, citations, and 500k+ row datasets right in your browser with zero cloud surveillance.",
+      status: "Live Research & Analytics",
+      href: "/scout",
+      cta: "Explore & Scout →",
+      bg: "#FFF5C9",
+      ink: "#3F3300",
+      badgeBg: "#3F3300",
+    },
     pipes: {
-      symbol: "| | |",
-      badge: "LIVE FLAGSHIP · PIPES.PINK",
-      title: "Pipes Sovereign Knowledge Protocol & Marketplace",
-      caption:
-        "Deed your own pipe\\handle ($9/yr), publish SHA-256 verified knowledge canons, and monetize via human subscriptions + HTTP 402 AI agent queries (70% creator split).",
-      image: "/images/pipes/pipes-marketplace.png",
-      ctaLabel: "Sign Up & Claim a Pipe on Pipes.Pink",
-      ctaHref: "https://pipes.pink",
+      symbol: "|",
+      name: "Pipes.Pink",
+      tagline: "Curated human perspective & 70% creator royalties",
+      desc: "Channel your expertise into deeded pipe\\ namespaces ($9/yr), share trusted lenses with your community, and get paid 70% whenever AI agents or subscribers query your work.",
+      status: "Live at pipes.pink",
+      href: "/products/pipes",
+      cta: "Explore | Pipes →",
+      bg: "#D4EBF5",
+      ink: "#02212F",
+      badgeBg: "#01A9F4",
     },
-    hash_semi: {
-      symbol: "# + ;-]",
-      badge: "UNIFIED IN PIPES · PIPES.PINK/WRITE",
-      title: "# Hash Epistemic Sanctuary & ;-] Semi Socratic Editor",
-      caption:
-        "Your private writing vault (All / Notes / Journal / Mono) paired with Semi—the Socratic Editor-in-Residence who remembers every entry and helps you 'Seal to Pipe' when ready.",
-      image: "/images/pipes/pipes-hash-studio-semi.png",
-      ctaLabel: "Open # Hash & ;-] Semi Free",
-      ctaHref: "https://pipes.pink/write",
-    },
-    mcp_galaxy: {
-      symbol: "& + !",
-      badge: "AGENT GATE · MCP & 3D GALAXY",
-      title: "Ampersand Citation Graph, MCP Hub & ! BANG macOS IDE",
-      caption:
-        "Visualize every note in a 3D Knowledge Galaxy, connect Pipes directly to Claude & Cursor via MCP, or run local-first multi-agent swarms in the native macOS ! BANG IDE.",
-      image: "/images/pipes/pipes-dev-mcp-hub.png",
-      ctaLabel: "Explore Developer & MCP Hub",
-      ctaHref: "https://pipes.pink",
-    },
-    greater_marigold: {
-      symbol: "> + &",
-      badge: "SOVEREIGN EDUCATION & ANALYTICS",
-      title: "> Greater Classrooms (90+ Languages) & Marigold DuckDB-WASM",
-      caption:
-        "Deploy turnkey multilingual classrooms in 60 seconds (greater.pink) or run zero-PII client-side statistical record linkage on 500k+ rows in the browser (bolt.pipes.pink).",
-      image: "/images/pipes/pipes-classroom-mpb.png",
-      ctaLabel: "Launch Greater.Pink Classroom",
-      ctaHref: "https://greater.pink",
+    accent: {
+      symbol: "/",
+      name: "Accént 3.0 Design System",
+      tagline: "Josef Albers color & Massimo Vignelli grids in code",
+      desc: "Our open-source W3C DTCG design system powering every CHB and Pipes surface: 49 WCAG AAA color pairings, tactile ink shadows, and 4.6KB LazyMotion choreography.",
+      status: "Live at design.pipes.pink",
+      href: "https://design.pipes.pink",
+      cta: "Open design.pipes.pink ↗",
+      bg: "#ECD9FD",
+      ink: "#18002E",
+      badgeBg: "#B8326D",
     },
   };
 
-  const activeShowcase = productShowcases[activeProductTab];
+  const activeMark = punctuationPlayground[activePunctuation];
 
   return (
-    <section className="relative pt-20 pb-16 lg:pt-24 lg:pb-24 bg-[#EAE0D0] border-b border-[#D3C7B5]">
+    <section
+      className="relative pt-24 pb-16 lg:pt-28 lg:pb-24 border-b-[1.5px] border-[#111827] transition-colors duration-500"
+      style={{ backgroundColor: activeLens.albersBg }}
+      data-testid="hero-section"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Issue / Volume Masthead — Swiss Architectural Ledger */}
-        <div className="flex flex-wrap items-center justify-between border-b border-[#D3C7B5] pb-3 mb-6 text-[11px] font-mono uppercase tracking-[0.2em] text-[#4A3A32]">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FE299E] animate-pulse" />
-            <span className="font-bold text-[#281B16]">COLON HYPHEN BRACKET · VOL. 04</span>
-          </div>
-          <span className="hidden sm:inline">SOVEREIGN KNOWLEDGE R&amp;D LAB &amp; ARCHITECTURAL STUDIO</span>
-          <span>EST. 2024 · ALL SYSTEMS SHIP LIVE</span>
-        </div>
-
-        {/* Top Interactive Perspective Pipe Bar — Explains the 3 Perspectives as Live Pipes */}
-        <div className="mb-10 bg-[#F2EAE0] border border-[#D3C7B5] rounded-xl p-3 sm:p-4 shadow-sm">
+        {/* Top Interactive Human Perspective Selector Banner */}
+        <div className="mb-10 accent-card-tactile p-3 sm:p-4 bg-[#FAF8F5]">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <span className="inline-flex items-center justify-center px-2.5 py-1 rounded bg-[#231814] text-[#FE299E] font-mono text-xs font-bold">
-                | | | LIVE PIPE LENS
+              <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-[#FE299E] text-white font-mono text-xs font-bold border border-[#111827]">
+                :-] WHO WE SERVE
               </span>
-              <p className="text-xs sm:text-sm text-[#281B16] font-medium">
-                <strong>Experience Pipes in action:</strong> Mount a perspective lens below to re-index this entire site for your domain.
+              <p className="text-xs sm:text-sm text-[#111827] font-medium">
+                <strong>We build for real people, not Silicon Valley averages.</strong> Pick your perspective to see how CHB fits your life:
               </p>
             </div>
 
@@ -172,30 +209,31 @@ export function HeroSection() {
                     whileHover={{ y: -1 }}
                     whileTap={TAP}
                     key={p.id}
+                    type="button"
                     onClick={() => setPerspective(p.id)}
-                    className={`px-3.5 py-2 rounded-lg text-left transition-all border cursor-pointer ${
+                    className={`px-3.5 py-2 rounded-lg text-left transition-all border-[1.5px] border-[#111827] cursor-pointer ${
                       isActive
-                        ? "bg-[#231814] text-[#F2EAE0] border-[#231814] shadow-sm"
-                        : "bg-[#EAE0D0]/70 text-[#281B16] border-[#D3C7B5] hover:bg-[#E4DACB]"
+                        ? "shadow-[0_3px_0_#111827] font-bold"
+                        : "bg-[#FAF8F5] hover:bg-[#E8E2D5] opacity-85 hover:opacity-100"
                     }`}
+                    style={
+                      isActive
+                        ? { backgroundColor: p.albersBg, color: p.albersInk }
+                        : { color: "#111827" }
+                    }
                     data-testid={`hero-perspective-${p.id}`}
                     aria-pressed={isActive}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs font-bold tracking-tight">
-                        {p.pipeHandle}
+                      <span className="text-xs font-bold tracking-tight">
+                        {p.title}
                       </span>
-                      <span
-                        className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: isActive ? "#FE299E" : p.accentColor }}
-                      />
+                      <span className="font-mono text-xs font-bold text-[#FE299E]">
+                        {p.mark}
+                      </span>
                     </div>
-                    <div
-                      className={`text-[11px] mt-0.5 font-medium ${
-                        isActive ? "text-[#D3C7B5]" : "text-[#4A3A32]"
-                      }`}
-                    >
-                      {p.shortTitle}
+                    <div className="text-[11px] mt-0.5 opacity-80 line-clamp-1">
+                      {p.subtitle}
                     </div>
                   </motion.button>
                 );
@@ -204,23 +242,24 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Main 12-Column Swiss Architectural Split Hero */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Left 7 Columns: Editorial Proposition & Direct Conversion Funnel */}
+        {/* Main 12-Column Playful Editorial + Tactile Split Hero */}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left 7 Columns: Human-First Story & Promises */}
           <div
             className={`lg:col-span-7 space-y-6 transition-opacity duration-200 ${
               isTransitioning ? "opacity-40" : "opacity-100"
             }`}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#E4DACB] border border-[#D3C7B5]">
-              <span className="w-2 h-2 rounded-full bg-[#FE299E]" />
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-[#281B16]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] border-[1.5px] border-[#111827] shadow-[0_2px_0_#111827]">
+              <Sparkles className="w-3.5 h-3.5 text-[#FE299E]" />
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#111827]">
                 {heroContent.eyebrow}
               </span>
             </div>
 
             <h1
-              className="font-serif text-4xl sm:text-5xl lg:text-[3.65rem] font-light text-[#281B16] leading-[1.05] tracking-tight"
+              className="font-serif text-5xl sm:text-6xl lg:text-[4.5rem] font-bold leading-[1.02] tracking-tight"
+              style={{ color: activeLens.albersInk }}
               data-testid="hero-title"
             >
               <AccentRevealText
@@ -232,187 +271,181 @@ export function HeroSection() {
             </h1>
 
             <p
-              className="text-base sm:text-lg lg:text-xl text-[#281B16]/90 leading-relaxed max-w-2xl font-normal"
+              className="text-lg sm:text-xl leading-relaxed max-w-2xl font-normal"
+              style={{ color: activeLens.albersInk }}
               data-testid="hero-description"
             >
-              {heroContent.description}
+              {heroContent.lead}
             </p>
 
-            {/* Primary & Secondary Conversion CTAs */}
+            {/* Primary & Secondary Playful Tactile Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row gap-3.5 items-stretch sm:items-center">
-              <motion.a
-                whileHover={{ y: -2 }}
-                whileTap={TAP}
-                href={
-                  currentPerspective === "memory_capturers"
-                    ? "https://pipes.pink/write"
-                    : "https://pipes.pink"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-4 rounded-xl bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-base shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2.5 group"
-                data-testid="button-primary-pipes-cta"
+              <Link
+                href={heroContent.primaryCtaHref}
+                className="px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#E01E8B] text-white font-bold text-base border-[1.5px] border-[#111827] shadow-[0_4px_0_#111827] hover:translate-y-[-1px] transition-all flex items-center justify-center gap-2.5 group no-underline"
+                data-testid="button-primary-cta"
               >
                 <span>{heroContent.primaryCtaText}</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ y: -2 }}
-                whileTap={TAP}
-                href={
-                  currentPerspective === "memory_capturers"
-                    ? "https://pipes.pink"
-                    : "https://pipes.pink/write"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-4 rounded-xl bg-[#231814] hover:bg-[#3A2821] text-[#F2EAE0] font-semibold text-base transition-all flex items-center justify-center gap-2"
-                data-testid="button-secondary-hash-cta"
-              >
-                <span>{heroContent.secondaryCtaText}</span>
-                <ExternalLink className="h-4 w-4 text-[#FE299E]" />
-              </motion.a>
-            </div>
-
-            {/* Direct Account & Ecosystem Quick-Links */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 text-xs sm:text-sm font-medium text-[#281B16]">
-              <Link
-                href="/signup"
-                className="inline-flex items-center gap-1.5 text-[#281B16] hover:text-[#FE299E] underline decoration-[#FE299E] decoration-2 underline-offset-4 font-semibold"
-                data-testid="hero-link-signup"
-              >
-                <span>Create Universal :-] Account</span>
               </Link>
-              <span className="text-[#D3C7B5]">•</span>
-              <a
-                href="https://greater.pink"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[#4A3A32] hover:text-[#281B16] transition-colors"
-              >
-                <span className="font-mono font-bold text-[#0B5CAB]">&gt;</span>
-                <span>Launch Greater Classroom</span>
-              </a>
-              <span className="text-[#D3C7B5]">•</span>
-              <a
-                href="https://hire.colonhyphenbracket.pink/studio"
-                className="inline-flex items-center gap-1 text-[#4A3A32] hover:text-[#281B16] transition-colors"
-              >
-                <span>Commission 1-Week R&amp;D Sprint ($7.5k) →</span>
-              </a>
+
+              {heroContent.secondaryCtaHref.startsWith("http") ? (
+                <a
+                  href={heroContent.secondaryCtaHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-7 py-4 rounded-full bg-[#FAF8F5] hover:bg-[#111827] text-[#111827] hover:text-[#FAF8F5] font-bold text-base border-[1.5px] border-[#111827] shadow-[0_4px_0_#111827] transition-all flex items-center justify-center gap-2 no-underline"
+                  data-testid="button-secondary-cta"
+                >
+                  <span>{heroContent.secondaryCtaText}</span>
+                  <ExternalLink className="h-4 w-4 text-[#FE299E]" />
+                </a>
+              ) : (
+                <Link
+                  href={heroContent.secondaryCtaHref}
+                  className="px-7 py-4 rounded-full bg-[#FAF8F5] hover:bg-[#111827] text-[#111827] hover:text-[#FAF8F5] font-bold text-base border-[1.5px] border-[#111827] shadow-[0_4px_0_#111827] transition-all flex items-center justify-center gap-2 no-underline"
+                  data-testid="button-secondary-cta"
+                >
+                  <span>{heroContent.secondaryCtaText}</span>
+                  <ArrowRight className="h-4 w-4 text-[#FE299E]" />
+                </Link>
+              )}
             </div>
 
-            {/* 3-Column Architectural Proof Strip */}
-            <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-[#D3C7B5]">
-              {heroContent.metricStrip.map((metric, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.15 }}
-                  className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-lg px-4 py-3"
+            {/* 3-Column Human Promise Cards */}
+            <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {heroContent.humanPromise.map((item) => (
+                <div
+                  key={item.k}
+                  className="bg-[#FAF8F5]/95 border-[1.5px] border-[#111827] rounded-xl px-4 py-3 shadow-[0_2px_0_#111827]"
                 >
-                  <div className="font-mono text-[11px] uppercase tracking-wider text-[#4A3A32] font-semibold">
-                    {metric.label}
+                  <div className="font-mono text-[11px] uppercase tracking-wider text-[#FE299E] font-bold">
+                    {item.k}
                   </div>
-                  <div className="font-serif text-base sm:text-lg font-bold text-[#281B16] mt-0.5">
-                    {metric.value}
+                  <div className="font-sans text-xs sm:text-sm font-semibold text-[#111827] mt-0.5 leading-snug">
+                    {item.v}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Right 5 Columns: Dark Espresso (#231814) Live Product Studio Well */}
+          {/* Right 5 Columns: Interactive CHB Punctuation Playground (Zero AI Slop — Pure Kinetic Punctuation) */}
           <div className="lg:col-span-5">
-            <div className="bg-[#231814] border-2 border-[#281B16] rounded-2xl p-4 sm:p-5 text-[#F2EAE0] shadow-xl">
-              {/* Studio Well Header & Interactive Operator Tabs */}
-              <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#3D2B24]">
+            <div className="accent-card-tactile p-5 sm:p-6 bg-[#FAF8F5]">
+              <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b-[1.5px] border-[#111827]">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FE299E]" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-[#D3C7B5] font-bold">
-                    LIVE SOVEREIGN ECOSYSTEM
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FE299E] border border-[#111827]" />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#111827] font-bold">
+                    INTERACTIVE PUNCTUATION FAMILY
                   </span>
                 </div>
-                <span className="font-mono text-[11px] text-[#FE299E] font-bold">
-                  {activeShowcase.badge}
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#374151]">
+                  Click a mark to inspect
                 </span>
               </div>
 
-              {/* 4 Operator Switcher Buttons with Shared Spring Pill */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-1.5 mb-4">
-                {[
-                  { id: "pipes" as const, symbol: "| | |", label: "Pipes.Pink" },
-                  { id: "hash_semi" as const, symbol: "# ;-]", label: "Hash + Semi" },
-                  { id: "mcp_galaxy" as const, symbol: "& !", label: "MCP & IDE" },
-                  { id: "greater_marigold" as const, symbol: "> &", label: "Greater" },
-                ].map((tab) => {
-                  const isSelected = activeProductTab === tab.id;
+              {/* 6 Playful Punctuation Keycaps */}
+              <div className="grid grid-cols-6 gap-1.5 mb-5">
+                {(
+                  [
+                    { id: "chb", sym: ":-]", label: "CHB" },
+                    { id: "hash", sym: "#", label: "Hash" },
+                    { id: "semi", sym: ";-]", label: "Semi" },
+                    { id: "scout", sym: "&", label: "Scout" },
+                    { id: "pipes", sym: "|", label: "Pipes" },
+                    { id: "accent", sym: "/", label: "Accént" },
+                  ] as const
+                ).map((item) => {
+                  const isSelected = activePunctuation === item.id;
                   return (
                     <button
-                      key={tab.id}
-                      onClick={() => setActiveProductTab(tab.id)}
-                      className={`relative px-2.5 py-2 rounded-lg font-mono text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+                      key={item.id}
+                      type="button"
+                      onClick={() => setActivePunctuation(item.id)}
+                      className={`py-2.5 px-1 rounded-lg border-[1.5px] border-[#111827] flex flex-col items-center justify-center transition-all cursor-pointer ${
                         isSelected
-                          ? "text-white font-bold"
-                          : "text-[#D3C7B5] hover:text-white bg-[#2E201B] border border-[#3D2B24]"
+                          ? "bg-[#111827] text-[#FAF8F5] translate-y-[-2px] shadow-[0_3px_0_#FE299E]"
+                          : "bg-[#E8E2D5] text-[#111827] hover:bg-[#FAF8F5] shadow-[0_2px_0_#111827]"
                       }`}
-                      data-testid={`hero-showcase-tab-${tab.id}`}
+                      data-testid={`punctuation-key-${item.id}`}
                     >
-                      {isSelected && (
-                        <motion.div
-                          layoutId="hero-operator-pill"
-                          transition={SPRING_LAYOUT}
-                          className="absolute inset-0 bg-[#FE299E] rounded-lg -z-0"
-                        />
-                      )}
-                      <span className="relative z-10">{tab.symbol}</span>
-                      <span className="relative z-10">{tab.label}</span>
+                      <span
+                        className={`font-mono text-base sm:text-lg font-bold leading-none ${
+                          isSelected ? "text-[#FE299E]" : "text-[#111827]"
+                        }`}
+                      >
+                        {item.sym}
+                      </span>
+                      <span className="font-mono text-[9px] uppercase tracking-tighter mt-1 opacity-80">
+                        {item.label}
+                      </span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* High-Contrast Screenshot Frame with Curtain Reveal */}
-              <div className="rounded-xl overflow-hidden border border-[#3D2B24] bg-[#160F0C] mb-4">
-                <AccentRevealImage
-                  key={activeProductTab}
-                  src={activeShowcase.image}
-                  alt={activeShowcase.title}
-                  className="w-full h-56 sm:h-64"
-                  imgClassName="object-top"
-                  delay={0.05}
-                />
-              </div>
+              {/* Active Punctuation Card Display */}
+              <motion.div
+                key={activePunctuation}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+                className="rounded-xl p-5 border-[1.5px] border-[#111827] transition-colors"
+                style={{ backgroundColor: activeMark.bg, color: activeMark.ink }}
+              >
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div>
+                    <span
+                      className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-white mb-2 border border-[#111827]"
+                      style={{ backgroundColor: activeMark.badgeBg }}
+                    >
+                      {activeMark.status}
+                    </span>
+                    <h3
+                      className="font-serif text-2xl sm:text-3xl font-bold leading-tight"
+                      style={{ color: activeMark.ink }}
+                    >
+                      {activeMark.name}
+                    </h3>
+                    <p className="font-mono text-xs font-semibold opacity-80 mt-0.5">
+                      {activeMark.tagline}
+                    </p>
+                  </div>
+                  <div className="w-14 h-14 rounded-xl bg-[#FAF8F5] border-[1.5px] border-[#111827] shadow-[0_3px_0_#111827] flex items-center justify-center shrink-0">
+                    <span className="font-mono text-2xl font-bold text-[#FE299E]">
+                      {activeMark.symbol}
+                    </span>
+                  </div>
+                </div>
 
-              {/* Showcase Caption & Direct Product Launch CTA */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded bg-[#FE299E]/20 text-[#FE299E] font-mono text-xs font-bold">
-                    {activeShowcase.symbol}
-                  </span>
-                  <h2 className="font-serif text-lg sm:text-xl font-bold text-[#F2EAE0] leading-snug">
-                    {activeShowcase.title}
-                  </h2>
-                </div>
-                <p className="text-xs sm:text-sm text-[#D3C7B5] leading-relaxed">
-                  {activeShowcase.caption}
+                <p className="text-sm leading-relaxed mb-5 opacity-90">
+                  {activeMark.desc}
                 </p>
-                <div className="pt-1 flex items-center justify-between gap-3">
-                  <motion.a
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={TAP}
-                    href={activeShowcase.ctaHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-lg bg-[#F2EAE0] hover:bg-white text-[#231814] font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                    data-testid="hero-showcase-launch-cta"
-                  >
-                    <span>{activeShowcase.ctaLabel}</span>
-                    <ExternalLink className="h-3.5 w-3.5 text-[#FE299E]" />
-                  </motion.a>
+
+                <div className="flex items-center justify-between pt-3 border-t border-[#111827]/20">
+                  <span className="font-mono text-[10px] uppercase tracking-wider font-bold">
+                    Explicitly Biased Toward You
+                  </span>
+                  {activeMark.href.startsWith("http") ? (
+                    <a
+                      href={activeMark.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] font-mono text-xs font-bold no-underline transition-colors"
+                    >
+                      <span>{activeMark.cta}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      href={activeMark.href}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] font-mono text-xs font-bold no-underline transition-colors"
+                    >
+                      <span>{activeMark.cta}</span>
+                    </Link>
+                  )}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
