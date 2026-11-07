@@ -157,8 +157,9 @@ export default function Products() {
     <div className="brand-canvas min-h-screen">
       <Seo
         title="Products | Colon Hyphen Bracket : - ] — Pipes |||, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❀"
-        description="Explore independent software tools by Colon Hyphen Bracket: Pipes ||| for curated human knowledge, Hash # for private writing, Semi ; - ], Greater >, Accént é, and Marigold ❀."
+        description="Independent sovereign software by Colon Hyphen Bracket: Pipes ||| for curated human knowledge, Hash # for private writing, Semi ; - ] editor, Greater > classroom, Accént é, and Marigold ❀ civic data."
         path="/products"
+        image="/images/og/og-products.jpg"
       />
 
       {/* Hero Section */}

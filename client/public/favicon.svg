@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <filter id="soft" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#111827" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <!-- Dark navy container circle with subtle shadow -->
+  <circle cx="256" cy="256" r="236" fill="#111827" filter="url(#soft)" />
+  
+  <!-- Hot pink bold colon : -->
+  <circle cx="156" cy="214" r="28" fill="#FE299E" />
+  <circle cx="156" cy="298" r="28" fill="#FE299E" />
+  
+  <!-- Hot pink bold hyphen - -->
+  <rect x="222" y="242" width="68" height="28" rx="14" fill="#FE299E" />
+  
+  <!-- Hot pink bold bracket ] -->
+  <path d="M 330 186 L 372 186 C 379 186 384 191 384 198 L 384 314 C 384 321 379 326 372 326 L 330 326" 
+        fill="none" stroke="#FE299E" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

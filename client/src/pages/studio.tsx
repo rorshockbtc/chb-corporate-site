@@ -75,8 +75,9 @@ export default function StudioPage() {
     <div className="brand-canvas min-h-screen">
       <Seo
         title="Studio | Colon Hyphen Bracket : - ] — One Senior Human. No Handoffs."
-        description="Principal-led software design and architecture sprints by Kyle Cyree. Go from a scary thesis to deployed production code in five days."
+        description="From scary thesis to shipped production code in five days. Fixed one-week sprints ($7,500), embedded partnerships, and custom builds by principal designer-architect Kyle Cyree."
         path="/studio"
+        image="/images/og/og-studio.jpg"
       />
 
       {/* Hero */}

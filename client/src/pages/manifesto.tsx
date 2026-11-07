@@ -63,6 +63,7 @@ export default function ManifestoPage() {
         title="Manifesto | Colon Hyphen Bracket : - ] — Coastal Rigor, Appalachian Honesty"
         description="Why a principal designer-architect from Southern Appalachia built Colon Hyphen Bracket for the founders, creators, families, and Main Street businesses Big Tech overlooked."
         path="/manifesto"
+        image="/images/og/og-manifesto.jpg"
       />
 
       {/* Full-Width Bold Typographic Hero */}

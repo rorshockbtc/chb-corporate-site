@@ -556,8 +556,9 @@ export function HomePage() {
     <div className="brand-canvas min-h-screen">
       <Seo
         title="Colon Hyphen Bracket : - ] | Principal Design, Software Architecture & Independent Tools"
-        description="Colon Hyphen Bracket turns the intimidating parts of software (compliance, infrastructure, cryptography, and data architecture) into clarity, speed, and a smile."
+        description="Colon Hyphen Bracket turns the intimidating parts of software (compliance, infrastructure, cryptography, and data architecture) into clarity, speed, and a smile. Fixed one-week sprints ($7,500) and sovereign tools."
         path="/"
+        image="/images/og/og-home.jpg"
       />
       <Hero />
       <Marquee />

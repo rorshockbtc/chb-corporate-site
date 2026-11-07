@@ -55,8 +55,9 @@ export default function Contact() {
     <div className="brand-canvas min-h-screen">
       <Seo
         title="Start a Project | Colon Hyphen Bracket : - ] — Principal Design & Architecture"
-        description="Book a one-week sprint, single-day build, or embedded principal partner with Kyle Cyree at Colon Hyphen Bracket."
+        description="Book a one-week sprint ($7,500), single-day build, or embedded principal partner with Kyle Cyree at Colon Hyphen Bracket."
         path="/contact"
+        image="/images/og/og-contact.jpg"
       />
 
       <section className="pt-28 sm:pt-40 pb-24 sm:pb-36">
