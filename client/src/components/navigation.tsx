@@ -42,11 +42,11 @@ export function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
           open
             ? "bg-[#FAF8F5] border-b border-[#111827]/10"
             : scrolled
-            ? "bg-[#FAF8F5]/92 backdrop-blur-md shadow-[0_1px_0_rgba(17,24,39,0.08)]"
+            ? "chb-nav-scrolled"
             : "bg-transparent"
         }`}
       >
