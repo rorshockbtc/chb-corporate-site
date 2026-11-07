@@ -48,6 +48,7 @@ for (const p of pages) {
   html = html.replace(/<meta name="twitter:title" content=".*?" \/>/, `<meta name="twitter:title" content="${p.title}" />`);
   html = html.replace(/<meta name="twitter:description" content=".*?" \/>/, `<meta name="twitter:description" content="${p.desc}" />`);
   html = html.replace(/<meta name="twitter:image" content=".*?" \/>/, `<meta name="twitter:image" content="${p.image}" />`);
+  html = html.replace(/<meta name="twitter:image:alt" content=".*?" \/>/, `<meta name="twitter:image:alt" content="${p.title}" />`);
   html = html.replace(/<link rel="canonical" href=".*?" \/>/, `<link rel="canonical" href="https://colonhyphenbracket.pink/${p.path}" />`);
 
   const dir = path.join(__dirname, 'dist/public', p.path);
