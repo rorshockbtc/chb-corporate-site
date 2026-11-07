@@ -72,19 +72,39 @@ function Marquee() {
   );
 }
 
-/* ──────────────────────────── MANIFESTO ──────────────────────────── */
+/* ──────────────────────────── MANIFESTO (CONTINUOUS SCROLL REVEAL) ──────────────────────────── */
 const MCOL = ["#FE299E", "#0A9BE0", "#3FA535"];
 const OPINIONS = [
-  { mark: ": - ]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
-  { mark: "#", line: "Explicit bias beats fake neutrality.", note: "We have opinions. We tell you what they are. You're smart enough to disagree." },
-  { mark: "; - ]", line: "One senior human beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
-  { mark: "|||", line: "Independent means uncompromised.", note: "No VC to please. Curators keep 70% of what they create. We answer to the people who use the software." },
-  { mark: "é", line: "Craft is how you scale.", note: "Clean architecture and a real design system are what let small teams act big." },
-  { mark: "❀", line: "Your data is yours. Full stop.", note: "Local-first, private by default. Marigold analyzes data in your browser; we never sell, mine, or train on what you make." },
+  { id: "op-0", mark: ": - ]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
+  { id: "op-1", mark: "#", line: "Explicit bias beats fake neutrality.", note: "We have opinions. We tell you what they are. You're smart enough to disagree." },
+  { id: "op-2", mark: "; - ]", line: "One senior human beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
+  { id: "op-3", mark: "|||", line: "Independent means uncompromised.", note: "No VC to please. Curators keep 70% of what they create. We answer to the people who use the software." },
+  { id: "op-4", mark: "é", line: "Craft is how you scale.", note: "Clean architecture and a real design system are what let small teams act big." },
+  { id: "op-5", mark: "❀", line: "Your data is yours. Full stop.", note: "Local-first, private by default. Marigold analyzes data in your browser; we never sell, mine, or train on what you make." },
 ];
 
 function Manifesto() {
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 320;
+      for (let i = 0; i < OPINIONS.length; i++) {
+        const el = document.getElementById(OPINIONS[i].id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActive(i);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section id="manifesto" className="py-28 sm:py-36 scroll-mt-24" data-testid="section-manifesto">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
@@ -95,26 +115,59 @@ function Manifesto() {
         <div className="mt-14 grid lg:grid-cols-12 gap-10">
           <ol className="lg:col-span-8">
             {OPINIONS.map((o, i) => (
-              <li key={o.line}>
+              <li key={o.id} id={o.id} className="scroll-mt-48">
                 <button
-                  onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}
-                  className="group w-full text-left py-5 sm:py-6 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 bg-transparent cursor-pointer">
-                  <span className={`font-display font-bold text-2xl sm:text-3xl w-14 shrink-0 transition-colors ${active === i ? "" : "text-[#111827]/25"}`} style={active === i ? { color: MCOL[i % 3] } : undefined}>{o.mark}</span>
-                  <span className={`font-display font-bold text-big transition-all duration-500 ${active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"}`}>
-                    {o.line}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className="group w-full text-left py-7 sm:py-8 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 bg-transparent cursor-pointer"
+                >
+                  <span
+                    className={`font-display font-bold text-2xl sm:text-3xl w-14 shrink-0 transition-colors duration-300 ${active === i ? "" : "text-[#111827]/25"}`}
+                    style={active === i ? { color: MCOL[i % 3] } : undefined}
+                  >
+                    {o.mark}
                   </span>
+                  <div className="flex-1">
+                    <span
+                      className={`block font-display font-bold text-big transition-all duration-300 ${
+                        active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"
+                      }`}
+                    >
+                      {o.line}
+                    </span>
+                    {/* Inline on mobile, sticky side on desktop */}
+                    <div className="block lg:hidden mt-3 text-lg text-[#111827]/75">
+                      {o.note}
+                    </div>
+                  </div>
                 </button>
               </li>
             ))}
           </ol>
-          <div className="lg:col-span-4 lg:pt-6">
-            <div className="lg:sticky lg:top-32">
+
+          <div className="hidden lg:block lg:col-span-4 lg:pt-6">
+            <div className="sticky top-36 p-8 rounded-3xl bg-[#F3EEE6]/70 border border-[#111827]/10 shadow-sm">
               <AnimatePresence mode="wait">
-                <motion.div key={active}
-                  initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.35 }}>
-                  <div className="font-display text-[96px] font-bold leading-none" style={{ color: MCOL[active % 3] }}>{OPINIONS[active].mark}</div>
-                  <p className="mt-6 text-xl leading-relaxed text-[#111827]/75">{OPINIONS[active].note}</p>
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div
+                    className="font-display text-[96px] font-bold leading-none"
+                    style={{ color: MCOL[active % 3] }}
+                  >
+                    {OPINIONS[active].mark}
+                  </div>
+                  <h3 className="font-display text-2xl font-bold text-[#111827] mt-4">
+                    {OPINIONS[active].line}
+                  </h3>
+                  <p className="mt-4 text-xl leading-relaxed text-[#111827]/75">
+                    {OPINIONS[active].note}
+                  </p>
                 </motion.div>
               </AnimatePresence>
             </div>
