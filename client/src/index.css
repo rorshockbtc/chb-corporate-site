@@ -494,3 +494,31 @@
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 .font-logo { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 0.02em; }
+
+/* ── Brisk continuous marquee ─────────────────────────────────── */
+@keyframes chb-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-chb-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: chb-marquee 13s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .animate-chb-marquee {
+    animation-duration: 22s;
+  }
+}
+
+.animate-chb-marquee:hover {
+  animation-play-state: paused;
+}
+

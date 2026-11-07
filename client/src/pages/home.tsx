@@ -182,17 +182,13 @@ function Marquee() {
   const row = [...words, ...words];
   return (
     <div className="border-y border-[#111827]/10 py-5 sm:py-6 overflow-hidden bg-[#FAF8F5]" aria-hidden>
-      <motion.div
-        className="flex gap-8 sm:gap-10 whitespace-nowrap font-display text-3xl sm:text-5xl font-bold"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 38, ease: "linear", repeat: Infinity }}
-      >
+      <div className="animate-chb-marquee flex gap-8 sm:gap-10 whitespace-nowrap font-display text-3xl sm:text-5xl font-bold">
         {row.map((w, i) => (
           <span key={i} className={/[:;é#|❀→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>
             {w}
           </span>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
