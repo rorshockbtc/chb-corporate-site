@@ -39,14 +39,14 @@ const PRODUCTS: ProductItem[] = [
     secondaryHref: "https://pipes.pink/download",
     secondaryCta: "Download for Mac, Windows & Mobile",
     tagline: "Curators get paid when people, or machines, learn from them.",
-    body: "Pipes is a home for curated human knowledge that works everywhere you do: as a web app, a native desktop app for Mac and Windows, on iOS and Android, and as a Chromium browser extension that runs on any website for live diagnostics and clipping. It can run entirely locally on your own hardware. Claim your three-pipe namespace for $9 a year, publish what you know, and keep 70% of what readers and automated systems pay to cite or learn from it.",
+    body: "AI giants scrape and farm human knowledge for free, without consent or compensation. Pipes solves that: you get a free personal pipe to store your private knowledge and research, a business pipe to integrate with your operations, or curated topic pipes to publish on what you know best—from aerospace engineering and fly fishing to writing books. When people or AI agents retrieve and learn from your verified nodes, you earn 70% royalties. Available across Web, Mac, Windows, iOS, Android, and Chromium extension, with full local zero-cloud capability.",
     points: [
-      "Always three pipes: |||",
-      "Cross-platform: Web, Mac, Windows, iOS & Android",
-      "Chromium extension for live website diagnostics",
+      "Register a pipe to represent your knowledge and share it with other humans and AI agents. Earn 70%.",
+      "Free personal namespace · Public publishing starts at $5/month",
+      "Curate any topic you care about: from aerospace to fly fishing",
+      "Solves real-time AI retrieval (RAG) with verifiable provenance",
+      "Cross-platform: Web, Mac, Windows, iOS, Android & Chromium extension",
       "Can run 100% locally on your own machine",
-      "Your own namespace for $9/yr · Creators keep 70%",
-      "Zero algorithmic feeds. Ever.",
     ],
   },
   {
@@ -59,15 +59,14 @@ const PRODUCTS: ProductItem[] = [
     cta: "Open BANG! IDE",
     secondaryHref: "https://pipes.pink/download",
     secondaryCta: "Download Pipes for Desktop",
-    tagline: "Update your own website with a local AI agent—for $0, without calling us.",
-    body: "Most agencies secretly love when you have to email them and pay a retainer just to swap a photo or fix a headline. We built BANG! so you never have to. Built right inside Pipes for Desktop, BANG! is a full-featured local IDE made for both developers and regular, non-technical teams. Just open BANG!, invoke specialized Pipes across the : - ] network (like our website design pipe), and ask your local agent in plain English to update text, swap images, or adjust layouts—for $0, with zero code required.",
+    tagline: "Update your own website with a local assistant—for $0, without calling us.",
+    body: "Traditional agencies love charging monthly retainers just to change a headline, swap an image, or update copy. We built BANG! so you're never held hostage for simple edits. Included right inside Pipes for Desktop, BANG! is a friendly local website editor made for regular, non-technical teams (and developers too). Just open BANG! and tell your local assistant in plain English what you want changed—it updates your site on your computer for $0, with zero coding required.",
     points: [
-      "Always all caps with an exclamation point: BANG!",
-      "Built for both non-technical teams and developers",
-      "Edit text, images, and pages in plain English for $0",
-      "Invoke specialized Pipes (like website design) locally",
-      "Runs inside Pipes for Desktop on Mac and Windows",
-      "No agency retainers just to make simple edits",
+      "Built for regular, non-technical teams (and developers too)",
+      "Update copy, images, and pages in plain English for $0",
+      "No agency retainers or hourly fees just to make basic site edits",
+      "Runs privately on your own computer inside Pipes for Desktop",
+      "Invoke specialized Pipes (like website design) whenever you need them",
     ],
   },
   {
@@ -531,7 +530,7 @@ export default function Products() {
           </div>
 
           <FadeUp delay={0.25} className="mt-12 sm:mt-14 pt-8 border-t border-[#111827]/15 flex flex-wrap items-center justify-between gap-4 sm:gap-6 text-sm text-[#111827]/60">
-            <span>Free to start · $9/yr to claim a sovereign Pipe · 70% creator royalties</span>
+            <span>Free personal namespace · Public publishing starts at $5/mo · 70% creator royalties</span>
             <span>Single unified cryptographic login across the entire ecosystem</span>
           </FadeUp>
         </div>
