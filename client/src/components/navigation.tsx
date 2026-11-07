@@ -6,7 +6,7 @@ import { Menu, X, ArrowRight } from "lucide-react";
 const LINKS = [
   { href: "/studio", label: "Studio" },
   { href: "/products", label: "Products" },
-  { href: "/#manifesto", label: "Manifesto" },
+  { href: "/manifesto", label: "Manifesto" },
   { href: "https://hire.colonhyphenbracket.pink", label: "About Kyle", external: true },
 ];
 

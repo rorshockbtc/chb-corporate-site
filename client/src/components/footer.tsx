@@ -21,6 +21,7 @@ export function Footer() {
             <div className="font-display text-lg font-bold text-white mb-4">Studio</div>
             <ul className="space-y-2.5 text-[15px]">
               <li><Link href="/studio" className="link-swipe no-underline text-white/80 hover:text-white">How we work</Link></li>
+              <li><Link href="/manifesto" className="link-swipe no-underline text-white/80 hover:text-white">Manifesto</Link></li>
               <li><Link href="/contact" className="link-swipe no-underline text-white/80 hover:text-white">Start a project</Link></li>
               <li><a href="https://hire.colonhyphenbracket.pink" className="link-swipe no-underline text-white/80 hover:text-white">About Kyle ↗</a></li>
             </ul>

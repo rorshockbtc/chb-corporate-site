@@ -80,13 +80,41 @@ export default function StudioPage() {
         </div>
       </section>
 
-      {/* Art band */}
-      <FadeUp className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <img
-          src="/images/brand/studio-bridge.jpg"
-          alt="A seamless stone bridge arch connecting strategy, design, and engineering"
-          className="w-full aspect-[21/9] object-cover rounded-[28px] shadow-sm"
-        />
+      {/* Bold Typographic Handoff-Elimination Band (Replaces generic illustration) */}
+      <FadeUp className="bg-[#111827] text-[#FAF8F5] py-20 sm:py-28">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="lg:col-span-6 space-y-4">
+            <div className="font-display text-2xl sm:text-3xl font-bold text-white/35 line-through decoration-[#FE299E] decoration-4">
+              Strategy deck → Figma handoff → Jira backlog → 4 months lost
+            </div>
+            <div className="font-display text-3xl sm:text-5xl font-bold text-white leading-tight pt-2">
+              <span className="text-[#0A9BE0]">Problem</span> →{" "}
+              <span className="text-[#3FA535]">Design</span> →{" "}
+              <span className="text-[#FE299E]">Production Code</span>{" "}
+              <span className="text-white/60">in one head.</span>
+            </div>
+          </div>
+          <div className="lg:col-span-6 grid sm:grid-cols-3 gap-6 border-t lg:border-t-0 lg:border-l border-white/15 pt-8 lg:pt-0 lg:pl-12">
+            <div>
+              <div className="font-display text-4xl sm:text-5xl font-bold text-[#0A9BE0]">1</div>
+              <p className="mt-2 text-base text-white/75 leading-relaxed">
+                Principal architect from first call to final pull request.
+              </p>
+            </div>
+            <div>
+              <div className="font-display text-4xl sm:text-5xl font-bold text-[#3FA535]">5 days</div>
+              <p className="mt-2 text-base text-white/75 leading-relaxed">
+                To go from a gnarly thesis to deployed, working software.
+              </p>
+            </div>
+            <div>
+              <div className="font-display text-4xl sm:text-5xl font-bold text-[#FE299E]">100%</div>
+              <p className="mt-2 text-base text-white/75 leading-relaxed">
+                Your repository, your design tokens, your IP on day one.
+              </p>
+            </div>
+          </div>
+        </div>
       </FadeUp>
 
       {/* Who */}

@@ -177,63 +177,59 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Sticky Storytelling Rail & Continuous Chapters */}
-      <section className="pb-28 sm:pb-36">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          {/* Top Sticky Punctuation Index Bar */}
-          <div className="sticky top-20 z-20 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#111827]/10 py-4 mb-16">
-            <div className="flex flex-wrap items-baseline gap-x-6 sm:gap-x-10 gap-y-3">
-              <span className="text-sm font-semibold uppercase tracking-wider text-[#111827]/40 hidden md:inline">
-                Scroll to explore:
-              </span>
-              {PRODUCTS.map((x) => {
-                const isActive = activeId === x.id;
-                return (
-                  <button
-                    key={x.id}
-                    onClick={() => scrollToSection(x.id)}
-                    className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
-                    style={{ color: isActive ? x.color : "rgba(17,24,39,0.3)" }}
-                  >
-                    <span className="mr-2 font-black">{x.mark}</span>
-                    <span>{x.name}</span>
-                    {isActive && (
-                      <motion.span
-                        layoutId="active-indicator"
-                        className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
-                        style={{ backgroundColor: x.color }}
-                        transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
+      {/* Full-Width Sticky Punctuation Index Bar */}
+      <div className="sticky top-16 sm:top-20 z-20 w-full bg-[#FAF8F5]/92 backdrop-blur-md border-y border-[#111827]/10 py-4">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+          {PRODUCTS.map((x) => {
+            const isActive = activeId === x.id;
+            return (
               <button
-                onClick={() => scrollToSection("marigold")}
+                key={x.id}
+                onClick={() => scrollToSection(x.id)}
                 className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
-                style={{ color: activeId === "marigold" ? GOLD : "rgba(17,24,39,0.3)" }}
+                style={{ color: isActive ? x.color : "rgba(17,24,39,0.3)" }}
               >
-                <span className="mr-2 text-xl">❀</span>
-                <span>Marigold</span>
-                {activeId === "marigold" && (
+                <span className="mr-2 font-black">{x.mark}</span>
+                <span>{x.name}</span>
+                {isActive && (
                   <motion.span
                     layoutId="active-indicator"
                     className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
-                    style={{ backgroundColor: GOLD }}
+                    style={{ backgroundColor: x.color }}
                     transition={{ type: "spring", stiffness: 450, damping: 35 }}
                   />
                 )}
               </button>
-            </div>
-          </div>
+            );
+          })}
+          <button
+            onClick={() => scrollToSection("marigold")}
+            className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
+            style={{ color: activeId === "marigold" ? GOLD : "rgba(17,24,39,0.3)" }}
+          >
+            <span className="mr-2 text-xl">❀</span>
+            <span>Marigold</span>
+            {activeId === "marigold" && (
+              <motion.span
+                layoutId="active-indicator"
+                className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
+                style={{ backgroundColor: GOLD }}
+                transition={{ type: "spring", stiffness: 450, damping: 35 }}
+              />
+            )}
+          </button>
+        </div>
+      </div>
 
-          {/* Sequential Product Chapters */}
+      {/* Sequential Product Chapters */}
+      <section className="pt-16 pb-28 sm:pb-36">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="space-y-32">
             {PRODUCTS.map((p) => (
               <div
                 key={p.id}
                 id={p.id}
-                className="scroll-mt-36 pt-8 pb-12 border-t border-[#111827]/10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start"
+                className="scroll-mt-36 pt-8 pb-12 border-t border-[#111827]/10 first:border-t-0 grid lg:grid-cols-12 gap-12 lg:gap-16 items-start"
               >
                 <div className="lg:col-span-4 lg:sticky lg:top-36">
                   <div
@@ -301,53 +297,55 @@ export default function Products() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Standalone Marigold Chapter (Mule Design-inspired full-bleed typographic billboard) */}
-            <div
-              id="marigold"
-              className="scroll-mt-36 relative overflow-hidden rounded-[36px] bg-[#1a140d] text-white -mx-5 sm:-mx-8 lg:-mx-12 px-8 sm:px-12 lg:px-16 py-20 sm:py-28 shadow-xl"
-            >
-              {/* Background Marigold Image with Warm Golden-Amber Wash */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src="/images/brand/marigold-real.jpg"
-                  alt="Golden marigold background"
-                  className="w-full h-full object-cover opacity-25 filter blur-[1px] scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#1a140d] via-[#1a140d]/90 to-[#b45309]/30" />
-              </div>
+      {/* Full-Width Standalone Marigold Chapter (Edge-to-edge Mule Design-inspired typographic billboard) */}
+      <section
+        id="marigold"
+        className="scroll-mt-32 relative overflow-hidden w-full bg-[#1a140d] text-white py-24 sm:py-36"
+      >
+        {/* Background Marigold Image with Warm Golden-Amber Wash */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/brand/marigold-real.jpg"
+            alt="Golden marigold background"
+            className="w-full h-full object-cover opacity-30 filter blur-[0.5px] scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a140d] via-[#1a140d]/88 to-[#b45309]/35" />
+        </div>
 
-              <div className="relative z-10 max-w-4xl">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30 mb-8">
-                  <span>❀</span> The Civic Data Exception · Named After the Flower
-                </div>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30 mb-8">
+              <span>❀</span> The Civic Data Exception · Named After the Flower
+            </div>
 
-                <h2 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white">
-                  Designed <span className="text-[#FBBF24]">to work.</span>
-                </h2>
+            <h2 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white">
+              Designed <span className="text-[#FBBF24]">to work.</span>
+            </h2>
 
-                <p className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mt-8 text-[#FAF8F5]/90 leading-snug">
-                  If you've got the sensitive civic data, we've got the zero-knowledge architecture... and the experience.
-                </p>
+            <p className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mt-8 text-[#FAF8F5]/90 leading-snug">
+              If you've got the sensitive civic data, we've got the zero-knowledge architecture... and the experience.
+            </p>
 
-                <p className="mt-8 text-lg sm:text-xl leading-relaxed text-[#FAF8F5]/75 max-w-[56ch]">
-                  Marigold is our civic data engine engineered specifically for researchers, municipal advocates, and healthcare teams. Built on DuckDB-Wasm and client-side encryption, it reconciles hundreds of thousands of records entirely in your browser—without sending a single byte of private data to a cloud server.
-                </p>
+            <p className="mt-8 text-lg sm:text-xl leading-relaxed text-[#FAF8F5]/80 max-w-[58ch]">
+              Marigold is our civic data engine engineered specifically for researchers, municipal advocates, and healthcare teams. Built on DuckDB-Wasm and client-side encryption, it reconciles hundreds of thousands of records entirely in your browser—without sending a single byte of private data to a cloud server.
+            </p>
 
-                <div className="mt-12 flex flex-wrap items-center gap-4">
-                  <a
-                    href="https://marigoldinsights.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] text-lg font-bold no-underline transition-colors shadow-lg"
-                  >
-                    Open MarigoldInsights.org <ArrowUpRight className="w-5 h-5 text-[#111827]" />
-                  </a>
-                  <span className="text-sm font-medium text-white/50">
-                    Live civic data research platform
-                  </span>
-                </div>
-              </div>
+            <div className="mt-12 flex flex-wrap items-center gap-4">
+              <a
+                href="https://marigoldinsights.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] text-lg font-bold no-underline transition-colors shadow-lg"
+              >
+                Open MarigoldInsights.org <ArrowUpRight className="w-5 h-5 text-[#111827]" />
+              </a>
+              <span className="text-sm font-medium text-white/60">
+                Live civic data research platform
+              </span>
             </div>
           </div>
         </div>

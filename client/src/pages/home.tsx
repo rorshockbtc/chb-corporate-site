@@ -12,43 +12,69 @@ function Art({ src, alt, className = "" }: { src: string; alt: string; className
   return <img src={src} alt={alt} loading="lazy" onError={() => setOk(false)} className={`object-cover ${className}`} />;
 }
 
-/* ─────────────────────────────── HERO (FULL-WIDTH CRAFT & HIGH-CONTRAST TYPE) ─────────────────────────────── */
+/* ─────────────────────────────── HERO (FULL-BLEED TALL STAIRCASE CANVAS) ─────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative pt-28 sm:pt-36 pb-20 sm:pb-28" data-testid="hero-section">
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-7">
-            <h1 className="font-display font-bold text-[#111827] text-[clamp(2.6rem,7.4vw,7.5rem)] leading-[0.95]" data-testid="hero-title">
+    <section
+      className="relative overflow-hidden bg-[#F7F6F1] border-b border-[#111827]/10"
+      data-testid="hero-section"
+    >
+      {/* Full-bleed horizontally-flipped staircase canvas:
+          Because the image is 16:9, we place it in a full-width aspect-[16/10] or taller container on desktop
+          with object-contain / object-right-top so the tall vertical staircase is visible along the right edge
+          at the top of the page, our dark navy typography sits in the huge upper-left off-white sky,
+          and scrolling down reveals the person with the pink umbrella walking up the gentle ramp. */}
+      <div className="relative min-h-[108vh] lg:min-h-[128vh] flex flex-col justify-between pt-28 sm:pt-36 pb-16 sm:pb-24">
+        <img
+          src="/images/brand/scary-staircase.jpg"
+          alt="A gentle ramp with a person holding a pink umbrella bypassing a tall jagged staircase"
+          className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-[22%_top] sm:object-[12%_top] scale-x-[-1]"
+        />
+        {/* Subtle readability veil on smaller viewports where the staircase shifts closer */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/85 via-[#FAF8F5]/45 to-transparent lg:from-transparent lg:via-transparent lg:to-transparent"
+        />
+
+        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="max-w-[50rem]">
+            <h1
+              className="font-display font-bold text-[#111827] text-[clamp(2.6rem,6.8vw,7rem)] leading-[0.95]"
+              data-testid="hero-title"
+            >
               <ScaryHeadline accent="#FE299E" />
             </h1>
 
             <FadeUp delay={0.25} className="mt-8 sm:mt-10">
-              <p className="text-xl sm:text-2xl leading-[1.45] text-[#111827]/80 max-w-[36ch]">
+              <p className="text-xl sm:text-2xl leading-[1.45] text-[#111827]/85 max-w-[35ch]">
                 Colon Hyphen Bracket takes the intimidating parts of software (compliance, infrastructure, AI) and makes them clear, honest, and kind to use. For founders, creators, and families Big Tech forgot.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-5">
                 <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-                  <Link href="/contact" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
+                  >
                     Bring us something scary <ArrowRight className="w-5 h-5" />
                   </Link>
                 </motion.div>
-                <a href="#manifesto" className="text-lg font-medium text-[#111827]/80 hover:text-[#111827] no-underline link-swipe">
-                  Explore our core opinions ↓
-                </a>
+                <Link
+                  href="/manifesto"
+                  className="text-lg font-semibold text-[#111827] hover:text-[#FE299E] no-underline link-swipe"
+                >
+                  Read the manifesto →
+                </Link>
               </div>
             </FadeUp>
           </div>
+        </div>
 
-          <FadeUp delay={0.35} className="lg:col-span-5">
-            <div className="relative rounded-[32px] overflow-hidden shadow-lg border border-[#111827]/10 bg-[#F3EEE6]">
-              <img
-                src="/images/brand/scary-staircase.jpg"
-                alt="A gentle ramp bypassing a jagged staircase with a pink umbrella"
-                className="w-full aspect-[4/3] object-cover scale-x-[-1]"
-              />
-            </div>
-          </FadeUp>
+        {/* Bottom caption anchored near the ramp as you scroll down */}
+        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12 mt-36 sm:mt-52">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#111827]/10 text-sm sm:text-base font-medium text-[#111827]/80 shadow-sm">
+            <span className="font-display font-bold text-[#FE299E]">: - ]</span>
+            <span>Every steep staircase is just a ramp nobody bothered to design yet.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -372,17 +398,17 @@ function ThingsWeMake() {
 /* ─────────────────────────────── CLOSE (RICH GROUNDED HERO CONCLUSION) ─────────────────────────────── */
 function Close() {
   return (
-    <section className="py-28 sm:py-36 text-center" data-testid="section-close">
-      <div className="max-w-[1000px] mx-auto px-5">
+    <section className="py-20 sm:py-28 text-center" data-testid="section-close">
+      <div className="max-w-[1060px] mx-auto px-5">
         <FadeUp>
-          <Smile className="text-[120px] sm:text-[180px]" color="#FE299E" winkEvery={3000} />
+          <Smile className="text-[88px] sm:text-[124px]" color="#FE299E" winkEvery={3000} />
         </FadeUp>
-        <h2 className="font-display font-bold text-huge mt-8">
-          <RiseLines lines={["Got something scary?", "Let's make it smile."]} />
+        <h2 className="font-display font-bold text-huge mt-4 sm:mt-5">
+          <RiseLines immediate lines={["Got something scary?", "Let's make it smile."]} />
         </h2>
 
-        {/* Studio Direct Reassurance Cards (Replaces the empty white void) */}
-        <FadeUp delay={0.2} className="mt-12 grid sm:grid-cols-3 gap-6 text-left">
+        {/* Studio Direct Reassurance Cards (Tightened spacing under the smile) */}
+        <FadeUp delay={0.15} className="mt-7 sm:mt-9 grid sm:grid-cols-3 gap-5 text-left">
           <div className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10">
             <div className="font-display text-2xl font-bold text-[#111827]">Fixed Sprints</div>
             <p className="mt-2 text-base text-[#111827]/70 leading-relaxed">
@@ -403,7 +429,7 @@ function Close() {
           </div>
         </FadeUp>
 
-        <FadeUp delay={0.3} className="mt-12 flex flex-wrap justify-center items-center gap-4">
+        <FadeUp delay={0.3} className="mt-10 flex flex-wrap justify-center items-center gap-4">
           <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
             <Link href="/contact" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-sm">
               Start a project <ArrowRight className="w-5 h-5" />
