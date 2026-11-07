@@ -5,49 +5,120 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { ScaryHeadline } from "@/components/brand/scary-words";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { Seo } from "@/components/brand/seo";
 
-function Art({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+function ResponsiveArt({
+  name,
+  alt,
+  className = "",
+  priority = false,
+}: {
+  name: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
   const [ok, setOk] = useState(true);
   if (!ok) return <div className={`bg-[#F1ECE4] ${className}`} aria-hidden />;
-  return <img src={src} alt={alt} loading="lazy" onError={() => setOk(false)} className={`object-cover ${className}`} />;
+  return (
+    <picture className="block w-full">
+      <source media="(max-width: 639px)" srcSet={`/images/brand/${name}-mobile.webp`} type="image/webp" />
+      <source media="(max-width: 639px)" srcSet={`/images/brand/${name}-mobile.jpg`} type="image/jpeg" />
+      <source srcSet={`/images/brand/${name}.webp`} type="image/webp" />
+      <img
+        src={`/images/brand/${name}.jpg`}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        onError={() => setOk(false)}
+        className={`object-cover ${className}`}
+      />
+    </picture>
+  );
 }
 
-/* ─────────────────────────────── HERO (FULL-BLEED TALL STAIRCASE CANVAS) ─────────────────────────────── */
+/* ─────────────────────────────── HERO ─────────────────────────────── */
 function Hero() {
   return (
     <section
       className="relative overflow-hidden bg-[#F7F6F1] border-b border-[#111827]/10"
       data-testid="hero-section"
     >
-      {/* Full-bleed horizontally-flipped staircase canvas:
-          Because the image is 16:9, we place it in a full-width aspect-[16/10] or taller container on desktop
-          with object-contain / object-right-top so the tall vertical staircase is visible along the right edge
-          at the top of the page, our dark navy typography sits in the huge upper-left off-white sky,
-          and scrolling down reveals the person with the pink umbrella walking up the gentle ramp. */}
-      <div className="relative min-h-[108vh] lg:min-h-[128vh] flex flex-col justify-between pt-28 sm:pt-36 pb-16 sm:pb-24">
-        <img
-          src="/images/brand/scary-staircase.jpg"
-          alt="A gentle ramp with a person holding a pink umbrella bypassing a tall jagged staircase"
-          className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-[22%_top] sm:object-[12%_top] scale-x-[-1]"
-        />
-        {/* Subtle readability veil on smaller viewports where the staircase shifts closer */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/85 via-[#FAF8F5]/45 to-transparent lg:from-transparent lg:via-transparent lg:to-transparent"
-        />
+      {/* Mobile & Tablet (< lg): Clean stacked layout so typography never collides with the dark staircase */}
+      <div className="lg:hidden pt-24 sm:pt-32 pb-12">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <h1
+            className="font-display font-bold text-[#111827] text-[clamp(2.35rem,9vw,4.25rem)] leading-[0.98]"
+            data-testid="hero-title-mobile"
+          >
+            <ScaryHeadline accent="#FE299E" />
+          </h1>
 
-        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-[58rem] lg:max-w-[64rem]">
+          <FadeUp delay={0.2} className="mt-6">
+            <p className="text-lg sm:text-xl leading-[1.5] text-[#111827]/85 max-w-[38ch]">
+              Colon Hyphen Bracket takes the intimidating parts of software (compliance, infrastructure, cryptography) and makes them clear, honest, and kind to use. For founders, creators, and families Big Tech forgot.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#FE299E] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
+              >
+                Bring us something scary <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="/manifesto"
+                className="text-base sm:text-lg font-semibold text-[#111827] hover:text-[#FE299E] no-underline link-swipe py-2"
+              >
+                Read the manifesto →
+              </Link>
+            </div>
+          </FadeUp>
+        </div>
+
+        {/* Dedicated mobile-cropped staircase + pink umbrella ramp artwork below the copy */}
+        <div className="mt-8 px-5 sm:px-8">
+          <div className="rounded-[24px] overflow-hidden border border-[#111827]/10 shadow-sm bg-[#F7F6F1]">
+            <picture>
+              <source srcSet="/images/brand/scary-staircase-mobile.webp" type="image/webp" />
+              <img
+                src="/images/brand/scary-staircase-mobile.jpg"
+                alt="A gentle ramp with a person holding a pink umbrella bypassing a tall jagged staircase"
+                className="w-full aspect-[4/3] object-cover block"
+                loading="eager"
+              />
+            </picture>
+          </div>
+          <div className="mt-4 inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#FAF8F5] border border-[#111827]/10 text-sm font-medium text-[#111827]/80">
+            <span className="font-display font-bold text-[#FE299E] shrink-0 whitespace-nowrap">: - ]</span>
+            <span>Every steep staircase is just a ramp nobody bothered to design yet.</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop (lg+): Full-bleed taller-than-viewport staircase canvas */}
+      <div className="hidden lg:flex relative min-h-[126vh] flex-col justify-between pt-36 pb-24">
+        <picture>
+          <source srcSet="/images/brand/scary-staircase.webp" type="image/webp" />
+          <img
+            src="/images/brand/scary-staircase.jpg"
+            alt="A gentle ramp with a person holding a pink umbrella bypassing a tall jagged staircase"
+            className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-[12%_top] scale-x-[-1]"
+            loading="eager"
+          />
+        </picture>
+
+        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-12">
+          <div className="max-w-[64rem]">
             <h1
-              className="font-display font-bold text-[#111827] text-[clamp(2.4rem,5.6vw,6.2rem)] leading-[0.96]"
+              className="font-display font-bold text-[#111827] text-[clamp(3.5rem,5.6vw,6.2rem)] leading-[0.96]"
               data-testid="hero-title"
             >
               <ScaryHeadline accent="#FE299E" />
             </h1>
 
-            <FadeUp delay={0.25} className="mt-8 sm:mt-10">
-              <p className="text-xl sm:text-2xl leading-[1.45] text-[#111827]/85 max-w-[35ch]">
-                Colon Hyphen Bracket takes the intimidating parts of software (compliance, infrastructure, AI) and makes them clear, honest, and kind to use. For founders, creators, and families Big Tech forgot.
+            <FadeUp delay={0.25} className="mt-10">
+              <p className="text-2xl leading-[1.45] text-[#111827]/85 max-w-[35ch]">
+                Colon Hyphen Bracket takes the intimidating parts of software (compliance, infrastructure, cryptography) and makes them clear, honest, and kind to use. For founders, creators, and families Big Tech forgot.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-5">
                 <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
@@ -69,10 +140,9 @@ function Hero() {
           </div>
         </div>
 
-        {/* Bottom caption anchored near the ramp as you scroll down */}
-        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12 mt-36 sm:mt-52">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#111827]/10 text-sm sm:text-base font-medium text-[#111827]/80 shadow-sm">
-            <span className="font-display font-bold text-[#FE299E]">: - ]</span>
+        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-12 mt-52">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#111827]/10 text-base font-medium text-[#111827]/80 shadow-sm">
+            <span className="font-display font-bold text-[#FE299E] shrink-0 whitespace-nowrap">: - ]</span>
             <span>Every steep staircase is just a ramp nobody bothered to design yet.</span>
           </div>
         </div>
@@ -86,11 +156,16 @@ function Marquee() {
   const words = ["Scary", "→", "Clear", "→", "Shipped", ": - ]", "Honest", "#", "Independent", "; - ]", "Kind", "|||", "Opinionated", "é", "Crafted", "❀"];
   const row = [...words, ...words];
   return (
-    <div className="border-y border-[#111827]/10 py-6 overflow-hidden bg-[#FAF8F5]" aria-hidden>
-      <motion.div className="flex gap-10 whitespace-nowrap font-display text-4xl sm:text-5xl font-bold"
-        animate={{ x: ["0%", "-50%"] }} transition={{ duration: 38, ease: "linear", repeat: Infinity }}>
+    <div className="border-y border-[#111827]/10 py-5 sm:py-6 overflow-hidden bg-[#FAF8F5]" aria-hidden>
+      <motion.div
+        className="flex gap-8 sm:gap-10 whitespace-nowrap font-display text-3xl sm:text-5xl font-bold"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ duration: 38, ease: "linear", repeat: Infinity }}
+      >
         {row.map((w, i) => (
-          <span key={i} className={/[:;é#|❀→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>{w}</span>
+          <span key={i} className={/[:;é#|❀→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>
+            {w}
+          </span>
         ))}
       </motion.div>
     </div>
@@ -132,37 +207,39 @@ function Manifesto() {
   }, []);
 
   return (
-    <section id="manifesto" className="py-32 sm:py-44 scroll-mt-24" data-testid="section-manifesto">
+    <section id="manifesto" className="py-24 sm:py-40 scroll-mt-24" data-testid="section-manifesto">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <h2 className="font-display font-bold text-huge text-[#111827]">
           What we believe.
         </h2>
 
-        <div className="mt-16 grid lg:grid-cols-12 gap-12 lg:gap-16">
+        <div className="mt-12 sm:mt-16 grid lg:grid-cols-12 gap-12 lg:gap-16">
           <ol className="lg:col-span-8">
             {OPINIONS.map((o, i) => (
               <li
                 key={o.id}
                 id={o.id}
-                className="scroll-mt-48 py-10 sm:py-14 border-t border-[#111827]/10 flex items-baseline gap-6 sm:gap-10 cursor-default"
+                className="scroll-mt-48 py-8 sm:py-14 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-10 cursor-default"
                 onClick={() => setActive(i)}
               >
+                {/* On mobile all marks & titles are full color; on desktop lg+ they highlight as you scroll */}
                 <span
-                  className={`font-display font-bold text-3xl sm:text-4xl w-14 shrink-0 transition-colors duration-300 ${active === i ? "" : "text-[#111827]/25"}`}
-                  style={active === i ? { color: MCOL[i % 3] } : undefined}
+                  className={`font-display font-bold text-2xl sm:text-4xl w-12 sm:w-14 shrink-0 whitespace-nowrap transition-colors duration-300 ${
+                    active === i ? "" : "lg:text-[#111827]/25"
+                  }`}
+                  style={{ color: MCOL[i % 3] }}
                 >
                   {o.mark}
                 </span>
                 <div className="flex-1">
                   <span
-                    className={`block font-display font-bold text-big transition-all duration-300 ${
-                      active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"
+                    className={`block font-display font-bold text-big transition-all duration-300 text-[#111827] ${
+                      active === i ? "lg:translate-x-2" : "lg:text-[#111827]/30"
                     }`}
                   >
                     {o.line}
                   </span>
-                  {/* Inline text note on mobile, card on desktop */}
-                  <div className="block lg:hidden mt-4 text-xl leading-relaxed text-[#111827]/75">
+                  <div className="block lg:hidden mt-3 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
                     {o.note}
                   </div>
                 </div>
@@ -202,25 +279,37 @@ function Manifesto() {
   );
 }
 
-/* ─────────────────────────── WHO WE HELP (CONTINUOUS SCROLL STORYTELLING) ─────────────────────────── */
+/* ─────────────────────────── WHO WE HELP ─────────────────────────── */
 const AUDIENCES = [
   {
-    key: "founders", who: "Founders", color: "#0A9BE0", headline: "Scale your vision.",
+    key: "founders",
+    who: "Founders",
+    color: "#0A9BE0",
+    headline: "Scale your vision.",
     title: "Scale beyond Silicon Valley's defaults",
     body: "Founders Big Tech overlooks deserve technology that respects their market and their edge. We build products that amplify your vision instead of flattening it into the same template every other startup uses.",
-    art: "/images/brand/founders-blueprint.jpg", alt: "A figure on a giant blueprint that curls into a wave, a sky-blue kite above",
+    artName: "founders-blueprint",
+    alt: "A figure on a giant blueprint that curls into a wave, a sky-blue kite above",
   },
   {
-    key: "creators", who: "Creators", color: "#FE299E", headline: "Create authentically.",
+    key: "creators",
+    who: "Creators",
+    color: "#FE299E",
+    headline: "Create authentically.",
     title: "Create without creative conformity",
     body: "Independent creators deserve tools that amplify their voice rather than homogenize it. Write privately, publish on your own terms, and get paid when people (or machines) learn from your work.",
-    art: "/images/brand/creators-terrace.jpg", alt: "An independent creator at a terrace worktable with giant translucent thought sheets rising into the sky",
+    artName: "creators-terrace",
+    alt: "An independent creator at a terrace worktable with giant translucent thought sheets rising into the sky",
   },
   {
-    key: "families", who: "Families", color: "#3FA535", headline: "Preserve what matters.",
+    key: "families",
+    who: "Families",
+    color: "#3FA535",
+    headline: "Preserve what matters.",
     title: "Preventing Big Tech erasure, one family at a time",
     body: "Your family's stories belong to you, not to algorithms built to sell you things. We help you capture, protect, and pass down what matters, privately and on your terms.",
-    art: "/images/brand/families-lighthouse.jpg", alt: "A lighthouse with a green beam watching over a family in a rowboat",
+    artName: "families-lighthouse",
+    alt: "A lighthouse with a green beam watching over a family in a rowboat",
   },
 ];
 
@@ -256,12 +345,12 @@ function WhoWeHelp() {
   };
 
   return (
-    <section className="py-28 sm:py-36 bg-[#F3EEE6]" data-testid="section-who">
+    <section className="py-24 sm:py-36 bg-[#F3EEE6]" data-testid="section-who">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        {/* Sticky perspective header tracking scroll */}
-        <div className="sticky top-20 z-10 bg-[#F3EEE6]/90 backdrop-blur-md border-b border-[#111827]/10 py-4 mb-16">
-          <div className="flex flex-wrap items-baseline gap-x-6 sm:gap-x-10 gap-y-3">
-            <span className="font-display font-bold text-2xl sm:text-4xl text-[#111827]">
+        {/* Compact sticky perspective header */}
+        <div className="sticky top-16 sm:top-20 z-20 bg-[#F3EEE6]/95 backdrop-blur-md border-b border-[#111827]/10 py-3 sm:py-4 mb-12 sm:mb-16">
+          <div className="flex items-baseline justify-between sm:justify-start gap-x-3 sm:gap-x-10 whitespace-nowrap">
+            <span className="font-display font-bold text-[15px] sm:text-4xl text-[#111827]">
               We build for:
             </span>
             {AUDIENCES.map((x) => {
@@ -270,14 +359,14 @@ function WhoWeHelp() {
                 <button
                   key={x.key}
                   onClick={() => scrollToAudience(x.key)}
-                  className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-4xl font-bold transition-all duration-300 py-1"
-                  style={{ color: isActive ? x.color : "rgba(17,24,39,0.25)" }}
+                  className="relative bg-transparent cursor-pointer font-display text-[16px] sm:text-4xl font-bold transition-all duration-300 py-1 shrink-0"
+                  style={{ color: isActive ? x.color : "rgba(17,24,39,0.28)" }}
                 >
                   {x.who}
                   {isActive && (
                     <motion.span
                       layoutId="aud-active-bar"
-                      className="absolute left-0 right-0 -bottom-1.5 h-[5px] rounded-full"
+                      className="absolute left-0 right-0 -bottom-1 sm:-bottom-1.5 h-[3px] sm:h-[5px] rounded-full"
                       style={{ backgroundColor: x.color }}
                       transition={{ type: "spring", stiffness: 450, damping: 35 }}
                     />
@@ -288,34 +377,40 @@ function WhoWeHelp() {
           </div>
         </div>
 
-        {/* Sequential Chapters - Scroll to reveal without forced clicking */}
-        <div className="space-y-32">
-          {AUDIENCES.map((a) => (
+        {/* Sequential Chapters */}
+        <div className="space-y-20 sm:space-y-32">
+          {AUDIENCES.map((a, idx) => (
             <div
               key={a.key}
               id={`who-${a.key}`}
-              className="scroll-mt-36 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center pt-8 border-t border-[#111827]/10"
+              className={`scroll-mt-32 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center ${
+                idx === 0 ? "pt-2" : "pt-10 border-t border-[#111827]/10"
+              }`}
             >
               <div className="lg:col-span-5 order-2 lg:order-1">
-                <div className="font-display text-4xl sm:text-5xl font-bold" style={{ color: a.color }}>
+                <div className="font-display text-3xl sm:text-5xl font-bold" style={{ color: a.color }}>
                   {a.headline}
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-semibold mt-6 text-[#111827]">
+                <h3 className="font-display text-2xl sm:text-3xl font-semibold mt-4 sm:mt-6 text-[#111827]">
                   {a.title}
                 </h3>
-                <p className="mt-5 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
+                <p className="mt-4 sm:mt-5 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
                   {a.body}
                 </p>
                 <Link
                   href="/contact"
-                  className="mt-8 inline-flex items-center gap-2 text-lg font-semibold no-underline link-swipe"
+                  className="mt-6 sm:mt-8 inline-flex items-center gap-2 text-lg font-semibold no-underline link-swipe"
                   style={{ color: a.color }}
                 >
                   Tell us what's scary <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
               <div className="lg:col-span-7 order-1 lg:order-2">
-                <Art src={a.art} alt={a.alt} className="w-full aspect-[4/3] rounded-[28px] shadow-sm" />
+                <ResponsiveArt
+                  name={a.artName}
+                  alt={a.alt}
+                  className="w-full aspect-[5/4] sm:aspect-[4/3] rounded-[24px] sm:rounded-[28px] shadow-sm border border-[#111827]/5"
+                />
               </div>
             </div>
           ))}
@@ -327,27 +422,27 @@ function WhoWeHelp() {
 
 /* ─────────────────────────── HOW IT WORKS ─────────────────────────── */
 const STEPS = [
-  { n: "01", word: "Scary", body: "You bring the thing that keeps you up at night: a regulator, a migration, a pile of AI hype, a product nobody can use." },
+  { n: "01", word: "Scary", body: "You bring the thing that keeps you up at night: a regulator, a migration, a gnarly architecture, a product nobody can use." },
   { n: "02", word: "Clear", body: "In days, not quarters, we map it, name it, and draw it, so everyone from the board to the newest hire gets it." },
   { n: "03", word: "Shipped", body: "Then we build it for real: production code on a real design system, architected to keep scaling after we leave." },
 ];
 
 function HowItWorks() {
   return (
-    <section className="py-28 sm:py-36" data-testid="section-how">
+    <section className="py-24 sm:py-36" data-testid="section-how">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="mt-14 grid md:grid-cols-3 gap-12 md:gap-8">
+        <div className="mt-8 sm:mt-14 grid md:grid-cols-3 gap-12 md:gap-8">
           {STEPS.map((s, i) => (
             <FadeUp key={s.n} delay={i * 0.12}>
               <div className="font-display text-2xl font-bold text-[#111827]/25">{s.n}</div>
               <div className={`font-display font-bold text-huge mt-2 ${i === 2 ? "text-[#FE299E]" : i === 0 ? "text-[#111827]/30 line-through decoration-[#FE299E] decoration-4" : "text-[#0A9BE0]"}`}>
                 {s.word}
               </div>
-              <p className="mt-6 text-lg leading-relaxed text-[#111827]/75 max-w-[32ch]">{s.body}</p>
+              <p className="mt-5 sm:mt-6 text-lg leading-relaxed text-[#111827]/75 max-w-[32ch]">{s.body}</p>
             </FadeUp>
           ))}
         </div>
-        <FadeUp delay={0.2} className="mt-20 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-t border-[#111827]/10 pt-10">
+        <FadeUp delay={0.2} className="mt-16 sm:mt-20 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-t border-[#111827]/10 pt-10">
           <p className="font-display text-2xl sm:text-3xl font-semibold max-w-2xl">
             Principal-led. Fixed scope. Starting with a one-week sprint or single-day build.
           </p>
@@ -364,7 +459,7 @@ function HowItWorks() {
 const MAKES = [
   { color: "#0A9BE0", mark: "|||", name: "Pipes", line: "Curated human knowledge. Creators keep 70%.", href: "https://pipes.pink" },
   { color: "#3FA535", mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
-  { color: "#FE299E", mark: "; - ]", name: "Semi", line: "An AI editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
+  { color: "#FE299E", mark: "; - ]", name: "Semi", line: "A Socratic editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
   { color: "#0A9BE0", mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
   { color: "#FE299E", mark: "é", name: "Accént", line: "Our design system, out in the open.", href: "https://design.pipes.pink" },
   { color: "#D97706", mark: "❀", name: "Marigold", line: "Zero-knowledge local civic analytics.", href: "https://marigoldinsights.org" },
@@ -372,19 +467,32 @@ const MAKES = [
 
 function ThingsWeMake() {
   return (
-    <section className="py-28 sm:py-36 bg-[#111827] text-[#FAF8F5]" data-testid="section-make">
+    <section className="py-24 sm:py-36 bg-[#111827] text-[#FAF8F5]" data-testid="section-make">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <h2 className="font-display font-bold text-huge max-w-4xl">
           We build our own tools, too. Every one is named after punctuation.
         </h2>
-        <ul className="mt-16">
+        <ul className="mt-12 sm:mt-16">
           {MAKES.map((m) => (
             <li key={m.name}>
-              <a href={m.href} target="_blank" rel="noopener noreferrer"
-                className="group grid grid-cols-12 items-baseline gap-4 py-6 sm:py-8 border-t border-white/10 no-underline text-[#FAF8F5]">
-                <span className="col-span-2 sm:col-span-1 font-display text-4xl sm:text-5xl font-bold transition-transform group-hover:-rotate-6" style={{ color: m.color }}>{m.mark}</span>
-                <span className="col-span-10 sm:col-span-4 font-display text-4xl sm:text-5xl font-bold transition-transform duration-500 group-hover:translate-x-3">{m.name}</span>
-                <span className="col-span-10 col-start-3 sm:col-start-auto sm:col-span-6 text-lg sm:text-xl text-white/60 group-hover:text-white transition-colors">{m.line}</span>
+              <a
+                href={m.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group grid grid-cols-12 items-baseline gap-3 sm:gap-4 py-6 sm:py-8 border-t border-white/10 no-underline text-[#FAF8F5]"
+              >
+                <span
+                  className="col-span-3 sm:col-span-2 lg:col-span-1 font-display text-3xl sm:text-5xl font-bold whitespace-nowrap transition-transform group-hover:-rotate-6"
+                  style={{ color: m.color }}
+                >
+                  {m.mark}
+                </span>
+                <span className="col-span-9 sm:col-span-4 font-display text-3xl sm:text-5xl font-bold transition-transform duration-500 group-hover:translate-x-3">
+                  {m.name}
+                </span>
+                <span className="col-span-9 col-start-4 sm:col-start-auto sm:col-span-5 lg:col-span-6 text-base sm:text-xl text-white/65 group-hover:text-white transition-colors">
+                  {m.line}
+                </span>
                 <ArrowUpRight className="hidden sm:block col-span-1 justify-self-end w-7 h-7 text-white/30 group-hover:text-[#FE299E] transition-all group-hover:-translate-y-1 group-hover:translate-x-1" />
               </a>
             </li>
@@ -395,7 +503,7 @@ function ThingsWeMake() {
   );
 }
 
-/* ─────────────────────────────── CLOSE (RICH GROUNDED HERO CONCLUSION) ─────────────────────────────── */
+/* ─────────────────────────────── CLOSE ─────────────────────────────── */
 function Close() {
   return (
     <section className="py-20 sm:py-28 text-center" data-testid="section-close">
@@ -407,7 +515,6 @@ function Close() {
           <RiseLines immediate lines={["Got something scary?", "Let's make it smile."]} />
         </h2>
 
-        {/* Studio Direct Reassurance Cards (Tightened spacing under the smile) */}
         <FadeUp delay={0.15} className="mt-7 sm:mt-9 grid sm:grid-cols-3 gap-5 text-left">
           <div className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10">
             <div className="font-display text-2xl font-bold text-[#111827]">Fixed Sprints</div>
@@ -435,7 +542,7 @@ function Close() {
               Start a project <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
-          <a href="mailto:cubby@colonhyphenbracket.pink" className="inline-flex items-center px-8 py-4 rounded-full border-2 border-[#111827] text-[#111827] text-lg font-semibold no-underline hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors">
+          <a href="mailto:cubby@colonhyphenbracket.pink" className="inline-flex items-center px-6 sm:px-8 py-4 rounded-full border-2 border-[#111827] text-[#111827] text-base sm:text-lg font-semibold no-underline hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors">
             cubby@colonhyphenbracket.pink
           </a>
         </FadeUp>
@@ -447,6 +554,11 @@ function Close() {
 export function HomePage() {
   return (
     <div className="brand-canvas min-h-screen">
+      <Seo
+        title="Colon Hyphen Bracket : - ] | Principal Design, Software Architecture & Independent Tools"
+        description="Colon Hyphen Bracket turns the intimidating parts of software (compliance, infrastructure, cryptography, and data architecture) into clarity, speed, and a smile."
+        path="/"
+      />
       <Hero />
       <Marquee />
       <Manifesto />

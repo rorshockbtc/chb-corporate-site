@@ -11,8 +11,10 @@ export function Footer() {
             <p className="font-display text-3xl sm:text-4xl font-bold mt-6 max-w-md leading-tight">
               Scary words in. Smiles out.
             </p>
-            <a href="mailto:cubby@colonhyphenbracket.pink"
-              className="link-swipe inline-block mt-6 text-lg text-white/80 hover:text-white no-underline">
+            <a
+              href="mailto:cubby@colonhyphenbracket.pink"
+              className="link-swipe inline-block mt-6 text-lg text-white/80 hover:text-white no-underline"
+            >
               cubby@colonhyphenbracket.pink
             </a>
           </div>
@@ -44,9 +46,20 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-white/50">
+
+        <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm text-white/55">
           <span>© 2026 Colon Hyphen Bracket, LLC. Independent. Opinionated. Kind.</span>
-          <span>This site is the portfolio. View source if you like.</span>
+
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-white/85 text-xs sm:text-sm font-medium"
+              data-testid="footer-bitcoin-badge"
+            >
+              <span className="text-[#F7931A] font-display font-bold text-base leading-none" aria-hidden="true">₿</span>
+              <span>Bitcoin accepted here · Powered by Bitcoin</span>
+            </span>
+            <span className="text-white/45">This site is the portfolio. View source if you like.</span>
+          </div>
         </div>
       </div>
     </footer>

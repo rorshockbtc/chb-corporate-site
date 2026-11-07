@@ -8,10 +8,10 @@ export const HOME_SCARY_PAIRS: ScaryPair[] = [
   { scary: "SOC 2 audits", friendly: "a checklist" },
   { scary: "HIPAA", friendly: "trust" },
   { scary: "Kubernetes", friendly: "uptime" },
-  { scary: "AI agents", friendly: "a helper" },
   { scary: "legacy code", friendly: "calm" },
   { scary: "regulators", friendly: "easy audits" },
   { scary: "cryptography", friendly: "privacy" },
+  { scary: "black-box software", friendly: "a helper" },
 ];
 
 export const STUDIO_SCARY_PAIRS: ScaryPair[] = [
@@ -24,7 +24,7 @@ export const STUDIO_SCARY_PAIRS: ScaryPair[] = [
 export const MANIFESTO_SCARY_PAIRS: ScaryPair[] = [
   { scary: "coastal gatekeeping", friendly: "Main Street craft" },
   { scary: "unpatched WordPress", friendly: "software you own" },
-  { scary: "fake AI neutrality", friendly: "honest opinions" },
+  { scary: "fake neutrality", friendly: "honest opinions" },
   { scary: "opaque surveillance", friendly: "local-first trust" },
 ];
 
@@ -96,7 +96,7 @@ export function ScaryHeadline({
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
             key={pair.scary}
-            className="relative inline-block whitespace-nowrap"
+            className="relative inline-block sm:whitespace-nowrap"
             initial={{ y: "100%" }}
             animate={{ y: "0%", color: struck ? struckColor : inkColor }}
             exit={{ y: "-100%" }}
@@ -116,7 +116,7 @@ export function ScaryHeadline({
       </span>
 
       {/* Line 3: into [friendly] : - ] */}
-      <span className="block overflow-hidden pb-[0.08em] min-h-[1.06em] whitespace-nowrap">
+      <span className="block overflow-hidden pb-[0.08em] min-h-[1.06em] sm:whitespace-nowrap">
         <motion.span
           className="inline-block mr-[0.24em]"
           style={{ color: inkColor }}
@@ -141,7 +141,7 @@ export function ScaryHeadline({
             </motion.span>
           </AnimatePresence>
         </span>{" "}
-        <Smile className="hidden sm:inline-flex align-baseline text-[0.78em]" color={accent} winkEvery={phase === "friendly" ? 900 : 5000} />
+        <Smile className="inline-flex align-baseline text-[0.72em] sm:text-[0.78em]" color={accent} winkEvery={phase === "friendly" ? 900 : 5000} />
       </span>
     </span>
   );
