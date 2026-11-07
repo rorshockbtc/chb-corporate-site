@@ -480,9 +480,8 @@
 
 /* ── CHB Playful-Principal brand layer ───────────────────────── */
 .font-display {
-  font-family: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
-  font-optical-sizing: auto;
-  letter-spacing: -0.035em;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.03em;
 }
 .brand-canvas { background: #FAF8F5; color: #111827; }
 .brand-canvas h1, .brand-canvas h2, .brand-canvas h3, .brand-canvas h4 { color: inherit; }

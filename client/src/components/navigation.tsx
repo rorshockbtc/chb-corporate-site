@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { Smile } from "@/components/brand/smile";
 
 const LINKS = [
   { href: "/studio", label: "Studio" },
@@ -32,11 +31,10 @@ export function Navigation() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
-        <Link href="/" className="group flex items-baseline gap-2.5 no-underline text-[#111827]" data-testid="logo-link">
-          <span className="font-display text-[22px] sm:text-2xl font-bold tracking-tight">
-            colon<span className="font-normal opacity-60">hyphen</span>bracket
-          </span>
-          <Smile className="text-[20px] sm:text-[22px]" color="#FE299E" winkEvery={6000} />
+        <Link href="/" className="text-xl tracking-wide text-[#111827] no-underline" data-testid="logo-link">
+          <span className="font-medium">colon</span>
+          <span className="font-extralight">hyphen</span>
+          <span className="font-medium">bracket</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8" aria-label="Main">

@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Plus } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
-import { RiseLines, FadeUp, Eyebrow } from "@/components/brand/motion";
+import { RiseLines, FadeUp } from "@/components/brand/motion";
 
 const WHO = [
   { who: "Startups", line: "Zero to one to Series B, without a four-person pod playing telephone." },
@@ -41,8 +41,7 @@ export default function StudioPage() {
       {/* Hero */}
       <section className="pt-32 sm:pt-40 pb-24">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <FadeUp><Eyebrow mark=":-]">The studio</Eyebrow></FadeUp>
-          <h1 className="font-display font-bold text-mega mt-8">
+          <h1 className="font-display font-bold text-mega">
             <RiseLines immediate lines={["One senior human.", <span key="n" className="text-[#FE299E]">No handoffs.</span>]} />
           </h1>
           <FadeUp delay={0.3} className="mt-12 grid lg:grid-cols-12 gap-10">
@@ -70,7 +69,6 @@ export default function StudioPage() {
       {/* Who */}
       <section className="py-28 sm:py-36">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <FadeUp><Eyebrow mark="&">Who we build for</Eyebrow></FadeUp>
           <ul className="mt-12">
             {WHO.map((w, i) => (
               <FadeUp key={w.who} delay={i * 0.06}>
@@ -87,12 +85,11 @@ export default function StudioPage() {
       {/* A week */}
       <section className="py-28 sm:py-36 bg-[#F3EEE6]">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <FadeUp><Eyebrow mark=";-]">What a sprint actually looks like</Eyebrow></FadeUp>
-          <h2 className="font-display font-bold text-huge mt-8 max-w-4xl">Five days from scary to shipped.</h2>
+          <h2 className="font-display font-bold text-huge max-w-4xl">Five days from scary to shipped.</h2>
           <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {WEEK.map((w, i) => (
               <FadeUp key={w.d} delay={i * 0.08}>
-                <div className="font-mono text-sm text-[#111827]/40">{w.d}</div>
+                <div className="font-display text-xl font-bold text-[#111827]/30">{w.d}</div>
                 <div className={`font-display text-4xl font-bold mt-2 ${i === 4 ? "text-[#FE299E]" : ""}`}>{w.t}</div>
                 <p className="mt-3 text-[17px] leading-relaxed text-[#111827]/70">{w.b}</p>
               </FadeUp>
@@ -104,13 +101,12 @@ export default function StudioPage() {
       {/* Tiers */}
       <section className="py-28 sm:py-36">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <FadeUp><Eyebrow mark="|">Ways to work together</Eyebrow></FadeUp>
           <div className="mt-14 grid md:grid-cols-3 md:divide-x divide-[#111827]/10 border-t border-[#111827]/10">
             {TIERS.map((t, i) => (
               <FadeUp key={t.name} delay={i * 0.1} className="pt-10 md:px-8 first:md:pl-0 last:md:pr-0 pb-10 flex flex-col">
                 <div className="font-display text-3xl font-bold">{t.name}</div>
                 <div className="mt-6 font-display text-6xl font-bold tracking-tight">{t.price}</div>
-                <div className="font-mono text-sm text-[#111827]/50 mt-1">{t.per}</div>
+                <div className="text-lg text-[#111827]/55 mt-1">{t.per}</div>
                 <p className="mt-6 text-lg leading-relaxed text-[#111827]/75 flex-1">{t.body}</p>
                 <Link href="/contact" className="mt-8 link-swipe inline-flex items-center gap-2 text-lg font-semibold text-[#111827] no-underline self-start">
                   {t.cta} <ArrowRight className="w-5 h-5 text-[#FE299E]" />
@@ -123,8 +119,7 @@ export default function StudioPage() {
 
       {/* FAQ */}
       <section className="pb-28 sm:pb-36">
-        <div className="max-w-[1000px] mx-auto px-5 sm:px-8">
-          <FadeUp><Eyebrow mark="?">Honest answers</Eyebrow></FadeUp>
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="mt-10">
             {FAQ.map((f, i) => (
               <div key={f.q} className="border-t border-[#111827]/10">

@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { ScaryHeadline } from "@/components/brand/scary-words";
-import { RiseLines, FadeUp, Eyebrow } from "@/components/brand/motion";
+import { RiseLines, FadeUp } from "@/components/brand/motion";
 
 function Art({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   const [ok, setOk] = useState(true);
@@ -20,11 +20,7 @@ function Hero() {
   return (
     <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden" data-testid="hero-section">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <FadeUp>
-          <Eyebrow mark=":-]">A design &amp; engineering studio</Eyebrow>
-        </FadeUp>
-
-        <h1 className="font-display font-bold mt-8 text-[#111827] text-[clamp(2.6rem,7.4vw,7.75rem)] leading-[0.95]" data-testid="hero-title">
+        <h1 className="font-display font-bold text-[#111827] text-[clamp(2.6rem,7.4vw,7.75rem)] leading-[0.95]" data-testid="hero-title">
           <ScaryHeadline />
         </h1>
 
@@ -66,7 +62,7 @@ function Marquee() {
       <motion.div className="flex gap-10 whitespace-nowrap font-display text-4xl sm:text-5xl font-bold"
         animate={{ x: ["0%", "-50%"] }} transition={{ duration: 38, ease: "linear", repeat: Infinity }}>
         {row.map((w, i) => (
-          <span key={i} className={/[:;#|&/→]/.test(w) ? "text-[#FE299E] font-mono" : "text-[#111827]/85"}>{w}</span>
+          <span key={i} className={/[:;#|&/→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>{w}</span>
         ))}
       </motion.div>
     </div>
@@ -88,7 +84,6 @@ function Manifesto() {
   return (
     <section id="manifesto" className="py-28 sm:py-36" data-testid="section-manifesto">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <FadeUp><Eyebrow mark="#">Manifesto · six opinions, loosely punctuated</Eyebrow></FadeUp>
 
         <div className="mt-14 grid lg:grid-cols-12 gap-10">
           <ol className="lg:col-span-8">
@@ -97,7 +92,7 @@ function Manifesto() {
                 <button
                   onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}
                   className="group w-full text-left py-5 sm:py-6 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 bg-transparent cursor-pointer">
-                  <span className={`font-mono font-bold text-xl sm:text-2xl w-12 shrink-0 transition-colors ${active === i ? "text-[#FE299E]" : "text-[#111827]/25"}`}>{o.mark}</span>
+                  <span className={`font-display font-bold text-2xl sm:text-3xl w-12 shrink-0 transition-colors ${active === i ? "text-[#FE299E]" : "text-[#111827]/25"}`}>{o.mark}</span>
                   <span className={`font-display font-bold text-big transition-all duration-500 ${active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"}`}>
                     {o.line}
                   </span>
@@ -111,7 +106,7 @@ function Manifesto() {
                 <motion.div key={active}
                   initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.35 }}>
-                  <div className="font-mono text-[80px] font-bold leading-none text-[#FE299E]">{OPINIONS[active].mark}</div>
+                  <div className="font-display text-[96px] font-bold leading-none text-[#FE299E]">{OPINIONS[active].mark}</div>
                   <p className="mt-6 text-xl leading-relaxed text-[#111827]/75">{OPINIONS[active].note}</p>
                 </motion.div>
               </AnimatePresence>
@@ -151,9 +146,8 @@ function WhoWeHelp() {
   return (
     <section className="py-28 sm:py-36 bg-[#F3EEE6]" data-testid="section-who">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <FadeUp><Eyebrow mark="&">Who we help</Eyebrow></FadeUp>
 
-        <h2 className="font-display font-bold text-huge mt-8 text-[#111827]">
+        <h2 className="font-display font-bold text-huge text-[#111827]">
           We build for{" "}
           <span className="inline-flex flex-wrap gap-x-4">
             {AUDIENCES.map((x, n) => (
@@ -204,11 +198,10 @@ function HowItWorks() {
   return (
     <section className="py-28 sm:py-36" data-testid="section-how">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <FadeUp><Eyebrow mark=";-]">How it works</Eyebrow></FadeUp>
         <div className="mt-14 grid md:grid-cols-3 gap-12 md:gap-8">
           {STEPS.map((s, i) => (
             <FadeUp key={s.n} delay={i * 0.12}>
-              <div className="font-mono text-sm text-[#111827]/40">{s.n}</div>
+              <div className="font-display text-2xl font-bold text-[#111827]/25">{s.n}</div>
               <div className={`font-display font-bold text-huge mt-2 ${i === 2 ? "text-[#FE299E]" : i === 0 ? "text-[#111827]/30 line-through decoration-[#FE299E] decoration-4" : "text-[#111827]"}`}>
                 {s.word}
               </div>
@@ -242,10 +235,7 @@ function ThingsWeMake() {
   return (
     <section className="py-28 sm:py-36 bg-[#111827] text-[#FAF8F5]" data-testid="section-make">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-white/50">
-          <span className="text-[#FE299E] text-[15px] font-bold">|</span> Things we make (go try them)
-        </div>
-        <h2 className="font-display font-bold text-huge mt-8 max-w-4xl">
+        <h2 className="font-display font-bold text-huge max-w-4xl">
           We build our own tools, too. Every one is named after punctuation.
         </h2>
         <ul className="mt-16">
@@ -253,7 +243,7 @@ function ThingsWeMake() {
             <li key={m.name}>
               <a href={m.href} target="_blank" rel="noopener noreferrer"
                 className="group grid grid-cols-12 items-baseline gap-4 py-6 sm:py-8 border-t border-white/10 no-underline text-[#FAF8F5]">
-                <span className="col-span-2 sm:col-span-1 font-mono text-3xl sm:text-4xl font-bold text-[#FE299E] transition-transform group-hover:-rotate-6">{m.mark}</span>
+                <span className="col-span-2 sm:col-span-1 font-display text-4xl sm:text-5xl font-bold transition-transform group-hover:-rotate-6">{m.mark}</span>
                 <span className="col-span-10 sm:col-span-4 font-display text-4xl sm:text-5xl font-bold transition-transform duration-500 group-hover:translate-x-3">{m.name}</span>
                 <span className="col-span-10 col-start-3 sm:col-start-auto sm:col-span-6 text-lg sm:text-xl text-white/60 group-hover:text-white transition-colors">{m.line}</span>
                 <ArrowUpRight className="hidden sm:block col-span-1 justify-self-end w-7 h-7 text-white/30 group-hover:text-[#FE299E] transition-all group-hover:-translate-y-1 group-hover:translate-x-1" />

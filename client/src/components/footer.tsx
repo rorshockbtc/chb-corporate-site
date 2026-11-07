@@ -18,7 +18,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <div className="font-mono text-xs uppercase tracking-[0.18em] text-white/40 mb-4">Studio</div>
+            <div className="font-display text-lg font-bold text-white mb-4">Studio</div>
             <ul className="space-y-2.5 text-[15px]">
               <li><Link href="/studio" className="link-swipe no-underline text-white/80 hover:text-white">How we work</Link></li>
               <li><Link href="/contact" className="link-swipe no-underline text-white/80 hover:text-white">Start a project</Link></li>
@@ -26,7 +26,7 @@ export function Footer() {
             </ul>
           </div>
           <div className="lg:col-span-2">
-            <div className="font-mono text-xs uppercase tracking-[0.18em] text-white/40 mb-4">Products</div>
+            <div className="font-display text-lg font-bold text-white mb-4">Products</div>
             <ul className="space-y-2.5 text-[15px]">
               <li><a href="https://pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Pipes |</a></li>
               <li><a href="https://pipes.pink/write" className="link-swipe no-underline text-white/80 hover:text-white">Hash # &amp; Semi ;-]</a></li>
@@ -35,7 +35,7 @@ export function Footer() {
             </ul>
           </div>
           <div className="lg:col-span-2">
-            <div className="font-mono text-xs uppercase tracking-[0.18em] text-white/40 mb-4">Open</div>
+            <div className="font-display text-lg font-bold text-white mb-4">Open</div>
             <ul className="space-y-2.5 text-[15px]">
               <li><a href="https://design.pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Accént design system /</a></li>
               <li><a href="https://github.com/rorshockbtc" className="link-swipe no-underline text-white/80 hover:text-white">GitHub</a></li>
@@ -43,7 +43,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 flex flex-col sm:flex-row justify-between gap-3 font-mono text-xs text-white/40">
+        <div className="pt-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-white/50">
           <span>© 2026 Colon Hyphen Bracket, LLC. Independent. Opinionated. Kind.</span>
           <span>This site is the portfolio. View source if you like.</span>
         </div>
