@@ -34,8 +34,8 @@ const TIERS = [
   {
     name: "The Partner",
     price: "Starts at $15k",
-    per: "per month (fractional, ~10–20 hrs/wk)",
-    body: "A principal designer-architect embedded in your team: product direction, design system, and production code. Target full engagement is $21k/month. Pause anytime.",
+    per: "per month (fractional, ~10–25 hrs/wk)",
+    body: "A principal designer-architect embedded in your team: product direction, design system, and production code. Roughly half-time capacity over the month. Pause anytime.",
     cta: "Start a conversation",
   },
   {
@@ -51,6 +51,33 @@ const STATS = [
   { val: "1", color: "#0A9BE0", desc: "Principal architect from first call to final pull request." },
   { val: "5 days", color: "#3FA535", desc: "To go from a gnarly thesis to deployed, working software." },
   { val: "100%", color: "#FE299E", desc: "Your repository, your design tokens, your IP on day one." },
+];
+
+const ECOSYSTEM_PLATFORMS = [
+  {
+    mark: "|||",
+    title: "Native Desktop (Mac & Windows)",
+    color: "#0A9BE0",
+    body: "Lightweight, local-first desktop apps built with Rust and native OS capabilities—not bloated 8GB wrappers.",
+  },
+  {
+    mark: "; - ]",
+    title: "iOS, Android & Web",
+    color: "#3FA535",
+    body: "Fast, accessible mobile and web applications sharing one disciplined design system and data architecture.",
+  },
+  {
+    mark: "#",
+    title: "Chromium Extensions",
+    color: "#0A9BE0",
+    body: "Browser companions and live diagnostic plugins that work on any website without surveillance.",
+  },
+  {
+    mark: "!",
+    title: "BANG! Local IDE ($0 Edits)",
+    color: "#FE299E",
+    body: "We hand you BANG! inside Pipes for Desktop so non-technical teams can invoke our Pipes to update text, images, and pages locally for $0—without calling us.",
+  },
 ];
 
 const FAQ = [
@@ -186,6 +213,57 @@ export default function StudioPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Thinking in Ecosystems */}
+      <section className="py-20 sm:py-32 border-b border-[#111827]/10">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp className="grid lg:grid-cols-12 gap-8 sm:gap-12 items-end">
+            <div className="lg:col-span-7">
+              <div className="font-display text-sm sm:text-base font-bold uppercase tracking-wider text-[#FE299E] mb-3">
+                Cross-Platform Architecture
+              </div>
+              <h2 className="font-display font-bold text-huge text-[#111827]">
+                We think in ecosystems, <span className="text-[#0A9BE0]">not just websites.</span>
+              </h2>
+            </div>
+            <p className="lg:col-span-5 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
+              Most shops only build brochure sites or single-wrapper React Native apps. We’re just as happy to tackle a focused one-day task, but our real edge is building across every platform—and handing you the keys so you never have to pay us just to change a headline.
+            </p>
+          </FadeUp>
+
+          <div className="mt-12 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {ECOSYSTEM_PLATFORMS.map((plat, i) => (
+              <FadeUp
+                key={plat.title}
+                delay={i * 0.08}
+                className="p-6 sm:p-7 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10 flex flex-col"
+              >
+                <div className="font-display text-3xl sm:text-4xl font-black" style={{ color: plat.color }}>
+                  {plat.mark}
+                </div>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#111827] mt-3">
+                  {plat.title}
+                </h3>
+                <p className="mt-2.5 text-base text-[#111827]/75 leading-relaxed flex-1">
+                  {plat.body}
+                </p>
+              </FadeUp>
+            ))}
+          </div>
+
+          <FadeUp delay={0.2} className="mt-8 sm:mt-10 flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[#111827]/10">
+            <p className="text-base sm:text-lg text-[#111827]/70">
+              See how our own cross-platform ecosystem works in the wild—from Pipes across 5 platforms to the BANG! local IDE.
+            </p>
+            <Link
+              href="/products"
+              className="link-swipe inline-flex items-center gap-2 text-base sm:text-lg font-semibold text-[#111827] no-underline"
+            >
+              Explore our products <ArrowRight className="w-5 h-5 text-[#FE299E]" />
+            </Link>
+          </FadeUp>
         </div>
       </section>
 
