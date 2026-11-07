@@ -11,6 +11,15 @@ import {
   CARD_TAP,
   RISE,
 } from "@/lib/motion/tokens";
+import { RiseLines, FadeUp, Eyebrow } from "@/components/brand/motion";
+import { Smile } from "@/components/brand/smile";
+import {
+  ScaryHeadline,
+  HOME_SCARY_PAIRS,
+  STUDIO_SCARY_PAIRS,
+  MANIFESTO_SCARY_PAIRS,
+  type ScaryPair,
+} from "@/components/brand/scary-words";
 
 export {
   DURATION,
@@ -22,6 +31,15 @@ export {
   CARD_HOVER,
   CARD_TAP,
   RISE,
+  RiseLines,
+  FadeUp,
+  Eyebrow,
+  Smile,
+  ScaryHeadline,
+  HOME_SCARY_PAIRS,
+  STUDIO_SCARY_PAIRS,
+  MANIFESTO_SCARY_PAIRS,
+  type ScaryPair,
 };
 
 // --------------------------------------------------------------------------

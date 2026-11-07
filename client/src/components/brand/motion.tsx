@@ -1,7 +1,12 @@
+/**
+ * Accént Design System (`rorshockbtc/accent-ui`) — Playful-Principal Brand Motion Primitives
+ * Synchronized with upstream `src/components/accent/editorial-motion/AccentBrandMotion.tsx`.
+ */
 import { type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { EASE_EDITORIAL } from "@/lib/motion/tokens";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+const EASE = EASE_EDITORIAL;
 
 /** Line-by-line masked rise for big display type. */
 export function RiseLines({
