@@ -17,25 +17,31 @@ export function RiseLines({
 }) {
   const reduce = useReducedMotion();
   return (
-    <span className={`block ${className}`}>
+    <motion.span
+      className={`block ${className}`}
+      initial="hidden"
+      {...(immediate
+        ? { animate: "visible" }
+        : {
+            whileInView: "visible",
+            viewport: { once: true, amount: 0.15 },
+          })}
+    >
       {lines.map((line, i) => (
         <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
           <motion.span
             className="block"
-            initial={reduce ? { opacity: 0 } : { y: "110%" }}
-            {...(immediate
-              ? { animate: reduce ? { opacity: 1 } : { y: "0%" } }
-              : {
-                  whileInView: reduce ? { opacity: 1 } : { y: "0%" },
-                  viewport: { once: true, margin: "-10% 0px" },
-                })}
+            variants={{
+              hidden: reduce ? { opacity: 0 } : { y: "110%" },
+              visible: reduce ? { opacity: 1 } : { y: "0%" },
+            }}
             transition={{ duration: reduce ? 0.2 : 0.9, ease: EASE, delay: delay + i * 0.08 }}
           >
             {line}
           </motion.span>
         </span>
       ))}
-    </span>
+    </motion.span>
   );
 }
 

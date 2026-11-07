@@ -76,9 +76,19 @@ export default function Contact() {
               />
             </h1>
             <FadeUp delay={0.3}>
-              <p className="mt-8 sm:mt-10 text-lg sm:text-xl leading-relaxed text-[#111827]/75 max-w-[34ch]">
-                Whether you need a one-week sprint, a single-day build, an embedded partner, or have questions about our tools—a real human (Kyle) reads every note and replies personally, usually within a day.
+              <p className="mt-8 sm:mt-10 text-lg sm:text-xl leading-relaxed text-[#111827]/75 max-w-[36ch]">
+                Whether you need a one-week sprint, a single-day build, an embedded partner, or have questions about our tools—I read every note and reply personally, usually within a day.
               </p>
+
+              <div className="mt-6 sm:mt-7 p-5 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10 max-w-[38ch]">
+                <div className="font-display text-base sm:text-lg font-bold text-[#111827] flex items-center gap-2">
+                  <span className="text-[#FE299E]">: - ]</span> Kyle or Cubby?
+                </div>
+                <p className="mt-1.5 text-sm sm:text-base leading-relaxed text-[#111827]/75">
+                  My real name is <strong>Kyle Cyree</strong>, though most people know me professionally by my nickname, <strong>Cubby</strong>. Either way, you&apos;re talking to the exact same person.
+                </p>
+              </div>
+
               <div className="mt-6 sm:mt-8 space-y-3">
                 <a
                   href="mailto:cubby@colonhyphenbracket.pink"

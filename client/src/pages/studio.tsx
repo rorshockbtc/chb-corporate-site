@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Plus } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -83,7 +84,7 @@ const ECOSYSTEM_PLATFORMS = [
 const FAQ = [
   {
     q: "Is it really just one person?",
-    a: "One principal (Kyle Cyree, 15+ years across Custodia Bank, UnitedHealth Group, and Walmart) leading every decision from architecture to code. When a project needs additional hands, we bring trusted specialists, but you always talk directly to the person doing the work.",
+    a: "One principal—Kyle Cyree (most people know me professionally by my nickname, Cubby; 15+ years across Custodia Bank, UnitedHealth Group, and Walmart)—leading every decision from architecture to code. When a project needs additional hands, we bring trusted specialists, but you always talk directly to the person doing the work.",
   },
   {
     q: "Do you do smaller or single-day builds?",
@@ -100,6 +101,21 @@ const FAQ = [
   {
     q: "How do you handle privacy and intellectual property?",
     a: "Your repository, design tokens, and intellectual property belong to you on day one. We never train external models on your private data or lock you into proprietary maintenance retainers.",
+  },
+];
+
+const STUDIO_CLOSE_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
+  {
+    title: "Fixed Sprints",
+    body: "$7,500 one-week sprint or single-day build. Scoped honestly with zero telephone game.",
+  },
+  {
+    title: "Direct to Kyle (Cubby)",
+    body: "One principal from first call to final pull request. Strategy, design, and code in one head.",
+  },
+  {
+    title: "Zero Lock-In",
+    body: "Your repository, your design tokens, and BANG! so you can make simple edits yourself for $0.",
   },
 ];
 
@@ -321,19 +337,16 @@ export default function StudioPage() {
       </section>
 
       {/* Close */}
-      <section className="pb-28 sm:pb-36 text-center">
-        <FadeUp>
-          <Smile className="text-[100px] sm:text-[160px]" color="#FE299E" winkEvery={3000} />
-        </FadeUp>
-        <h2 className="font-display font-bold text-huge mt-6 sm:mt-8 px-5">
-          <RiseLines lines={["Let's make it smile."]} />
-        </h2>
-        <FadeUp delay={0.2}>
-          <Link href="/contact" className="mt-8 sm:mt-10 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#111827] text-[#FAF8F5] hover:bg-[#FE299E] transition-colors text-lg font-semibold no-underline">
-            Start a project <ArrowRight className="w-5 h-5" />
-          </Link>
-        </FadeUp>
-      </section>
+      <PageClose
+        headline="Ready to skip the handoffs? Let's make it smile."
+        subhead="Go from a gnarly problem to working, deployed software in five days—or bring us in as an embedded fractional partner."
+        cards={STUDIO_CLOSE_CARDS}
+        primaryCta="Start a project"
+        primaryHref="/contact"
+        secondaryCta="cubby@colonhyphenbracket.pink"
+        secondaryHref="mailto:cubby@colonhyphenbracket.pink"
+        secondaryExternal
+      />
     </div>
   );
 }

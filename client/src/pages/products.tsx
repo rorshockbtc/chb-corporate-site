@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
 
 const BLUE = "#0A9BE0";
@@ -170,7 +171,7 @@ const ECOSYSTEM_STEPS = [
   },
 ];
 
-const CUSTOM_CARDS = [
+const CUSTOM_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
   {
     title: "Custom Tools & Engines",
     body: "Need a specialized local-first database, cross-platform app, or diagnostic companion? We build bespoke software tailored to your specific problem.",
@@ -283,6 +284,8 @@ export default function Products() {
         </div>
       </section>
 
+      {/* Scoped wrapper so sticky punctuation index bar unsticks cleanly after Marigold */}
+      <div className="relative">
       {/* Full-Width Sticky Punctuation Index Bar */}
       {(() => {
         const isDark = isDarkBar;
@@ -501,6 +504,7 @@ export default function Products() {
           </FadeUp>
         </div>
       </section>
+      </div>
 
       {/* How They Work Together Band */}
       <section className="py-24 sm:py-36 bg-[#F2EAE0] text-[#111827] border-t border-[#111827]/10">
@@ -537,51 +541,16 @@ export default function Products() {
       </section>
 
       {/* Close Section */}
-      <section className="pt-32 sm:pt-44 pb-24 sm:pb-36 text-center bg-[#FAF8F5] border-t border-[#111827]/10">
-        <div className="max-w-[1060px] mx-auto px-5 sm:px-8">
-          <FadeUp>
-            <Smile className="text-[72px] sm:text-[96px]" color={PINK} winkEvery={3000} />
-            <h2 className="font-display font-bold text-huge mt-5 sm:mt-6 text-[#111827]">
-              Need something we haven&apos;t built yet?
-            </h2>
-          </FadeUp>
-          <FadeUp delay={0.15}>
-            <p className="mt-4 sm:mt-5 text-lg sm:text-2xl text-[#111827]/75 max-w-[48ch] mx-auto leading-relaxed">
-              Every tool on this page started because off-the-shelf software was either bloated, rented, or built to trap user data. If you have a gnarly challenge or a custom product to build, let&apos;s talk.
-            </p>
-          </FadeUp>
-
-          <div className="mt-8 sm:mt-12 grid sm:grid-cols-3 gap-5 text-left">
-            {CUSTOM_CARDS.map((card, i) => (
-              <FadeUp
-                key={card.title}
-                delay={0.1 + i * 0.08}
-                className="p-6 sm:p-7 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10 flex flex-col"
-              >
-                <div className="font-display text-xl sm:text-2xl font-bold text-[#111827]">{card.title}</div>
-                <p className="mt-2.5 text-base text-[#111827]/75 leading-relaxed flex-1">{card.body}</p>
-              </FadeUp>
-            ))}
-          </div>
-
-          <FadeUp delay={0.25} className="mt-10 sm:mt-12 flex flex-wrap justify-center items-center gap-4">
-            <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-base sm:text-lg font-semibold no-underline shadow-sm hover:bg-[#111827] transition-colors"
-              >
-                Start a project <ArrowRight className="w-5 h-5" />
-              </Link>
-            </motion.div>
-            <Link
-              href="/studio"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border-2 border-[#111827] text-[#111827] text-base sm:text-lg font-semibold no-underline hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors"
-            >
-              How the studio works →
-            </Link>
-          </FadeUp>
-        </div>
-      </section>
+      <PageClose
+        headline="Need something we haven't built yet?"
+        subhead="Every tool on this page started because off-the-shelf software was either bloated, rented, or built to trap user data. If you have a gnarly challenge or a custom product to build, let's talk."
+        cards={CUSTOM_CARDS}
+        primaryCta="Start a project"
+        primaryHref="/contact"
+        secondaryCta="How the studio works"
+        secondaryHref="/studio"
+        secondaryExternal={false}
+      />
     </div>
   );
 }

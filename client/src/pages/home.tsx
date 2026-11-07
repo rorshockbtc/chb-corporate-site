@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { ScaryHeadline } from "@/components/brand/scary-words";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -600,57 +601,33 @@ function ThingsWeMake() {
 }
 
 /* ─────────────────────────────── CLOSE ─────────────────────────────── */
-const SUMMARY_CARDS = [
+const SUMMARY_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
   {
     title: "Fixed Sprints",
     body: "$7,500 one-week sprint or single-day build. No scope creep, no runaway retainers.",
   },
   {
-    title: "Direct Kyle",
-    body: "No account managers or junior handoffs. You talk directly with the principal architect.",
+    title: "Direct to Kyle (Cubby)",
+    body: "No account managers or junior handoffs. You work directly with the principal architect.",
   },
   {
     title: "Code You Own",
-    body: "Clean architecture, tested repo, full design tokens. Deployed and handed over on Friday.",
+    body: "Clean architecture, open design system, tested repo. Deployed and handed over on Friday.",
   },
 ];
 
 function Close() {
   return (
-    <section className="py-20 sm:py-28 text-center" data-testid="section-close">
-      <div className="max-w-[1060px] mx-auto px-5">
-        <FadeUp>
-          <Smile className="text-[88px] sm:text-[124px]" color="#FE299E" winkEvery={3000} />
-        </FadeUp>
-        <h2 className="font-display font-bold text-huge mt-4 sm:mt-5">
-          <RiseLines lines={["Got something scary?", "Let's make it smile."]} />
-        </h2>
-
-        <div className="mt-7 sm:mt-9 grid sm:grid-cols-3 gap-5 text-left">
-          {SUMMARY_CARDS.map((card, i) => (
-            <FadeUp
-              key={card.title}
-              delay={0.1 + i * 0.1}
-              className="p-6 rounded-2xl bg-[#F3EEE6] border border-[#111827]/10"
-            >
-              <div className="font-display text-2xl font-bold text-[#111827]">{card.title}</div>
-              <p className="mt-2 text-base text-[#111827]/70 leading-relaxed">{card.body}</p>
-            </FadeUp>
-          ))}
-        </div>
-
-        <FadeUp delay={0.3} className="mt-10 flex flex-wrap justify-center items-center gap-4">
-          <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-            <Link href="/contact" className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-sm">
-              Start a project <ArrowRight className="w-5 h-5" />
-            </Link>
-          </motion.div>
-          <a href="mailto:cubby@colonhyphenbracket.pink" className="inline-flex items-center px-6 sm:px-8 py-4 rounded-full border-2 border-[#111827] text-[#111827] text-base sm:text-lg font-semibold no-underline hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors">
-            cubby@colonhyphenbracket.pink
-          </a>
-        </FadeUp>
-      </div>
-    </section>
+    <PageClose
+      headline="Got something scary? Let's make it smile."
+      subhead="Whether you need a one-week sprint, a single-day build, or a full cross-platform product, you work directly with the person who designs the screens and writes the code."
+      cards={SUMMARY_CARDS}
+      primaryCta="Start a project"
+      primaryHref="/contact"
+      secondaryCta="cubby@colonhyphenbracket.pink"
+      secondaryHref="mailto:cubby@colonhyphenbracket.pink"
+      secondaryExternal
+    />
   );
 }
 

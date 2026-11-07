@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { ScaryHeadline, MANIFESTO_SCARY_PAIRS } from "@/components/brand/scary-words";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -55,6 +56,21 @@ const CONTRASTS = [
     them: "Treating businesses outside San Francisco and New York like an afterthought.",
     us: "Bringing Fortune-500 and Series-B product rigor to Main Street, regulated teams, and ambitious founders everywhere.",
     color: "#FE299E",
+  },
+];
+
+const MANIFESTO_CLOSE_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
+  {
+    title: "Main Street & Beyond",
+    body: "Fortune-500 and Series-B engineering rigor brought to independent businesses, regulated teams, and founders everywhere.",
+  },
+  {
+    title: "Direct to Kyle (Cubby)",
+    body: "No four-person agency pod playing telephone. You work directly with the principal who designs and builds your product.",
+  },
+  {
+    title: "Yours on Day One",
+    body: "Local-first privacy, open-source design rails, and 100% repository ownership—never a maintenance trap.",
   },
 ];
 
@@ -184,37 +200,17 @@ export default function ManifestoPage() {
       </section>
 
       {/* Signature & Close */}
-      <section className="py-20 sm:py-32 text-center" data-testid="manifesto-close">
-        <div className="max-w-[960px] mx-auto px-5">
-          <FadeUp>
-            <Smile className="text-[96px] sm:text-[150px]" color="#FE299E" winkEvery={3000} />
-          </FadeUp>
-          <h2 className="font-display font-bold text-huge mt-6">
-            <RiseLines lines={["Coastal rigor.", "Appalachian honesty."]} />
-          </h2>
-          <FadeUp delay={0.15}>
-            <p className="mt-6 text-lg sm:text-2xl text-[#111827]/75 max-w-2xl mx-auto leading-relaxed">
-              Whether you're on Main Street or Sand Hill Road, if you're building something that matters, we'd love to help you ship it.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.25} className="mt-10 flex flex-wrap justify-center gap-4">
-            <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold no-underline shadow-sm"
-              >
-                Start a project <ArrowRight className="w-5 h-5" />
-              </Link>
-            </motion.div>
-            <Link
-              href="/studio"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-[#111827] text-[#111827] hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors text-lg font-semibold no-underline"
-            >
-              See how the studio works
-            </Link>
-          </FadeUp>
-        </div>
-      </section>
+      <PageClose
+        headline="Coastal rigor. Appalachian honesty."
+        subhead="Whether you're on Main Street or Sand Hill Road, if you're building something that matters, we'd love to help you ship it."
+        cards={MANIFESTO_CLOSE_CARDS}
+        primaryCta="Start a project"
+        primaryHref="/contact"
+        secondaryCta="How the studio works"
+        secondaryHref="/studio"
+        secondaryExternal={false}
+        testId="manifesto-close"
+      />
     </div>
   );
 }
