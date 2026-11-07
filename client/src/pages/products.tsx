@@ -8,6 +8,7 @@ import { RiseLines, FadeUp } from "@/components/brand/motion";
 const BLUE = "#0A9BE0";
 const GREEN = "#3FA535";
 const PINK = "#FE299E";
+const GOLD = "#D97706";
 
 interface ProductItem {
   id: string;
@@ -116,7 +117,7 @@ export default function Products() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 260;
+      const scrollPos = window.scrollY + 280;
       for (const item of PRODUCTS) {
         const el = document.getElementById(item.id);
         if (el) {
@@ -124,8 +125,16 @@ export default function Products() {
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
             setActiveId(item.id);
-            break;
+            return;
           }
+        }
+      }
+      const marigoldEl = document.getElementById("marigold");
+      if (marigoldEl) {
+        const top = marigoldEl.offsetTop;
+        const height = marigoldEl.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          setActiveId("marigold");
         }
       }
     };
@@ -202,17 +211,25 @@ export default function Products() {
               <button
                 onClick={() => scrollToSection("marigold")}
                 className="relative bg-transparent cursor-pointer font-display text-2xl sm:text-3xl font-bold transition-all duration-300 py-1"
-                style={{ color: activeId === "marigold" ? "#3FA535" : "rgba(17,24,39,0.3)" }}
+                style={{ color: activeId === "marigold" ? GOLD : "rgba(17,24,39,0.3)" }}
               >
-                <span className="mr-2">&amp;</span>
+                <span className="mr-2 text-xl">❀</span>
                 <span>Marigold</span>
+                {activeId === "marigold" && (
+                  <motion.span
+                    layoutId="active-indicator"
+                    className="absolute left-0 right-0 -bottom-2 h-[4px] rounded-full"
+                    style={{ backgroundColor: GOLD }}
+                    transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                  />
+                )}
               </button>
             </div>
           </div>
 
           {/* Sequential Product Chapters */}
           <div className="space-y-32">
-            {PRODUCTS.map((p, idx) => (
+            {PRODUCTS.map((p) => (
               <div
                 key={p.id}
                 id={p.id}
@@ -285,62 +302,50 @@ export default function Products() {
               </div>
             ))}
 
-            {/* Standalone Marigold Chapter (The Floral Exception) */}
+            {/* Standalone Marigold Chapter (Mule Design-inspired full-bleed typographic billboard) */}
             <div
               id="marigold"
-              className="scroll-mt-36 pt-12 pb-16 border-t-2 border-[#3FA535]/30 bg-[#F3EEE6] -mx-5 sm:-mx-8 lg:-mx-12 px-5 sm:px-8 lg:px-12 rounded-[36px]"
+              className="scroll-mt-36 relative overflow-hidden rounded-[36px] bg-[#1a140d] text-white -mx-5 sm:-mx-8 lg:-mx-12 px-8 sm:px-12 lg:px-16 py-20 sm:py-28 shadow-xl"
             >
-              <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                <div className="lg:col-span-7">
-                  <div className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-[#3FA535]/15 text-[#3FA535] mb-4">
-                    The Exception to Punctuation · Named After the Flower
-                  </div>
-                  <h2 className="font-display font-bold text-4xl sm:text-6xl text-[#111827] leading-tight">
-                    Marigold <span className="text-[#3FA535]">&amp;</span>
-                  </h2>
-                  <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#111827]/80 mt-4">
-                    Serious local analytics that never touch a stranger's cloud.
-                  </h3>
-                  <p className="mt-6 text-lg sm:text-xl leading-relaxed text-[#111827]/75 max-w-[52ch]">
-                    Marigold is our zero-knowledge analytics engine built on DuckDB-Wasm and WebGPU. It queries and reconciles hundreds of thousands of records entirely in your browser. Civic organizations, researchers, and healthcare advocates get deep insights without ever sacrificing data sovereignty.
-                  </p>
-                  <ul className="mt-8 space-y-3">
-                    <li className="flex items-center gap-3 text-lg font-semibold text-[#111827]">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#3FA535]" />
-                      500k+ rows analyzed client-side in milliseconds
-                    </li>
-                    <li className="flex items-center gap-3 text-lg font-semibold text-[#111827]">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#3FA535]" />
-                      Zero PII uploaded to any cloud server
-                    </li>
-                    <li className="flex items-center gap-3 text-lg font-semibold text-[#111827]">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#3FA535]" />
-                      Encrypted at rest with native Web Crypto
-                    </li>
-                  </ul>
-                  <div className="mt-10">
-                    <a
-                      href="https://bolt.pipes.pink"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#3FA535] hover:bg-[#348a2c] text-white text-lg font-semibold no-underline transition-colors shadow-sm"
-                    >
-                      Open Marigold on Bolt <ArrowUpRight className="w-5 h-5" />
-                    </a>
-                  </div>
+              {/* Background Marigold Image with Warm Golden-Amber Wash */}
+              <div className="absolute inset-0 z-0">
+                <img
+                  src="/images/brand/marigold-real.jpg"
+                  alt="Golden marigold background"
+                  className="w-full h-full object-cover opacity-25 filter blur-[1px] scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#1a140d] via-[#1a140d]/90 to-[#b45309]/30" />
+              </div>
+
+              <div className="relative z-10 max-w-4xl">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30 mb-8">
+                  <span>❀</span> The Civic Data Exception · Named After the Flower
                 </div>
 
-                <div className="lg:col-span-5 space-y-4">
-                  <div className="rounded-[24px] overflow-hidden shadow-sm border border-[#111827]/10 bg-white">
-                    <img
-                      src="/images/brand/marigold-real.jpg"
-                      alt="Golden African Marigold blooms in full ruffled spherical flower"
-                      className="w-full aspect-[4/3] object-cover"
-                    />
-                  </div>
-                  <p className="text-xs text-[#111827]/50 text-center italic">
-                    Tagetes erecta — vibrant, resilient, and unapologetically golden.
-                  </p>
+                <h2 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white">
+                  Designed <span className="text-[#FBBF24]">to work.</span>
+                </h2>
+
+                <p className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold mt-8 text-[#FAF8F5]/90 leading-snug">
+                  If you've got the sensitive civic data, we've got the zero-knowledge architecture... and the experience.
+                </p>
+
+                <p className="mt-8 text-lg sm:text-xl leading-relaxed text-[#FAF8F5]/75 max-w-[56ch]">
+                  Marigold is our civic data engine engineered specifically for researchers, municipal advocates, and healthcare teams. Built on DuckDB-Wasm and client-side encryption, it reconciles hundreds of thousands of records entirely in your browser—without sending a single byte of private data to a cloud server.
+                </p>
+
+                <div className="mt-12 flex flex-wrap items-center gap-4">
+                  <a
+                    href="https://marigoldinsights.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] text-lg font-bold no-underline transition-colors shadow-lg"
+                  >
+                    Open MarigoldInsights.org <ArrowUpRight className="w-5 h-5 text-[#111827]" />
+                  </a>
+                  <span className="text-sm font-medium text-white/50">
+                    Live civic data research platform
+                  </span>
                 </div>
               </div>
             </div>
@@ -380,7 +385,7 @@ export default function Products() {
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <div className="font-display text-4xl font-bold text-[#3FA535]">&amp; Analyze</div>
+              <div className="font-display text-4xl font-bold text-[#F59E0B]">❀ Analyze</div>
               <p className="mt-3 text-base text-white/70 leading-relaxed">
                 Analyze and query hundreds of thousands of records locally in Marigold.
               </p>

@@ -31,7 +31,7 @@ export function Footer() {
               <li><a href="https://pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Pipes |||</a></li>
               <li><a href="https://pipes.pink/write" className="link-swipe no-underline text-white/80 hover:text-white">Hash # &amp; Semi ; - ]</a></li>
               <li><a href="https://greater.pink" className="link-swipe no-underline text-white/80 hover:text-white">Greater &gt;</a></li>
-              <li><a href="https://bolt.pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Marigold &amp;</a></li>
+              <li><a href="https://marigoldinsights.org" className="link-swipe no-underline text-white/80 hover:text-white">Marigold ❀</a></li>
             </ul>
           </div>
           <div className="lg:col-span-2">
