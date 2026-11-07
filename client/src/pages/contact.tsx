@@ -1,192 +1,112 @@
-import { Mail, ExternalLink, Building } from "lucide-react";
-import { usePerspectiveContent } from "@/hooks/use-perspective";
-import { ContactForm } from "@/components/contact-form";
+import { useState, type FormEvent } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { Smile } from "@/components/brand/smile";
+import { RiseLines, FadeUp } from "@/components/brand/motion";
+
+const KINDS = [
+  { id: "sprint", label: "A one-week sprint", color: "#0A9BE0" },
+  { id: "partner", label: "An ongoing partner", color: "#FE299E" },
+  { id: "build", label: "A full build", color: "#3FA535" },
+  { id: "hello", label: "Just saying hi", color: "#111827" },
+];
+
+const field =
+  "w-full bg-transparent border-0 border-b-2 border-[#111827]/15 focus:border-[#FE299E] focus:outline-none focus:ring-0 py-4 font-display text-2xl sm:text-3xl font-semibold text-[#111827] placeholder:text-[#111827]/25 transition-colors";
 
 export default function Contact() {
-  const contactContent = usePerspectiveContent({
-    startup_founders: {
-      title: "Let's build the market together",
-      description: "Ready to experience AI that accelerates your business growth? Join entrepreneurs who've discovered what technology feels like when it's built for real market impact.",
-      ctaText: "Let's Scale"
-    },
-    content_creators: {
-      title: "Let's create together",
-      description: "Ready to experience AI that amplifies your creative voice? Join creators who've discovered what technology feels like when it's built for authentic expression.",
-      ctaText: "Let's Create"
-    },
-    memory_capturers: {
-      title: "Let's preserve together",
-      description: "Ready to experience AI that honors your family's story? Join families who've discovered what technology feels like when it's built for what truly matters.",
-      ctaText: "Let's Connect"
-    }
-  });
+  const [kind, setKind] = useState("sprint");
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
 
-  const contactMethods = [
-    {
-      icon: Mail,
-      title: "Email",
-      subtitle: "Direct communication",
-      contact: "cubby@colonhyphenbracket.pink",
-      href: "mailto:cubby@colonhyphenbracket.pink",
-      color: "bg-brand-pink",
-      testId: "contact-email"
-    },
-    {
-      icon: Building,
-      title: "Follow CHB",
-      subtitle: "Company updates",
-      contact: "@chb_coop",
-      href: "https://twitter.com/chb_coop", 
-      color: "bg-brand-green",
-      testId: "contact-business"
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const d = new FormData(e.currentTarget);
+    const name = String(d.get("name") || "").trim();
+    const email = String(d.get("email") || "").trim();
+    const message = String(d.get("message") || "").trim();
+    if (!name || !email || !message) return;
+    setState("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name, email, message,
+          company: String(d.get("company") || "").trim(),
+          subject: `CHB Start a project (${KINDS.find((k) => k.id === kind)?.label}) — ${name}`,
+        }),
+      });
+      const r = (await res.json()) as { success: boolean; message?: string };
+      if (!r.success) throw new Error(r.message || "Something went wrong");
+      setState("sent");
+    } catch (err: any) {
+      setError(err?.message || "Something went wrong");
+      setState("error");
     }
-  ];
+  }
 
   return (
-    <main className="pt-20">
-      {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-background via-muted/30 to-background">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="text-center lg:text-left space-y-8">
-              <h1 className="text-6xl lg:text-7xl font-bold font-serif leading-tight" data-testid="contact-title">
-                {contactContent.title}
-              </h1>
-              
-              <p className="text-2xl text-muted-foreground leading-relaxed max-w-2xl" data-testid="contact-description">
-                {contactContent.description}
+    <div className="brand-canvas min-h-screen">
+      <section className="pt-32 sm:pt-40 pb-28 sm:pb-36">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-14">
+          <div className="lg:col-span-5">
+            <h1 className="font-display font-bold text-huge">
+              <RiseLines immediate lines={["Bring us", "something", <span key="s" className="text-[#FE299E]">scary.</span>]} />
+            </h1>
+            <FadeUp delay={0.3}>
+              <p className="mt-10 text-xl leading-relaxed text-[#111827]/75 max-w-[34ch]">
+                Tell us what's keeping you up at night. A real human (Kyle) reads every note and replies personally,
+                usually within a day.
               </p>
-            </div>
-            
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative group">
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500"></div>
-                <div className="relative overflow-hidden rounded-2xl border border-border bg-[#F2EAE0] p-2 shadow-xl">
-                  <img 
-                    src="/images/studio/kyle-portrait.jpg" 
-                    alt="Kyle Cyree — Founder & Principal Systems Architect"
-                    className="w-72 h-80 object-cover rounded-xl grayscale hover:grayscale-0 transition duration-500"
-                    data-testid="contact-hero-image"
-                  />
-                  <div className="pt-3 pb-1 px-2 text-left">
-                    <p className="font-mono text-xs uppercase tracking-wider text-[#4A3A32]">Principal Architect</p>
-                    <p className="font-serif text-sm font-semibold text-[#281B16]">Kyle Cyree · Colon Hyphen Bracket</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Contact Methods Section */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold font-serif mb-6">Choose Your Connection</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Whether you prefer email, personal updates, or business discussions, we're here to connect in the way that works best for you.</p>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 gap-8 lg:gap-12 mb-20 max-w-3xl mx-auto">
-            {contactMethods.map((method, index) => (
-              <div key={method.title} className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                <div className="relative bg-card border border-border rounded-2xl p-8 text-center space-y-6 transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1">
-                  <div className={`w-20 h-20 ${method.color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
-                    <method.icon size={32} className="text-white" />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-bold">{method.title}</h3>
-                    <p className="text-muted-foreground">{method.subtitle}</p>
-                  </div>
-                  <a
-                    href={method.href}
-                    target={method.href.startsWith("http") ? "_blank" : undefined}
-                    rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors font-medium text-lg"
-                    data-testid={method.testId}
-                  >
-                    <span>{method.contact}</span>
-                    {method.href.startsWith("http") && <ExternalLink size={16} />}
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-10 space-y-3">
-              <h3 className="text-3xl lg:text-4xl font-bold font-serif">{contactContent.ctaText}</h3>
-              <p className="text-muted-foreground text-lg">
-                Send us a note. We read every message and reply personally.
-              </p>
-            </div>
-            <div className="bg-card border border-border rounded-3xl p-8 lg:p-10 shadow-lg">
-              <ContactForm subjectPrefix="CHB Contact Page" testIdPrefix="contact-page" />
-            </div>
-            <div className="text-center mt-8">
-              <a
-                href="https://hash.pink"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-                data-testid="try-hash-free-button"
-              >
-                <span>Or try Hash for free</span>
-                <ExternalLink size={16} />
+              <a href="mailto:cubby@colonhyphenbracket.pink" className="link-swipe inline-block mt-8 text-xl font-semibold text-[#111827] no-underline">
+                cubby@colonhyphenbracket.pink
               </a>
-            </div>
+            </FadeUp>
           </div>
-        </div>
-      </section>
 
-      {/* FAQ Section */}
-      <section className="py-32 bg-gradient-to-br from-muted/30 via-background to-muted/30">
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold font-serif mb-6">Common Questions</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Everything you need to know about CHB and our AI for the underserved</p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-6 text-primary">What makes CHB different from other AI companies?</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                We build AI for people Big Tech overlooks—individuals who want real personalization, 
-                control over their data, and tools that respect their values instead of flattening them. 
-                Constitutional governance means transparency and human agency are baked in, not bolted on.
-              </p>
-            </div>
-            
-            <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-6 text-primary">How do your products work together?</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Hash captures and organizes your thoughts, Semi helps develop and extend ideas, Scout finds 
-                patterns and connections, and Workshop ensures everything aligns with your values. Each tool 
-                excels individually but becomes more powerful when used together.
-              </p>
-            </div>
-            
-            <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-6 text-primary">What does "AI for the underserved" mean?</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                It means building for the people mainstream AI ignores: individuals who want personalization 
-                tied to their actual values, control over what's shared, and transparency about how their AI 
-                makes decisions. Less one-size-fits-all, more your-size-fits-you.
-              </p>
-            </div>
-            
-            <div className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-6 text-primary">Are your tools available now?</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Hash and Semi are available today. Scout is integrated into Hash for pattern recognition, 
-                and Workshop provides the governance framework across all tools. We're continuously improving 
-                and expanding capabilities based on user feedback.
-              </p>
-            </div>
+          <div className="lg:col-span-7">
+            <AnimatePresence mode="wait">
+              {state === "sent" ? (
+                <motion.div key="sent" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-6">
+                  <Smile className="text-[140px]" color="#FE299E" winkEvery={1600} />
+                  <h2 className="font-display text-big font-bold mt-8">Got it. That already feels less scary.</h2>
+                  <p className="mt-6 text-xl text-[#111827]/70">Expect a reply soon.</p>
+                </motion.div>
+              ) : (
+                <motion.form key="form" onSubmit={submit} className="space-y-10" data-testid="contact-page-form" exit={{ opacity: 0, y: -12 }}>
+                  <div>
+                    <div className="font-display text-xl font-bold text-[#111827] mb-4">I'm looking for</div>
+                    <div className="flex flex-wrap gap-3">
+                      {KINDS.map((k) => (
+                        <button type="button" key={k.id} onClick={() => setKind(k.id)}
+                          className="px-5 py-3 rounded-full border-2 text-lg font-semibold transition-colors cursor-pointer"
+                          style={kind === k.id
+                            ? { backgroundColor: k.color, borderColor: k.color, color: "#fff" }
+                            : { backgroundColor: "transparent", borderColor: "rgba(17,24,39,0.15)", color: "#111827" }}>
+                          {k.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-10">
+                    <input name="name" required placeholder="Your name" className={field} data-testid="contact-page-input-name" />
+                    <input name="email" type="email" required placeholder="Email" className={field} data-testid="contact-page-input-email" />
+                  </div>
+                  <input name="company" placeholder="Company or project (optional)" className={field} />
+                  <textarea name="message" required rows={4} placeholder="What's the scary thing?" className={`${field} resize-none`} data-testid="contact-page-input-message" />
+                  {state === "error" && <p className="text-lg text-[#D9264A]">{error}. You can always email us directly.</p>}
+                  <motion.button whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }} type="submit" disabled={state === "sending"}
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold cursor-pointer disabled:opacity-60"
+                    data-testid="contact-page-submit">
+                    {state === "sending" ? <><Loader2 className="w-5 h-5 animate-spin" /> Sending…</> : <>Send it <ArrowRight className="w-5 h-5" /></>}
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -70,6 +70,7 @@ function Marquee() {
 }
 
 /* ──────────────────────────── MANIFESTO ──────────────────────────── */
+const MCOL = ["#FE299E", "#0A9BE0", "#3FA535"];
 const OPINIONS = [
   { mark: ":-]", line: "Scary is a design problem.", note: "If people are afraid of your product, that's on us, not them. Fear is just complexity nobody bothered to explain." },
   { mark: "#", line: "Explicit bias beats fake neutrality.", note: "We have opinions. We tell you what they are. You're smart enough to disagree." },
@@ -92,7 +93,7 @@ function Manifesto() {
                 <button
                   onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}
                   className="group w-full text-left py-5 sm:py-6 border-t border-[#111827]/10 flex items-baseline gap-5 sm:gap-8 bg-transparent cursor-pointer">
-                  <span className={`font-display font-bold text-2xl sm:text-3xl w-12 shrink-0 transition-colors ${active === i ? "text-[#FE299E]" : "text-[#111827]/25"}`}>{o.mark}</span>
+                  <span className={`font-display font-bold text-2xl sm:text-3xl w-12 shrink-0 transition-colors ${active === i ? "" : "text-[#111827]/25"}`} style={active === i ? { color: MCOL[i % 3] } : undefined}>{o.mark}</span>
                   <span className={`font-display font-bold text-big transition-all duration-500 ${active === i ? "text-[#111827] translate-x-2" : "text-[#111827]/30"}`}>
                     {o.line}
                   </span>
@@ -106,7 +107,7 @@ function Manifesto() {
                 <motion.div key={active}
                   initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.35 }}>
-                  <div className="font-display text-[96px] font-bold leading-none text-[#FE299E]">{OPINIONS[active].mark}</div>
+                  <div className="font-display text-[96px] font-bold leading-none" style={{ color: MCOL[active % 3] }}>{OPINIONS[active].mark}</div>
                   <p className="mt-6 text-xl leading-relaxed text-[#111827]/75">{OPINIONS[active].note}</p>
                 </motion.div>
               </AnimatePresence>
@@ -121,7 +122,7 @@ function Manifesto() {
 /* ─────────────────────────── WHO WE HELP ─────────────────────────── */
 const AUDIENCES = [
   {
-    key: "founders", who: "Founders", color: "#0B8FD6", headline: "Scale your vision.",
+    key: "founders", who: "Founders", color: "#0A9BE0", headline: "Scale your vision.",
     title: "Scale beyond Silicon Valley's defaults",
     body: "Founders Big Tech overlooks deserve technology that respects their market and their edge. We build products that amplify your vision instead of flattening it into the same template every other startup uses.",
     art: "/images/brand/founders-blueprint.jpg", alt: "A figure on a giant blueprint that curls into a wave, a pink kite above",
@@ -133,7 +134,7 @@ const AUDIENCES = [
     art: "/images/brand/scary-staircase.jpg", alt: "A jagged staircase replaced by a gentle ramp, a figure with a pink umbrella",
   },
   {
-    key: "families", who: "Families", color: "#4E8A12", headline: "Preserve what matters.",
+    key: "families", who: "Families", color: "#3FA535", headline: "Preserve what matters.",
     title: "Preventing Big Tech erasure, one family at a time",
     body: "Your family's stories belong to you, not to algorithms built to sell you things. We help you capture, protect, and pass down what matters, privately and on your terms.",
     art: "/images/brand/families-lighthouse.jpg", alt: "A lighthouse with a pink beam watching over a family in a rowboat",
@@ -202,7 +203,7 @@ function HowItWorks() {
           {STEPS.map((s, i) => (
             <FadeUp key={s.n} delay={i * 0.12}>
               <div className="font-display text-2xl font-bold text-[#111827]/25">{s.n}</div>
-              <div className={`font-display font-bold text-huge mt-2 ${i === 2 ? "text-[#FE299E]" : i === 0 ? "text-[#111827]/30 line-through decoration-[#FE299E] decoration-4" : "text-[#111827]"}`}>
+              <div className={`font-display font-bold text-huge mt-2 ${i === 2 ? "text-[#FE299E]" : i === 0 ? "text-[#111827]/30 line-through decoration-[#FE299E] decoration-4" : "text-[#0A9BE0]"}`}>
                 {s.word}
               </div>
               <p className="mt-6 text-lg leading-relaxed text-[#111827]/75 max-w-[32ch]">{s.body}</p>
@@ -224,11 +225,11 @@ function HowItWorks() {
 
 /* ─────────────────────────── THINGS WE MAKE ─────────────────────────── */
 const MAKES = [
-  { mark: "|", name: "Pipes", line: "Curated human knowledge. Creators keep 70%.", href: "https://pipes.pink" },
-  { mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
-  { mark: ";-]", name: "Semi", line: "An AI editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
-  { mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
-  { mark: "/", name: "Accént", line: "Our design system, out in the open.", href: "https://design.pipes.pink" },
+  { color: "#0A9BE0", mark: "|", name: "Pipes", line: "Curated human knowledge. Creators keep 70%.", href: "https://pipes.pink" },
+  { color: "#3FA535", mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
+  { color: "#FE299E", mark: ";-]", name: "Semi", line: "An AI editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
+  { color: "#0A9BE0", mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
+  { color: "#3FA535", mark: "/", name: "Accént", line: "Our design system, out in the open.", href: "https://design.pipes.pink" },
 ];
 
 function ThingsWeMake() {
@@ -243,7 +244,7 @@ function ThingsWeMake() {
             <li key={m.name}>
               <a href={m.href} target="_blank" rel="noopener noreferrer"
                 className="group grid grid-cols-12 items-baseline gap-4 py-6 sm:py-8 border-t border-white/10 no-underline text-[#FAF8F5]">
-                <span className="col-span-2 sm:col-span-1 font-display text-4xl sm:text-5xl font-bold transition-transform group-hover:-rotate-6">{m.mark}</span>
+                <span className="col-span-2 sm:col-span-1 font-display text-4xl sm:text-5xl font-bold transition-transform group-hover:-rotate-6" style={{ color: m.color }}>{m.mark}</span>
                 <span className="col-span-10 sm:col-span-4 font-display text-4xl sm:text-5xl font-bold transition-transform duration-500 group-hover:translate-x-3">{m.name}</span>
                 <span className="col-span-10 col-start-3 sm:col-start-auto sm:col-span-6 text-lg sm:text-xl text-white/60 group-hover:text-white transition-colors">{m.line}</span>
                 <ArrowUpRight className="hidden sm:block col-span-1 justify-self-end w-7 h-7 text-white/30 group-hover:text-[#FE299E] transition-all group-hover:-translate-y-1 group-hover:translate-x-1" />

@@ -31,9 +31,9 @@ export function Navigation() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
-        <Link href="/" className="text-xl tracking-wide text-[#111827] no-underline" data-testid="logo-link">
+        <Link href="/" className="font-logo text-xl sm:text-[22px] text-[#111827] no-underline" data-testid="logo-link">
           <span className="font-medium">colon</span>
-          <span className="font-extralight">hyphen</span>
+          <span className="font-light">hyphen</span>
           <span className="font-medium">bracket</span>
         </Link>
 
