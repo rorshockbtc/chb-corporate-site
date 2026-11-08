@@ -434,8 +434,7 @@ export default function Products() {
                           p.color === COLOR_PIPES ? "text-[#111827]" : "text-white"
                         }`}
                         style={{
-                          backgroundColor:
-                            p.id === "semi" ? "var(--a-accent-fill, #B81468)" : p.color,
+                          backgroundColor: p.color,
                         }}
                       >
                         {p.cta} <ArrowUpRight className="w-5 h-5" />

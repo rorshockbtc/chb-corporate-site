@@ -218,7 +218,8 @@ export function Navigation() {
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-[var(--a-accent-fill,#B81468)] hover:bg-[#111827] text-white text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(184,20,104,0.5)] transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#111827] text-white text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)] transition-colors"
+                data-testid="mobile-drawer-cta"
               >
                 Start a project <ArrowRight className="w-5 h-5" />
               </Link>

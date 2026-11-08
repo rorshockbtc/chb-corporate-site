@@ -43,7 +43,7 @@ export default function DesignSystemPage() {
         <div className="container mx-auto relative">
           <div className="max-w-4xl space-y-8">
             <div className="flex items-center gap-3">
-              <Badge className="bg-brand-pink hover:bg-brand-pink/90 text-white px-4 py-1.5 text-sm font-bold rounded-full shadow-lg shadow-brand-pink/20">
+              <Badge className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white px-4 py-1.5 text-sm font-bold rounded-full shadow-lg shadow-brand-pink/20">
                 M3-SPEC 1.0.0
               </Badge>
               <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Perspective-Engine v4</span>
@@ -59,7 +59,7 @@ export default function DesignSystemPage() {
               <span className="text-foreground font-semibold"> nostalgic preservation</span> instantly.
             </p>
             <div className="flex flex-wrap gap-4 pt-6">
-              <Button asChild className="bg-brand-pink hover:opacity-90 h-14 px-10 text-lg rounded-2xl shadow-xl shadow-brand-pink/20 transition-all hover:scale-[1.02]">
+              <Button asChild className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white h-14 px-10 text-lg rounded-2xl shadow-xl shadow-brand-pink/20 transition-all hover:scale-[1.02]">
                 <a href="https://design.pipes.pink" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-3 h-6 w-6" />
                   Accént 3.0 Specs
@@ -245,7 +245,7 @@ export default function DesignSystemPage() {
 </Button>`}
                   >
                     <div className="flex flex-wrap gap-6">
-                      <Button className="bg-brand-pink hover:opacity-90 text-white rounded-2xl h-14 px-8 font-bold shadow-lg shadow-brand-pink/20">Brand Primary</Button>
+                      <Button className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white rounded-2xl h-14 px-8 font-bold shadow-lg shadow-brand-pink/20">Brand Primary</Button>
                       <Button variant="outline" className="border-brand-pink text-brand-pink hover:bg-brand-pink/5 rounded-2xl h-14 px-8 font-bold">Secondary Action</Button>
                     </div>
                   </ComponentShowcase>
@@ -283,7 +283,7 @@ export default function DesignSystemPage() {
 </Badge>`}
                   >
                     <div className="flex flex-wrap gap-4">
-                      <Badge className="bg-brand-pink hover:bg-brand-pink/90 text-white px-4 py-1.5 rounded-full font-bold">Stable v1.0</Badge>
+                      <Badge className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white px-4 py-1.5 rounded-full font-bold">Stable v1.0</Badge>
                       <Badge variant="outline" className="border-perspective text-perspective px-4 py-1.5 rounded-full font-bold">Perspective Active</Badge>
                       <Badge className="bg-brand-yellow text-black hover:bg-brand-yellow/90 px-4 py-1.5 rounded-full font-bold">System Alert</Badge>
                     </div>
@@ -373,8 +373,8 @@ function ColorToken({ name, hex, variable, usage }: { name: string, hex: string,
       <div className="space-y-1 px-1">
         <h4 className="font-bold text-lg tracking-tight">{name}</h4>
         <div className="flex items-center gap-2">
-          <code className="text-[10px] bg-muted px-2 py-0.5 rounded-full font-mono text-muted-foreground">{variable}</code>
-          <code className="text-[10px] bg-muted px-2 py-0.5 rounded-full font-mono text-muted-foreground uppercase">{hex}</code>
+          <code className="text-xs bg-muted px-2 py-0.5 rounded-full font-mono text-muted-foreground">{variable}</code>
+          <code className="text-xs bg-muted px-2 py-0.5 rounded-full font-mono text-muted-foreground uppercase">{hex}</code>
         </div>
         <p className="text-xs mt-2 leading-relaxed text-muted-foreground/80">{usage}</p>
       </div>
@@ -393,7 +393,7 @@ function TypographyPreview({ label, className, token, range, text }: {
     <div className="space-y-4 p-8 rounded-[2rem] bg-muted/20 border border-border/50 hover:border-brand-pink/20 transition-all">
       <div className="flex items-center justify-between border-b border-border/50 pb-4">
         <div className="flex items-center gap-3">
-          <Badge variant="outline" className="font-mono text-[10px] tracking-widest uppercase">{token}</Badge>
+          <Badge variant="outline" className="font-mono text-xs tracking-widest uppercase">{token}</Badge>
           <span className="text-xs font-mono text-muted-foreground">{range}</span>
         </div>
         <span className="text-sm font-bold opacity-40">{label}</span>
@@ -422,7 +422,7 @@ function ComponentShowcase({ title, description, code, children }: {
           <Button 
             variant="ghost" 
             size="sm" 
-            className="rounded-xl h-8 text-[10px] font-mono"
+            className="rounded-xl min-h-[44px] px-3 text-xs font-mono"
             onClick={() => setShowCode(!showCode)}
           >
             <Code className="h-3 w-3 mr-2" />
@@ -463,7 +463,7 @@ function PerspectiveControlCard({ title, perspective, description, isActive, onC
     >
       <CardHeader className="space-y-4">
         <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-          isActive ? 'bg-brand-pink text-white rotate-12 scale-110' : 'bg-muted text-muted-foreground group-hover:bg-perspective/10 group-hover:text-perspective'
+          isActive ? 'bg-[var(--a-accent-fill,#FE299E)] text-white rotate-12 scale-110' : 'bg-muted text-muted-foreground group-hover:bg-perspective/10 group-hover:text-perspective'
         }`}>
           <Sparkles className="h-6 w-6" />
         </div>
@@ -482,7 +482,7 @@ function PerspectiveControlCard({ title, perspective, description, isActive, onC
            </div>
            {isActive && <CheckCircle2 className="h-5 w-5 text-brand-pink animate-in zoom-in duration-300" />}
          </div>
-         <p className="text-[10px] font-mono mt-6 text-muted-foreground uppercase tracking-widest">
+         <p className="text-xs font-mono mt-6 text-muted-foreground uppercase tracking-widest">
            {isActive ? 'Lens Engaged' : 'Click to Shift Context'}
          </p>
       </CardContent>

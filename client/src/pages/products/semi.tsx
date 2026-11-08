@@ -108,7 +108,7 @@ export default function SemiDeepDive() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-3">
-                <div className="px-3.5 py-2 bg-[#B81468] rounded-xl flex items-center justify-center">
+                <div className="px-3.5 py-2 bg-[#FE299E] rounded-xl flex items-center justify-center">
                   <span className="text-lg font-mono font-bold text-white">;-]</span>
                 </div>
                 <span className="px-3 py-1 rounded bg-[#E4DACB] border border-[#D3C7B5] font-mono text-xs font-bold text-[#281B16] uppercase tracking-wider">
@@ -129,9 +129,9 @@ export default function SemiDeepDive() {
 
               <div className="bg-[#F2EAE0] border border-[#D3C7B5] rounded-xl p-5">
                 <div className="flex items-start gap-3">
-                  <Heart className="h-5 w-5 text-[#B81468] flex-shrink-0 mt-1" />
+                  <Heart className="h-5 w-5 text-[#FE299E] flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-mono text-xs font-bold text-[#B81468] uppercase tracking-wider mb-1">
+                    <p className="font-mono text-xs font-bold text-[#FE299E] uppercase tracking-wider mb-1">
                       SOCRATIC PROOF POINT
                     </p>
                     <p className="text-sm sm:text-base text-[#281B16] italic leading-relaxed">
@@ -146,7 +146,7 @@ export default function SemiDeepDive() {
                   href="https://pipes.pink/write"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-xl bg-[#B81468] hover:bg-[#961054] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors"
+                  className="px-6 py-3.5 rounded-xl bg-[#FE299E] hover:bg-[#111827] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
                   data-testid="cta-try-semi"
                 >
                   <span>Chat with ;-] Semi in Pipes.Pink</span>
@@ -201,7 +201,7 @@ export default function SemiDeepDive() {
                   data-testid="tab-highlights"
                   className="text-[#281B16] font-semibold data-[state=active]:bg-[#231814] data-[state=active]:text-[#F2EAE0]"
                 >
-                  <Zap className="h-4 w-4 mr-2 text-[#B81468]" />
+                  <Zap className="h-4 w-4 mr-2 text-[#FE299E]" />
                   Quick Highlights
                 </TabsTrigger>
                 <TabsTrigger
@@ -209,7 +209,7 @@ export default function SemiDeepDive() {
                   data-testid="tab-deep-dive"
                   className="text-[#281B16] font-semibold data-[state=active]:bg-[#231814] data-[state=active]:text-[#F2EAE0]"
                 >
-                  <FileText className="h-4 w-4 mr-2 text-[#B81468]" />
+                  <FileText className="h-4 w-4 mr-2 text-[#FE299E]" />
                   The Intelligence Layer (10 min)
                 </TabsTrigger>
               </TabsList>
@@ -818,7 +818,7 @@ export default function SemiDeepDive() {
       {/* CTA */}
       <section className="py-16 lg:py-24 bg-[#231814] text-[#F2EAE0]">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center space-y-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#B81468]/30 text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#FE299E]/20 text-[#FE299E] font-mono text-xs font-bold uppercase tracking-[0.15em]">
             UNIFIED IN PIPES // PIPES.PINK/WRITE
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F2EAE0]">
@@ -832,7 +832,7 @@ export default function SemiDeepDive() {
               href="https://pipes.pink/write"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-7 py-4 rounded-xl bg-[#B81468] hover:bg-[#961054] text-white font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors"
+              className="px-7 py-4 rounded-xl bg-[#FE299E] hover:bg-[#111827] text-white font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]"
               data-testid="cta-final-semi"
             >
               <span>Open ;-] Semi in Pipes.Pink</span>

@@ -1,31 +1,67 @@
 /**
  * Accént 3.0 Brand Configuration Adapter for Colon Hyphen Bracket Corporate
+ * Governance Contract: /STYLES.md (Style Control Plane — distinct from operational /AGENTS.md)
  * Upstream Reference: https://github.com/rorshockbtc/accent-ui (`src/styles/themes.ts`)
  * Canonical Spec: https://design.pipes.pink
  *
- * Defines the downstream brand profile adapter for `playful-principal` and `albers-perspectives`,
+ * Defines the downstream 5-Axis Brand Profile Adapter for `playful-principal` and `albers-perspectives`,
  * ensuring intentional aesthetic drift while strictly preserving Accént's mathematical invariants:
  * - 8pt rhythmic grid
  * - 13px typographic floor (even on monospace eyebrows and footers)
  * - 44×44px touch targets
- * - 5.6:1 WCAG AA contrast on white-text primary buttons via `--a-accent-fill`
+ * - 5.6:1 WCAG AA contrast on white-text primary buttons via `--a-accent-fill` (#B81468) while preserving
+ *   Sovereign Hot Pink (`#FE299E`) on punctuation marks (`: - ]`), `<Smile />`, and `<ScaryHeadline />`.
+ * - 7 Non-Repeating Punctuation Product Signature Colors across Home, Studio, and Products.
  */
 
 export const ACCENT_SPEC = {
   version: "3.0.0",
   designSystemUrl: "https://design.pipes.pink",
   repoUrl: "https://github.com/rorshockbtc/accent-ui",
+  stylesContractPath: "/STYLES.md",
   license: "MIT",
   author: "Colon Hyphen Bracket, LLC",
 } as const;
 
 export type AccentBrandProfileId = "playful-principal" | "albers-perspectives";
 
+export interface AccentProductColorSlot {
+  id: string;
+  mark: string;
+  name: string;
+  hex: string;
+  role: string;
+}
+
+export const CHB_SEVEN_PRODUCT_SLOTS: AccentProductColorSlot[] = [
+  { id: "pipes", mark: "|||", name: "Pipes", hex: "#EAB308", role: "Solar Yellow — bright beacon of verified knowledge" },
+  { id: "bang", mark: "!", name: "BANG!", hex: "#16A34A", role: "Emerald Green — local execution runtime & freedom" },
+  { id: "hash", mark: "#", name: "Hash", hex: "#C2410C", role: "Burnt Terracotta / Rust — quiet, private writing retreat" },
+  { id: "semi", mark: "; - ]", name: "Semi", hex: "#FE299E", role: "Sovereign Pink — flagship Socratic editor" },
+  { id: "greater", mark: ">", name: "Greater", hex: "#0284C7", role: "Sky / Cobalt Blue — universal classroom in 90+ languages" },
+  { id: "accent", mark: "é", name: "Accént", hex: "#E11D48", role: "Crimson / Ruby — open-source typographic craft" },
+  { id: "marigold", mark: "❀", name: "Marigold", hex: "#D97706", role: "Amber Gold — local zero-knowledge civic analytics" },
+];
+
 export interface AccentTypography {
   display: string;
   serif: string;
   sans: string;
   mono: string;
+  displayTracking: string;
+  bodyLineHeight: string;
+}
+
+export interface AccentStructure {
+  ctaRadius: string;
+  posture: "pedestal-hairline" | "warm-well" | "archival-spine" | "terminal-grid";
+  summary: string;
+}
+
+export interface AccentCustomExtension {
+  css?: string;
+  rules?: string[];
+  codeSnippet?: string;
 }
 
 export interface AccentBrandProfile {
@@ -36,6 +72,9 @@ export interface AccentBrandProfile {
   repoUrl: string;
   mark: string;
   typography: AccentTypography;
+  structure: AccentStructure;
+  productSlots?: AccentProductColorSlot[];
+  customExtension?: AccentCustomExtension;
   tokens: {
     light: Record<string, string>;
     dark: Record<string, string>;
@@ -54,6 +93,23 @@ export const PLAYFUL_PRINCIPAL_PROFILE: AccentBrandProfile = {
     serif: "Newsreader",
     sans: "Inter",
     mono: "JetBrains Mono",
+    displayTracking: "-0.035em",
+    bodyLineHeight: "1.55",
+  },
+  structure: {
+    ctaRadius: "9999px",
+    posture: "pedestal-hairline",
+    summary: "De-cardified open architectural pedestals (border-l and border-t hairlines) with 9999px full-pill CTAs.",
+  },
+  productSlots: CHB_SEVEN_PRODUCT_SLOTS,
+  customExtension: {
+    css: `.accent-pedestal { border-top: 1px solid rgba(17, 24, 39, 0.15); padding-top: 1.5rem; }`,
+    rules: [
+      "Preserve Sovereign Hot Pink (#FE299E) on all punctuation marks (: - ]), <Smile /> winks, <ScaryHeadline /> strike bars, and hover links.",
+      "Use --a-accent-fill (#B81468, 5.6:1 WCAG AA) strictly for filled primary CTA buttons carrying white text.",
+      "Maintain the 7 non-repeating product signature colors (Pipes #EAB308, BANG! #16A34A, Hash #C2410C, Semi #FE299E, Greater #0284C7, Accént #E11D48, Marigold #D97706).",
+      "Prefer open architectural pedestals (border-l / border-t hairlines) over boxed, shadowed cards.",
+    ],
   },
   tokens: {
     light: {
@@ -119,6 +175,13 @@ export const ALBERS_PERSPECTIVES_PROFILE: AccentBrandProfile = {
     serif: "EB Garamond",
     sans: "Inter",
     mono: "JetBrains Mono",
+    displayTracking: "-0.02em",
+    bodyLineHeight: "1.65",
+  },
+  structure: {
+    ctaRadius: "10px",
+    posture: "warm-well",
+    summary: "Josef Albers homages with warm sandstone wells (#F2EAE0) and 10px tactile corners.",
   },
   tokens: {
     light: {

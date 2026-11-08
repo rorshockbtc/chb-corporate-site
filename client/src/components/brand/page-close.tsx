@@ -73,7 +73,8 @@ export function PageClose({
           <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
             <Link
               href={primaryHref}
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[var(--a-accent-fill,#B81468)] text-white text-base sm:text-lg font-semibold no-underline shadow-sm hover:bg-[#111827] transition-colors"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] hover:bg-[#111827] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)] transition-all"
+              data-testid="page-close-primary-cta"
             >
               {primaryCta} <ArrowRight className="w-5 h-5" />
             </Link>

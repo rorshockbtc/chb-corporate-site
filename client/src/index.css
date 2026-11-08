@@ -12,10 +12,10 @@
   --a-muted: #4B5563;
   --a-rule: rgba(17, 24, 39, 0.12);
   --a-accent: #FE299E;
-  --a-accent-fill: #B81468;
+  --a-accent-fill: #FE299E;
   --a-accent-fill-hover: #111827;
   --a-accent-fg: #FFFFFF;
-  --a-accent-text: #B81468;
+  --a-accent-text: #FE299E;
   --a-sky: #0A9BE0;
   --a-sky-deep: #0B5CAB;
   --a-emerald: #3FA535;
@@ -32,6 +32,7 @@
   --chb-accent-fill: var(--a-accent-fill);
   --chb-accent-fill-hover: var(--a-accent-fill-hover);
   --chb-accent-fg: var(--a-accent-fg);
+  --chb-accent-text: var(--a-accent-text);
   --chb-sky: var(--a-sky);
   --chb-emerald: var(--a-emerald);
   --chb-radius-cta: var(--a-radius-cta);

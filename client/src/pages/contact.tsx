@@ -6,12 +6,12 @@ import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { Seo } from "@/components/brand/seo";
 
 const KINDS = [
-  { id: "sprint", label: "A one-week sprint ($7.5k)", color: "#0A9BE0" },
-  { id: "day", label: "A single-day build or sprint", color: "#3FA535" },
-  { id: "partner", label: "An ongoing partner (starts $15k/mo)", color: "#FE299E" },
-  { id: "build", label: "A custom build", color: "#0A9BE0" },
-  { id: "products", label: "Questions about your products", color: "#3FA535" },
-  { id: "hello", label: "Just saying hi", color: "#111827" },
+  { id: "sprint", label: "A one-week sprint ($7.5k)", color: "#0A9BE0", activeFill: "#0B5CAB" },
+  { id: "day", label: "A single-day build or sprint", color: "#3FA535", activeFill: "#1B6346" },
+  { id: "partner", label: "An ongoing partner (starts $15k/mo)", color: "#FE299E", activeFill: "#FE299E" },
+  { id: "build", label: "A custom build", color: "#0A9BE0", activeFill: "#0B5CAB" },
+  { id: "products", label: "Questions about your products", color: "#3FA535", activeFill: "#1B6346" },
+  { id: "hello", label: "Just saying hi", color: "#111827", activeFill: "#111827" },
 ];
 
 const field =
@@ -156,10 +156,10 @@ export default function Contact() {
                           type="button"
                           key={k.id}
                           onClick={() => setKind(k.id)}
-                          className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border-2 text-sm sm:text-lg font-semibold transition-colors cursor-pointer"
+                          className="min-h-[44px] px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border-2 text-sm sm:text-lg font-semibold transition-colors cursor-pointer"
                           style={
                             kind === k.id
-                              ? { backgroundColor: k.color, borderColor: k.color, color: "#fff" }
+                              ? { backgroundColor: k.activeFill, borderColor: k.color, color: "#fff" }
                               : { backgroundColor: "transparent", borderColor: "rgba(17,24,39,0.15)", color: "#111827" }
                           }
                         >
@@ -189,7 +189,7 @@ export default function Contact() {
                     whileTap={{ scale: 0.97 }}
                     type="submit"
                     disabled={state === "sending"}
-                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[var(--a-accent-fill,#B81468)] hover:bg-[#111827] text-white text-lg font-semibold cursor-pointer disabled:opacity-60 transition-colors"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] hover:bg-[#111827] text-white text-lg font-semibold cursor-pointer disabled:opacity-60 shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)] transition-all"
                     data-testid="contact-page-submit"
                   >
                     {state === "sending" ? (
