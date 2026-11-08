@@ -52,11 +52,11 @@ export function Footer() {
 
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <span
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-white/85 text-xs sm:text-sm font-medium"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-white/80 text-xs font-medium tracking-tight"
               data-testid="footer-bitcoin-badge"
             >
-              <span className="text-[#F7931A] font-display font-bold text-base leading-none" aria-hidden="true">₿</span>
-              <span>Bitcoin accepted here · Powered by Bitcoin</span>
+              <span className="text-[#F7931A] font-bold text-xs leading-none" aria-hidden="true">₿</span>
+              <span>Bitcoin Accepted Here</span>
             </span>
             <span className="text-white/45">This site is the portfolio. View source if you like.</span>
           </div>
