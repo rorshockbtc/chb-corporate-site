@@ -430,8 +430,13 @@ export default function Products() {
                         href={p.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full text-white text-base sm:text-lg font-semibold no-underline shadow-sm"
-                        style={{ backgroundColor: p.color }}
+                        className={`inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full text-base sm:text-lg font-semibold no-underline shadow-sm ${
+                          p.color === COLOR_PIPES ? "text-[#111827]" : "text-white"
+                        }`}
+                        style={{
+                          backgroundColor:
+                            p.id === "semi" ? "var(--a-accent-fill, #B81468)" : p.color,
+                        }}
                       >
                         {p.cta} <ArrowUpRight className="w-5 h-5" />
                       </motion.a>

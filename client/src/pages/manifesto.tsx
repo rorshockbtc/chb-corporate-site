@@ -199,6 +199,36 @@ export default function ManifestoPage() {
         </div>
       </section>
 
+      {/* Colophon & Design System Lineage */}
+      <section className="py-12 border-t border-[#111827]/10" data-testid="manifesto-colophon">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base text-[#111827]/70">
+          <div>
+            Built on{" "}
+            <a
+              href="https://design.pipes.pink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#111827] hover:text-[#FE299E] underline underline-offset-4"
+            >
+              Accént 3.0
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://github.com/rorshockbtc/accent-ui"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#111827] hover:text-[#FE299E] underline underline-offset-4"
+            >
+              Playful-Principal Brand Adapter
+            </a>{" "}
+            · MIT Open Source
+          </div>
+          <div className="font-mono text-xs uppercase tracking-wider text-[#111827]/50">
+            Brand Preset: playful-principal (Alabaster #FAF8F5 / Ink #111827)
+          </div>
+        </div>
+      </section>
+
       {/* Signature & Close */}
       <PageClose
         headline="Coastal rigor. Appalachian honesty."

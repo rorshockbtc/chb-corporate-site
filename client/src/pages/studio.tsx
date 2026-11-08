@@ -145,7 +145,7 @@ export default function StudioPage() {
             </p>
             <div className="lg:col-span-5 lg:justify-self-end self-end">
               <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/contact" className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#FE299E] text-white text-base sm:text-lg font-semibold no-underline">
+                <Link href="/contact" className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[var(--a-accent-fill,#B81468)] hover:bg-[#111827] text-white text-base sm:text-lg font-semibold no-underline transition-colors">
                   Book a one-week sprint <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>

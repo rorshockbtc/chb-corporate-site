@@ -189,7 +189,7 @@ export default function Contact() {
                     whileTap={{ scale: 0.97 }}
                     type="submit"
                     disabled={state === "sending"}
-                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#FE299E] text-white text-lg font-semibold cursor-pointer disabled:opacity-60"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[var(--a-accent-fill,#B81468)] hover:bg-[#111827] text-white text-lg font-semibold cursor-pointer disabled:opacity-60 transition-colors"
                     data-testid="contact-page-submit"
                   >
                     {state === "sending" ? (

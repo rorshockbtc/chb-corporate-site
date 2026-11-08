@@ -3,6 +3,39 @@
 @tailwind utilities;
 
 :root {
+  /* Accént 3.0 Upstream Tokens & CHB Dual-Namespace Adapter Bridge */
+  --a-bg: #FAF8F5;
+  --a-surface: #F3EEE6;
+  --a-card: #F3EEE6;
+  --a-well: #FFFFFF;
+  --a-ink: #111827;
+  --a-muted: #4B5563;
+  --a-rule: rgba(17, 24, 39, 0.12);
+  --a-accent: #FE299E;
+  --a-accent-fill: #B81468;
+  --a-accent-fill-hover: #111827;
+  --a-accent-fg: #FFFFFF;
+  --a-accent-text: #B81468;
+  --a-sky: #0A9BE0;
+  --a-sky-deep: #0B5CAB;
+  --a-emerald: #3FA535;
+  --a-radius-cta: 9999px;
+
+  --chb-bg: var(--a-bg);
+  --chb-surface: var(--a-surface);
+  --chb-card: var(--a-card);
+  --chb-well: var(--a-well);
+  --chb-ink: var(--a-ink);
+  --chb-muted: var(--a-muted);
+  --chb-rule: var(--a-rule);
+  --chb-accent: var(--a-accent);
+  --chb-accent-fill: var(--a-accent-fill);
+  --chb-accent-fill-hover: var(--a-accent-fill-hover);
+  --chb-accent-fg: var(--a-accent-fg);
+  --chb-sky: var(--a-sky);
+  --chb-emerald: var(--a-emerald);
+  --chb-radius-cta: var(--a-radius-cta);
+
   --background: #EAE0D0;
   --foreground: #281B16;
   --card: #F2EAE0;

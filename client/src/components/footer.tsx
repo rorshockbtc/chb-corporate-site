@@ -48,9 +48,33 @@ export function Footer() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm text-white/55">
-          <span>© 2026 Colon Hyphen Bracket, LLC. Independent. Opinionated. Kind.</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-wrap">
+            <span>© 2026 Colon Hyphen Bracket, LLC. Independent. Opinionated. Kind.</span>
+            <span className="hidden sm:inline text-white/20">·</span>
+            <span>
+              Built on{" "}
+              <a
+                href="https://design.pipes.pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-swipe text-white/75 hover:text-white no-underline font-medium"
+              >
+                Accént 3.0
+              </a>{" "}
+              ·{" "}
+              <a
+                href="https://github.com/rorshockbtc/accent-ui"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-swipe text-white/75 hover:text-white no-underline font-medium"
+              >
+                Playful-Principal Brand Adapter
+              </a>{" "}
+              · MIT Open Source
+            </span>
+          </div>
 
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 shrink-0">
             <span
               className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-white/80 text-xs font-medium tracking-tight"
               data-testid="footer-bitcoin-badge"

@@ -60,16 +60,21 @@ export default function DesignSystemPage() {
             </p>
             <div className="flex flex-wrap gap-4 pt-6">
               <Button asChild className="bg-brand-pink hover:opacity-90 h-14 px-10 text-lg rounded-2xl shadow-xl shadow-brand-pink/20 transition-all hover:scale-[1.02]">
-                <a href="https://github.com/rorshockbtc/chb-corporate-site" target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-3 h-6 w-6" />
-                  Source Code
+                <a href="https://design.pipes.pink" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="mr-3 h-6 w-6" />
+                  Accént 3.0 Specs
                 </a>
               </Button>
-              <Button variant="outline" className="h-14 px-10 text-lg rounded-2xl border-brand-pink/30 text-brand-pink hover:bg-brand-pink/5 backdrop-blur-sm">
-                <ExternalLink className="mr-3 h-6 w-6" />
-                Figma Specs
+              <Button asChild variant="outline" className="h-14 px-10 text-lg rounded-2xl border-brand-pink/30 text-brand-pink hover:bg-brand-pink/5 backdrop-blur-sm">
+                <a href="https://github.com/rorshockbtc/accent-ui" target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-3 h-6 w-6" />
+                  Accént UI (GitHub)
+                </a>
               </Button>
             </div>
+            <p className="text-sm text-muted-foreground pt-2">
+              Built on <a href="https://design.pipes.pink" target="_blank" rel="noopener noreferrer" className="underline font-medium text-foreground">Accént 3.0</a> · <a href="https://github.com/rorshockbtc/accent-ui" target="_blank" rel="noopener noreferrer" className="underline font-medium text-foreground">Playful-Principal Brand Adapter</a> · MIT Open Source
+            </p>
           </div>
         </div>
       </section>
