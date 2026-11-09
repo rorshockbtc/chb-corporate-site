@@ -44,3 +44,15 @@
    - All buttons, nav links, and filter pills must enforce `min-h-[44px]`.
 4. **Tier 2 Motion Primitives (`client/src/components/brand/`)**:
    - `RiseLines`, `FadeUp`, `Reveal`, `Hairline`, `Stagger`, `Eyebrow`, `ScaryHeadline`, and `Smile` are synchronized with `@rorshockbtc/accent-ui` (`[0.22, 1, 0.36, 1]` editorial curve + `stiffness: 240, damping: 24` spring) and honor `useReducedMotion()`.
+
+---
+
+## 3. Upstream Contribution Pipeline (`@rorshockbtc/accent-ui`)
+
+When this imprint develops a new layout pedestal, component, or motion refinement:
+1. **Local Incubation**: Keep it in `client/src/components/brand/` and declare it in `client/src/styles/accent.config.ts` under `upstreamCandidates`.
+2. **Audit & Parameterization**: Run `npx @rorshockbtc/accent-ui contribute <path-to-component>` (or `node scripts/accent-contribute.js`) to verify:
+   - Zero hardcoded hex codes (all colors mapped to `--a-*` semantic variables).
+   - $\ge 13\text{px}$ type floor compliance and $\ge 44\times 44\text{px}$ touch targets.
+   - GPU-only composited motion (`transform`, `opacity`).
+3. **Upstream PR**: Submit to `rorshockbtc/accent-ui` to make the primitive available across the entire ecosystem without manual cross-repo PR arbitration.
