@@ -6,15 +6,16 @@ import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
+import { PRODUCT_COLORS } from "@/lib/product-colors";
 
-// 7 Distinct Product Signature Colors
-const COLOR_PIPES = "#EAB308"; // Solar Yellow
-const COLOR_BANG = "#16A34A"; // Emerald Green
-const COLOR_HASH = "#C2410C"; // Burnt Terracotta / Rust
-const COLOR_SEMI = "#FE299E"; // Sovereign Pink
-const COLOR_GREATER = "#0284C7"; // Sky Blue
-const COLOR_ACCENT = "#E11D48"; // Crimson / Ruby
-const COLOR_MARIGOLD = "#D97706"; // Amber Gold
+// 7 Distinct Product Signature Colors from Canonical Registry
+const COLOR_PIPES = PRODUCT_COLORS.pipes; // Solar Yellow (#EAB308)
+const COLOR_BANG = PRODUCT_COLORS.bang; // Emerald Green (#16A34A)
+const COLOR_HASH = PRODUCT_COLORS.hash; // Burnt Terracotta / Rust (#C2410C)
+const COLOR_SEMI = PRODUCT_COLORS.semi; // Sovereign Pink (#FE299E)
+const COLOR_GREATER = PRODUCT_COLORS.greater; // Sky Blue (#0284C7)
+const COLOR_ACCENT = PRODUCT_COLORS.accent; // Crimson / Ruby (#E11D48)
+const COLOR_MARIGOLD = PRODUCT_COLORS.marigold; // Amber Gold (#D97706)
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface ProductItem {
@@ -478,12 +479,12 @@ export default function Products() {
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <FadeUp className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30 mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-[#D97706]/20 text-[#D97706] border border-[#D97706]/35 mb-6 sm:mb-8">
               <span>❀</span> The Civic Data Exception · Named After the Flower
             </div>
 
             <h2 className="font-display font-black text-4xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white">
-              Designed <span className="text-[#FBBF24]">to work.</span>
+              Designed <span className="text-[#D97706]">to work.</span>
             </h2>
 
             <p className="font-display text-xl sm:text-3xl lg:text-4xl font-bold mt-6 sm:mt-8 text-[#FAF8F5]/90 leading-snug">
@@ -501,9 +502,9 @@ export default function Products() {
                 href="https://marigoldinsights.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] text-base sm:text-lg font-bold no-underline transition-colors shadow-lg"
+                className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#D97706] hover:bg-[#B45309] text-white text-base sm:text-lg font-bold no-underline transition-colors shadow-lg"
               >
-                Open MarigoldInsights.org <ArrowUpRight className="w-5 h-5 text-[#111827]" />
+                Open MarigoldInsights.org <ArrowUpRight className="w-5 h-5 text-white" />
               </motion.a>
               <span className="text-sm font-medium text-white/60">
                 Live civic data research platform

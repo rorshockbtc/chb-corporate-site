@@ -6,6 +6,7 @@ import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
+import { PRODUCT_COLORS } from "@/lib/product-colors";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -58,25 +59,25 @@ const ECOSYSTEM_PLATFORMS = [
   {
     mark: "|||",
     title: "Native Desktop (Mac & Windows)",
-    color: "#EAB308",
+    color: PRODUCT_COLORS.pipes,
     body: "Lightweight, local-first desktop apps built with Rust and native OS capabilities—not bloated 8GB wrappers.",
   },
   {
     mark: "; - ]",
     title: "iOS, Android & Web",
-    color: "#FE299E",
+    color: PRODUCT_COLORS.semi,
     body: "Fast, accessible mobile and web applications sharing one disciplined design system and data architecture.",
   },
   {
     mark: "#",
     title: "Chromium Extensions",
-    color: "#C2410C",
+    color: PRODUCT_COLORS.hash,
     body: "Browser companions and live diagnostic plugins that work on any website without surveillance.",
   },
   {
     mark: "!",
     title: "BANG! Local IDE ($0 Edits)",
-    color: "#16A34A",
+    color: PRODUCT_COLORS.bang,
     body: "We hand you BANG! inside Pipes for Desktop so non-technical teams can invoke our Pipes to update text, images, and pages locally for $0—without calling us.",
   },
 ];
