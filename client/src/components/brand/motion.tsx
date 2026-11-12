@@ -77,7 +77,7 @@ export function FadeUp({
 /** Small mono eyebrow with a punctuation mark. */
 export function Eyebrow({ mark, children, color = "#FE299E" }: { mark: string; children: ReactNode; color?: string }) {
   return (
-    <div className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-[#111827]/60">
+    <div className="flex items-center gap-3 font-mono text-[13px] uppercase tracking-[0.18em] text-[#111827]/60">
       <span className="font-bold text-[15px]" style={{ color }}>{mark}</span>
       <span>{children}</span>
     </div>

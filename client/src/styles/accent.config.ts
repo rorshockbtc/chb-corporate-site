@@ -9,8 +9,8 @@
  * - 8pt rhythmic grid
  * - 13px typographic floor (even on monospace eyebrows and footers)
  * - 44×44px touch targets
- * - 5.6:1 WCAG AA contrast on white-text primary buttons via `--a-accent-fill` (#B81468) while preserving
- *   Sovereign Hot Pink (`#FE299E`) on punctuation marks (`: - ]`), `<Smile />`, and `<ScaryHeadline />`.
+ * - Sovereign Hot Pink (`#FE299E`) across primary filled CTA buttons (white text, hover `#111827`),
+ *   punctuation marks (`: - ]`), `<Smile />`, and `<ScaryHeadline />`.
  * - 7 Non-Repeating Punctuation Product Signature Colors across Home, Studio, and Products.
  */
 
@@ -84,7 +84,7 @@ export interface AccentBrandProfile {
 export const PLAYFUL_PRINCIPAL_PROFILE: AccentBrandProfile = {
   id: "playful-principal",
   name: "Playful-Principal (CHB Corporate Flagship)",
-  tagline: "Crisp Alabaster paper (#FAF8F5), Bricolage Grotesque display, Hot Pink (#FE299E) rules/marks, Accessible Pink Fill (#B81468) button surfaces, and pill CTAs.",
+  tagline: "Crisp Alabaster paper (#FAF8F5), Bricolage Grotesque display, Sovereign Hot Pink (#FE299E) rules/marks and primary pill CTAs (hover #111827).",
   usedBy: "colonhyphenbracket.pink (feat/playful-principal & main)",
   repoUrl: "https://github.com/rorshockbtc/chb-corporate-site",
   mark: ": - ]",
@@ -105,8 +105,8 @@ export const PLAYFUL_PRINCIPAL_PROFILE: AccentBrandProfile = {
   customExtension: {
     css: `.accent-pedestal { border-top: 1px solid rgba(17, 24, 39, 0.15); padding-top: 1.5rem; }`,
     rules: [
-      "Preserve Sovereign Hot Pink (#FE299E) on all punctuation marks (: - ]), <Smile /> winks, <ScaryHeadline /> strike bars, and hover links.",
-      "Use --a-accent-fill (#B81468, 5.6:1 WCAG AA) strictly for filled primary CTA buttons carrying white text.",
+      "Preserve Sovereign Hot Pink (#FE299E) on primary filled CTA buttons (hover Ink #111827), punctuation marks (: - ]), <Smile /> winks, <ScaryHeadline /> strike bars, and hover links.",
+      "Do not substitute muted dark magenta or burgundy (#B81468) on filled pill CTAs.",
       "Maintain the 7 non-repeating product signature colors (Pipes #EAB308, BANG! #16A34A, Hash #C2410C, Semi #FE299E, Greater #0284C7, Accént #E11D48, Marigold #D97706).",
       "Prefer open architectural pedestals (border-l / border-t hairlines) over boxed, shadowed cards.",
     ],
@@ -121,7 +121,7 @@ export const PLAYFUL_PRINCIPAL_PROFILE: AccentBrandProfile = {
       "--a-muted": "#4B5563",
       "--a-rule": "rgba(17, 24, 39, 0.12)",
       "--a-accent": "#FE299E",
-      "--a-accent-fill": "#B81468",
+      "--a-accent-fill": "#FE299E",
       "--a-accent-fill-hover": "#111827",
       "--a-accent-fg": "#FFFFFF",
       "--a-accent-text": "#B81468",
@@ -193,7 +193,7 @@ export const ALBERS_PERSPECTIVES_PROFILE: AccentBrandProfile = {
       "--a-muted": "#4A3A32",
       "--a-rule": "rgba(40, 27, 22, 0.16)",
       "--a-accent": "#FE299E",
-      "--a-accent-fill": "#B81468",
+      "--a-accent-fill": "#FE299E",
       "--a-accent-fill-hover": "#281B16",
       "--a-accent-fg": "#FFFFFF",
       "--a-accent-text": "#B81468",

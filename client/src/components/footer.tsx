@@ -116,7 +116,7 @@ export function Footer() {
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 shrink-0">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 shrink-0">
             <span
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-white/85 text-[13px] font-medium tracking-tight"
               data-testid="footer-bitcoin-badge"
@@ -124,7 +124,22 @@ export function Footer() {
               <span className="text-[#F7931A] font-bold text-[13px] leading-none" aria-hidden="true">₿</span>
               <span>Bitcoin Accepted Here</span>
             </span>
-            <span className="text-white/55 text-[13px]">This site is the portfolio. View source if you like.</span>
+            <a
+              href="https://github.com/rorshockbtc/chb-corporate-site"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center min-h-[44px] text-white/65 hover:text-white transition-colors text-[13px] no-underline"
+            >
+              Source on GitHub (MIT) ↗
+            </a>
+            <a
+              href="https://hire.colonhyphenbracket.pink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center min-h-[44px] text-white/65 hover:text-white transition-colors text-[13px] no-underline"
+            >
+              Kyle&apos;s Portfolio ↗
+            </a>
           </div>
         </div>
       </div>

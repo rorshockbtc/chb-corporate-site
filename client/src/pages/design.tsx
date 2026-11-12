@@ -301,14 +301,16 @@ export default function DesignSystemPage() {
               return (
                 <FadeUp key={slot.id} delay={i * 0.04}>
                   <li className="grid grid-cols-12 items-center gap-4 py-6 border-t border-white/10">
-                    <span
-                      className="col-span-3 sm:col-span-2 lg:col-span-1 font-display text-3xl sm:text-4xl font-bold whitespace-nowrap"
-                      style={{ color: slot.hex }}
-                    >
-                      {slot.mark}
-                    </span>
-                    <div className="col-span-9 sm:col-span-3 font-display text-2xl sm:text-3xl font-bold">
-                      {slot.name}
+                    <div className="col-span-12 sm:col-span-5 lg:col-span-4 flex items-baseline gap-3.5">
+                      <span
+                        className="font-display text-3xl sm:text-4xl font-bold whitespace-nowrap shrink-0"
+                        style={{ color: slot.hex }}
+                      >
+                        {slot.mark}
+                      </span>
+                      <span className="font-display text-2xl sm:text-3xl font-bold">
+                        {slot.name}
+                      </span>
                     </div>
                     <p className="col-span-12 sm:col-span-4 text-base text-white/70">
                       {slot.role}
