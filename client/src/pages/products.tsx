@@ -191,9 +191,21 @@ const CUSTOM_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
   },
 ];
 
-export default function Products() {
-  const [activeId, setActiveId] = useState("pipes");
-  const [isDarkBar, setIsDarkBar] = useState(false);
+export const VALID_PRODUCT_IDS = [
+  "pipes",
+  "bang",
+  "hash",
+  "semi",
+  "greater",
+  "accent",
+  "marigold",
+] as const;
+
+export type ValidProductId = (typeof VALID_PRODUCT_IDS)[number];
+
+export default function Products({ initialProductId }: { initialProductId?: string } = {}) {
+  const [activeId, setActiveId] = useState(initialProductId || "pipes");
+  const [isDarkBar, setIsDarkBar] = useState(initialProductId === "marigold");
 
   useEffect(() => {
     const allIds = [...PRODUCTS.map((p) => p.id), "marigold"];
@@ -246,6 +258,29 @@ export default function Products() {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const resolveAndScroll = () => {
+      const candidate = (initialProductId || window.location.hash.replace(/^#/, "")).toLowerCase();
+      if ((VALID_PRODUCT_IDS as readonly string[]).includes(candidate)) {
+        setActiveId(candidate);
+        setIsDarkBar(candidate === "marigold");
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            const el = document.getElementById(candidate);
+            if (el) {
+              const y = el.getBoundingClientRect().top + window.pageYOffset - 120;
+              window.scrollTo({ top: y, behavior: "smooth" });
+            }
+          }, 80);
+        });
+      }
+    };
+
+    resolveAndScroll();
+    window.addEventListener("hashchange", resolveAndScroll);
+    return () => window.removeEventListener("hashchange", resolveAndScroll);
+  }, [initialProductId]);
 
   return (
     <div className="brand-canvas min-h-screen">

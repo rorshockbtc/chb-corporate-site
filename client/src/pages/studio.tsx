@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Plus } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
@@ -294,11 +294,80 @@ export default function StudioPage() {
                 <div className="mt-4 sm:mt-6 font-display text-5xl sm:text-6xl font-bold tracking-tight">{t.price}</div>
                 <div className="text-base sm:text-lg text-[#111827]/55 mt-1">{t.per}</div>
                 <p className="mt-5 sm:mt-6 text-lg leading-relaxed text-[#111827]/75 flex-1">{t.body}</p>
-                <Link href="/contact" className="mt-6 sm:mt-8 link-swipe inline-flex items-center gap-2 text-lg font-semibold text-[#111827] no-underline self-start">
+                <Link href="/contact" className="mt-6 sm:mt-8 link-swipe inline-flex items-center gap-2 min-h-[44px] text-lg font-semibold text-[#111827] no-underline self-start">
                   {t.cta} <ArrowRight className="w-5 h-5 text-[#FE299E]" />
                 </Link>
               </FadeUp>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Track Record & Client Zero */}
+      <section
+        className="py-20 sm:py-32 mb-20 sm:mb-28 bg-[#F3EEE6] border-y border-[#111827]/10"
+        data-testid="studio-proof-bridge"
+      >
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp>
+            <div className="font-mono text-[13px] font-bold uppercase tracking-[0.16em] text-[#FE299E] mb-3">
+              Track Record &amp; Client Zero
+            </div>
+            <h2 className="font-display font-bold text-huge text-[#111827] max-w-4xl">
+              Proof in production—not agency slideware.
+            </h2>
+          </FadeUp>
+
+          <div className="mt-12 sm:mt-16 grid md:grid-cols-2 gap-10 md:gap-0 md:divide-x divide-[#111827]/12 border-t border-[#111827]/12">
+            <FadeUp delay={0.08} className="pt-8 sm:pt-10 md:pr-12 flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-2xl sm:text-3xl font-bold text-[#FE299E]">: - ]</div>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#111827] mt-3">
+                  15+ Years Shipping High-Stakes Systems
+                </h3>
+                <p className="mt-4 text-lg leading-relaxed text-[#111827]/75">
+                  Before founding Colon Hyphen Bracket, principal architect Kyle Cyree led zero-to-one product design and systems architecture across regulated banking (<strong>Custodia Bank</strong>), 35M-patient healthcare (<strong>UnitedHealth Group &amp; Optum</strong>), and 3M-associate enterprise search (<strong>Walmart</strong>), plus <strong>Fidelity</strong> and <strong>IronNet</strong>.
+                </p>
+              </div>
+              <div className="mt-7 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-6">
+                <a
+                  href="https://hire.colonhyphenbracket.pink#work"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-base sm:text-lg font-semibold text-[#111827] no-underline"
+                >
+                  Inspect architectural case studies <ArrowUpRight className="w-5 h-5 text-[#FE299E]" />
+                </a>
+                <a
+                  href="https://hire.colonhyphenbracket.pink#recommendations"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-base sm:text-lg font-semibold text-[#111827] no-underline"
+                >
+                  Read 11 verified leader &amp; engineer reviews <ArrowUpRight className="w-5 h-5 text-[#FE299E]" />
+                </a>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.14} className="pt-8 sm:pt-10 md:pl-12 border-t md:border-t-0 border-[#111827]/12 flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-2xl sm:text-3xl font-bold" style={{ color: PRODUCT_COLORS.pipes }}>|||</div>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#111827] mt-3">
+                  Client Zero on Our Own Stack
+                </h3>
+                <p className="mt-4 text-lg leading-relaxed text-[#111827]/75">
+                  We never treat client engagements as experiments for unproven tooling. Every capability we offer—local-first cross-platform apps (<strong>Pipes</strong>), $0 plain-English site editing (<strong>BANG!</strong>), open-source design tokens (<strong>Accént</strong>), and zero-knowledge browser analytics (<strong>Marigold</strong>)—is dogfooded and maintained in production across our own seven live tools first. Already have a tech stack, repo, or design system your team loves? We build cleanly inside yours, too.
+                </p>
+              </div>
+              <div className="mt-7">
+                <Link
+                  href="/products"
+                  className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-base sm:text-lg font-semibold text-[#111827] no-underline"
+                >
+                  Explore our 7 live tools <ArrowRight className="w-5 h-5 text-[#FE299E]" />
+                </Link>
+              </div>
+            </FadeUp>
           </div>
         </div>
       </section>

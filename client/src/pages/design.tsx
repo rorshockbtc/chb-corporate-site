@@ -1,491 +1,428 @@
-import { usePerspective } from "@/hooks/use-perspective";
-import { usePerspectiveTheme } from "@/hooks/use-perspective-theme";
-import { BRAND_COLORS } from "@/lib/brand-colors";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  ExternalLink, 
-  Github, 
-  Palette, 
-  Type, 
-  Layout, 
-  Sparkles, 
-  Info, 
-  Code,
-  Layers,
-  Box,
-  CheckCircle2,
-  Copy
-} from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Check, Copy } from "lucide-react";
+import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
+import { Seo } from "@/components/brand/seo";
+import {
+  ACCENT_TO_CHB_VARIABLE_MAP,
+  CHB_SEVEN_PRODUCT_SLOTS,
+  PLAYFUL_PRINCIPAL_PROFILE,
+} from "@/styles/accent.config";
+
+const CORE_SWATCHES = [
+  {
+    name: "Crisp Alabaster Canvas",
+    aVar: "--a-bg",
+    role: "Primary page ground across colonhyphenbracket.pink",
+  },
+  {
+    name: "Warm Stone Surface",
+    aVar: "--a-surface",
+    role: "Section bands, pedestals, and subtle elevated wells",
+  },
+  {
+    name: "Primary Ink",
+    aVar: "--a-ink",
+    role: "Headlines, primary typography, and hover CTA inversion",
+  },
+  {
+    name: "Sovereign Hot Pink",
+    aVar: "--a-accent",
+    role: "Marks (: - ]), strike bars, primary CTA pill fills, and hover links",
+  },
+  {
+    name: "Signal Sky Blue",
+    aVar: "--a-sky",
+    role: "Process steps, technical callouts, and studio cadence",
+  },
+  {
+    name: "Signal Emerald",
+    aVar: "--a-emerald",
+    role: "Verification, compliance, and regulated-system highlights",
+  },
+] as const;
+
+const TYPE_SPECIMENS = [
+  {
+    role: "Display",
+    family: PLAYFUL_PRINCIPAL_PROFILE.typography.display,
+    meta: `Tracking ${PLAYFUL_PRINCIPAL_PROFILE.typography.displayTracking} · Bold / Black`,
+    sample: "Scary words in. Smiles out.",
+    className: "font-display font-bold text-3xl sm:text-5xl tracking-[-0.035em]",
+  },
+  {
+    role: "Editorial Serif",
+    family: PLAYFUL_PRINCIPAL_PROFILE.typography.serif,
+    meta: `Line height ${PLAYFUL_PRINCIPAL_PROFILE.typography.bodyLineHeight} · Long-form & monographs`,
+    sample: "Coastal engineering rigor paired with Appalachian honesty.",
+    className: "font-serif text-2xl sm:text-3xl leading-[1.55]",
+  },
+  {
+    role: "UI Sans",
+    family: PLAYFUL_PRINCIPAL_PROFILE.typography.sans,
+    meta: "16px+ body prose · 60–70ch measure",
+    sample: "One principal designer-architect from first call to final pull request.",
+    className: "font-sans text-lg sm:text-xl leading-relaxed",
+  },
+  {
+    role: "Monospace",
+    family: PLAYFUL_PRINCIPAL_PROFILE.typography.mono,
+    meta: "13px minimum floor · Tokens & eyebrows",
+    sample: "--a-accent: #FE299E; /* var(--chb-accent) */",
+    className: "font-mono text-base sm:text-lg",
+  },
+] as const;
+
+const GUARDRAILS = [
+  {
+    num: "01",
+    title: "8pt Rhythmic Spatial Grid",
+    body: "Every section rhythm, padding step, and hairline column sits on multiples of 4px / 8px.",
+  },
+  {
+    num: "02",
+    title: "13px Typographic Floor",
+    body: "Nothing renders below 13px (0.8125rem)—including monospace eyebrows, badges, and footer colophons.",
+  },
+  {
+    num: "03",
+    title: "44×44px Touch Targets",
+    body: "Every button, nav item, swatch control, and mobile trigger maintains at least a 44×44px hit area.",
+  },
+  {
+    num: "04",
+    title: "Reduced-Motion Editorial Easing",
+    body: "All motion primitives (RiseLines, FadeUp, Smile, ScaryHeadline) respect useReducedMotion() and use EASE_EDITORIAL [0.22, 1, 0.36, 1].",
+  },
+] as const;
+
+const DESIGN_CLOSE_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
+  {
+    title: "MIT Open Source",
+    body: "Accént 3.0 is completely free under the MIT license—no proprietary component lock-in.",
+  },
+  {
+    title: "Dual-Namespace Tokens",
+    body: "Upstream --a-* semantics map cleanly onto site-specific --chb-* aliases without theme drift.",
+  },
+  {
+    title: "Yours or Ours",
+    body: "Need a fresh product built on Accént, or shipping cleanly inside your existing design system? We do both.",
+  },
+];
 
 export default function DesignSystemPage() {
-  const { currentPerspective, setPerspective } = usePerspective();
-  const { theme } = usePerspectiveTheme();
-  const { toast } = useToast();
+  const [copiedHex, setCopiedHex] = useState<string | null>(null);
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast({
-      title: "Copied to clipboard",
-      description: text,
-    });
+  const handleCopy = async (value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedHex(value);
+      setTimeout(() => setCopiedHex((curr) => (curr === value ? null : curr)), 1600);
+    } catch {
+      // Clipboard API unavailable in restricted contexts; ignore silently.
+    }
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24 selection:bg-brand-pink/20">
-      {/* Hero Header */}
-      <section className="bg-perspective-light/10 border-b border-perspective py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] [mask-image:linear-gradient(to_bottom,white,transparent)]" />
-        <div className="container mx-auto relative">
-          <div className="max-w-4xl space-y-8">
-            <div className="flex items-center gap-3">
-              <Badge className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white px-4 py-1.5 text-sm font-bold rounded-full shadow-lg shadow-brand-pink/20">
-                M3-SPEC 1.0.0
-              </Badge>
-              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Perspective-Engine v4</span>
-            </div>
-            <h1 className="text-fluid-hero font-black section-title-perspective tracking-tighter leading-[0.85]">
-              Colon Hyphen Bracket <br/>
-              <span className="text-foreground italic opacity-90">Design System</span>
-            </h1>
-            <p className="text-fluid-body-xl text-muted-foreground leading-relaxed max-w-2xl">
-              A Material M3-inspired visual language that adapts to user psychology. 
-              Our "Perspective Switching" technology transforms the UI from 
-              <span className="text-foreground font-semibold"> high-scale infrastructure</span> to 
-              <span className="text-foreground font-semibold"> nostalgic preservation</span> instantly.
+    <div className="brand-canvas min-h-screen" data-testid="design-adapter-page">
+      <Seo
+        title="Design System & Brand Adapter | Colon Hyphen Bracket : - ]"
+        description="How Colon Hyphen Bracket adapts and contributes back to Accént 3.0 (MIT)—typography, semantic tokens, motion invariants, and the 7-product punctuation palette."
+        path="/design"
+        image="/images/og/og-home.jpg"
+      />
+
+      {/* Hero */}
+      <section className="pt-28 sm:pt-40 pb-16 sm:pb-24 border-b border-[#111827]/10">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="font-mono text-[13px] uppercase tracking-[0.16em] text-[#111827]/60 mb-5 flex items-center gap-2.5">
+            <span className="text-[#FE299E] font-bold">: - ]</span>
+            <span>Accént 3.0 · Playful-Principal Brand Adapter</span>
+          </div>
+
+          <h1 className="font-display font-bold text-mega text-[#111827]">
+            <RiseLines
+              immediate
+              lines={[
+                "One open design system.",
+                <span key="voice" className="text-[#FE299E]">
+                  Infinite honest voices.
+                </span>,
+              ]}
+            />
+          </h1>
+
+          <FadeUp delay={0.25} className="mt-8 sm:mt-12 grid lg:grid-cols-12 gap-8 sm:gap-10 items-end">
+            <p className="lg:col-span-7 text-lg sm:text-2xl leading-[1.45] text-[#111827]/80">
+              This site consumes{" "}
+              <a
+                href="https://design.pipes.pink"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#111827] font-semibold underline decoration-[#FE299E] underline-offset-4 hover:text-[#FE299E]"
+              >
+                Accént 3.0
+              </a>{" "}
+              through our{" "}
+              <code className="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-[#F3EEE6] border border-[#111827]/10">
+                playful-principal
+              </code>{" "}
+              brand profile (<code className="font-mono text-[0.9em]">client/src/styles/accent.config.ts</code>) and upstreams reusable motion primitives directly back to{" "}
+              <a
+                href="https://github.com/rorshockbtc/accent-ui"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#111827] font-semibold underline underline-offset-4 hover:text-[#FE299E]"
+              >
+                rorshockbtc/accent-ui
+              </a>
+              .
             </p>
-            <div className="flex flex-wrap gap-4 pt-6">
-              <Button asChild className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white h-14 px-10 text-lg rounded-2xl shadow-xl shadow-brand-pink/20 transition-all hover:scale-[1.02]">
-                <a href="https://design.pipes.pink" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-3 h-6 w-6" />
-                  Accént 3.0 Specs
+
+            <div className="lg:col-span-5 flex flex-wrap lg:justify-end gap-3">
+              <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
+                <a
+                  href="https://design.pipes.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 min-h-[44px] px-7 py-3.5 rounded-full bg-[#FE299E] hover:bg-[#111827] text-white text-base font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)] transition-all"
+                  data-testid="design-cta-spec"
+                >
+                  Open Accént 3.0 spec <ArrowUpRight className="w-5 h-5" />
                 </a>
-              </Button>
-              <Button asChild variant="outline" className="h-14 px-10 text-lg rounded-2xl border-brand-pink/30 text-brand-pink hover:bg-brand-pink/5 backdrop-blur-sm">
-                <a href="https://github.com/rorshockbtc/accent-ui" target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-3 h-6 w-6" />
-                  Accént UI (GitHub)
-                </a>
-              </Button>
+              </motion.div>
+              <a
+                href="https://github.com/rorshockbtc/accent-ui"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 min-h-[44px] px-6 py-3.5 rounded-full border-2 border-[#111827] text-[#111827] hover:bg-[#111827] hover:text-[#FAF8F5] text-base font-semibold no-underline transition-colors"
+                data-testid="design-cta-github"
+              >
+                GitHub (MIT) <ArrowUpRight className="w-4 h-4" />
+              </a>
             </div>
-            <p className="text-sm text-muted-foreground pt-2">
-              Built on <a href="https://design.pipes.pink" target="_blank" rel="noopener noreferrer" className="underline font-medium text-foreground">Accént 3.0</a> · <a href="https://github.com/rorshockbtc/accent-ui" target="_blank" rel="noopener noreferrer" className="underline font-medium text-foreground">Playful-Principal Brand Adapter</a> · MIT Open Source
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* Core Semantic Tokens (--a-* <-> --chb-*) */}
+      <section className="py-20 sm:py-28 border-b border-[#111827]/10" data-testid="design-semantic-tokens">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.16em] text-[#FE299E] mb-3">
+                01 · Semantic Token Adapter
+              </div>
+              <h2 className="font-display font-bold text-huge text-[#111827]">
+                Crisp Alabaster &amp; Sovereign Pink.
+              </h2>
+            </div>
+            <p className="text-base sm:text-lg text-[#111827]/70 max-w-[42ch]">
+              Upstream <code className="font-mono">--a-*</code> tokens map 1:1 onto{" "}
+              <code className="font-mono">--chb-*</code> aliases in CSS. Click any swatch to copy its canonical hex.
             </p>
+          </FadeUp>
+
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+            {CORE_SWATCHES.map((swatch, idx) => {
+              const hex = PLAYFUL_PRINCIPAL_PROFILE.tokens.light[swatch.aVar];
+              const chbVar = ACCENT_TO_CHB_VARIABLE_MAP[swatch.aVar];
+              const isCopied = copiedHex === hex;
+              return (
+                <FadeUp
+                  key={swatch.aVar}
+                  delay={idx * 0.05}
+                  className="pt-6 border-t border-[#111827]/15 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-4">
+                      <span
+                        className="w-12 h-12 rounded-full border border-[#111827]/15 shrink-0"
+                        style={{ backgroundColor: hex }}
+                        aria-hidden="true"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleCopy(hex)}
+                        className="inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full border border-[#111827]/15 hover:border-[#FE299E] text-[14px] font-mono font-semibold text-[#111827] bg-transparent cursor-pointer transition-colors"
+                        aria-label={`Copy ${swatch.name} hex ${hex}`}
+                      >
+                        {isCopied ? (
+                          <>
+                            <Check className="w-4 h-4 text-[#3FA535]" /> Copied {hex}
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4 text-[#111827]/60" /> {hex}
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <h3 className="font-display text-2xl font-bold text-[#111827] mt-5">
+                      {swatch.name}
+                    </h3>
+                    <p className="mt-2 text-base text-[#111827]/75 leading-relaxed">
+                      {swatch.role}
+                    </p>
+                  </div>
+                  <div className="mt-4 font-mono text-[13px] text-[#111827]/60">
+                    {swatch.aVar} {chbVar ? `→ ${chbVar}` : ""}
+                  </div>
+                </FadeUp>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <div className="container mx-auto px-6 mt-16">
-        <Tabs defaultValue="tokens" className="space-y-12">
-          <TabsList className="inline-flex h-14 items-center justify-center rounded-2xl bg-muted/50 p-1.5 text-muted-foreground w-full lg:w-auto shadow-inner">
-            <TabsTrigger value="tokens" className="rounded-xl px-8 py-2.5 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-xl transition-all font-bold">
-              <Palette className="mr-2.5 h-4 w-4" />
-              Design Tokens
-            </TabsTrigger>
-            <TabsTrigger value="typography" className="rounded-xl px-8 py-2.5 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-xl transition-all font-bold">
-              <Type className="mr-2.5 h-4 w-4" />
-              Typography
-            </TabsTrigger>
-            <TabsTrigger value="components" className="rounded-xl px-8 py-2.5 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-xl transition-all font-bold">
-              <Layout className="mr-2.5 h-4 w-4" />
-              Components
-            </TabsTrigger>
-            <TabsTrigger value="perspectives" className="rounded-xl px-8 py-2.5 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-xl transition-all font-bold">
-              <Sparkles className="mr-2.5 h-4 w-4" />
-              Perspective Engine
-            </TabsTrigger>
-          </TabsList>
-
-          {/* TOKENS TAB */}
-          <TabsContent value="tokens" className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="space-y-8">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-brand-pink/10 flex items-center justify-center text-brand-pink">
-                    <Layers className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-3xl font-black tracking-tight">Core Brand DNA</h2>
-                </div>
-                <div className="grid grid-cols-2 gap-6">
-                  <ColorToken 
-                    name="Brand Pink" 
-                    hex={BRAND_COLORS.pink} 
-                    variable="--brand-pink"
-                    usage="Primary Brand Action & Global CTAs" 
-                  />
-                  <ColorToken 
-                    name="Brand Yellow" 
-                    hex={BRAND_COLORS.yellow} 
-                    variable="--brand-yellow"
-                    usage="Secondary Highlights & Success States" 
-                  />
-                  <ColorToken 
-                    name="Hash Green" 
-                    hex={BRAND_COLORS.hash} 
-                    variable="--brand-green"
-                    usage="Memory Capturer Context" 
-                  />
-                  <ColorToken 
-                    name="Semi Purple" 
-                    hex={BRAND_COLORS.semi} 
-                    variable="--brand-purple"
-                    usage="Content Creator Context" 
-                  />
-                  <ColorToken 
-                    name="Surface" 
-                    hex={BRAND_COLORS.surface} 
-                    variable="--surface-dark"
-                    usage="Main Background Surface" 
-                  />
-                  <ColorToken 
-                    name="Contrast Text" 
-                    hex={BRAND_COLORS.textOnSurface} 
-                    variable="--text-on-surface"
-                    usage="High Visibility Typography" 
-                  />
-                </div>
+      {/* 7 Non-Repeating Product Signature Colors */}
+      <section className="py-20 sm:py-28 bg-[#111827] text-[#FAF8F5]" data-testid="design-product-palette">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.16em] text-[#FE299E] mb-3">
+                02 · Seven Distinct Product Signatures
               </div>
-
-              <div className="space-y-8">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-perspective-light/20 flex items-center justify-center text-perspective">
-                    <Sparkles className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-3xl font-black tracking-tight">Active Context</h2>
-                </div>
-                <Card className="bg-perspective-light/5 border-perspective/20 shadow-none rounded-3xl overflow-hidden group">
-                  <div className="p-8 space-y-6">
-                    <div className="flex justify-between items-center">
-                      <div className="space-y-1">
-                        <p className="text-sm font-mono text-muted-foreground uppercase tracking-wider">Perspective Variable Map</p>
-                        <h3 className="text-xl font-bold capitalize">{currentPerspective.replace('_', ' ')}</h3>
-                      </div>
-                      <Badge variant="outline" className="border-perspective text-perspective font-mono px-4 py-1">
-                        LIVE
-                      </Badge>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <div className="h-20 rounded-2xl bg-perspective shadow-sm border border-black/5" />
-                        <p className="text-xs font-mono text-muted-foreground">--perspective-primary</p>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="h-20 rounded-2xl bg-[var(--perspective-accent)] shadow-sm border border-black/5" />
-                        <p className="text-xs font-mono text-muted-foreground">--perspective-accent</p>
-                      </div>
-                    </div>
-                    <div className="pt-4 border-t border-perspective/10">
-                      <p className="text-sm text-muted-foreground leading-relaxed italic">
-                        All perspective colors (except Brand Pink) are derived from the active audience lens. 
-                        This ensures the visual tone shifts with the user's intent.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
+              <h2 className="font-display font-bold text-huge text-[#FAF8F5]">
+                Every mark owns its own color.
+              </h2>
             </div>
-          </TabsContent>
+            <p className="text-base sm:text-lg text-white/70 max-w-[42ch]">
+              Consistent across Home, Studio, Products, and Footer—zero duplicated product signatures.
+            </p>
+          </FadeUp>
 
-          {/* TYPOGRAPHY TAB */}
-          <TabsContent value="typography" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="space-y-8">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                  <Type className="h-6 w-6" />
-                </div>
-                <h2 className="text-3xl font-black tracking-tight">Fluid Typography System</h2>
-              </div>
-              
-              <div className="grid gap-12">
-                <TypographyPreview 
-                  label="Hero Display" 
-                  className="text-fluid-hero font-black leading-[0.85] tracking-tighter"
-                  token="--fluid-hero"
-                  range="40px → 80px"
-                  text="Every Pipe is a real slice of humanity."
-                />
-                <TypographyPreview 
-                  label="Section Header" 
-                  className="text-fluid-display font-bold tracking-tight"
-                  token="--fluid-display"
-                  range="32px → 56px"
-                  text="Context is the currency of the future."
-                />
-                <TypographyPreview 
-                  label="Body Large" 
-                  className="text-fluid-body-xl leading-relaxed"
-                  token="--fluid-body-xl"
-                  range="18px → 24px"
-                  text="We build tools for the people Big Tech left behind. Memory captures, creative flow, and expertise packaged as monetizable infrastructure."
-                />
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* COMPONENTS TAB */}
-          <TabsContent value="components" className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-16">
-              <div className="space-y-12">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
-                      <Box className="h-6 w-6" />
+          <ul className="mt-12 border-b border-white/10">
+            {CHB_SEVEN_PRODUCT_SLOTS.map((slot, i) => {
+              const isCopied = copiedHex === slot.hex;
+              return (
+                <FadeUp key={slot.id} delay={i * 0.04}>
+                  <li className="grid grid-cols-12 items-center gap-4 py-6 border-t border-white/10">
+                    <span
+                      className="col-span-3 sm:col-span-2 lg:col-span-1 font-display text-3xl sm:text-4xl font-bold whitespace-nowrap"
+                      style={{ color: slot.hex }}
+                    >
+                      {slot.mark}
+                    </span>
+                    <div className="col-span-9 sm:col-span-3 font-display text-2xl sm:text-3xl font-bold">
+                      {slot.name}
                     </div>
-                    <h2 className="text-3xl font-black tracking-tight">Action Surfaces</h2>
+                    <p className="col-span-12 sm:col-span-4 text-base text-white/70">
+                      {slot.role}
+                    </p>
+                    <div className="col-span-12 sm:col-span-3 flex flex-wrap sm:justify-end items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => handleCopy(slot.hex)}
+                        className="inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full border border-white/15 hover:border-white/50 text-[14px] font-mono text-white bg-transparent cursor-pointer transition-colors"
+                        aria-label={`Copy ${slot.name} color ${slot.hex}`}
+                      >
+                        <span
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: slot.hex }}
+                          aria-hidden="true"
+                        />
+                        {isCopied ? "Copied!" : slot.hex}
+                      </button>
+                      <Link
+                        href={`/products#${slot.id}`}
+                        className="inline-flex items-center gap-1 min-h-[44px] px-3 text-[15px] font-semibold text-white/80 hover:text-[#FE299E] no-underline transition-colors"
+                      >
+                        Inspect <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </li>
+                </FadeUp>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      {/* Typography & Invariants */}
+      <section className="py-20 sm:py-28 bg-[#F3EEE6] border-b border-[#111827]/10" data-testid="design-typography">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp>
+            <div className="font-mono text-[13px] uppercase tracking-[0.16em] text-[#111827]/60 mb-3">
+              03 · Typographic Voice &amp; Mathematical Invariants
+            </div>
+            <h2 className="font-display font-bold text-huge text-[#111827] max-w-4xl">
+              Editorial personality up top. Rigid math underneath.
+            </h2>
+          </FadeUp>
+
+          <div className="mt-12 divide-y divide-[#111827]/12 border-y border-[#111827]/12">
+            {TYPE_SPECIMENS.map((spec) => (
+              <div key={spec.role} className="grid lg:grid-cols-12 gap-4 lg:gap-8 py-8 items-baseline">
+                <div className="lg:col-span-4">
+                  <div className="font-display text-xl font-bold text-[#111827]">{spec.family}</div>
+                  <div className="font-mono text-[13px] text-[#111827]/60 mt-1">
+                    {spec.role} · {spec.meta}
                   </div>
-                  <ComponentShowcase 
-                    title="Universal Buttons" 
-                    description="Consistent brand touchpoints that never change with perspective."
-                    code={`<Button className="bg-brand-pink text-white rounded-2xl h-14 px-8 font-bold">
-  Brand Primary
-</Button>`}
-                  >
-                    <div className="flex flex-wrap gap-6">
-                      <Button className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white rounded-2xl h-14 px-8 font-bold shadow-lg shadow-brand-pink/20">Brand Primary</Button>
-                      <Button variant="outline" className="border-brand-pink text-brand-pink hover:bg-brand-pink/5 rounded-2xl h-14 px-8 font-bold">Secondary Action</Button>
-                    </div>
-                  </ComponentShowcase>
                 </div>
-
-                <div className="space-y-6">
-                  <ComponentShowcase 
-                    title="Perspective Links" 
-                    description="Dynamic elements that inherit colors from the active audience lens."
-                    code={`<Button className="pipes-link">
-  Explore | | |
-</Button>`}
-                  >
-                    <div className="flex flex-wrap gap-6">
-                      <Button className="pipes-link">Explore | | |</Button>
-                      <Button variant="outline" className="border-perspective text-perspective hover:bg-perspective/5 rounded-2xl h-14 px-8 font-bold">Learn Context</Button>
-                    </div>
-                  </ComponentShowcase>
+                <div className={`lg:col-span-8 text-[#111827] ${spec.className}`}>
+                  {spec.sample}
                 </div>
               </div>
-
-              <div className="space-y-12">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500">
-                      <Info className="h-6 w-6" />
-                    </div>
-                    <h2 className="text-3xl font-black tracking-tight">Informational Logic</h2>
-                  </div>
-                  <ComponentShowcase 
-                    title="Status Badges" 
-                    description="Compact feedback elements for system states."
-                    code={`<Badge className="bg-brand-pink text-white px-4 py-1 rounded-full">
-  v1.0.0-Stable
-</Badge>`}
-                  >
-                    <div className="flex flex-wrap gap-4">
-                      <Badge className="bg-[var(--a-accent-fill,#FE299E)] hover:opacity-90 text-white px-4 py-1.5 rounded-full font-bold">Stable v1.0</Badge>
-                      <Badge variant="outline" className="border-perspective text-perspective px-4 py-1.5 rounded-full font-bold">Perspective Active</Badge>
-                      <Badge className="bg-brand-yellow text-black hover:bg-brand-yellow/90 px-4 py-1.5 rounded-full font-bold">System Alert</Badge>
-                    </div>
-                  </ComponentShowcase>
-                </div>
-
-                <div className="space-y-6">
-                  <ComponentShowcase 
-                    title="Subscription Tiers" 
-                    description="Visual shorthand for service levels using punctuation glyphs."
-                    code={`<div className="font-mono text-2xl w-12 h-12 flex items-center justify-center bg-muted rounded-2xl border border-border">
-  ...
-</div>`}
-                  >
-                    <div className="flex gap-6">
-                      <div className="font-mono text-3xl w-14 h-14 flex items-center justify-center bg-muted/50 rounded-2xl border border-border shadow-sm font-black text-brand-pink">,</div >
-                      <div className="font-mono text-3xl w-14 h-14 flex items-center justify-center bg-muted/50 rounded-2xl border border-border shadow-sm font-black text-brand-pink">.</div>
-                      <div className="font-mono text-3xl w-14 h-14 flex items-center justify-center bg-muted/50 rounded-2xl border border-border shadow-sm font-black text-brand-pink">...</div>
-                    </div>
-                  </ComponentShowcase>
-                </div>
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* PERSPECTIVES TAB */}
-          <TabsContent value="perspectives" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-perspective-light/10 border border-perspective/20 rounded-[2.5rem] p-12 space-y-12">
-              <div className="max-w-2xl space-y-4">
-                <h2 className="text-4xl font-black tracking-tight">Switch the Lens</h2>
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  The entire design system re-tokens itself based on these three perspectives. 
-                  Toggle them to see the components on this page adapt their visual personality.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-8">
-                <PerspectiveControlCard 
-                  title="Startup Founders" 
-                  perspective="startup_founders" 
-                  description="High-precision grid, geometric puzzles, and cold strategic blues."
-                  isActive={currentPerspective === 'startup_founders'}
-                  onClick={() => setPerspective('startup_founders')}
-                />
-                <PerspectiveControlCard 
-                  title="Content Creators" 
-                  perspective="content_creators" 
-                  description="Fluid creative flow, abstract artistic tools, and magenta energy."
-                  isActive={currentPerspective === 'content_creators'}
-                  onClick={() => setPerspective('content_creators')}
-                />
-                <PerspectiveControlCard 
-                  title="Memory Capturers" 
-                  perspective="memory_capturers" 
-                  description="Warm illustrated farmhouse, vintage postcards, and nurturing greens."
-                  isActive={currentPerspective === 'memory_capturers'}
-                  onClick={() => setPerspective('memory_capturers')}
-                />
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
-  );
-}
-
-function ColorToken({ name, hex, variable, usage }: { name: string, hex: string, variable: string, usage: string }) {
-  const { toast } = useToast();
-  
-  const copyValue = (val: string) => {
-    navigator.clipboard.writeText(val);
-    toast({ title: "Copied Token", description: val });
-  };
-
-  return (
-    <div className="group space-y-4 p-4 rounded-3xl hover:bg-muted/50 transition-all border border-transparent hover:border-border">
-      <div 
-        className="aspect-video rounded-2xl shadow-xl shadow-black/5 border border-black/5 transition-transform group-hover:scale-[1.03] duration-300 relative overflow-hidden cursor-pointer" 
-        style={{ backgroundColor: hex }}
-        onClick={() => copyValue(hex)}
-      >
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/10 backdrop-blur-[2px] transition-opacity">
-          <Copy className="h-6 w-6 text-white drop-shadow-md" />
-        </div>
-      </div>
-      <div className="space-y-1 px-1">
-        <h4 className="font-bold text-lg tracking-tight">{name}</h4>
-        <div className="flex items-center gap-2">
-          <code className="text-xs bg-muted px-2 py-0.5 rounded-full font-mono text-muted-foreground">{variable}</code>
-          <code className="text-xs bg-muted px-2 py-0.5 rounded-full font-mono text-muted-foreground uppercase">{hex}</code>
-        </div>
-        <p className="text-xs mt-2 leading-relaxed text-muted-foreground/80">{usage}</p>
-      </div>
-    </div>
-  );
-}
-
-function TypographyPreview({ label, className, token, range, text }: { 
-  label: string, 
-  className: string, 
-  token: string, 
-  range: string, 
-  text: string 
-}) {
-  return (
-    <div className="space-y-4 p-8 rounded-[2rem] bg-muted/20 border border-border/50 hover:border-brand-pink/20 transition-all">
-      <div className="flex items-center justify-between border-b border-border/50 pb-4">
-        <div className="flex items-center gap-3">
-          <Badge variant="outline" className="font-mono text-xs tracking-widest uppercase">{token}</Badge>
-          <span className="text-xs font-mono text-muted-foreground">{range}</span>
-        </div>
-        <span className="text-sm font-bold opacity-40">{label}</span>
-      </div>
-      <p className={className}>{text}</p>
-    </div>
-  );
-}
-
-function ComponentShowcase({ title, description, code, children }: { 
-  title: string, 
-  description: string, 
-  code: string, 
-  children: React.ReactNode 
-}) {
-  const [showCode, setShowCode] = useState(false);
-
-  return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h3 className="text-xl font-bold tracking-tight">{title}</h3>
-        <p className="text-sm text-muted-foreground max-w-md">{description}</p>
-      </div>
-      <div className="p-12 rounded-[2rem] bg-muted/20 border border-border/50 relative group">
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="rounded-xl min-h-[44px] px-3 text-xs font-mono"
-            onClick={() => setShowCode(!showCode)}
-          >
-            <Code className="h-3 w-3 mr-2" />
-            {showCode ? 'HIDE SPEC' : 'VIEW SPEC'}
-          </Button>
-        </div>
-        {showCode ? (
-          <div className="bg-black/90 p-6 rounded-2xl overflow-x-auto">
-            <pre className="text-xs font-mono text-pink-400 leading-relaxed">
-              <code>{code}</code>
-            </pre>
+            ))}
           </div>
-        ) : (
-          <div className="flex items-center justify-center">
-            {children}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
-function PerspectiveControlCard({ title, perspective, description, isActive, onClick }: { 
-  title: string, 
-  perspective: string, 
-  description: string,
-  isActive: boolean,
-  onClick: () => void
-}) {
-  return (
-    <Card 
-      className={`cursor-pointer transition-all duration-500 border-2 rounded-[2rem] overflow-hidden group ${
-        isActive 
-          ? 'border-brand-pink shadow-2xl shadow-brand-pink/20 translate-y-[-8px]' 
-          : 'hover:border-perspective/50 border-transparent bg-background/50 backdrop-blur-sm'
-      }`}
-      onClick={onClick}
-    >
-      <CardHeader className="space-y-4">
-        <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-          isActive ? 'bg-[var(--a-accent-fill,#FE299E)] text-white rotate-12 scale-110' : 'bg-muted text-muted-foreground group-hover:bg-perspective/10 group-hover:text-perspective'
-        }`}>
-          <Sparkles className="h-6 w-6" />
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {GUARDRAILS.map((g, idx) => (
+              <FadeUp key={g.num} delay={idx * 0.06} className="pt-6 border-t border-[#111827]/15">
+                <div className="font-mono text-[13px] font-bold text-[#FE299E]">{g.num}</div>
+                <h3 className="font-display text-xl font-bold text-[#111827] mt-2">{g.title}</h3>
+                <p className="mt-2.5 text-base text-[#111827]/75 leading-relaxed">{g.body}</p>
+              </FadeUp>
+            ))}
+          </div>
         </div>
-        <div>
-          <CardTitle className="text-2xl font-black">{title}</CardTitle>
-          <CardDescription className="text-sm mt-2 font-medium">{description}</CardDescription>
+      </section>
+
+      {/* Colophon */}
+      <section className="py-12 border-b border-[#111827]/10" data-testid="design-colophon">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm sm:text-base text-[#111827]/75">
+          <div>
+            Built on{" "}
+            <a
+              href="https://design.pipes.pink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#111827] hover:text-[#FE299E] underline underline-offset-4"
+            >
+              Accént 3.0
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://github.com/rorshockbtc/accent-ui"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#111827] hover:text-[#FE299E] underline underline-offset-4"
+            >
+              Playful-Principal Brand Adapter
+            </a>{" "}
+            · MIT Open Source
+          </div>
+          <div className="font-mono text-[13px] uppercase tracking-wider text-[#111827]/60">
+            Posture: {PLAYFUL_PRINCIPAL_PROFILE.structure.posture} · CTA {PLAYFUL_PRINCIPAL_PROFILE.structure.ctaRadius}
+          </div>
         </div>
-      </CardHeader>
-      <CardContent className="pt-0">
-         <div className="flex items-center gap-3">
-           <div className="h-1.5 flex-1 bg-muted rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-brand-pink transition-all duration-700 ease-out" 
-                style={{ width: isActive ? '100%' : '0%' }}
-              />
-           </div>
-           {isActive && <CheckCircle2 className="h-5 w-5 text-brand-pink animate-in zoom-in duration-300" />}
-         </div>
-         <p className="text-xs font-mono mt-6 text-muted-foreground uppercase tracking-widest">
-           {isActive ? 'Lens Engaged' : 'Click to Shift Context'}
-         </p>
-      </CardContent>
-    </Card>
+      </section>
+
+      <PageClose
+        headline="Need a design system that actually ships?"
+        subhead="We build custom products on Accént's open rails—or step cleanly into your existing brand and token architecture."
+        cards={DESIGN_CLOSE_CARDS}
+        primaryCta="Start a project"
+        primaryHref="/contact"
+        secondaryCta="How the studio works"
+        secondaryHref="/studio"
+        secondaryExternal={false}
+        testId="design-close"
+      />
+    </div>
   );
 }

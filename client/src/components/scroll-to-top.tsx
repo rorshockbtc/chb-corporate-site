@@ -5,7 +5,8 @@ export function ScrollToTop() {
   const [location] = useLocation();
 
   useEffect(() => {
-    // Scroll to top on route change
+    if (window.location.hash) return;
+    // Scroll to top on route change when no anchor hash is present
     window.scrollTo(0, 0);
   }, [location]);
 

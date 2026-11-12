@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Loader2 } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { RiseLines, FadeUp } from "@/components/brand/motion";
 import { Seo } from "@/components/brand/seo";
@@ -116,6 +116,14 @@ export default function Contact() {
                 <p className="mt-1.5 text-sm sm:text-base leading-relaxed text-[#111827]/75">
                   My real name is <strong>Kyle Cyree</strong>, though most people know me professionally by my nickname, <strong>Cubby</strong>. Either way, you&apos;re talking to the exact same person.
                 </p>
+                <a
+                  href="https://hire.colonhyphenbracket.pink#recommendations"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 link-swipe inline-flex items-center gap-1.5 min-h-[44px] text-sm sm:text-base font-semibold text-[#111827] no-underline"
+                >
+                  Case studies &amp; 11 peer reviews <ArrowUpRight className="w-4 h-4 text-[#FE299E]" />
+                </a>
               </div>
 
               <div className="mt-6 sm:mt-8 space-y-3">

@@ -1,5 +1,9 @@
 import { Link } from "wouter";
 import { Smile } from "@/components/brand/smile";
+import { PRODUCT_COLORS } from "@/lib/product-colors";
+
+const FOOTER_LINK =
+  "link-swipe inline-flex items-center min-h-[44px] no-underline text-white/80 hover:text-white";
 
 export function Footer() {
   return (
@@ -13,41 +17,79 @@ export function Footer() {
             </p>
             <a
               href="mailto:cubby@colonhyphenbracket.pink"
-              className="link-swipe inline-block mt-6 text-lg text-white/80 hover:text-white no-underline"
+              className="link-swipe inline-flex items-center min-h-[44px] mt-5 text-lg text-white/80 hover:text-white no-underline"
             >
               cubby@colonhyphenbracket.pink
             </a>
           </div>
 
           <div className="lg:col-span-2">
-            <div className="font-display text-lg font-bold text-white mb-4">Studio</div>
-            <ul className="space-y-2.5 text-[15px]">
-              <li><Link href="/studio" className="link-swipe no-underline text-white/80 hover:text-white">How we work</Link></li>
-              <li><Link href="/manifesto" className="link-swipe no-underline text-white/80 hover:text-white">Manifesto</Link></li>
-              <li><Link href="/contact" className="link-swipe no-underline text-white/80 hover:text-white">Start a project</Link></li>
-              <li><a href="https://hire.colonhyphenbracket.pink" className="link-swipe no-underline text-white/80 hover:text-white">About Kyle ↗</a></li>
+            <div className="font-display text-lg font-bold text-white mb-2">Studio</div>
+            <ul className="text-[15px]">
+              <li><Link href="/studio" className={FOOTER_LINK}>How we work</Link></li>
+              <li><Link href="/manifesto" className={FOOTER_LINK}>Manifesto</Link></li>
+              <li><Link href="/contact" className={FOOTER_LINK}>Start a project</Link></li>
+              <li>
+                <a
+                  href="https://hire.colonhyphenbracket.pink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={FOOTER_LINK}
+                >
+                  About Kyle ↗
+                </a>
+              </li>
             </ul>
           </div>
+
           <div className="lg:col-span-2">
-            <div className="font-display text-lg font-bold text-white mb-4">Products</div>
-            <ul className="space-y-2.5 text-[15px]">
-              <li><a href="https://pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Pipes |||</a></li>
-              <li><a href="https://pipes.pink/write" className="link-swipe no-underline text-white/80 hover:text-white">Hash # &amp; Semi ; - ]</a></li>
-              <li><a href="https://greater.pink" className="link-swipe no-underline text-white/80 hover:text-white">Greater &gt;</a></li>
-              <li><a href="https://marigoldinsights.org" className="link-swipe no-underline text-white/80 hover:text-white">Marigold ❀</a></li>
+            <div className="font-display text-lg font-bold text-white mb-2">Products</div>
+            <ul className="text-[15px]">
+              <li><Link href="/products" className={FOOTER_LINK}>All 7 tools</Link></li>
+              <li>
+                <a href="https://pipes.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  Pipes <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.pipes }}>|||</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://pipes.pink/desktop/bang" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  BANG! <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.bang }}>!</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://pipes.pink/write" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  Hash <span className="mx-1 font-mono font-bold" style={{ color: PRODUCT_COLORS.hash }}>#</span> &amp; Semi <span className="ml-1 font-mono font-bold" style={{ color: PRODUCT_COLORS.semi }}>; - ]</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://greater.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  Greater <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.greater }}>&gt;</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://marigoldinsights.org" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  Marigold <span className="ml-1.5" style={{ color: PRODUCT_COLORS.marigold }}>❀</span>
+                </a>
+              </li>
             </ul>
           </div>
+
           <div className="lg:col-span-2">
-            <div className="font-display text-lg font-bold text-white mb-4">Open</div>
-            <ul className="space-y-2.5 text-[15px]">
-              <li><a href="https://design.pipes.pink" className="link-swipe no-underline text-white/80 hover:text-white">Accént design system é</a></li>
-              <li><a href="https://github.com/rorshockbtc" className="link-swipe no-underline text-white/80 hover:text-white">GitHub</a></li>
-              <li><Link href="/account" className="link-swipe no-underline text-white/80 hover:text-white">Sign in</Link></li>
+            <div className="font-display text-lg font-bold text-white mb-2">Open</div>
+            <ul className="text-[15px]">
+              <li>
+                <a href="https://design.pipes.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  Accént design system <span className="ml-1.5 font-bold" style={{ color: PRODUCT_COLORS.accent }}>é</span>
+                </a>
+              </li>
+              <li><Link href="/design" className={FOOTER_LINK}>Brand adapter : - ]</Link></li>
+              <li><a href="https://github.com/rorshockbtc" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>GitHub</a></li>
+              <li><a href="https://pipes.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>Pipes sign in ↗</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm text-white/55">
+        <div className="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm text-white/60">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-wrap">
             <span>© 2026 Colon Hyphen Bracket, LLC. Independent. Opinionated. Kind.</span>
             <span className="hidden sm:inline text-white/20">·</span>
@@ -57,7 +99,7 @@ export function Footer() {
                 href="https://design.pipes.pink"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-swipe text-white/75 hover:text-white no-underline font-medium"
+                className="link-swipe text-white/80 hover:text-white no-underline font-medium"
               >
                 Accént 3.0
               </a>{" "}
@@ -66,7 +108,7 @@ export function Footer() {
                 href="https://github.com/rorshockbtc/accent-ui"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-swipe text-white/75 hover:text-white no-underline font-medium"
+                className="link-swipe text-white/80 hover:text-white no-underline font-medium"
               >
                 Playful-Principal Brand Adapter
               </a>{" "}
@@ -76,13 +118,13 @@ export function Footer() {
 
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 shrink-0">
             <span
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-white/80 text-xs font-medium tracking-tight"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-white/85 text-[13px] font-medium tracking-tight"
               data-testid="footer-bitcoin-badge"
             >
-              <span className="text-[#F7931A] font-bold text-xs leading-none" aria-hidden="true">₿</span>
+              <span className="text-[#F7931A] font-bold text-[13px] leading-none" aria-hidden="true">₿</span>
               <span>Bitcoin Accepted Here</span>
             </span>
-            <span className="text-white/45">This site is the portfolio. View source if you like.</span>
+            <span className="text-white/55 text-[13px]">This site is the portfolio. View source if you like.</span>
           </div>
         </div>
       </div>

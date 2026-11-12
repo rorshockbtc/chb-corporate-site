@@ -33,6 +33,12 @@ const pages = [
     title: 'Start a Project | Colon Hyphen Bracket : - ] — Principal Design & Architecture',
     desc: 'Book a one-week sprint ($7,500), single-day build, or embedded principal partner with Kyle Cyree at Colon Hyphen Bracket.',
     image: 'https://colonhyphenbracket.pink/images/og/og-contact.jpg'
+  },
+  {
+    path: 'design',
+    title: 'Design System & Brand Adapter | Colon Hyphen Bracket : - ]',
+    desc: 'How Colon Hyphen Bracket adapts and contributes back to Accént 3.0 (MIT)—typography, semantic tokens, motion invariants, and the 7-product punctuation palette.',
+    image: 'https://colonhyphenbracket.pink/images/og/og-home.jpg'
   }
 ];
 
