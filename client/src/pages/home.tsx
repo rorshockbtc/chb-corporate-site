@@ -180,13 +180,13 @@ function Hero() {
 
 /* ───────────────────────────── MARQUEE ───────────────────────────── */
 function Marquee() {
-  const words = ["Scary", "→", "Clear", "→", "Shipped", ": - ]", "Honest", "#", "Independent", "; - ]", "Kind", "|||", "Opinionated", "é", "Crafted", "❀"];
+  const words = ["Scary", "→", "Clear", "→", "Shipped", ": - ]", "Honest", "#", "Independent", "; - ]", "Kind", "|||", "Opinionated", "é", "Crafted", "❁"];
   const row = [...words, ...words];
   return (
     <div className="border-y border-[#111827]/10 py-5 sm:py-6 overflow-hidden bg-[#FAF8F5]" aria-hidden>
       <div className="animate-chb-marquee flex gap-8 sm:gap-10 whitespace-nowrap font-display text-3xl sm:text-5xl font-bold">
         {row.map((w, i) => (
-          <span key={i} className={/[:;é#|❀→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>
+          <span key={i} className={/[:;é#|❁→]/.test(w) ? "text-[#FE299E]" : "text-[#111827]/85"}>
             {w}
           </span>
         ))}
@@ -203,7 +203,7 @@ const OPINIONS = [
   { id: "op-2", mark: "; - ]", line: "One principal beats four handoffs.", note: "Strategy, design, and code in one head. No telephone game, no translation tax." },
   { id: "op-3", mark: "|||", line: "Independent means uncompromised.", note: "We value all businesses, especially the independent ones. We're independent too. No VC to please—we answer only to the people who use our software." },
   { id: "op-4", mark: "é", line: "Craft is how you scale.", note: "Clean architecture and a real design system are what let small teams act big." },
-  { id: "op-5", mark: "❀", line: "Your data is yours. Full stop.", note: "Local-first, private by default. You own your code, your content, and your data on day one—we never sell, mine, or train on what you make." },
+  { id: "op-5", mark: "❁", line: "Your data is yours. Full stop.", note: "Local-first, private by default. You own your code, your content, and your data on day one—we never sell, mine, or train on what you make." },
 ];
 
 function Manifesto() {
@@ -546,7 +546,7 @@ const MAKES = [
   { color: PRODUCT_COLORS.semi, mark: "; - ]", name: "Semi", line: "A Socratic editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
   { color: PRODUCT_COLORS.greater, mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
   { color: PRODUCT_COLORS.accent, mark: "é", name: "Accént", line: "Our free, open-source design system (MIT).", href: "https://design.pipes.pink" },
-  { color: PRODUCT_COLORS.marigold, mark: "❀", name: "Marigold", line: "Zero-knowledge local civic analytics.", href: "https://marigoldinsights.org" },
+  { color: PRODUCT_COLORS.marigold, mark: "❁", name: "Marigold", line: "Zero-knowledge local civic analytics.", href: "https://marigoldinsights.org" },
 ];
 
 function ThingsWeMake() {

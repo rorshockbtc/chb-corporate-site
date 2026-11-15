@@ -18,8 +18,8 @@ const pages = [
   },
   {
     path: 'products',
-    title: 'Products | Colon Hyphen Bracket : - ] — Pipes |||, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❀',
-    desc: 'Independent sovereign software by Colon Hyphen Bracket: Pipes ||| for curated human knowledge, Hash # for private writing, Semi ; - ] editor, Greater > classroom, Accént é, and Marigold ❀ civic data.',
+    title: 'Products | Colon Hyphen Bracket : - ] — Pipes |||, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❁',
+    desc: 'Independent sovereign software by Colon Hyphen Bracket: Pipes ||| for curated human knowledge, Hash # for private writing, Semi ; - ] editor, Greater > classroom, Accént é, and Marigold ❁ civic data.',
     image: 'https://colonhyphenbracket.pink/images/og/og-products.jpg'
   },
   {

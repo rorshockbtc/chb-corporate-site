@@ -19,7 +19,7 @@
    - `; - ]` **Semi**: Sovereign Pink (`#FE299E`) — flagship Socratic editor
    - `>` **Greater**: Sky / Cobalt Blue (`#0284C7`) — universal classroom in 90+ languages
    - `é` **Accént**: Crimson / Ruby (`#E11D48`) — open-source typographic craft
-   - `❀` **Marigold**: Amber Gold (`#D97706`) — local zero-knowledge civic analytics
+   - `❁` **Marigold**: Amber Gold (`#D97706`) — local zero-knowledge civic analytics
 3. **Architectural Pedestals Over Boxy Cards (De-Cardification)**:
    - Sticky belief panels use an understated left hairline divider (`border-l border-[#111827]/15 pl-8 lg:pl-10`) instead of boxy cards.
    - Platform showcases in `studio.tsx` breathe as open architectural pedestals with top hairlines (`border-t border-[#111827]/15 pt-6`).

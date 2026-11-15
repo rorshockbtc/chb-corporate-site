@@ -170,7 +170,7 @@ const ECOSYSTEM_STEPS = [
     body: "Open BANG! inside Pipes Desktop to update your own site locally for $0—no code needed.",
   },
   {
-    title: "❀ Analyze",
+    title: "❁ Analyze",
     color: COLOR_MARIGOLD,
     body: "Analyze and query hundreds of thousands of records locally in Marigold.",
   },
@@ -285,8 +285,8 @@ export default function Products({ initialProductId }: { initialProductId?: stri
   return (
     <div className="brand-canvas min-h-screen">
       <Seo
-        title="Products | Colon Hyphen Bracket : - ] — Pipes |||, BANG! !, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❀"
-        description="Independent cross-platform software by Colon Hyphen Bracket: Pipes ||| (Web, Mac, Windows, iOS, Android & Chromium extension), BANG! ! local IDE, Hash #, Semi ; - ], Greater >, Accént é, and Marigold ❀."
+        title="Products | Colon Hyphen Bracket : - ] — Pipes |||, BANG! !, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❁"
+        description="Independent cross-platform software by Colon Hyphen Bracket: Pipes ||| (Web, Mac, Windows, iOS, Android & Chromium extension), BANG! ! local IDE, Hash #, Semi ; - ], Greater >, Accént é, and Marigold ❁."
         path="/products"
         image="/images/og/og-products.jpg"
       />
@@ -368,7 +368,7 @@ export default function Products({ initialProductId }: { initialProductId?: stri
                   color: activeId === "marigold" ? COLOR_MARIGOLD : isDark ? "rgba(250,248,245,0.45)" : "rgba(17,24,39,0.3)",
                 }}
               >
-                <span className="mr-1 sm:mr-1.5 text-xs sm:text-lg">❀</span>
+                <span className="mr-1 sm:mr-1.5 text-xs sm:text-lg">❁</span>
                 <span>Marigold</span>
                 {activeId === "marigold" && (
                   <motion.span
@@ -515,7 +515,7 @@ export default function Products({ initialProductId }: { initialProductId?: stri
         <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <FadeUp className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-[#D97706]/20 text-[#D97706] border border-[#D97706]/35 mb-6 sm:mb-8">
-              <span>❀</span> The Civic Data Exception · Named After the Flower
+              <span>❁</span> The Civic Data Exception · Named After the Flower
             </div>
 
             <h2 className="font-display font-black text-4xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-white">

@@ -40,7 +40,7 @@ export const CHB_SEVEN_PRODUCT_SLOTS: AccentProductColorSlot[] = [
   { id: "semi", mark: "; - ]", name: "Semi", hex: "#FE299E", role: "Sovereign Pink — flagship Socratic editor" },
   { id: "greater", mark: ">", name: "Greater", hex: "#0284C7", role: "Sky / Cobalt Blue — universal classroom in 90+ languages" },
   { id: "accent", mark: "é", name: "Accént", hex: "#E11D48", role: "Crimson / Ruby — open-source typographic craft" },
-  { id: "marigold", mark: "❀", name: "Marigold", hex: "#D97706", role: "Amber Gold — local zero-knowledge civic analytics" },
+  { id: "marigold", mark: "❁", name: "Marigold", hex: "#D97706", role: "Amber Gold — local zero-knowledge civic analytics" },
 ];
 
 export interface AccentTypography {

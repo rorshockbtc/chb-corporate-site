@@ -49,7 +49,7 @@ const CONTRASTS = [
   },
   {
     them: "Black-box features bolted on for investor slides that quietly upload your customers' private records to someone else's cloud.",
-    us: "Local-first, sovereign tools (Pipes |||, Hash #, Semi ; - ], Marigold ❀) built around privacy and verifiable provenance.",
+    us: "Local-first, sovereign tools (Pipes |||, Hash #, Semi ; - ], Marigold ❁) built around privacy and verifiable provenance.",
     color: "#3FA535",
   },
   {

@@ -68,7 +68,7 @@ export function Footer() {
               </li>
               <li>
                 <a href="https://marigoldinsights.org" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
-                  Marigold <span className="ml-1.5" style={{ color: PRODUCT_COLORS.marigold }}>❀</span>
+                  Marigold <span className="ml-1.5" style={{ color: PRODUCT_COLORS.marigold }}>❁</span>
                 </a>
               </li>
             </ul>

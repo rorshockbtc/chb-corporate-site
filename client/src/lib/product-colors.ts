@@ -11,7 +11,7 @@
  *   - Semi ; - ]: Sovereign Pink (#FE299E)
  *   - Greater >: Sky / Cobalt Blue (#0284C7)
  *   - Accént é: Crimson / Ruby (#E11D48)
- *   - Marigold ❀: Amber Gold (#D97706)
+ *   - Marigold ❁: Amber Gold (#D97706)
  */
 
 export const PRODUCT_COLORS = {
@@ -33,5 +33,5 @@ export const PRODUCT_SLOTS = [
   { id: "semi", mark: "; - ]", name: "Semi", color: PRODUCT_COLORS.semi, role: "Sovereign Pink — flagship Socratic editor" },
   { id: "greater", mark: ">", name: "Greater", color: PRODUCT_COLORS.greater, role: "Sky / Cobalt Blue — universal classroom in 90+ languages" },
   { id: "accent", mark: "é", name: "Accént", color: PRODUCT_COLORS.accent, role: "Crimson / Ruby — open-source typographic craft" },
-  { id: "marigold", mark: "❀", name: "Marigold", color: PRODUCT_COLORS.marigold, role: "Amber Gold — local zero-knowledge civic analytics" },
+  { id: "marigold", mark: "❁", name: "Marigold", color: PRODUCT_COLORS.marigold, role: "Amber Gold — local zero-knowledge civic analytics" },
 ] as const;
