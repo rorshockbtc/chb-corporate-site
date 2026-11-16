@@ -4,8 +4,9 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Smile } from "@/components/brand/smile";
 import { ScaryHeadline } from "@/components/brand/scary-words";
-import { RiseLines, FadeUp } from "@/components/brand/motion";
+import { RiseLines, FadeUp, Eyebrow } from "@/components/brand/motion";
 import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
+import { YouTubeEmbed } from "@/components/brand/youtube-embed";
 import { Seo } from "@/components/brand/seo";
 import { PRODUCT_COLORS } from "@/lib/product-colors";
 
@@ -601,6 +602,50 @@ function ThingsWeMake() {
   );
 }
 
+/* ─────────────────────────── FOUNDER BRIEF ─────────────────────────── */
+function PromoVideo() {
+  return (
+    <section
+      className="py-20 sm:py-28 border-t border-[#111827]/10"
+      data-testid="section-promo-video"
+    >
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <FadeUp className="lg:col-span-5">
+          <Eyebrow mark=": - ]">In Kyle&apos;s words</Eyebrow>
+          <h2 className="mt-4 font-display font-bold text-4xl sm:text-5xl tracking-[-0.025em] leading-[1.05] text-[#111827]">
+            How to build software fast.
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-[#111827]/75 max-w-[42ch]">
+            A quick look at how we strip out layers, work directly with founders and teams, and move from a blank page to shipping production code.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center gap-6">
+            <Link
+              href="/studio"
+              className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-base sm:text-lg font-semibold text-[#111827] no-underline"
+            >
+              See how a sprint runs <ArrowRight className="w-5 h-5 text-[#FE299E]" />
+            </Link>
+            <a
+              href="https://www.youtube.com/watch?v=8eU-X801jSw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 min-h-[44px] text-[15px] font-medium text-[#111827]/70 hover:text-[#111827] transition-colors no-underline"
+            >
+              Watch on YouTube <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
+        </FadeUp>
+        <FadeUp delay={0.1} className="lg:col-span-7">
+          <YouTubeEmbed
+            videoId="8eU-X801jSw"
+            title="How to Build Software Fast — Kyle Cyree"
+          />
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────────────────── CLOSE ─────────────────────────────── */
 const SUMMARY_CARDS: [CloseCardItem, CloseCardItem, CloseCardItem] = [
   {
@@ -647,6 +692,7 @@ export function HomePage() {
       <WhoWeHelp />
       <HowItWorks />
       <ThingsWeMake />
+      <PromoVideo />
       <Close />
     </div>
   );
