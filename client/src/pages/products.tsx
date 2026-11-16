@@ -8,7 +8,7 @@ import { PageClose, type CloseCardItem } from "@/components/brand/page-close";
 import { Seo } from "@/components/brand/seo";
 import { PRODUCT_COLORS } from "@/lib/product-colors";
 
-// 7 Distinct Product Signature Colors from Canonical Registry
+// 8 Distinct Product Signature Colors from Canonical Registry
 const COLOR_PIPES = PRODUCT_COLORS.pipes; // Solar Yellow (#EAB308)
 const COLOR_BANG = PRODUCT_COLORS.bang; // Emerald Green (#16A34A)
 const COLOR_HASH = PRODUCT_COLORS.hash; // Burnt Terracotta / Rust (#C2410C)
@@ -16,6 +16,7 @@ const COLOR_SEMI = PRODUCT_COLORS.semi; // Sovereign Pink (#FE299E)
 const COLOR_GREATER = PRODUCT_COLORS.greater; // Sky Blue (#0284C7)
 const COLOR_ACCENT = PRODUCT_COLORS.accent; // Crimson / Ruby (#E11D48)
 const COLOR_MARIGOLD = PRODUCT_COLORS.marigold; // Amber Gold (#D97706)
+const COLOR_ASTERISK = PRODUCT_COLORS.asterisk; // Twilight Rose (#FF2E93)
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 interface ProductItem {
@@ -146,6 +147,26 @@ const PRODUCTS: ProductItem[] = [
       "Flexible: we can use Accént or adapt to your existing brand",
     ],
   },
+  {
+    id: "asterisk",
+    mark: "*",
+    name: "asterisk",
+    color: COLOR_ASTERISK,
+    status: "Live · Open Source (Apache-2.0)",
+    href: "https://asterisk.pipes.pink",
+    cta: "Open asterisk",
+    secondaryHref: "https://hire.colonhyphenbracket.pink/case-studies/asterisk",
+    secondaryCta: "Read the case study",
+    tagline: "Write one honest thought. Tune it for six social rooms without turning it into engagement bait.",
+    body: "Write a post once and adapt it for Threads, X, Facebook, Substack, Instagram, and TikTok in your own words. asterisk splits X threads at sentence boundaries, moves links into self-replies on Threads and Facebook so feeds don't throttle your reach, checks 1–4 image aspect ratios against Instagram's 4:5 frame, pulls visuals straight from Pipes, and syncs drafts back to Hash (#).",
+    points: [
+      "Copy & Open works immediately with zero API keys or OAuth lock-in",
+      "Automatic link isolation into self-replies for Threads & Facebook",
+      "Up to 4 image attachments with Instagram 4:5 aspect-ratio guardrails",
+      "Two-way Pipes & Hash bridge: Save to # Hash or Publish to Personal Pipe",
+      "Open-source Apache-2.0 code at github.com/rorshockbtc/asterisk",
+    ],
+  },
 ];
 
 const ECOSYSTEM_STEPS = [
@@ -158,6 +179,11 @@ const ECOSYSTEM_STEPS = [
     title: "; - ] Refine",
     color: COLOR_SEMI,
     body: "Semi asks Socratic questions and helps you clarify your thoughts without ghostwriting.",
+  },
+  {
+    title: "* Distribute",
+    color: COLOR_ASTERISK,
+    body: "Adapt one post for six social rooms in asterisk, with links split out and image ratios checked.",
   },
   {
     title: "||| Publish",
@@ -199,6 +225,7 @@ export const VALID_PRODUCT_IDS = [
   "greater",
   "accent",
   "marigold",
+  "asterisk",
 ] as const;
 
 export type ValidProductId = (typeof VALID_PRODUCT_IDS)[number];
@@ -285,8 +312,8 @@ export default function Products({ initialProductId }: { initialProductId?: stri
   return (
     <div className="brand-canvas min-h-screen">
       <Seo
-        title="Products | Colon Hyphen Bracket : - ] — Pipes |||, BANG! !, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❁"
-        description="Independent cross-platform software by Colon Hyphen Bracket: Pipes ||| (Web, Mac, Windows, iOS, Android & Chromium extension), BANG! ! local IDE, Hash #, Semi ; - ], Greater >, Accént é, and Marigold ❁."
+        title="Products | Colon Hyphen Bracket : - ] — Pipes |||, BANG! !, Hash #, Semi ; - ], Greater >, Accént é, asterisk * & Marigold ❁"
+        description="Independent cross-platform software by Colon Hyphen Bracket: Pipes ||| (Web, Mac, Windows, iOS, Android & Chromium extension), BANG! ! local IDE, Hash #, Semi ; - ], Greater >, Accént é, asterisk * six-room post tuner, and Marigold ❁."
         path="/products"
         image="/images/og/og-products.jpg"
       />
@@ -337,7 +364,7 @@ export default function Products({ initialProductId }: { initialProductId?: stri
                 : "bg-[#FAF8F5]/95 backdrop-blur-md border-[#111827]/10"
             }`}
           >
-            <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 flex flex-wrap sm:flex-nowrap items-baseline justify-start sm:justify-between gap-x-4 sm:gap-x-5 gap-y-2 sm:gap-y-0 whitespace-nowrap">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 flex flex-wrap lg:flex-nowrap items-baseline justify-start lg:justify-between gap-x-4 sm:gap-x-5 gap-y-2 lg:gap-y-0 whitespace-nowrap">
               {PRODUCTS.map((x) => {
                 const isActive = activeId === x.id;
                 const inactiveColor = isDark ? "rgba(250,248,245,0.45)" : "rgba(17,24,39,0.3)";

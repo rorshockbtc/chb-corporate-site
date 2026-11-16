@@ -10,8 +10,8 @@ Independent product studio building local-first developer tools, sovereign softw
 
 ## Routes
 
-- `/` — Studio manifesto, seven-product overview, and sovereignty thesis
-- `/products` — Seven live tools (`Pipes`, `BANG!`, `Hash`, `Semi`, `Marigold`, `Accént`, `CHB`)
+- `/` — Studio manifesto, eight-product overview, and sovereignty thesis
+- `/products` — Eight live tools (`Pipes`, `BANG!`, `Hash`, `Semi`, `Greater`, `Accént`, `asterisk`, `Marigold`)
 - `/studio` — Engineering engagements (`$7,500` 1-week sprint, `$15k/mo` fractional principal partner, custom builds) + client handover proof ([Hacienda Chicuinaco](https://hire.colonhyphenbracket.pink/case-studies/chicuinaco))
 - `/design` — Live **Accént 3.0** token reference, canonical product color slots, and editorial primitives
 - `/manifesto` — Why software should work offline, export cleanly, and never hold users hostage

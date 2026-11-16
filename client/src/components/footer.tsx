@@ -45,7 +45,12 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="font-display text-lg font-bold text-white mb-2">Products</div>
             <ul className="text-[15px]">
-              <li><Link href="/products" className={FOOTER_LINK}>All 7 tools</Link></li>
+              <li><Link href="/products" className={FOOTER_LINK}>All tools</Link></li>
+              <li>
+                <a href="https://asterisk.pipes.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  asterisk <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.asterisk }}>*</span>
+                </a>
+              </li>
               <li>
                 <a href="https://pipes.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
                   Pipes <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.pipes }}>|||</span>

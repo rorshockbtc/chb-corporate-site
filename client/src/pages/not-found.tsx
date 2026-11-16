@@ -7,7 +7,7 @@ import { Seo } from "@/components/brand/seo";
 
 const QUICK_ROUTES = [
   { href: "/studio", label: "How the studio works", mark: ": - ]" },
-  { href: "/products", label: "Explore all 7 tools", mark: "|||" },
+  { href: "/products", label: "Explore all 8 tools", mark: "|||" },
   { href: "/manifesto", label: "Read the manifesto", mark: "#" },
 ] as const;
 

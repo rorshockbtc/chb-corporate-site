@@ -11,8 +11,8 @@
    - Primary CTA buttons ("Bring us a challenge", "Start a project", "Book a one-week sprint", "Send note", and flagship Semi actions) use sovereign Hot Pink (`#FE299E`) with crisp white text and signature glow shadow `shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)]`, transitioning to `#111827` ink on hover.
    - On mobile OLED screens (especially iPhone), `#B81468` renders visibly dark burgundy/wine which conflicts with brand identity. Sovereign Hot Pink (`#FE299E`) is the canonical primary CTA fill across all viewports.
    - Punctuation marks (`: - ]`), `<Smile />` eye-winks, `<Eyebrow />` brackets, strike-through bars (`<ScaryHeadline />`), and dynamic scroll/underline indicators strictly use `#FE299E`.
-2. **Strict 7-Product Non-Repeating Signature Colors**:
-   Each of the 7 punctuation products retains its sovereign signature color across `home.tsx`, `studio.tsx`, and `products.tsx` with zero collision:
+2. **Strict 8-Product Non-Repeating Signature Colors**:
+   Each of the 8 punctuation products retains its sovereign signature color across `home.tsx`, `studio.tsx`, and `products.tsx` with zero collision:
    - `|||` **Pipes**: Solar Yellow (`#EAB308`) — bright beacon of verified knowledge
    - `!` **BANG!**: Emerald Green (`#16A34A`) — local execution runtime & freedom
    - `#` **Hash**: Burnt Terracotta / Rust (`#C2410C`) — quiet, private writing retreat
@@ -20,6 +20,7 @@
    - `>` **Greater**: Sky / Cobalt Blue (`#0284C7`) — universal classroom in 90+ languages
    - `é` **Accént**: Crimson / Ruby (`#E11D48`) — open-source typographic craft
    - `❁` **Marigold**: Amber Gold (`#D97706`) — local zero-knowledge civic analytics
+   - `*` **asterisk**: Twilight Rose (`#FF2E93`) — six-room social post tuner
 3. **Architectural Pedestals Over Boxy Cards (De-Cardification)**:
    - Sticky belief panels use an understated left hairline divider (`border-l border-[#111827]/15 pl-8 lg:pl-10`) instead of boxy cards.
    - Platform showcases in `studio.tsx` breathe as open architectural pedestals with top hairlines (`border-t border-[#111827]/15 pt-6`).

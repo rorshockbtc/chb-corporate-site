@@ -11,7 +11,7 @@
  * - 44×44px touch targets
  * - Sovereign Hot Pink (`#FE299E`) across primary filled CTA buttons (white text, hover `#111827`),
  *   punctuation marks (`: - ]`), `<Smile />`, and `<ScaryHeadline />`.
- * - 7 Non-Repeating Punctuation Product Signature Colors across Home, Studio, and Products.
+ * - 8 Non-Repeating Punctuation Product Signature Colors across Home, Studio, and Products.
  */
 
 export const ACCENT_SPEC = {
@@ -41,6 +41,7 @@ export const CHB_SEVEN_PRODUCT_SLOTS: AccentProductColorSlot[] = [
   { id: "greater", mark: ">", name: "Greater", hex: "#0284C7", role: "Sky / Cobalt Blue — universal classroom in 90+ languages" },
   { id: "accent", mark: "é", name: "Accént", hex: "#E11D48", role: "Crimson / Ruby — open-source typographic craft" },
   { id: "marigold", mark: "❁", name: "Marigold", hex: "#D97706", role: "Amber Gold — local zero-knowledge civic analytics" },
+  { id: "asterisk", mark: "*", name: "asterisk", hex: "#FF2E93", role: "Twilight Rose — six-room social post tuner" },
 ];
 
 export interface AccentTypography {
@@ -107,7 +108,7 @@ export const PLAYFUL_PRINCIPAL_PROFILE: AccentBrandProfile = {
     rules: [
       "Preserve Sovereign Hot Pink (#FE299E) on primary filled CTA buttons (hover Ink #111827), punctuation marks (: - ]), <Smile /> winks, <ScaryHeadline /> strike bars, and hover links.",
       "Do not substitute muted dark magenta or burgundy (#B81468) on filled pill CTAs.",
-      "Maintain the 7 non-repeating product signature colors (Pipes #EAB308, BANG! #16A34A, Hash #C2410C, Semi #FE299E, Greater #0284C7, Accént #E11D48, Marigold #D97706).",
+      "Maintain the 8 non-repeating product signature colors (Pipes #EAB308, BANG! #16A34A, Hash #C2410C, Semi #FE299E, Greater #0284C7, Accént #E11D48, Marigold #D97706, asterisk #FF2E93).",
       "Prefer open architectural pedestals (border-l / border-t hairlines) over boxed, shadowed cards.",
     ],
   },

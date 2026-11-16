@@ -1,7 +1,7 @@
 /**
  * Centralized Canonical Product Color Registry
  *
- * Enforces the strict 7-product non-repeating signature color palette
+ * Enforces the strict 8-product non-repeating signature color palette
  * across all pages of Colon Hyphen Bracket corporate site.
  *
  * Defined in STYLES.md & accent.config.ts:
@@ -22,6 +22,7 @@ export const PRODUCT_COLORS = {
   greater: "#0284C7",
   accent: "#E11D48",
   marigold: "#D97706",
+  asterisk: "#FF2E93",
 } as const;
 
 export type ProductId = keyof typeof PRODUCT_COLORS;
@@ -34,4 +35,5 @@ export const PRODUCT_SLOTS = [
   { id: "greater", mark: ">", name: "Greater", color: PRODUCT_COLORS.greater, role: "Sky / Cobalt Blue — universal classroom in 90+ languages" },
   { id: "accent", mark: "é", name: "Accént", color: PRODUCT_COLORS.accent, role: "Crimson / Ruby — open-source typographic craft" },
   { id: "marigold", mark: "❁", name: "Marigold", color: PRODUCT_COLORS.marigold, role: "Amber Gold — local zero-knowledge civic analytics" },
+  { id: "asterisk", mark: "*", name: "asterisk", color: PRODUCT_COLORS.asterisk, role: "Twilight Rose — six-room social post tuner" },
 ] as const;

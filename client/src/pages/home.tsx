@@ -548,6 +548,7 @@ const MAKES = [
   { color: PRODUCT_COLORS.greater, mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
   { color: PRODUCT_COLORS.accent, mark: "é", name: "Accént", line: "Our free, open-source design system (MIT).", href: "https://design.pipes.pink" },
   { color: PRODUCT_COLORS.marigold, mark: "❁", name: "Marigold", line: "Zero-knowledge local civic analytics.", href: "https://marigoldinsights.org" },
+  { color: PRODUCT_COLORS.asterisk, mark: "*", name: "asterisk", line: "One honest thought, tuned for six social rooms.", href: "https://asterisk.pipes.pink" },
 ];
 
 function ThingsWeMake() {

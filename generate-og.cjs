@@ -29,7 +29,7 @@ const pages = [
     slug: 'products',
     eyebrow: 'COLON HYPHEN BRACKET TOOLS',
     title: 'Software named after punctuation.',
-    subtitle: 'Pipes |||, Hash #, Semi ; - ], Greater &gt;, Accént é, and Marigold ❁. Built for human sovereignty.',
+    subtitle: 'Pipes |||, Hash #, Semi ; - ], Greater &gt;, Accént é, asterisk *, and Marigold ❁. Built for human sovereignty.',
     badge: 'INDEPENDENT ECOSYSTEM',
     accent: '#FE299E',
     artFile: '/Users/kendallkylecyree/Developer/chb-corporate-site/client/public/images/brand/products-workbench.jpg'

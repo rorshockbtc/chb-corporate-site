@@ -130,7 +130,7 @@ export default function DesignSystemPage() {
     <div className="brand-canvas min-h-screen" data-testid="design-adapter-page">
       <Seo
         title="Design System & Brand Adapter | Colon Hyphen Bracket : - ]"
-        description="How Colon Hyphen Bracket adapts and contributes back to Accént 3.0 (MIT)—typography, semantic tokens, motion invariants, and the 7-product punctuation palette."
+        description="How Colon Hyphen Bracket adapts and contributes back to Accént 3.0 (MIT)—typography, semantic tokens, motion invariants, and the 8-product punctuation palette."
         path="/design"
         image="/images/og/og-home.jpg"
       />
@@ -278,13 +278,13 @@ export default function DesignSystemPage() {
         </div>
       </section>
 
-      {/* 7 Non-Repeating Product Signature Colors */}
+      {/* 8 Non-Repeating Product Signature Colors */}
       <section className="py-20 sm:py-28 bg-[#111827] text-[#FAF8F5]" data-testid="design-product-palette">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <FadeUp className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <div className="font-mono text-[13px] uppercase tracking-[0.16em] text-[#FE299E] mb-3">
-                02 · Seven Distinct Product Signatures
+                02 · Eight Distinct Product Signatures
               </div>
               <h2 className="font-display font-bold text-huge text-[#FAF8F5]">
                 Every mark owns its own color.

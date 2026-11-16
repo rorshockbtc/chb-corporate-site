@@ -356,7 +356,7 @@ export default function StudioPage() {
                   Client Zero &amp; Zero-Hostage Handovers
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-[#111827]/75">
-                  We never treat client engagements as experiments for unproven tooling. Every capability we offer—local-first cross-platform apps (<strong>Pipes</strong>), plain-English site editing (<strong>BANG!</strong>), open-source design tokens (<strong>Accént</strong>), and zero-knowledge browser analytics (<strong>Marigold</strong>)—is dogfooded across our own seven live tools first. For <strong>Hacienda Chicuinaco</strong> (<a href="https://chicuinaco.com" target="_blank" rel="noopener noreferrer" className="underline decoration-[#FE299E]/70 underline-offset-4 hover:decoration-[#FE299E]">chicuinaco.com</a>), we built a custom static web platform and handed proprietor Joe Coffey full ownership of the codebase and pipeline—maintained independently via BANG! IDE with $0/mo retainer lock-in. Already have a stack or repo your team loves? We build cleanly inside yours, too.
+                  We never treat client engagements as experiments for unproven tooling. Every capability we offer—local-first cross-platform apps (<strong>Pipes</strong>), plain-English site editing (<strong>BANG!</strong>), open-source design tokens (<strong>Accént</strong>), multi-room publishing (<strong>asterisk</strong>), and zero-knowledge browser analytics (<strong>Marigold</strong>)—is dogfooded across our own eight live tools first. For <strong>Hacienda Chicuinaco</strong> (<a href="https://chicuinaco.com" target="_blank" rel="noopener noreferrer" className="underline decoration-[#FE299E]/70 underline-offset-4 hover:decoration-[#FE299E]">chicuinaco.com</a>), we built a custom static web platform and handed proprietor Joe Coffey full ownership of the codebase and pipeline—maintained independently via BANG! IDE with $0/mo retainer lock-in. Already have a stack or repo your team loves? We build cleanly inside yours, too.
                 </p>
               </div>
               <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-2">
@@ -372,7 +372,7 @@ export default function StudioPage() {
                   href="/products"
                   className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-base sm:text-lg font-semibold text-[#111827]/80 no-underline"
                 >
-                  Explore our 7 live tools <ArrowRight className="w-5 h-5 text-[#FE299E]" />
+                  Explore our 8 live tools <ArrowRight className="w-5 h-5 text-[#FE299E]" />
                 </Link>
               </div>
             </FadeUp>

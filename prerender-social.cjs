@@ -18,8 +18,8 @@ const pages = [
   },
   {
     path: 'products',
-    title: 'Products | Colon Hyphen Bracket : - ] — Pipes |||, Hash #, Semi ; - ], Greater >, Accént é & Marigold ❁',
-    desc: 'Independent sovereign software by Colon Hyphen Bracket: Pipes ||| for curated human knowledge, Hash # for private writing, Semi ; - ] editor, Greater > classroom, Accént é, and Marigold ❁ civic data.',
+    title: 'Products | Colon Hyphen Bracket : - ] — Pipes |||, Hash #, Semi ; - ], Greater >, Accént é, asterisk * & Marigold ❁',
+    desc: 'Independent sovereign software by Colon Hyphen Bracket: Pipes ||| for curated human knowledge, Hash # for private writing, Semi ; - ] editor, Greater > classroom, Accént é, asterisk * six-room post tuner, and Marigold ❁ civic data.',
     image: 'https://colonhyphenbracket.pink/images/og/og-products.jpg'
   },
   {
@@ -37,7 +37,7 @@ const pages = [
   {
     path: 'design',
     title: 'Design System & Brand Adapter | Colon Hyphen Bracket : - ]',
-    desc: 'How Colon Hyphen Bracket adapts and contributes back to Accént 3.0 (MIT)—typography, semantic tokens, motion invariants, and the 7-product punctuation palette.',
+    desc: 'How Colon Hyphen Bracket adapts and contributes back to Accént 3.0 (MIT)—typography, semantic tokens, motion invariants, and the 8-product punctuation palette.',
     image: 'https://colonhyphenbracket.pink/images/og/og-home.jpg'
   }
 ];
