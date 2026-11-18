@@ -100,9 +100,11 @@ const PRODUCTS: ProductItem[] = [
     color: COLOR_SEMI,
     status: "Live in Pipes",
     href: "https://pipes.pink/write",
-    cta: "Meet Semi",
+    cta: "Write with Semi",
+    secondaryHref: "https://semi.colonhyphenbracket.pink",
+    secondaryCta: "Hear her songs",
     tagline: "An editor who remembers, and doesn't pretend.",
-    body: "A semicolon means the thought isn't finished yet. Semi is a patient Socratic editor-in-residence who remembers your projects, your voice, and your family's stories over time. Semi asks clarifying questions instead of writing corporate slop for you.",
+    body: "A semicolon means the thought isn't finished yet. Semi is a patient Socratic editor-in-residence who remembers your projects, your voice, and your family's stories over time. Modeled like a real person rather than a corporate chatbot, she asks clarifying questions instead of ghostwriting slop—and even writes and releases her own West Nashville songs.",
     points: [
       "Remembers your voice across sessions",
       "Socratic editor: asks, doesn't ghostwrite",

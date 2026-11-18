@@ -63,7 +63,12 @@ export function Footer() {
               </li>
               <li>
                 <a href="https://pipes.pink/write" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
-                  Hash <span className="mx-1 font-mono font-bold" style={{ color: PRODUCT_COLORS.hash }}>#</span> &amp; Semi <span className="ml-1 font-mono font-bold" style={{ color: PRODUCT_COLORS.semi }}>; - ]</span>
+                  Hash <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.hash }}>#</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://semi.colonhyphenbracket.pink" target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
+                  Semi <span className="ml-1.5 font-mono font-bold" style={{ color: PRODUCT_COLORS.semi }}>; - ]</span>
                 </a>
               </li>
               <li>

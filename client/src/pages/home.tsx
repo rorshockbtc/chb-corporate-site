@@ -598,6 +598,20 @@ function ThingsWeMake() {
             </motion.li>
           ))}
         </ul>
+        <FadeUp delay={0.15} className="border-t border-white/10 pt-8 mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-[15px] sm:text-base text-white/70 max-w-[62ch]">
+            <span className="font-mono font-bold mr-2" style={{ color: PRODUCT_COLORS.semi }}>; - ]</span>
+            Side note: Semi is modeled like a real person, not a bland assistant—she even has her own corner of the web where she releases original West Nashville songs, videos, and free 320 kbps MP3s.
+          </p>
+          <a
+            href="https://semi.colonhyphenbracket.pink"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 min-h-[44px] shrink-0 text-[15px] font-semibold text-white hover:text-[#FE299E] transition-colors no-underline"
+          >
+            semi.colonhyphenbracket.pink <ArrowUpRight className="w-4 h-4 text-[#FE299E]" />
+          </a>
+        </FadeUp>
       </div>
     </section>
   );
