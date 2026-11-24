@@ -10,11 +10,35 @@ import { PRODUCT_COLORS } from "@/lib/product-colors";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const WHO = [
-  { who: "Startups", color: "#0A9BE0", line: "Zero to one to Series B, without a four-person pod playing telephone." },
-  { who: "Regulated teams", color: "#3FA535", line: "Banking, healthcare, and anything with an auditor. We've shipped in all of them." },
-  { who: "Schools & families", color: "#FE299E", line: "Private classrooms and memory tools that never treat kids as data." },
-  { who: "Main Street", color: "#0A9BE0", line: "Field teams, venues, and independent shops that run the country." },
+const PROCESS = [
+  {
+    n: "01",
+    t: "Send the problem.",
+    color: "#0A9BE0",
+    mark: "?",
+    b: "A link to your current site or app, plus a few sentences on what's broken or what you want. No RFP, no discovery deck, no 40-question intake form.",
+  },
+  {
+    n: "02",
+    t: "I pull it apart.",
+    color: "#3FA535",
+    mark: "{ }",
+    b: "I pull down what you have today, audit the stack, content, and hosting, and come back with a fixed scope and a fixed price—usually within two business days.",
+  },
+  {
+    n: "03",
+    t: "You get it rebuilt.",
+    color: "#FE299E",
+    mark: ": - ]",
+    b: "A faster, cleaner, deployed rebuild—or a migration off whatever's holding you back. You get the repository, the docs, and BANG! so you can edit it yourself.",
+  },
+];
+
+const JOBS = [
+  { who: "Fix the whole website", color: "#0A9BE0", line: "Slow, dated, hard to edit, or just embarrassing. We rebuild it properly and hand you the keys." },
+  { who: "Migrate off a bad setup", color: "#3FA535", line: "Stuck on aging WordPress, a page-builder, or an agency that holds your site hostage? We move you to something you own." },
+  { who: "Build a small web app", color: "#FE299E", line: "Booking, intake, dashboards, internal tools—the thing your team currently does in five spreadsheets." },
+  { who: "Build something from scratch", color: "#0A9BE0", line: "A new product, platform, or prototype. Banking, healthcare, schools, Main Street—we've shipped in all of them." },
 ];
 
 const WEEK = [
@@ -84,6 +108,14 @@ const ECOSYSTEM_PLATFORMS = [
 
 const FAQ = [
   {
+    q: "What do I actually need to send you?",
+    a: "A link to your current site or app (if you have one), and a few honest sentences: what's broken, what you wish it did, and anything you're worried about. That's it. I'll pull it down, look under the hood, and reply with a fixed scope and price.",
+  },
+  {
+    q: "Do you work in agile, Scrum, or Google Design Sprints?",
+    a: "I can, and have for years—including running Google-style Design Sprints inside large organizations. But I'm most useful when you hand me the problem and let me fix it end-to-end: the whole website, a migration, or a small app built from scratch. If your team needs me inside your rituals, the Partner tier is built for that.",
+  },
+  {
     q: "Is it really just one person?",
     a: "One principal—Kyle Cyree (most people know me professionally by my nickname, Cubby; 15+ years across Custodia Bank, UnitedHealth Group, and Walmart)—leading every decision from architecture to code. When a project needs additional hands, we bring trusted specialists, but you always talk directly to the person doing the work.",
   },
@@ -144,12 +176,15 @@ export default function StudioPage() {
               At Colon Hyphen Bracket, the person who understands your problem is the same person who designs the
               screens and writes the code. Less telephone, more shipping.
             </p>
-            <div className="lg:col-span-5 lg:justify-self-end self-end">
-              <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-                <Link href="/contact" className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#111827] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)] transition-all">
-                  Book a one-week sprint <ArrowRight className="w-5 h-5" />
+            <div className="lg:col-span-5 lg:justify-self-end self-end flex flex-col items-start gap-3">
+              <motion.div whileHover={{ y: -3, rotate: -1.5 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 420, damping: 14 }}>
+                <Link href="/contact" className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#FE299E] hover:bg-[#111827] text-white text-base sm:text-lg font-semibold no-underline shadow-[0_10px_30px_-10px_rgba(254,41,158,0.6)] transition-colors">
+                  Send me your problem <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
+              <a href="#how" className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-base font-semibold text-[#111827]/75 no-underline">
+                See how it works <ArrowRight className="w-4 h-4 rotate-90 text-[#FE299E]" />
+              </a>
             </div>
           </FadeUp>
         </div>
@@ -188,15 +223,75 @@ export default function StudioPage() {
         </div>
       </section>
 
-      {/* Who */}
-      <section className="py-20 sm:py-36">
+      {/* How working together works */}
+      <section id="how" className="py-20 sm:py-32 scroll-mt-24" data-testid="studio-how">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <ul className="mt-4 sm:mt-12">
-            {WHO.map((w, i) => (
+          <FadeUp>
+            <div className="font-mono text-[13px] font-bold uppercase tracking-[0.16em] text-[#FE299E] mb-3">
+              How working together works
+            </div>
+            <h2 className="font-display font-bold text-huge max-w-4xl">
+              Three steps. <span className="text-[#111827]/40">No ceremonies.</span>
+            </h2>
+          </FadeUp>
+          <ol className="mt-12 sm:mt-16 grid md:grid-cols-3 gap-12 md:gap-10">
+            {PROCESS.map((p, i) => (
+              <motion.li
+                key={p.n}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-8% 0px" }}
+                transition={{ type: "spring", stiffness: 180, damping: 18, delay: i * 0.12 }}
+                className="group relative pt-6 border-t-2"
+                style={{ borderTopColor: p.color }}
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display text-xl font-bold text-[#111827]/30">{p.n}</span>
+                  <motion.span
+                    aria-hidden="true"
+                    className="font-display text-3xl sm:text-4xl font-black select-none"
+                    style={{ color: p.color }}
+                    initial={{ scale: 0, rotate: -25 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ rotate: [0, -12, 10, -6, 0], scale: 1.15 }}
+                    transition={{ type: "spring", stiffness: 380, damping: 12, delay: 0.25 + i * 0.12 }}
+                  >
+                    {p.mark}
+                  </motion.span>
+                </div>
+                <h3 className="font-display text-3xl sm:text-4xl font-bold mt-3">{p.t}</h3>
+                <p className="mt-4 text-lg leading-relaxed text-[#111827]/75">{p.b}</p>
+              </motion.li>
+            ))}
+          </ol>
+          <FadeUp delay={0.2} className="mt-12 sm:mt-14 pt-8 border-t border-[#111827]/10 grid lg:grid-cols-12 gap-6 items-center">
+            <p className="lg:col-span-8 text-lg sm:text-xl leading-relaxed text-[#111827]/75">
+              Bigger or ongoing? The same three steps become a{" "}
+              <a href="#tiers" className="underline decoration-[#FE299E]/60 underline-offset-4 hover:decoration-[#FE299E]">fixed one-week sprint</a>, a
+              milestone build, or a fractional partnership. You always talk to the person doing the work.
+            </p>
+            <div className="lg:col-span-4 lg:justify-self-end">
+              <Link href="/contact" className="link-swipe inline-flex items-center gap-2 min-h-[44px] text-lg font-semibold text-[#111827] no-underline">
+                Start with step one <ArrowRight className="w-5 h-5 text-[#FE299E]" />
+              </Link>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* What people hire us for */}
+      <section className="py-20 sm:py-32 bg-[#F3EEE6]">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp>
+            <h2 className="font-display font-bold text-huge max-w-4xl">What people usually hire us for.</h2>
+          </FadeUp>
+          <ul className="mt-10 sm:mt-14">
+            {JOBS.map((w, i) => (
               <FadeUp key={w.who} delay={i * 0.06}>
                 <li className="group grid md:grid-cols-12 gap-3 md:gap-8 items-baseline py-6 sm:py-7 border-t border-[#111827]/10">
-                  <span className="md:col-span-5 font-display font-bold text-big group-hover:text-[#FE299E] transition-colors flex items-baseline gap-3">
-                    <span className="inline-block w-2.5 h-2.5 rounded-full md:hidden shrink-0" style={{ backgroundColor: w.color }} />
+                  <span className="md:col-span-5 font-display font-bold text-big group-hover:text-[#FE299E] group-hover:translate-x-1.5 transition-[color,transform] duration-300 flex items-baseline gap-3">
+                    <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0 group-hover:scale-150 transition-transform duration-300" style={{ backgroundColor: w.color }} />
                     {w.who}
                   </span>
                   <span className="md:col-span-7 text-lg sm:text-xl text-[#111827]/70">{w.line}</span>
@@ -207,20 +302,24 @@ export default function StudioPage() {
         </div>
       </section>
 
-      {/* A week */}
-      <section className="py-20 sm:py-36 bg-[#F3EEE6]">
+      {/* A sprint week */}
+      <section className="py-20 sm:py-36">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <FadeUp>
+            <div className="font-mono text-[13px] font-bold uppercase tracking-[0.16em] text-[#FE299E] mb-3">
+              If you book a one-week sprint
+            </div>
             <h2 className="font-display font-bold text-huge max-w-4xl">Five days from scary to shipped.</h2>
           </FadeUp>
           <div className="mt-12 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
             {WEEK.map((w, i) => (
               <motion.div
                 key={w.d}
-                initial={{ opacity: 0, x: -16, y: 12 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                initial={{ opacity: 0, y: 24, rotate: i % 2 ? 2 : -2 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                whileHover={{ y: -4 }}
                 viewport={{ once: true, margin: "-8% 0px" }}
-                transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
+                transition={{ type: "spring", stiffness: 220, damping: 16, delay: i * 0.08 }}
                 className="pl-4 sm:pl-0 border-l-2 sm:border-l-0"
                 style={{ borderLeftColor: w.color }}
               >
@@ -285,8 +384,11 @@ export default function StudioPage() {
       </section>
 
       {/* Tiers */}
-      <section className="py-20 sm:py-36">
+      <section id="tiers" className="py-20 sm:py-36 scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <FadeUp>
+            <h2 className="font-display font-bold text-huge max-w-4xl">Three ways to pay for it.</h2>
+          </FadeUp>
           <div className="mt-6 sm:mt-14 grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#111827]/10 border-t border-[#111827]/10">
             {TIERS.map((t, i) => (
               <FadeUp key={t.name} delay={i * 0.1} className="py-8 sm:pt-10 md:px-8 first:md:pl-0 last:md:pr-0 sm:pb-10 flex flex-col">

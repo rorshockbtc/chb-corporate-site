@@ -528,10 +528,10 @@ function HowItWorks() {
         </div>
         <FadeUp delay={0.2} className="mt-16 sm:mt-20 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-t border-[#111827]/10 pt-10">
           <p className="font-display text-2xl sm:text-3xl font-semibold max-w-2xl">
-            Principal-led. Fixed scope. Starting with a one-week sprint or single-day build.
+            Send a link and the problem. I pull your current site apart and come back with a fixed scope and price.
           </p>
-          <Link href="/studio" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border-2 border-[#111827] text-[#111827] hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors text-lg font-semibold no-underline self-start">
-            How the studio works <ArrowRight className="w-5 h-5" />
+          <Link href="/studio#how" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border-2 border-[#111827] text-[#111827] hover:bg-[#111827] hover:text-[#FAF8F5] transition-colors text-lg font-semibold no-underline self-start">
+            How working together works <ArrowRight className="w-5 h-5" />
           </Link>
         </FadeUp>
       </div>
@@ -544,7 +544,7 @@ const MAKES = [
   { color: PRODUCT_COLORS.pipes, mark: "|||", name: "Pipes", line: "Curated human knowledge across web, desktop, mobile & browser.", href: "https://pipes.pink" },
   { color: PRODUCT_COLORS.bang, mark: "!", name: "BANG!", line: "A local IDE inside Pipes Desktop to edit your own website for $0.", href: "https://pipes.pink/desktop/bang" },
   { color: PRODUCT_COLORS.hash, mark: "#", name: "Hash", line: "A private place to think and write.", href: "https://pipes.pink/write" },
-  { color: PRODUCT_COLORS.semi, mark: "; - ]", name: "Semi", line: "A Socratic editor that remembers, and doesn't pretend.", href: "https://pipes.pink/write" },
+  { color: PRODUCT_COLORS.semi, mark: "; - ]", name: "Semi", line: "An AI companion who remembers—and writes songs about how software works.", href: "https://semi.colonhyphenbracket.pink" },
   { color: PRODUCT_COLORS.greater, mark: ">", name: "Greater", line: "A classroom in any of 90 languages, in a minute.", href: "https://greater.pink" },
   { color: PRODUCT_COLORS.accent, mark: "é", name: "Accént", line: "Our free, open-source design system (MIT).", href: "https://design.pipes.pink" },
   { color: PRODUCT_COLORS.marigold, mark: "❁", name: "Marigold", line: "Zero-knowledge local civic analytics.", href: "https://marigoldinsights.org" },
