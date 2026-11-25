@@ -32,6 +32,7 @@ export default function Contact() {
     const name = String(d.get("name") || "").trim();
     const email = String(d.get("email") || "").trim();
     const company = String(d.get("company") || "").trim();
+    const url = String(d.get("url") || "").trim();
     const message = String(d.get("message") || "").trim();
     if (!name || !email || !message) return;
 
@@ -43,6 +44,7 @@ export default function Contact() {
       const formattedMessage = [
         `Looking for: ${selectedKind}`,
         company ? `Company / Project: ${company}` : null,
+        url ? `Current site or app: ${url}` : null,
         "",
         "Message:",
         message,
@@ -60,6 +62,7 @@ export default function Contact() {
         // Standard fields Web3Forms parses automatically
         "Project Type": selectedKind,
         ...(company ? { Company: company } : {}),
+        ...(url ? { "Current Site / App": url } : {}),
       };
 
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -180,7 +183,10 @@ export default function Contact() {
                     <input name="name" required placeholder="Your name" className={field} data-testid="contact-page-input-name" />
                     <input name="email" type="email" required placeholder="Email" className={field} data-testid="contact-page-input-email" />
                   </div>
-                  <input name="company" placeholder="Company or project (optional)" className={field} />
+                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-8 sm:gap-y-10">
+                    <input name="company" placeholder="Company or project (optional)" className={field} />
+                    <input name="url" type="url" placeholder="Current site or app URL (optional)" className={field} data-testid="contact-page-input-url" />
+                  </div>
                   <textarea
                     name="message"
                     required
